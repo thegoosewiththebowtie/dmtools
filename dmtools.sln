@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dmtools", "dmtools\dmtools.csproj", "{9B1F7441-798C-4734-B72F-2B655195B6A5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dmtools.Desktop", "dmtools.Desktop\dmtools.Desktop.csproj", "{0F21FDB9-20A4-4022-AFAD-B40F3EA23F1F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9B1F7441-798C-4734-B72F-2B655195B6A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B1F7441-798C-4734-B72F-2B655195B6A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B1F7441-798C-4734-B72F-2B655195B6A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B1F7441-798C-4734-B72F-2B655195B6A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F21FDB9-20A4-4022-AFAD-B40F3EA23F1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F21FDB9-20A4-4022-AFAD-B40F3EA23F1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F21FDB9-20A4-4022-AFAD-B40F3EA23F1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F21FDB9-20A4-4022-AFAD-B40F3EA23F1F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D969B1C3-B78B-4F92-87F0-10733131DCFB}
+	EndGlobalSection
+EndGlobal

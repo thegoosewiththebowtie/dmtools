@@ -1,0 +1,28 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="dmtools.App"
+             RequestedThemeVariant="Default">
+             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+
+    <Application.Styles>
+        <FluentTheme />
+		<StyleInclude Source="/Templates/CharForm.axaml"/>
+		<StyleInclude Source="/Templates/plusminbutton.axaml"/>
+        <StyleInclude Source="Resources/Icons.axaml"></StyleInclude>
+        <StyleInclude Source="Templates/Longplusmin.axaml"></StyleInclude>
+        <StyleInclude Source="Templates/Longplusminmore.axaml"></StyleInclude>
+        <StyleInclude Source="Templates/plusminbuttonless.axaml"></StyleInclude>
+        <Style Selector="TextBlock.Header0">
+	        <Setter Property="FontSize" Value="72"></Setter>
+        </Style>
+        <Style Selector="TextBlock.Header1">
+	        <Setter Property="FontSize" Value="48"></Setter>
+        </Style>
+        <Style Selector="TextBlock.Header2">
+	        <Setter Property="FontSize" Value="24"></Setter>
+        </Style>
+        <Style Selector="TextBlock.Header3">
+	        <Setter Property="FontSize" Value="16"></Setter>
+        </Style>
+    </Application.Styles>
+</Application>

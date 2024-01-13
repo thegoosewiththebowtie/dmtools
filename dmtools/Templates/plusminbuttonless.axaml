@@ -1,0 +1,68 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:dmtools.Templates">
+  <Design.PreviewWith>
+	  <Grid RowDefinitions="100" ColumnDefinitions="100">
+		  <controls:plusminbuttonless />
+	  </Grid>
+  </Design.PreviewWith>
+
+  <Style Selector="controls|plusminbuttonless">
+    <!-- Set Defaults -->
+    <Setter Property="Template">
+      <ControlTemplate>
+		      <Grid
+					Margin="5"		
+              		      ColumnDefinitions="*, *, *, *"
+              		      RowDefinitions="*, *, *, *">
+			      <Border
+				      Grid.ColumnSpan="4"
+				      Grid.RowSpan="4"
+				      CornerRadius="5"
+				      BorderThickness="1"
+				      BorderBrush="DimGray"></Border>
+			      <TextBlock
+              				  Text="{TemplateBinding Labll}"
+              				  Grid.ColumnSpan="4"
+              				  VerticalAlignment="Center"
+              				  Classes="Header3"
+              				  HorizontalAlignment="Center"/>
+              			  <Button 
+								UseLayoutRounding="True"
+              					x:Name="plus"
+              					Grid.Row="3" 
+								Grid.ColumnSpan="2"
+              					FontSize="16"
+              					Padding="0"
+              					VerticalContentAlignment="Center"
+              					HorizontalContentAlignment="Center"
+              					VerticalAlignment="Stretch"
+								CornerRadius="0, 0, 0, 5"
+              					HorizontalAlignment="Stretch">+</Button>
+              			  <TextBlock Grid.Column="0" 
+		                             FontSize="40"
+              			             Grid.ColumnSpan="4" 
+		                             Grid.RowSpan="2"
+              			             Grid.Row="1"
+              			             VerticalAlignment="Center"
+              			             HorizontalAlignment="Center"
+              			           Text="{TemplateBinding Value0}"/>
+              			  <Button x:Name="minus" 
+              			          Grid.Column="2"
+		                          Grid.ColumnSpan="2"
+              			          Grid.Row="3" 
+              			          FontSize="16"
+              			          Padding="0"
+		                          Margin="0"
+              			          VerticalContentAlignment="Center"
+              			          HorizontalContentAlignment="Center"
+              			          VerticalAlignment="Stretch" 
+		                          CornerRadius="0, 0, 5, 0"
+              			          HorizontalAlignment="Stretch">-</Button>
+		                  <Line
+			                  StrokeThickness="50"></Line>
+              			</Grid>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+</Styles>

@@ -1,0 +1,130 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:dmtools.Templates">
+    <Design.PreviewWith>
+	    <Grid Width="200" Height="100" >
+		    <controls:Longplusminmore />
+	    </Grid>
+	    
+    </Design.PreviewWith>
+    <Style Selector="controls|Longplusminmore">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Grid ColumnDefinitions="*, *, *, *" RowDefinitions="*, *, *">
+	                <Border
+                       Grid.Row="0" 
+		                Grid.Column="0"
+		                Grid.ColumnSpan="4"
+						Grid.RowSpan="4"
+		                BorderThickness="1"
+		                Margin="5"
+		                CornerRadius="5"
+		                BorderBrush="DimGray"></Border>
+	                <Button
+		                Name = "lvlpl1"
+		                Padding="5, 0, 0, 0"
+		                VerticalContentAlignment="Center"
+		                HorizontalContentAlignment="Left"
+		                FontSize="12"
+		                Grid.Row="0" 
+		                Grid.Column="0"
+		                Margin="5, 5, 0, 0"
+		                CornerRadius="5, 0, 0, 0"
+		                HorizontalAlignment="Stretch"
+		                VerticalAlignment="Stretch">
+		                +1
+	                </Button>
+	                <Button
+		                Name = "lvlpl10"
+		                Padding="5, 0, 0, 0"
+		                VerticalContentAlignment="Center"
+		                HorizontalContentAlignment="Left"
+		                FontSize="12"
+		                Grid.Row="1" 
+		                Grid.Column="0"
+		                Margin="5, 0, 0, 0"
+		                CornerRadius="0"
+		                HorizontalAlignment="Stretch"
+		                VerticalAlignment="Stretch">
+		                +10
+	                </Button>
+	                <Button
+		                Name = "lvlpl100"
+		                Padding="5, 0, 0, 0"
+		                VerticalContentAlignment="Center"
+		                HorizontalContentAlignment="Left"
+		                FontSize="12"
+		                Grid.Row="2" 
+		                Grid.Column="0"
+		                Margin="5, 0, 0, 5"
+		                CornerRadius="0, 0, 0, 5"
+		                HorizontalAlignment="Stretch"
+		                VerticalAlignment="Stretch">
+		                +100
+	                </Button>
+	                <TextBlock 
+		                Grid.Row="0" 
+		                Grid.Column="1"
+		                Grid.ColumnSpan="2"
+		                HorizontalAlignment="Center"
+		                VerticalAlignment="Center"
+		                Margin="0, 5, 0,0"
+		                FontSize="16"
+		                Text="{TemplateBinding labellss}"></TextBlock>
+	                <TextBlock Grid.Row="1" 
+		                Grid.Column="1"
+		                Grid.RowSpan="2"
+		                Grid.ColumnSpan="2"
+		                HorizontalAlignment="Center"
+		                VerticalAlignment="Center"
+		                Margin="0, 0, 0,0"
+		                FontSize="32"
+		                Text="{TemplateBinding theval}"></TextBlock>
+	                <Button
+		                Name = "lvlmn1"
+		                Padding="0, 0, 5, 0"
+		                VerticalContentAlignment="Center"
+		                HorizontalContentAlignment="Right"
+		                FontSize="12"
+		                Grid.Row="0" 
+		                Grid.Column="3"
+		                Margin="0, 5, 5, 0"
+		                CornerRadius="0, 5, 0,0"
+		                HorizontalAlignment="Stretch"
+		                VerticalAlignment="Stretch">
+		                -1
+	                </Button>
+	                <Button
+		                Name = "lvlmn10"
+		                Padding="0, 0, 5, 0"
+		                VerticalContentAlignment="Center"
+		                HorizontalContentAlignment="Right"
+		                FontSize="12"
+		                Grid.Row="1" 
+		                Grid.Column="3"
+		                Margin="0, 0, 5, 0"
+		                CornerRadius="0, 0, 0,0"
+		                HorizontalAlignment="Stretch"
+		                VerticalAlignment="Stretch">
+		                -10
+	                </Button>
+	                <Button
+		                Name = "lvlmn100"
+		                Padding="0, 0, 5, 0"
+		                CornerRadius="0, 0, 5,0"
+		                VerticalContentAlignment="Center"
+		                HorizontalContentAlignment="Right"
+		                FontSize="12"
+		                Grid.Row="2" 
+		                Grid.Column="3"
+		                Margin="0, 0, 5, 5"
+		                HorizontalAlignment="Stretch"
+		                VerticalAlignment="Stretch">
+		                -100
+	                </Button>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

@@ -1,0 +1,74 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:dmtools.Templates">
+    <Design.PreviewWith>
+	    <Grid Width="200" Height="50" >
+		    <controls:Longplusmin />
+	    </Grid>
+	    
+    </Design.PreviewWith>
+
+    <Style Selector="controls|Longplusmin">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Grid ColumnDefinitions="*, *, *, *">
+	                <Border
+                       Grid.Row="0" 
+		                Grid.Column="0"
+		                Grid.ColumnSpan="4"
+		                BorderThickness="1"
+		                Margin="5"
+		                CornerRadius="5"
+		                BorderBrush="DimGray"></Border>
+	                <Button
+		                Name = "lvlpl"
+		                Padding="0"
+		                VerticalContentAlignment="Center"
+		                HorizontalContentAlignment="Center"
+		                FontSize="30"
+		                Grid.Row="0" 
+		                Grid.Column="0"
+		                Margin="5"
+		                HorizontalAlignment="Stretch"
+		                CornerRadius="5, 0, 0,5"
+		                VerticalAlignment="Stretch">
+		                +
+	                </Button>
+	                <TextBlock 
+		                Grid.Row="0" 
+		                Grid.Column="1"
+		                Grid.ColumnSpan="2"
+		                HorizontalAlignment="Left"
+		                VerticalAlignment="Top"
+		                Margin="0, 5, 0,0"
+		                FontSize="12"
+		                Foreground="Gray"
+		                Text="{TemplateBinding labellss}"></TextBlock>
+	                <TextBlock Grid.Row="0" 
+		                Grid.Column="1"
+		                Grid.ColumnSpan="2"
+		                HorizontalAlignment="Center"
+		                VerticalAlignment="Center"
+		                Margin="0, 5, 0,0"
+		                FontSize="30"
+		                Text="{TemplateBinding theval}"></TextBlock>
+	                <Button
+		                Name = "lvlmn"
+		                Padding="0"
+		                VerticalContentAlignment="Center"
+		                HorizontalContentAlignment="Center"
+		                FontSize="30"
+		                Grid.Row="0" 
+		                Grid.Column="3"
+		                Margin="5"
+		                HorizontalAlignment="Stretch"
+		                CornerRadius="0, 5, 5,0"
+		                VerticalAlignment="Stretch">
+		                -
+	                </Button>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

@@ -1,0 +1,33 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="200" d:DesignHeight="100"
+        x:Class="dmtools.Resources.Sure"
+        CanResize="False"
+        Height="100"
+        Width="200"
+        
+        Title="Sure">
+        <Grid RowDefinitions="*, *, *" ColumnDefinitions="*, *, *" Background="White">
+                <TextBlock
+                        Grid.RowSpan="2"
+                        Grid.ColumnSpan="3"
+                        TextAlignment="Center"
+                        TextWrapping="Wrap"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                        Are you sure you want to delete this?
+                </TextBlock>
+                <Button
+                        Name="ButtonDelete"
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Click="Button_Delete">Delete</Button>
+                <Button 
+                        Name="ButtonCancel"
+                        Grid.Row="2"
+                        Grid.Column="2"
+                        Click="ButtonCancel_OnClick">Cancel</Button>
+        </Grid>
+</Window>
