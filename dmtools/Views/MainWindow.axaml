@@ -5,10 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="clr-namespace:dmtools.Views"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:DataType="vm:MainWindowViewModel"
         x:Class="dmtools.Views.MainWindow"
         TransparencyLevelHint="AcrylicBlur"
         SizeChanged="Control_OnSizeChanged"
-        Title="dmtools" > 
-        <views:MainView />
-
+        Title="dmtools">
+    <SplitView IsPaneOpen="False"
+               DisplayMode="CompactInline"
+               CompactPaneLength="75"
+               OpenPaneLength="300">
+        <SplitView.Pane>
+            <StackPanel>
+                <Button 
+                    Command="{Binding $parent[Window].DataContext.Home}"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Top">Home
+                </Button>
+                <Button
+                    Command="{Binding $parent[Window].DataContext.Settings}">
+                    Settings
+                </Button>
+            </StackPanel>
+        </SplitView.Pane>
+        <ContentControl Content="{Binding Content}"/>
+    </SplitView>
 </Window>

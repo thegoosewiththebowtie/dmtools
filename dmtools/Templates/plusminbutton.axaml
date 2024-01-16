@@ -42,6 +42,7 @@
               					Grid.Row="3" 
               					FontSize="16"
               					Padding="0"
+								Classes="DefBut"
               					VerticalContentAlignment="Center"
               					HorizontalContentAlignment="Center"
               					VerticalAlignment="Stretch"

@@ -17,10 +17,7 @@
 		                Grid.Column="0"
 		                Grid.ColumnSpan="4"
 						Grid.RowSpan="4"
-		                BorderThickness="1"
-		                Margin="5"
-		                CornerRadius="5"
-		                BorderBrush="DimGray"></Border>
+                       Classes="DefBorder"></Border>
 	                <Button
 		                Name = "lvlpl1"
 		                Padding="5, 0, 0, 0"
