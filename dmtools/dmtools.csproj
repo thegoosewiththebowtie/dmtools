@@ -48,7 +48,5 @@
 
   <ItemGroup>
     <Folder Include="config\" />
-    <Folder Include="Music\Mus\" />
-    <Folder Include="Music\Snd\" />
   </ItemGroup>
 </Project>

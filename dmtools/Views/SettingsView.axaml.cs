@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Security.Permissions;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Platform.Storage;
@@ -26,11 +28,11 @@ public partial class SettingsView : UserControl
         SndPa.Text = settings.SndPath;
         if (settings.MusPath == "Music/Mus")
         {
-            Music.IsChecked = true;
+            Mus.IsChecked = true;
         }
         else
         {
-            Music.IsChecked = false;
+            Mus.IsChecked = false;
         }
 
         if (settings.AmbPath == "Music/Amb")
@@ -44,11 +46,69 @@ public partial class SettingsView : UserControl
 
         if (settings.SndPath == "Music/Snd")
         {
-            Sound.IsChecked = true;
+            Snd.IsChecked = true;
         }
         else
         {
-            Sound.IsChecked = false;
+            Snd.IsChecked = false;
         }
+    }
+    private void Default(object? sender, RoutedEventArgs e)
+    {
+        if ((sender as ToggleButton).IsChecked == true)
+        {
+            switch ((sender as ToggleButton).Name)
+            {
+                case "Mus": settings.MusPath = "Music/Mus"; break; 
+                case "Amb": settings.AmbPath = "Music/Amb"; break;
+                case "Snd": settings.SndPath = "Music/Snd"; break;
+            }
+            MusPa.Text = settings.MusPath;
+            AmbPa.Text = settings.AmbPath;
+            SndPa.Text = settings.SndPath;
+        }
+        else
+        {
+
+        }
+    }
+    private async void Browse(object? sender, RoutedEventArgs e)
+    {
+        var topLevel = TopLevel.GetTopLevel(this);
+        var result = await topLevel.StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions(){ Title = "Choose directory"});
+        if (result.Count != 0)
+        {
+            if (sender is ToggleButton)
+            {
+                switch ((sender as ToggleButton).Name)
+                {
+                    case "Mus":
+                        settings.MusPath = result[0].Path.ToString().Replace("file:///", "");
+                        break;
+                    case "Amb":
+                        settings.AmbPath = result[0].Path.ToString().Replace("file:///", "");
+                        break;
+                    case "Snd":
+                        settings.SndPath = result[0].Path.ToString().Replace("file:///", "");
+                        break;
+                }
+            }
+            else
+            {
+                switch ((sender as Button).Name)
+                {
+                    case "MusBrs":
+                        settings.MusPath = result[0].Path.ToString().Replace("file:///", "");
+                        break;
+                    case "AmbBrs":
+                        settings.AmbPath = result[0].Path.ToString().Replace("file:///", "");
+                        break;
+                    case "SndBrs":
+                        settings.SndPath = result[0].Path.ToString().Replace("file:///", "");
+                        break;
+                }
+            }
+        }
+        ButIni();
     }
 }

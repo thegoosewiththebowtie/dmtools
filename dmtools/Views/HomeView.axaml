@@ -140,6 +140,13 @@
 					Classes="DefBorder"
 					Grid.Row="1"
 					Grid.Column="1">
+					<ScrollViewer 
+						Margin="5">
+						<WrapPanel
+							Name="Sounds" HorizontalAlignment="Stretch"
+							VerticalAlignment="Stretch">
+						</WrapPanel>
+					</ScrollViewer>
 				</Border>
 				<Border
 					Grid.Column="0"

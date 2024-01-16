@@ -46,18 +46,13 @@ public class PlayerCharacter
     
     public int Insp { get; set; }
 }
-
-public class AmbiencePlayers
-{
-    public string ID { get; set; }
-    public WaveOutEvent AmbPlayer = new WaveOutEvent();
-}
 public interface ISettings
 {
     string MusPath { get; set; }
     string AmbPath { get; set; }
     string SndPath { get; set; }
     double Volume { get; set; }
+    double VolumeAmb { get; set; }
 }
 public partial class HomeView : UserControl
 {
@@ -65,6 +60,7 @@ public partial class HomeView : UserControl
     {
         InitializeComponent();
         AmbIni();
+        SndIni();
         SetSetup();
         VolumeS.Value = settings.Volume;
         MainWindow.SizzeChanged += SizeChange;
@@ -94,6 +90,10 @@ public partial class HomeView : UserControl
         {
             settings.Volume = 10;
         }
+        if (settings.VolumeAmb == 0)
+        {
+            settings.VolumeAmb = 10;
+        }
     }
     
     
@@ -112,11 +112,19 @@ public partial class HomeView : UserControl
     {
         var MusDir = new DirectoryInfo(settings.MusPath).GetDirectories();
         MoodChooser.Items.Clear();
-        foreach (var musdir in MusDir)
+        if (MusDir.Count() != 0)
         {
-            var name = musdir.Name;
-            MoodChooser.Items.Add(name);
+            foreach (var musdir in MusDir)
+            {
+                var name = musdir.Name;
+                MoodChooser.Items.Add(name);
+            }
         }
+        else
+        {
+            
+        }
+
     }
     private void MoodChooser_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
@@ -165,7 +173,7 @@ public partial class HomeView : UserControl
     {
         Uri.TryCreate(settings.MusPath + "/" + MoodChooser.SelectedItem + "/" + SongChooser.SelectedItem,
             UriKind.RelativeOrAbsolute, out Uri s);
-        if (s.IsFile == true)
+        if (s.IsFile)
         {
             if (mainPlayer.PlaybackState == PlaybackState.Stopped)
             {
@@ -237,69 +245,129 @@ public partial class HomeView : UserControl
     //amb
     public List<WaveOutEvent> IDAmb = new List<WaveOutEvent>();
     public List<DispatcherTimer> IDTim = new List<DispatcherTimer>();
-    public List<int> IDper = new List<int>();
+    public List<AudioFileReader> IDDin = new List<AudioFileReader>();
     public void AmbIni()
     {
         var ambf = new DirectoryInfo(settings.AmbPath);
         Ambience.Children.Clear();
         int i = 0;
-        foreach (var amb in ambf.GetFiles())
+        if (ambf.GetFiles().Count() != 0)
         {
-            if (amb.Name.EndsWith(".mp3"))
-            {
-                ToggleButton tg0 = new ToggleButton()
-                {
-                    Name = amb.Name + "_" + i,
-                    Content = amb.Name.Replace(".mp3", ""),
-                    Width = 150, 
-                    Height = 50,
-                    HorizontalContentAlignment= HorizontalAlignment.Center,
-                    VerticalContentAlignment= VerticalAlignment.Center,
-                    FontSize = 24,
-                    
-                };
-                i++;
-                tg0.IsCheckedChanged += AmbChangeState;
-                Ambience.Children.Add(tg0);
-                WaveOutEvent ap = new WaveOutEvent();
-                IDAmb.Add(ap);
-                DispatcherTimer dt = new DispatcherTimer();
-                dt.Tick += AmbControl;
-                IDTim.Add(dt);
-            }
-        }
-    }
-    private void AmbChangeState(object? sender, RoutedEventArgs e)
-    {
-        int ID = Convert.ToInt32((sender as ToggleButton).Name.Split("_")[1]);
-        AudioFileReader af = new AudioFileReader(settings.AmbPath + "/" + (sender as ToggleButton).Name.Split("_")[0]);
 
-        if ((sender as ToggleButton).IsChecked == true)
-        {
-            if (IDAmb[ID].PlaybackState == PlaybackState.Paused)
+            foreach (var amb in ambf.GetFiles())
             {
-                IDAmb[ID].Stop();
-            }
-            else
-            {
-                IDAmb[ID].Init(af);
-                IDAmb[ID].Play();
+                if (amb.Name.EndsWith(".mp3"))
+                {
+                    ToggleButton tg0 = new ToggleButton()
+                    {
+                        Name = amb.Name + "_" + i,
+                        Content = amb.Name.Replace(".mp3", ""),
+                        Width = 150,
+                        Height = 50,
+                        HorizontalContentAlignment = HorizontalAlignment.Center,
+                        VerticalContentAlignment = VerticalAlignment.Center,
+                        FontSize = 24,
+
+                    };
+                    i++;
+                    tg0.IsCheckedChanged += AmbChangeState;
+                    Ambience.Children.Add(tg0);
+                    AudioFileReader af = new AudioFileReader(settings.AmbPath + "/" + amb.Name);
+                    IDDin.Add(af);
+                    WaveOutEvent ap = new WaveOutEvent();
+                    IDAmb.Add(ap);
+                    DispatcherTimer dt = new DispatcherTimer();
+                    IDTim.Add(dt);
+                }
             }
         }
         else
         {
-            IDAmb[ID].Pause();
-        }
-        void Restart(object? o, StoppedEventArgs s)
-        {
-            IDAmb[ID].Dispose();
-            IDAmb[ID].Init(af);
-            IDAmb[ID].Play();
+            TextBlock n = new TextBlock()
+            {
+                Text = "no files",
+                FontSize = 46
+            };
+            Ambience.Children.Add(n);
         }
     }
-    private void AmbControl(object? sender, EventArgs e)
+    private void AmbChangeState(object? sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        int tick = 0;
+        int ID = Convert.ToInt32((sender as ToggleButton).Name.Split("_")[1]);
+        IDAmb[ID].Volume =(float)settings.VolumeAmb/10;
+        IDTim[ID].Tick += AmbControl;
+        if ((sender as ToggleButton).IsChecked == true)
+        {
+            if (IDAmb[ID].PlaybackState == PlaybackState.Stopped)
+            {
+                IDAmb[ID].Init(IDDin[ID]);
+            }
+            IDAmb[ID].Play();
+            IDTim[ID].Start();
+        }
+        else
+        {
+            IDAmb[ID].Pause();
+            IDTim[ID].Stop();
+        }
+        void AmbControl(object? o, EventArgs eventArgs)
+        {
+            if (tick < 10)
+            {
+                tick = Convert.ToInt32((IDDin[ID].CurrentTime / IDDin[ID].TotalTime) * 100);
+            }
+            else
+            {
+                tick = 0;
+                IDAmb[ID].Stop();
+                IDDin[ID].CurrentTime = new TimeSpan(0);
+                IDAmb[ID].Init(IDDin[ID]);
+                IDAmb[ID].Play();
+            }
+        }
+    }
+    
+    
+    //sounds
+    public void SndIni()
+    {
+        var sndf = new DirectoryInfo(settings.SndPath);
+        Sounds.Children.Clear();
+        if (sndf.GetFiles().Length != 0)
+        {
+            foreach (var snd in sndf.GetFiles())
+            {
+                if (snd.Name.EndsWith(".mp3"))
+                {
+                    Button tg0 = new Button()
+                    {
+                        Name = snd.Name,
+                        Content = snd.Name.Replace(".mp3", ""),
+                        Width = 150,
+                        Height = 50,
+                        HorizontalContentAlignment = HorizontalAlignment.Center,
+                        VerticalContentAlignment = VerticalAlignment.Center,
+                        FontSize = 24,
+
+                    };
+                    Ambience.Children.Add(tg0);
+                    AudioFileReader af = new AudioFileReader(settings.AmbPath + "/" + snd.Name);
+                    WaveOutEvent ap = new WaveOutEvent();
+                    ap.Init(af);
+                    ap.Play();
+                }
+            }
+        }
+        else
+        {
+            TextBlock n = new TextBlock()
+            {
+              Text = "no files",
+                FontSize = 46
+            };
+            Sounds.Children.Add(n);
+        }
     }
     
 
