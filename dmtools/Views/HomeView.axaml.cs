@@ -22,6 +22,17 @@ using Config.Net;
 
 
 namespace dmtools.Views;
+
+public class FightData
+{
+    public int Initiative { get; set; }
+    public string Name { get; set; }
+    public string Player { get; set; }
+    public int ArCl { get; set; }
+    public string IDP { get; set; }
+    public int Health { get; set; }
+    public string IDM { get; set; }
+}
 public class PlayerCharacter
 {
     public int ID { get; set; }
@@ -66,6 +77,7 @@ public partial class HomeView : UserControl
         MainWindow.SizzeChanged += SizeChange;
         Sure.Delete += pcupdate;
         Sure.Delete += SizeChange;
+        DashFightUp();
     }
     ISettings settings = new ConfigurationBuilder<ISettings>().UseIniFile("Settings.ini").Build();
 
@@ -96,8 +108,58 @@ public partial class HomeView : UserControl
         }
     }
     
+    //dashboard
     
-    
+    //fight
+    public void DashFightUp()
+    {
+        using (var LdbPC = new LiteDatabase("LdbforPC.db"))
+        {
+            FightGrid.ItemsSource = null;
+            var playChar = LdbPC.GetCollection<PlayerCharacter>();
+            List<FightData> fin = new List<FightData>();
+            foreach (var pc in playChar.FindAll())
+            {
+                FightData fightList = new FightData()
+                {
+                    Initiative = 0,
+                    Name =  pc.FirstName,
+                    Player = pc.Player,
+                    ArCl = Convert.ToInt32(pc.ArmorClass),
+                    IDM = "Minus_" + pc.ID.ToString(),
+                    Health = Convert.ToInt32(pc.Health),
+                    IDP = "Plus_" + pc.ID.ToString(),
+                };
+                fin.Add(fightList);
+            }
+            FightGrid.ItemsSource = fin;
+        }
+    }
+
+    public void PlusMinusHP(object? sender, RoutedEventArgs e)
+    {
+        var data = (sender as Button).Name.Split("_");
+        int ID = Convert.ToInt32(data[1]);
+        string pm = data[0];
+        int hP = 0;
+        using (var LdbPC = new LiteDatabase("LdbforPC.db"))
+        {
+            var pccol = LdbPC.GetCollection<PlayerCharacter>();
+            if (pm == "Plus")
+            {
+                hP = Convert.ToInt32(pccol.FindById(ID).Health) + 1;
+            }
+            else if (pm == "Minus")
+            {
+                hP = Convert.ToInt32(pccol.FindById(ID).Health) - 1;
+            }
+
+            var HP = pccol.FindById(ID);
+            HP.Health = hP.ToString();
+            pccol.Update(HP);
+        }
+        DashFightUp();
+    }
     //media
     
     
@@ -120,11 +182,6 @@ public partial class HomeView : UserControl
                 MoodChooser.Items.Add(name);
             }
         }
-        else
-        {
-            
-        }
-
     }
     private void MoodChooser_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
@@ -267,7 +324,7 @@ public partial class HomeView : UserControl
                         HorizontalContentAlignment = HorizontalAlignment.Center,
                         VerticalContentAlignment = VerticalAlignment.Center,
                         FontSize = 24,
-
+                        Margin = new Thickness(5)
                     };
                     i++;
                     tg0.IsCheckedChanged += AmbChangeState;
@@ -313,7 +370,7 @@ public partial class HomeView : UserControl
         }
         void AmbControl(object? o, EventArgs eventArgs)
         {
-            if (tick < 10)
+            if (tick < 99)
             {
                 tick = Convert.ToInt32((IDDin[ID].CurrentTime / IDDin[ID].TotalTime) * 100);
             }
@@ -349,13 +406,11 @@ public partial class HomeView : UserControl
                         HorizontalContentAlignment = HorizontalAlignment.Center,
                         VerticalContentAlignment = VerticalAlignment.Center,
                         FontSize = 24,
-
+                        Margin = new Thickness(5)
                     };
-                    Ambience.Children.Add(tg0);
-                    AudioFileReader af = new AudioFileReader(settings.AmbPath + "/" + snd.Name);
-                    WaveOutEvent ap = new WaveOutEvent();
-                    ap.Init(af);
-                    ap.Play();
+                    tg0.Click += boom;
+                    Sounds.Children.Add(tg0);
+
                 }
             }
         }
@@ -369,7 +424,14 @@ public partial class HomeView : UserControl
             Sounds.Children.Add(n);
         }
     }
-    
+
+    private void boom(object? sender, RoutedEventArgs e)
+    {                    
+        AudioFileReader af = new AudioFileReader(settings.AmbPath + "/" + (sender as Button).Name);
+        WaveOutEvent ap = new WaveOutEvent();
+        ap.Init(af);
+        ap.Play();
+    }
 
 
     //playercharacters

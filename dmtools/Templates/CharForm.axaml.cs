@@ -200,7 +200,7 @@ public class CharForm : TemplatedControl
         var sbtn = e.NameScope.Find<Button>("Save");
         sbtn.Click += (sender, args) =>
         {
-            using (var LdbPC = new LiteDatabase("Data0/LdbforPC.db"))
+            using (var LdbPC = new LiteDatabase("LdbforPC.db"))
             {
                 var pccol = LdbPC.GetCollection<PlayerCharacter>();
                 pccol.Delete(ID );

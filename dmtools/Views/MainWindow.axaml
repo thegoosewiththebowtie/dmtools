@@ -10,22 +10,69 @@
         TransparencyLevelHint="AcrylicBlur"
         SizeChanged="Control_OnSizeChanged"
         Title="dmtools">
-    <SplitView IsPaneOpen="False"
+    <SplitView
+        Name="SplitView"
+        IsPaneOpen="False"
                DisplayMode="CompactInline"
                CompactPaneLength="75"
                OpenPaneLength="300">
         <SplitView.Pane>
-            <StackPanel>
-                <Button 
-                    Command="{Binding $parent[Window].DataContext.Home}"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Top">Home
-                </Button>
-                <Button
-                    Command="{Binding $parent[Window].DataContext.Settings}">
-                    Settings
-                </Button>
-            </StackPanel>
+            <Grid RowDefinitions="*, *">
+                <StackPanel
+                    VerticalAlignment="Top">
+                    <Button
+                        HorizontalAlignment="Right"
+                        FontSize="20"
+                        Name="Expand"
+                        Click="Expand_OnClick">
+                        >
+                    </Button>
+                        <Expander
+                            Margin="0"
+                            HorizontalAlignment="Stretch"
+                            Header="Profile">
+                            <StackPanel>
+                                <Button Margin="0" HorizontalAlignment="Stretch">Profile1</Button>
+                                <Button Margin="0" HorizontalAlignment="Stretch">Profile2</Button>
+                                <Button Margin="0" HorizontalAlignment="Stretch">Profile3</Button>
+                            </StackPanel>
+                        </Expander>
+                    <Button 
+                        FontSize="20"
+                        Command="{Binding $parent[Window].DataContext.Home}"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top">Home
+                    </Button>
+                    <Button
+                        HorizontalAlignment="Stretch"
+                        FontSize="20">
+                        Info
+                    </Button>
+                </StackPanel>
+                <StackPanel
+                    Grid.Row="1"
+                    VerticalAlignment="Bottom">
+                    <Button
+                        HorizontalAlignment="Stretch"
+                        FontSize="20"
+                        Command="{Binding $parent[Window].DataContext.Settings}">
+                        Settings
+                    </Button>
+                    <Button
+                        HorizontalAlignment="Stretch"
+                        FontSize="20"
+                        Command="{Binding $parent[Window].DataContext.About}">
+                        About
+                    </Button>
+                </StackPanel>
+                <TextBlock
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    FontSize="72"
+                    Grid.RowSpan="2"
+                    Foreground="Red"
+                    >[wip]</TextBlock>
+            </Grid>
         </SplitView.Pane>
         <ContentControl Content="{Binding Content}"/>
     </SplitView>

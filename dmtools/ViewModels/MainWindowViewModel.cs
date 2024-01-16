@@ -29,4 +29,10 @@ public class MainWindowViewModel : ViewModelBase
         var vm = new HomeViewModel();
         Content = vm;
     }
+
+    public void About()
+    {
+        var vm = new AboutViewModel();
+        Content = vm;
+    }
 }

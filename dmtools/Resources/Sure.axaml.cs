@@ -20,7 +20,7 @@ public partial class Sure : Window
 
     private void Button_Delete(object? sender, RoutedEventArgs e)
     {
-        using (var ldbpc = new LiteDatabase("Data0/LdbforPC.db"))
+        using (var ldbpc = new LiteDatabase("LdbforPC.db"))
         {
             var chars = ldbpc.GetCollection<PlayerCharacter>();
             chars.Delete(id);

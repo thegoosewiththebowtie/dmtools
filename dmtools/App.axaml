@@ -9,6 +9,7 @@
 	</Application.DataTemplates>
 	<Application.Styles>
         <FluentTheme />
+        <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
 		<StyleInclude Source="/Templates/CharForm.axaml"/>
 		<StyleInclude Source="/Templates/plusminbutton.axaml"/>
         <StyleInclude Source="Resources/Icons.axaml"></StyleInclude>
