@@ -5,9 +5,9 @@ using Avalonia.Controls.Primitives;
 
 namespace dmtools.Templates;
 
-public class Longplusmin : TemplatedControl
+public class Longplusminmore : TemplatedControl
 {
-    public static readonly StyledProperty<string> labellssProperty = AvaloniaProperty.Register<Longplusmin, string>(
+    public static readonly StyledProperty<string> labellssProperty = AvaloniaProperty.Register<Longplusminmore, string>(
         "labellss", defaultValue:"Level");
 
     public string labellss
@@ -16,7 +16,7 @@ public class Longplusmin : TemplatedControl
         set => SetValue(labellssProperty, value);
     }
 
-    public static readonly StyledProperty<string> thevalProperty = AvaloniaProperty.Register<Longplusmin, string>(
+    public static readonly StyledProperty<string> thevalProperty = AvaloniaProperty.Register<Longplusminmore, string>(
         "theval", defaultValue:"0");
 
     public string theval

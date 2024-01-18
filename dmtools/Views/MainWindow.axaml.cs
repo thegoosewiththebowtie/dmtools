@@ -3,7 +3,11 @@ using Avalonia.Controls;
 using LiteDB;
 using System.IO;
 using System.Net;
+using System.Net.Mime;
+using Avalonia;
+using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Interactivity;
+using dmtools.ViewModels;
 
 namespace dmtools.Views;
 
@@ -17,8 +21,7 @@ public partial class MainWindow : Window
     }
     public void Control_OnSizeChanged(object? sender, SizeChangedEventArgs e)
     {
-        EventHandler eventHandler = SizzeChanged;
-        eventHandler(sender, e);
+        SizzeChanged(sender, e);
     }
 
     private void Expand_OnClick(object? sender, RoutedEventArgs e)
@@ -35,4 +38,5 @@ public partial class MainWindow : Window
         }
 
     }
+    
 }

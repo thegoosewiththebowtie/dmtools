@@ -5,6 +5,7 @@ using dmtools.ViewModels;
 using dmtools.Views;
 using System;
 using System.Configuration;
+using Avalonia.Controls;
 
 namespace dmtools;
 
@@ -24,6 +25,7 @@ public partial class App : Application
             {
                 DataContext = new MainWindowViewModel()
             };
+            desktop.ShutdownMode = Avalonia.Controls.ShutdownMode.OnMainWindowClose;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using Avalonia.Controls;
@@ -75,6 +76,7 @@ public partial class HomeView : UserControl
         SetSetup();
         VolumeS.Value = settings.Volume;
         MainWindow.SizzeChanged += SizeChange;
+        Picture.Closeed += ClozedEv;
         Sure.Delete += pcupdate;
         Sure.Delete += SizeChange;
         DashFightUp();
@@ -111,35 +113,47 @@ public partial class HomeView : UserControl
     //dashboard
     
     //fight
+    public List<int> init = new List<int>();
+    ObservableCollection<FightData> fin = new ObservableCollection<FightData>();
     public void DashFightUp()
     {
         using (var LdbPC = new LiteDatabase("LdbforPC.db"))
         {
-            FightGrid.ItemsSource = null;
             var playChar = LdbPC.GetCollection<PlayerCharacter>();
-            List<FightData> fin = new List<FightData>();
+            int c = 0;
             foreach (var pc in playChar.FindAll())
             {
+                int i;
+                if (fighttb.IsChecked == true)
+                {
+                    i = init[pc.ID - 1];
+                }
+                else
+                {
+                    init.Add(0);
+                    i = 0;
+                }
                 FightData fightList = new FightData()
                 {
-                    Initiative = 0,
+                    Initiative = i,
                     Name =  pc.FirstName,
                     Player = pc.Player,
                     ArCl = Convert.ToInt32(pc.ArmorClass),
-                    IDM = "Minus_" + pc.ID.ToString(),
+                    IDM = "Minus_" + pc.ID + "_"+ (c).ToString(),
                     Health = Convert.ToInt32(pc.Health),
-                    IDP = "Plus_" + pc.ID.ToString(),
+                    IDP = "Plus_" + pc.ID + "_" + (c).ToString(),
                 };
+                c++;
                 fin.Add(fightList);
             }
             FightGrid.ItemsSource = fin;
         }
     }
-
     public void PlusMinusHP(object? sender, RoutedEventArgs e)
     {
         var data = (sender as Button).Name.Split("_");
         int ID = Convert.ToInt32(data[1]);
+        int index = Convert.ToInt32(data[2]);
         string pm = data[0];
         int hP = 0;
         using (var LdbPC = new LiteDatabase("LdbforPC.db"))
@@ -148,18 +162,74 @@ public partial class HomeView : UserControl
             if (pm == "Plus")
             {
                 hP = Convert.ToInt32(pccol.FindById(ID).Health) + 1;
+                fin[index].IDP = (sender as Button).Name;
             }
             else if (pm == "Minus")
             {
                 hP = Convert.ToInt32(pccol.FindById(ID).Health) - 1;
+                fin[index].IDM = (sender as Button).Name;
             }
-
             var HP = pccol.FindById(ID);
             HP.Health = hP.ToString();
             pccol.Update(HP);
         }
+        fin[index].Health = hP;
+    }
+    private void InputElement_OnPointerPressed(object? sender, PointerPressedEventArgs e)
+    {
         DashFightUp();
     }
+    private void Startf(object? sender, RoutedEventArgs e)
+    {
+        if ((sender as ToggleButton).IsChecked == true)
+        {
+            FightGrid.Columns[0].IsVisible = true;
+            FightGrid.Columns[0].Sort();
+            using (var LdbPC = new LiteDatabase("LdbforPC.db"))
+            {
+                var playChar = LdbPC.GetCollection<PlayerCharacter>();
+                foreach (var pc in playChar.FindAll())
+                {
+                    init[pc.ID - 1] = init[pc.ID - 1] +
+                                      (int)Math.Floor(Convert.ToDecimal((Convert.ToInt32(pc.Dexterity) - 10) / 2));
+                }
+            }
+        }
+        else
+        {
+            FightGrid.Columns[0].IsVisible = false;
+            FightGrid.Columns[1].Sort();
+            init.Clear();
+        }
+        DashFightUp();
+    }
+    
+    
+    
+    
+    //picture
+    public string openclose { get; set; }
+    public Picture window = new Picture();
+    public bool win = false;
+    private void OpenPictureWindow(object? sender, RoutedEventArgs e)
+    {
+        if (win)
+        {
+            window.Hide();
+            win = false;
+        }
+        else if (!win)
+        {
+            window.Show();
+            win = true;
+        }
+    }
+
+    private void ClozedEv(object? o, EventArgs e)
+    {
+        win = false;
+    }
+    
     //media
     
     
@@ -440,7 +510,11 @@ public partial class HomeView : UserControl
         using (var LdbPC = new LiteDatabase("LdbforPC.db"))
         {
             var playChar = LdbPC.GetCollection<PlayerCharacter>();
-            playChar.Insert(new PlayerCharacter{ });
+            playChar.Insert(new PlayerCharacter
+            {
+                Level = "1", ArmorClass = "10", Health = "5", Strength = "10", Dexterity = "10",
+                Constitution = "10", Experience = "0", Wisdom = "10", Intelligence = "10", Charisma = "10"
+            });
         }
         pcupdate(sender, args);
         SizeChange(sender, args);

@@ -188,7 +188,7 @@ public class CharForm : TemplatedControl
     {
         base.OnApplyTemplate(e);
         var dbtn = e.NameScope.Find<Button>("Delete");
-        profbon ="+" + (Math.Ceiling(Convert.ToDecimal(Level) / 4) + 1).ToString("0");
+        profbon ="+" + (Math.Floor(Convert.ToDecimal(Level) / 4) + 1).ToString();
         dbtn.Click += (sender, args) =>
         {
             Sure huh = new Sure(ID);

@@ -5,7 +5,9 @@
              mc:Ignorable="d" d:DesignWidth="1600" d:DesignHeight="900"
              x:Class="dmtools.Views.HomeView">
 	<TabControl Name="TheTabControl">
-		<TabItem Header="Dashboard">
+		<TabItem
+			PointerPressed="InputElement_OnPointerPressed"
+			Header="Dashboard">
 			<Grid
 				ColumnDefinitions="*, *, *, *"
 				RowDefinitions="0.25*, *, *">
@@ -14,11 +16,9 @@
 					Grid.Row="1"
 					ZIndex="2"
 					Classes="DefBorder">
-					</Border>
+					
 					<DockPanel
-						Margin="5"
-						Grid.Column="0"
-						Grid.Row="1">
+						Margin="0">
 						<Grid
 							ColumnDefinitions="*, *"
 							DockPanel.Dock="Top">
@@ -52,26 +52,30 @@
 								</Button>
 							</StackPanel>
 						</Grid>
+						<Rectangle
+							Height="1"
+							DockPanel.Dock="Top"
+							Fill="DimGray">
+						</Rectangle>
 						<TextBox
 							ZIndex="2"
 							FontSize="20"
 							Margin="0"
-							BorderBrush="DimGray"
+							Watermark="Type something here,&#x0a;and i'll dissapear :>"
+							BorderThickness="0"
 							CornerRadius="0, 0, 5, 5"
 							AcceptsReturn="True"
 							AcceptsTab="True">
 						</TextBox>
 					</DockPanel>
+				</Border>
 				<Border
 					Grid.Column="1"
 					Grid.Row="1"
 					Grid.ColumnSpan="2"
-					Classes="DefBorder"></Border>
+					Classes="DefBorder">
 					<DockPanel
-						Grid.Column="1"
-						Grid.Row="1"
-						LastChildFill="True"
-						Grid.ColumnSpan="2">
+						LastChildFill="True">
 						<Grid
 							ColumnDefinitions="*, *, *, *, *"
 							DockPanel.Dock="Top">
@@ -86,6 +90,8 @@
 								Add Custom
 							</Button>
 							<ToggleButton
+								Name="fighttb"
+								IsCheckedChanged="Startf"
 								Grid.Column="2"
 								Margin="5"
 								FontSize="20"
@@ -106,21 +112,24 @@
 								Add Custom
 							</Button>
 						</Grid>
+						<Rectangle
+							Height="1"
+							DockPanel.Dock="Top"
+							Fill="DimGray">
+						</Rectangle>
 						<DataGrid 
-							ZIndex="-1"
-							Foreground="Black"
 							FontSize="16"
-							VerticalAlignment="Stretch"
 							HorizontalAlignment="Stretch"
-							Margin="5"
 							HorizontalGridLinesBrush="DimGray"
-							VerticalGridLinesBrush="DimGray"
 							Name="FightGrid" 
-							BorderBrush="DimGray"
-							HeadersVisibility="All"
-							GridLinesVisibility="All">
+							BorderBrush="Transparent"
+							HeadersVisibility="Column"
+							GridLinesVisibility="Horizontal">
 							<DataGrid.Columns>
-								<DataGridTextColumn Binding="{Binding Path=Initiative}" Header="Initiative"/>
+								<DataGridTextColumn 
+									IsVisible="False"
+									Binding="{Binding Path=Initiative}"
+									Header="Initiative"/>
 								<DataGridTextColumn Binding="{Binding Path=Name}" Header="Name" />
 								<DataGridTextColumn Binding="{Binding Path=Player}" Header="Player" />
 								<DataGridTextColumn Binding="{Binding Path=ArCl}" Header="Armor Class" />
@@ -156,72 +165,74 @@
 							</DataGrid.Columns>
 						</DataGrid>
 					</DockPanel>
+				</Border>
 				<Border
 					Grid.Column="3"
 					Grid.Row="1"
-					Classes="DefBorder"></Border>
-					<DockPanel
-					Margin="5"
-					Grid.Column="3"
-					Grid.Row="1">
-					<Grid
-						ColumnDefinitions=" *, *"
-						DockPanel.Dock="Top">
-						<Border
-							ZIndex="1"
-							Grid.Column="0"
-							Grid.Row="1"
-							Grid.ColumnSpan="3"
-							Margin="0"
-							CornerRadius="5, 5, 0, 0"
-							Classes="DefBorder"></Border>
-						
-						<StackPanel
-							Orientation="Horizontal">
-							<Button
-								VerticalAlignment="Stretch"
-								HorizontalAlignment="Left"
-								Foreground="DarkRed"
-								Background="RosyBrown"
-								Margin="0,0,0,0"
-								CornerRadius="5,0,0,0">
-								<PathIcon Data="{StaticResource delete_regular}"></PathIcon>
-							</Button>
-							<Button
-								VerticalAlignment="Stretch"
-								HorizontalAlignment="Left"
-								Margin="0,0,0,0"
-								CornerRadius="0,0,0,0">
-								<PathIcon Data="{StaticResource add_regular}"></PathIcon>
-							</Button>
-						</StackPanel>
-						<TextBlock
-							Grid.Column="2"
-							Margin="5"
-							FontSize="20"
-							VerticalAlignment="Center"
-							HorizontalAlignment="Right">
-							To-Do
-						</TextBlock>
-					</Grid>
-					<StackPanel>
-						<TextBlock>asfafsadaf</TextBlock>
-						<TextBlock>asfafsadaf</TextBlock>
-						<TextBlock>asfafsadaf</TextBlock>
-						<TextBlock>asfafsadaf</TextBlock>
-						<TextBlock>asfafsadaf</TextBlock>
-					</StackPanel>
+					Classes="DefBorder">
+					<DockPanel>
+						<Grid
+							ColumnDefinitions=" *, *"
+							DockPanel.Dock="Top">
+							<StackPanel
+								Orientation="Horizontal">
+								<Button
+									VerticalAlignment="Stretch"
+									HorizontalAlignment="Left"
+									Foreground="DarkRed"
+									Background="RosyBrown"
+									Margin="0,0,0,0"
+									CornerRadius="5,0,0,0">
+									<PathIcon Data="{StaticResource delete_regular}"></PathIcon>
+								</Button>
+								<Button
+									VerticalAlignment="Stretch"
+									HorizontalAlignment="Left"
+									Margin="0,0,0,0"
+									CornerRadius="0,0,0,0">
+									<PathIcon Data="{StaticResource add_regular}"></PathIcon>
+								</Button>
+							</StackPanel>
+							<TextBlock
+								Grid.Column="2"
+								Margin="5"
+								FontSize="20"
+								VerticalAlignment="Center"
+								HorizontalAlignment="Right">
+								To-Do
+							</TextBlock>
+						</Grid>
+						<Rectangle
+							Height="1"
+							DockPanel.Dock="Top"
+							Fill="DimGray">
+						</Rectangle>
+						<ListBox>
+							
+						</ListBox>
 				</DockPanel>
+				</Border>
 				<Border
 					Grid.Column="0"
 					Grid.Row="2"
 					Grid.ColumnSpan="2"
-					Classes="DefBorder"></Border>
+					Classes="DefBorder">
+					<Button
+						HorizontalAlignment="Stretch"
+						VerticalAlignment="Stretch"
+						HorizontalContentAlignment="Center"
+						VerticalContentAlignment="Center"
+						Click="OpenPictureWindow"
+						FontSize="150">
+						<PathIcon Data="{StaticResource open_regular}"></PathIcon>
+					</Button>
+				</Border>
 				<Border
 					Grid.Column="2"
 					Grid.Row="2"
 					Grid.ColumnSpan="2"
-					Classes="DefBorder"></Border>
+					Classes="DefBorder">
+				</Border>
 			</Grid>
 		</TabItem>
 		<TabItem Name="Media" Header="Media">

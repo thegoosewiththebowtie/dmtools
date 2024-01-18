@@ -39,23 +39,20 @@ public class plusminbutton : TemplatedControl
     {
         base.OnApplyTemplate(e);
         var pbtn = e.NameScope.Find<Button>("plus");
-        modmodd = ((Convert.ToInt32(Value0) - 10) / 2).ToString("0");
+        modmodd = ((int)Math.Floor(Convert.ToDecimal((Convert.ToInt32(Value0) - 10) / 2))).ToString();
         pbtn.Click += (s, e) =>
         {
-            if (Convert.ToInt32(Value0) < 20)
-            {
                 Value0 = (Convert.ToInt32(Value0) + 1).ToString();
-                modmodd = ((Convert.ToInt32(Value0) - 10) / 2).ToString("0");
-            }
+                modmodd = (Math.Floor((Convert.ToDecimal(Value0) - 10) / 2)).ToString();
     
         };
         var mbtn = e.NameScope.Find<Button>("minus");
         mbtn.Click += (s, e) =>
         {
-            if (Convert.ToInt32(Value0) > 0)
+            if (Convert.ToInt32(Value0) > 1)
             {
                 Value0 = (Convert.ToInt32(Value0) - 1).ToString();
-                modmodd = ((Convert.ToInt32(Value0) - 10) / 2).ToString("0");
+                modmodd = ((int)Math.Floor(Convert.ToDecimal((Convert.ToInt32(Value0) - 10) / 2))).ToString();
             }
         };
     }

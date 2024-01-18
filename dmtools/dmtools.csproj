@@ -43,9 +43,6 @@
       <DependentUpon>plusminbuttonless.axaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Templates\Longplusmin.axaml.cs">
-      <DependentUpon>Longplusmin.axaml</DependentUpon>
-    </Compile>
     <Compile Update="Views\HomeView.axaml.cs">
       <DependentUpon>HomeView.axaml</DependentUpon>
       <SubType>Code</SubType>
