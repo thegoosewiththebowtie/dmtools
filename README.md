@@ -34,7 +34,7 @@ them in powerpoint, but i dunno, thats plans for a veeeerrryy distant future)
 ## Free and open-sourse forever
 i have no plans to monetize this app in any way, i think that we should have more free software
 ## First glance:
-![image](https://github.com/thegoosewiththebowtie/dmtools/assets/153792474/624d9e54-840a-4007-8b51-bc6186244517)
+![image](https://github.com/thegoosewiththebowtie/dmtools/assets/153792474/7242a83b-2e29-4cbe-82f3-a9a28fd38869)
 ![image](https://github.com/thegoosewiththebowtie/dmtools/assets/153792474/45e7846e-d9af-44ea-bfb7-cdd677da503b)
 ![image](https://github.com/thegoosewiththebowtie/dmtools/assets/153792474/df03594f-2782-4160-b200-f9fa80394fc4)
 
