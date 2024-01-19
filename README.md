@@ -15,9 +15,10 @@ https://t.me/dmtoolschat
 - [x] Music, ambient noises and sound effects
 - [x] Character lists to keep track on your players
 - [x] Ability to change music/sound's sourse
+- [x] Notes & to-do
 - [ ] Npc generator - almost ready
 - [ ] Npc lists - almost ready
-- [ ] Second-screen image control - almost ready
+- [x] Second-screen image control - almost ready
 - [ ] Embedded YT player (for music, if you prefer streaming instead of .mp3s) - almost ready
 - [ ] Calculator for important formulas
 - [ ] Dice
