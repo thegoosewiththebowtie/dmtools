@@ -35,7 +35,7 @@
             Margin="5">
             <Grid
                 ColumnDefinitions="3*, *, 2*, *"
-                RowDefinitions="*, *, *, *"
+                RowDefinitions="*, *, *, *, *"
                 ShowGridLines="False">
                 <TextBlock
                     VerticalAlignment="Center"
@@ -54,7 +54,6 @@
                     Grid.Row="1"
                     Grid.Column="1"
                     Name="Mus"
-                    Tag="ot"
                     HorizontalAlignment="Stretch"
                     Content="Default">
                 </ToggleButton>
@@ -75,7 +74,6 @@
                     Grid.Row="1"
                     Grid.Column="3"
                     Name="MusBrs"
-                    Tag="ot"
                     HorizontalAlignment="Stretch"
                     Content="Browse">
                 </Button>
@@ -91,7 +89,6 @@
                     Grid.Row="2"
                     Grid.Column="1"
                     Name="Amb"
-                    Tag="ot"
                     HorizontalAlignment="Stretch"
                     Content="Default">
                 </ToggleButton>
@@ -112,7 +109,6 @@
                     Grid.Row="2"
                     Grid.Column="3"
                     Name="AmbBrs"
-                    Tag="ot"
                     HorizontalAlignment="Stretch"
                     Content="Browse">
                 </Button>
@@ -128,7 +124,6 @@
                         Grid.Row="3"
                         Grid.Column="1"
                         Name="Snd"
-                        Tag="ot"
                         HorizontalAlignment="Stretch"
                         Content="Default">
                 </ToggleButton>
@@ -149,9 +144,43 @@
                         Grid.Row="3"
                         Grid.Column="3"
                         Name="SndBrs"
-                        Tag="ot"
                         HorizontalAlignment="Stretch"
                         Content="Browse">
+                </Button>
+                <TextBlock
+                    VerticalAlignment="Center"
+                    Margin="5"
+                    Classes="Text0"
+                    Grid.Row="4">
+                    Images source
+                </TextBlock>
+                <ToggleButton
+                    IsCheckedChanged="Default"
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    Name="Img"
+                    HorizontalAlignment="Stretch"
+                    Content="Default">
+                </ToggleButton>
+                <Border
+                    Classes="DefBorder"
+                    Grid.Row="4"
+                    VerticalAlignment="Center"
+                    Grid.Column="2">
+                    <TextBlock
+                        Name="ImgPa"
+                        VerticalAlignment="Center"
+                        Margin="5"
+                        Classes="Text0">
+                    </TextBlock>
+                </Border>
+                <Button
+                    Click="Browse"
+                    Grid.Row="4"
+                    Grid.Column="3"
+                    Name="ImgBrs"
+                    HorizontalAlignment="Stretch"
+                    Content="Browse">
                 </Button>
             </Grid>
         </Border>
@@ -162,7 +191,6 @@
             BorderThickness="2"
             BorderBrush="DimGray"
             Margin="5">
-
         </Border>
     </Grid>
 </UserControl>

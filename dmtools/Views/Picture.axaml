@@ -6,7 +6,11 @@
         x:Class="dmtools.Views.Picture"
         Closing="Window_OnClosing"
         Title="Picture">
-    <Image>
-        
-    </Image>
+    <Grid
+        Background="Black">
+            <Image
+                Name="MainImg">
+            </Image>
+    </Grid>
+
 </Window>

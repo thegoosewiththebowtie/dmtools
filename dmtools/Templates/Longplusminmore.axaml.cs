@@ -28,7 +28,7 @@ public class Longplusminmore : TemplatedControl
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);
-        var dbtn = e.NameScope.Find<Button>("lvlpl");
+        var dbtn = e.NameScope.Find<Button>("lvlpl1");
         dbtn.Click += (sender, args) =>
         {
             if (Convert.ToInt32(theval) < 20)
@@ -36,7 +36,7 @@ public class Longplusminmore : TemplatedControl
                 theval = (Convert.ToInt32(theval) + 1).ToString("0");
             }
         };
-        var dsbtn = e.NameScope.Find<Button>("lvlmn");
+        var dsbtn = e.NameScope.Find<Button>("lvlmn1");
         dsbtn.Click += (sender, args) =>
         {
             if (Convert.ToInt32(theval) > 0)

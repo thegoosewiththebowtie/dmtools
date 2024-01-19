@@ -11,11 +11,12 @@
         <FluentTheme />
         <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
 		<StyleInclude Source="/Templates/CharForm.axaml"/>
+        <StyleInclude Source="Templates/NpcForm.axaml"></StyleInclude>
 		<StyleInclude Source="/Templates/plusminbutton.axaml"/>
         <StyleInclude Source="Resources/Icons.axaml"></StyleInclude>
-        <StyleInclude Source="Templates/Longplusmin.axaml"></StyleInclude>
         <StyleInclude Source="Templates/Longplusminmore.axaml"></StyleInclude>
         <StyleInclude Source="Templates/plusminbuttonless.axaml"></StyleInclude>
 		<StyleInclude Source="Styles/Styles.axaml"></StyleInclude>
+        <StyleInclude Source="Templates/HealthGrid.axaml"></StyleInclude>
     </Application.Styles>
 </Application>

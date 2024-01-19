@@ -52,6 +52,14 @@ public partial class SettingsView : UserControl
         {
             Snd.IsChecked = false;
         }
+        if (settings.ImgPath == "Images")
+        {
+            Img.IsChecked = true;
+        }
+        else
+        {
+            Img.IsChecked = false;
+        }
     }
     private void Default(object? sender, RoutedEventArgs e)
     {
@@ -62,14 +70,12 @@ public partial class SettingsView : UserControl
                 case "Mus": settings.MusPath = "Music/Mus"; break; 
                 case "Amb": settings.AmbPath = "Music/Amb"; break;
                 case "Snd": settings.SndPath = "Music/Snd"; break;
+                case "Img": settings.ImgPath = "Images"; break;
             }
             MusPa.Text = settings.MusPath;
             AmbPa.Text = settings.AmbPath;
             SndPa.Text = settings.SndPath;
-        }
-        else
-        {
-
+            ImgPa.Text = settings.ImgPath;
         }
     }
     private async void Browse(object? sender, RoutedEventArgs e)
@@ -91,6 +97,9 @@ public partial class SettingsView : UserControl
                     case "Snd":
                         settings.SndPath = result[0].Path.ToString().Replace("file:///", "");
                         break;
+                    case "Img":
+                        settings.ImgPath = result[0].Path.ToString().Replace("file:///", "");
+                        break;
                 }
             }
             else
@@ -105,6 +114,9 @@ public partial class SettingsView : UserControl
                         break;
                     case "SndBrs":
                         settings.SndPath = result[0].Path.ToString().Replace("file:///", "");
+                        break;
+                    case "ImgBrs":
+                        settings.ImgPath = result[0].Path.ToString().Replace("file:///", "");
                         break;
                 }
             }

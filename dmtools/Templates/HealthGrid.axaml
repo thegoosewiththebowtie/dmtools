@@ -1,0 +1,46 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:dmtools.Templates">
+    <Design.PreviewWith>
+        <Grid Height="100" Width="200">
+            <controls:HealthGrid />
+        </Grid>
+    </Design.PreviewWith>
+
+    <Style Selector="controls|HealthGrid">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Grid
+                    VerticalAlignment="Stretch"
+                    HorizontalAlignment="Stretch"
+                    
+                    ColumnDefinitions="*, 4*, *">
+                    <Button
+                        Name = "bPlus"
+                        VerticalContentAlignment="Center"
+                        HorizontalContentAlignment="Center"
+                        VerticalAlignment="Stretch"
+                        Margin="5"
+                        HorizontalAlignment="Stretch">+</Button>
+                    <TextBlock
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        TextAlignment="Center"
+                        FontSize="16"
+                        MinWidth="50"
+                        Margin="0, 5, 0, 5"
+                        Grid.Column="1"
+                        Text="{TemplateBinding HealthVal}"></TextBlock>
+                    <Button
+                        Name = "bMinus"
+                        VerticalContentAlignment="Center"
+                        HorizontalContentAlignment="Center"
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch"
+                        Margin="5"
+                        Grid.Column="2">-</Button>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

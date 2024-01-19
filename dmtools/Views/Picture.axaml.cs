@@ -2,6 +2,7 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Avalonia.Media.Imaging;
 
 namespace dmtools.Views;
 
@@ -11,6 +12,11 @@ public partial class Picture : Window
     public Picture()
     {
         InitializeComponent();
+    }
+
+    public void pichange(Bitmap srs)
+    {
+        MainImg.Source = srs;
     }
 
     private void Window_OnClosing(object? sender, WindowClosingEventArgs e)

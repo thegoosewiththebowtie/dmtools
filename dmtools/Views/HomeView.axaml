@@ -2,6 +2,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="using:dmtools"
+             xmlns:templates="clr-namespace:dmtools.Templates"
              mc:Ignorable="d" d:DesignWidth="1600" d:DesignHeight="900"
              x:Class="dmtools.Views.HomeView">
 	<TabControl Name="TheTabControl">
@@ -16,7 +18,6 @@
 					Grid.Row="1"
 					ZIndex="2"
 					Classes="DefBorder">
-					
 					<DockPanel
 						Margin="0">
 						<Grid
@@ -34,6 +35,8 @@
 								Orientation="Horizontal"
 								HorizontalAlignment="Right">
 								<Button
+									Name="SaveNotes"
+									Click="SaveNotes_OnClick"
 									VerticalAlignment="Stretch"
 									Grid.Column="2"
 									HorizontalAlignment="Right"
@@ -42,6 +45,8 @@
 									<PathIcon Data="{StaticResource save_regular}"></PathIcon>
 								</Button>
 								<Button
+									Click="DeleteNotes_OnClick"
+									Name="DeleteNotes"
 									VerticalAlignment="Stretch"
 									HorizontalAlignment="Left"
 									Foreground="DarkRed"
@@ -58,6 +63,7 @@
 							Fill="DimGray">
 						</Rectangle>
 						<TextBox
+							Name="MainNotesT"
 							ZIndex="2"
 							FontSize="20"
 							Margin="0"
@@ -80,6 +86,8 @@
 							ColumnDefinitions="*, *, *, *, *"
 							DockPanel.Dock="Top">
 							<Button
+								Name="AddCus"
+								IsEnabled="False"
 								Grid.Column="0"
 								Margin="5"
 								FontSize="20"
@@ -87,7 +95,7 @@
 								HorizontalContentAlignment="Center"
 								HorizontalAlignment="Stretch"
 								VerticalAlignment="Stretch">
-								Add Custom
+								<PathIcon Data="{StaticResource document_add_regular}"></PathIcon>
 							</Button>
 							<ToggleButton
 								Name="fighttb"
@@ -102,6 +110,8 @@
 								Fight
 							</ToggleButton>
 							<Button
+								Name="AddNpc"
+								IsEnabled="False"
 								Grid.Column="4"
 								Margin="5"
 								FontSize="20"
@@ -109,7 +119,7 @@
 								HorizontalContentAlignment="Center"
 								HorizontalAlignment="Stretch"
 								VerticalAlignment="Stretch">
-								Add Custom
+								<PathIcon Data="{StaticResource add_regular}"></PathIcon>
 							</Button>
 						</Grid>
 						<Rectangle
@@ -133,32 +143,14 @@
 								<DataGridTextColumn Binding="{Binding Path=Name}" Header="Name" />
 								<DataGridTextColumn Binding="{Binding Path=Player}" Header="Player" />
 								<DataGridTextColumn Binding="{Binding Path=ArCl}" Header="Armor Class" />
-								<DataGridTemplateColumn>
+								<DataGridTemplateColumn Header="Health">
 									<DataGridTemplateColumn.CellTemplate>
 										<DataTemplate>
-											<Button
-												Name = "{Binding Path=IDP}"
-												Click="PlusMinusHP"
-												VerticalContentAlignment="Center"
-												HorizontalContentAlignment="Center"
-												Margin="5"
+											<templates:HealthGrid
+												HealthVal="{Binding Health, Mode=TwoWay}"
+												ID = "{Binding ID}"
 												VerticalAlignment="Stretch"
-												HorizontalAlignment="Stretch">+</Button>
-										</DataTemplate>
-									</DataGridTemplateColumn.CellTemplate>
-								</DataGridTemplateColumn>
-								<DataGridTextColumn Binding="{Binding Path=Health}" Header="Health" />
-								<DataGridTemplateColumn>
-									<DataGridTemplateColumn.CellTemplate>
-										<DataTemplate>
-											<Button
-												Name = "{Binding Path=IDM}"
-												Click="PlusMinusHP"
-												VerticalContentAlignment="Center"
-												HorizontalContentAlignment="Center"
-												Margin="5"
-												VerticalAlignment="Stretch"
-												HorizontalAlignment="Stretch">-</Button>
+												HorizontalAlignment="Stretch"></templates:HealthGrid>
 										</DataTemplate>
 									</DataGridTemplateColumn.CellTemplate>
 								</DataGridTemplateColumn>
@@ -170,13 +162,16 @@
 					Grid.Column="3"
 					Grid.Row="1"
 					Classes="DefBorder">
-					<DockPanel>
+					<DockPanel
+						LastChildFill="True">
 						<Grid
 							ColumnDefinitions=" *, *"
 							DockPanel.Dock="Top">
 							<StackPanel
 								Orientation="Horizontal">
 								<Button
+									Name="deltd"
+									Click="Deltd_OnClick"
 									VerticalAlignment="Stretch"
 									HorizontalAlignment="Left"
 									Foreground="DarkRed"
@@ -186,6 +181,8 @@
 									<PathIcon Data="{StaticResource delete_regular}"></PathIcon>
 								</Button>
 								<Button
+									Name="addtd"
+									Click="Addtd_OnClick"
 									VerticalAlignment="Stretch"
 									HorizontalAlignment="Left"
 									Margin="0,0,0,0"
@@ -207,9 +204,61 @@
 							DockPanel.Dock="Top"
 							Fill="DimGray">
 						</Rectangle>
-						<ListBox>
-							
-						</ListBox>
+						<Grid>
+						<Grid
+							VerticalAlignment="Stretch"
+							HorizontalAlignment="Stretch"
+							Name="maintodoll">
+							<ListBox
+								IsVisible="True"
+								Background="Transparent"
+								Name="tdl">
+							</ListBox>
+						</Grid>
+						<Grid
+							Name="addtodol"
+							IsVisible="False"
+							RowDefinitions="*, 9*" 
+							Margin="5"
+							ColumnDefinitions="*,2*,*,2*,*">
+							<TextBox
+								Name="textadd"
+								Grid.ColumnSpan="5"
+								CornerRadius="5"
+								FontSize="16"
+								BorderBrush="DimGray"
+								Margin="0, 5, 0, 5">
+							</TextBox>
+							<Button
+								Name="SaveNTD"
+								Click="SaveNTD_OnClick"
+								Grid.Column="1"
+								Margin="5"
+								FontSize="16"
+								HorizontalContentAlignment="Center"
+								VerticalContentAlignment="Center"
+								HorizontalAlignment="Stretch"
+								VerticalAlignment="Top"
+								CornerRadius="5"
+								Grid.Row="1">
+								Save
+							</Button>
+							<Button
+								Name="CanNTD"
+								Click="CanNTD_OnClick"
+								Grid.Column="3"
+								Margin="5"
+								FontSize="16"
+								CornerRadius="5"
+								HorizontalContentAlignment="Center"
+								VerticalContentAlignment="Center"
+								VerticalAlignment="Top"
+								HorizontalAlignment="Stretch"
+								Grid.Row="2">
+								Cancel
+							</Button>
+						</Grid>
+						</Grid>
 				</DockPanel>
 				</Border>
 				<Border
@@ -217,15 +266,78 @@
 					Grid.Row="2"
 					Grid.ColumnSpan="2"
 					Classes="DefBorder">
-					<Button
-						HorizontalAlignment="Stretch"
-						VerticalAlignment="Stretch"
-						HorizontalContentAlignment="Center"
-						VerticalContentAlignment="Center"
-						Click="OpenPictureWindow"
-						FontSize="150">
-						<PathIcon Data="{StaticResource open_regular}"></PathIcon>
-					</Button>
+					<DockPanel
+						Name="ImgPan"
+						LastChildFill="True">
+						<Grid
+							ColumnDefinitions="*, *"
+							DockPanel.Dock="Top">
+							<TextBlock
+								VerticalAlignment="Center"
+								Margin="5"
+								FontSize="20"
+								HorizontalAlignment="Left">
+								Image control
+							</TextBlock>
+							<StackPanel
+								Grid.Column="1"
+								HorizontalAlignment="Right"
+								Orientation="Horizontal">
+								<ToggleButton
+									CornerRadius="0,0,0, 0"
+									Name="GridVVI"
+									IsCheckedChanged="GridVVI_OnIsCheckedChanged"
+									HorizontalAlignment="Right"
+									VerticalAlignment="Stretch"
+									HorizontalContentAlignment="Center"
+									VerticalContentAlignment="Center">
+									<PathIcon Data="{StaticResource grid_regular}"></PathIcon>
+								</ToggleButton>
+								<Button
+									CornerRadius="0,5,0, 0"
+									HorizontalAlignment="Right"
+									VerticalAlignment="Stretch"
+									HorizontalContentAlignment="Center"
+									VerticalContentAlignment="Center"
+									Click="OpenPictureWindow"
+									FontSize="150">
+									<PathIcon Data="{StaticResource open_regular}"></PathIcon>
+								</Button>
+							</StackPanel>
+						</Grid>
+						<Rectangle
+							Height="1"
+							DockPanel.Dock="Top"
+							Fill="DimGray">
+						</Rectangle>
+						<Button
+							Click="LeftRight_OnClick"
+							Name="Left"
+							Background="Transparent"
+							DockPanel.Dock="Left">
+							<PathIcon Data="{StaticResource caret_left_regular}"></PathIcon>
+						</Button>
+						<Button
+							Name="Right"
+							Click="LeftRight_OnClick"
+							Background="Transparent"
+							DockPanel.Dock="Right">
+							<PathIcon Data="{StaticResource caret_right_regular}"></PathIcon>
+						</Button>
+						<Grid>
+							<ScrollViewer>
+								<WrapPanel
+									Name="wpip"
+									IsVisible="False">
+								</WrapPanel>
+							</ScrollViewer>
+							<Image
+								Name="ImagePreview"
+								HorizontalAlignment="Stretch"
+								VerticalAlignment="Stretch">
+							</Image>
+						</Grid>
+					</DockPanel>
 				</Border>
 				<Border
 					Grid.Column="2"

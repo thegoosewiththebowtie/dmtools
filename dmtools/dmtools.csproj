@@ -12,7 +12,7 @@
     </Content>
   </ItemGroup>
     <ItemGroup>
-        <Content Include="Assets\**" >
+        <Content Include="Images\**" >
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

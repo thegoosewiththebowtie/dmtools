@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -7,12 +7,13 @@ using Config.Net;
 using dmtools.Resources;
 using dmtools.Views;
 using LiteDB;
-using ReactiveUI;
 
-namespace dmtools;
-public class CharForm : TemplatedControl
+namespace dmtools.Templates;
+
+public class NpcForm : TemplatedControl
 {
     ISettings settings = new ConfigurationBuilder<ISettings>().UseIniFile("Settings.ini").Build();
+    
     public int ID { get; set; }
     public static readonly StyledProperty<string> FirstNameProperty = AvaloniaProperty.Register<CharForm, string>(
         "FirstName");
@@ -215,5 +216,5 @@ public class CharForm : TemplatedControl
             }
         };
     }
-}
 
+}

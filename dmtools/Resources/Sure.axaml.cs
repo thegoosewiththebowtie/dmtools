@@ -3,6 +3,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using Config.Net;
 using dmtools.Views;
 using LiteDB;
 
@@ -17,10 +18,11 @@ public partial class Sure : Window
         InitializeComponent();
         id = ID;
     }
+    ISettings settings = new ConfigurationBuilder<ISettings>().UseIniFile("Settings.ini").Build();
 
     private void Button_Delete(object? sender, RoutedEventArgs e)
     {
-        using (var ldbpc = new LiteDatabase("LdbforPC.db"))
+        using (var ldbpc = new LiteDatabase(settings.Profile))
         {
             var chars = ldbpc.GetCollection<PlayerCharacter>();
             chars.Delete(id);

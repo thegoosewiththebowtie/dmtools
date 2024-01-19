@@ -7,6 +7,7 @@ using System.Net.Mime;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Interactivity;
+using Avalonia.Platform.Storage;
 using dmtools.ViewModels;
 
 namespace dmtools.Views;
@@ -18,6 +19,12 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+        System.IO.Directory.CreateDirectory("Profiles");
+        System.IO.Directory.CreateDirectory("Music");
+        System.IO.Directory.CreateDirectory("Music/Amb");
+        System.IO.Directory.CreateDirectory("Music/Mus");
+        System.IO.Directory.CreateDirectory("Music/Snd");
+        System.IO.Directory.CreateDirectory("Images");
     }
     public void Control_OnSizeChanged(object? sender, SizeChangedEventArgs e)
     {
