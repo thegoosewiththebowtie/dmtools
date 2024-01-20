@@ -10,7 +10,7 @@ I'm planning to make first alpha version publically available on the 21st of Jan
 https://t.me/dmtoolsbyvtg
 * bug reports and chatting:
 https://t.me/dmtoolschat
-* reddit
+* reddit:
 https://reddit.com/r/dmtools
 ## Plans for future and already finished features
 - [x] Initiative tracker
