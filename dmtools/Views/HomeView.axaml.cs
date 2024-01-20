@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using Avalonia.Controls;
@@ -12,8 +13,10 @@ using LiteDB;
 using System.IO;
 using System.Runtime;
 using Avalonia;
+using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Controls.Primitives;
 using Avalonia.Layout;
+using Avalonia.LogicalTree;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using NAudio;
@@ -28,6 +31,16 @@ using DynamicData;
 namespace dmtools.Views;
 
 public class FightData
+{
+    public int Initiative { get; set; }
+    public string Name { get; set; }
+    public string Player { get; set; }
+    public int ArCl { get; set; }
+    public int ID { get; set; }
+    public int Health { get; set; }
+}
+
+public class FightDataNpc
 {
     public int Initiative { get; set; }
     public string Name { get; set; }
@@ -184,6 +197,7 @@ public partial class HomeView : UserControl
     
     //fight
     public List<int> init = new List<int>();
+    public List<FightDataNpc> npcsf = new List<FightDataNpc>(); 
     ObservableCollection<FightData> fin = new ObservableCollection<FightData>();
     public void DashFightUp()
     {
@@ -217,6 +231,22 @@ public partial class HomeView : UserControl
                 c++;
                 fin.Add(fightList);
             }
+            foreach (var variNpc in npcsf)
+            {
+                if (fighttb.IsChecked == true)
+                {
+                    FightData fightList = new FightData()
+                    {
+                        Initiative = variNpc.Initiative,
+                        Name = variNpc.Name,
+                        Player = variNpc.Player,
+                        ArCl = variNpc.ArCl,
+                        ID = variNpc.ID,
+                        Health = variNpc.Health,
+                    };
+                    fin.Add(fightList);
+                }
+            }
             FightGrid.ItemsSource = fin;
         }
     }
@@ -224,32 +254,88 @@ public partial class HomeView : UserControl
     {
         DashFightUp();
     }
-    private void Startf(object? sender, RoutedEventArgs e)
+    private async void Startf(object? sender, RoutedEventArgs e)
     {
         if ((sender as ToggleButton).IsChecked == true)
         {
-            FightGrid.Columns[0].IsVisible = true;
-            FightGrid.Columns[0].Sort();
+            int s = 1;
             using (var LdbPC = new LiteDatabase(settings.Profile))
             {
                 var playChar = LdbPC.GetCollection<PlayerCharacter>();
                 int c = 0;
                 foreach (var pc in playChar.FindAll())
                 {
+                    Init inn = new Init(pc.FirstName);
+                    int dice = 0;
+                    if (Avalonia.Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+                    {
+                        await inn.ShowDialog(desktop.MainWindow);
+                        if (inn.result == -1)
+                        {
+                            s = 0;
+                            break;
+                        }
+                        else if (inn.result < 21 && inn.result > 0)
+                        {
+                            dice = inn.result;
+                        }
+                        else
+                        {
+                            dice = rndm.Next(1, 20);
+                        }
+                    }
                     init[c] = init[c] +
-                                      (int)Math.Floor(Convert.ToDecimal((Convert.ToInt32(pc.Dexterity) - 10) / 2));
+                              (int)Math.Floor(Convert.ToDecimal((Convert.ToInt32(pc.Dexterity) - 10) / 2)) + dice;
                     c++;
                 }
             }
-            DashFightUp();
+            if (s == 0)
+            {
+                (sender as ToggleButton).IsChecked = false;
+            }
+            else
+            {
+                AddCus.IsEnabled = true;
+                AddNpc.IsEnabled = true;
+                FightGrid.Columns[0].IsVisible = true;
+                FightGrid.Columns[0].Sort(ListSortDirection.Descending);
+            }
         }
         else
         {
+            npcsf.Clear();
+            AddCus.IsEnabled = false;
+            AddNpc.IsEnabled = false;
             FightGrid.Columns[0].IsVisible = false;
             FightGrid.Columns[1].Sort();
             init.Clear();
         }
         DashFightUp();
+    }
+    private async void AddCus_OnClick(object? sender, RoutedEventArgs e)
+    {
+        AddCustNpc acn = new AddCustNpc();
+        if (Avalonia.Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        {
+            await acn.ShowDialog(desktop.MainWindow);
+            if (acn.res.initiative != -1)
+            {
+                npcsf.Add(new FightDataNpc()
+                {
+                    Name = acn.res.name,
+                    Player = acn.res.playe,
+                    Initiative = acn.res.initiative,
+                    ArCl = acn.res.ac,
+                    ID = 999,
+                    Health = acn.res.hp
+                });
+            }
+        }
+        DashFightUp();
+    }
+    private void AddNpc_OnClick(object? sender, RoutedEventArgs e)
+    {
+        
     }
     
     
@@ -802,5 +888,63 @@ public partial class HomeView : UserControl
                 cf.Height = cf.Width / 1.33333;
             }
         }
+    }
+
+    public List<int> his = new List<int>();
+    private void DiceThrow(object? sender, RoutedEventArgs e)
+    {
+        foreach (var g in (sender as Button).GetLogicalChildren().OfType<Grid>())
+        {
+            foreach (var res in g.Children.OfType<TextBlock>())
+            {
+                int ress = 0;
+                for (int i = 0; i < Convert.ToInt32(seldm.Remove(0,1)); i++)
+                {
+                    var rsr = rndm.Next(1, Convert.ToInt32((sender as Button).Name.Remove(0, 1))+1);
+                    ress += rsr;
+                    HistoryD.Items.Insert(0, rsr);
+                }
+                res.Text = ress.ToString();
+                TotalD.Text = (Convert.ToInt32(TotalD.Text) + ress).ToString();
+            }
+        }
+    }
+
+    public string seldm { get; set; } = "x1";
+    private void moredice(object? sender, RoutedEventArgs e)
+    {
+        if (Dicess == null)
+        {
+            return;
+        }
+        if ((sender as ToggleButton).IsChecked == false)
+        {
+            return;
+        }
+        seldm = (sender as ToggleButton).Name;
+        foreach (var tb in Dicess.Children.OfType<ToggleButton>())
+        {
+            if (tb.Name != seldm)
+            {
+                tb.IsChecked = false;
+            }
+        }
+    }
+
+    private void Cleardice_OnClick(object? sender, RoutedEventArgs e)
+    {
+        foreach (var d in Dicess.Children.OfType<Button>())
+        {
+            var r = d.Name.Remove(0, 1);
+            foreach (var g in d.GetLogicalChildren().OfType<Grid>())
+            {
+                foreach (var tb in g.Children.OfType<TextBlock>())
+                {
+                    tb.Text = r;
+                }
+            }
+        }
+        HistoryD.Items.Clear();
+        TotalD.Text = "0";
     }
 }

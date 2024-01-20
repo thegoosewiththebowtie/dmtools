@@ -5,6 +5,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Controls.Primitives;
 using Config.Net;
 using dmtools.Resources;
+using dmtools.Templates;
 using dmtools.Views;
 using LiteDB;
 using ReactiveUI;
@@ -189,7 +190,7 @@ public class CharForm : TemplatedControl
     {
         base.OnApplyTemplate(e);
         var dbtn = e.NameScope.Find<Button>("Delete");
-        profbon ="+" + (Math.Floor(Convert.ToDecimal(Level) / 4) + 1).ToString();
+        profbon ="+" + (Math.Ceiling(Convert.ToDecimal(Level) / 4) + 1).ToString();
         dbtn.Click += (sender, args) =>
         {
             Sure huh = new Sure(ID);
@@ -213,6 +214,11 @@ public class CharForm : TemplatedControl
                     Experience = Exp, Health = Health, ArmorClass = Ac
                 });
             }
+        };
+        var lvl = e.NameScope.Find<plusminbuttonless>("level0");
+        lvl.PropertyChanged += (sender, args) =>
+        {
+            profbon ="+" + (Math.Ceiling(Convert.ToDecimal(Level) / 4) + 1).ToString();
         };
     }
 }

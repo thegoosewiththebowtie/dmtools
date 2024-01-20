@@ -1,0 +1,57 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        CanResize="False"
+        Height="255"
+        Width="300"
+        x:Class="dmtools.Resources.AddCustNpc"
+        Title="AddCustNpc">
+        <StackPanel>
+                <TextBox
+                        KeyDown="TestInt"
+                        Name="Initiative"
+                        Watermark="Initiative, leave empty for random"
+                        Margin="5"></TextBox>
+                <TextBox
+                        Name="Name"
+                        Watermark="Name"
+                        Margin="5"></TextBox>
+                <TextBox
+                        Name="NPC"
+                        IsEnabled="False"
+                        Margin="5">
+                        NPC
+                </TextBox>
+                <TextBox
+                        KeyDown="TestInt"
+                        Name="AC"
+                        Watermark="Armor class"
+                        Margin="5"></TextBox>
+                <TextBox
+                        KeyDown="TestInt"
+                        Name="HP"
+                        Watermark="Hit Points"
+                        Margin="5"></TextBox>
+                <Grid ColumnDefinitions="*, 2*, *, 2*, *">
+                        <Button
+                                Click="OK"
+                                IsDefault="True"
+                                Margin="5"
+                                VerticalContentAlignment="Center"
+                                HorizontalContentAlignment="Center"
+                                VerticalAlignment="Stretch"
+                                HorizontalAlignment="Stretch"
+                                Grid.Column="1">Add</Button>
+                        <Button
+                                Click="Cancel"
+                                Margin="5"
+                                VerticalContentAlignment="Center"
+                                HorizontalContentAlignment="Center"
+                                VerticalAlignment="Stretch"
+                                HorizontalAlignment="Stretch"
+                                Grid.Column="3">Cancel</Button>
+                </Grid>
+        </StackPanel>
+</Window>

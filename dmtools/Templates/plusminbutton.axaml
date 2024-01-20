@@ -30,10 +30,31 @@
 				      BorderBrush="DimGray"></Border>
 			      <TextBlock
               				  Text="{TemplateBinding Labll}"
-              				  Grid.ColumnSpan="4"
+              				  Grid.ColumnSpan="3"
               				  VerticalAlignment="Center"
-              				  Classes="Header3"
+              				  FontSize="14"
               				  HorizontalAlignment="Center"/>
+			      <ToggleButton
+				      CornerRadius="0,5,0,0"
+				      VerticalAlignment="Stretch"
+				      HorizontalAlignment="Stretch"
+				      Grid.Row="0"
+				      Grid.Column="3"
+				      Name = "pro">
+				      <Viewbox
+					      Height="13"
+					      Width="13">
+					      <PathIcon Data="{StaticResource glasses_regular}"></PathIcon>
+				      </Viewbox>
+			      </ToggleButton>
+			      <Rectangle
+				      Grid.Row="1"
+				      Grid.Column="0"
+				      Grid.ColumnSpan="4"
+				      Height="1"
+				      Fill="DimGray"
+				      VerticalAlignment="Top"
+				      Margin="0, -1, 0, 0"></Rectangle>
               			  <TextBlock 
               				  Text="{TemplateBinding modmodd}"
               				  Classes="Header1"

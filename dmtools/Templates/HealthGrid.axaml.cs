@@ -38,24 +38,30 @@ public class HealthGrid : TemplatedControl
         pbtn.Click += (sender, args) =>
         {
             HealthVal = (Convert.ToInt32(HealthVal) + 1).ToString();
-            using (var LdbPC = new LiteDatabase(settings.Profile))
+            if (ID != 999)
             {
-                var pc = LdbPC.GetCollection<PlayerCharacter>();
-                var p = pc.FindById(ID);
-                p.Health = HealthVal;
-                pc.Update(p);
+                using (var LdbPC = new LiteDatabase(settings.Profile))
+                {
+                    var pc = LdbPC.GetCollection<PlayerCharacter>();
+                    var p = pc.FindById(ID);
+                    p.Health = HealthVal;
+                    pc.Update(p);
+                }
             }
         };
         var mbtn = e.NameScope.Find<Button>("bMinus");
         mbtn.Click += (sender, args) =>
         {
             HealthVal = (Convert.ToInt32(HealthVal) - 1).ToString();
-            using (var LdbPC = new LiteDatabase(settings.Profile))
+            if (ID != 999)
             {
-                var pc = LdbPC.GetCollection<PlayerCharacter>();
-                var p = pc.FindById(ID);
-                p.Health = HealthVal;
-                pc.Update(p);
+                using (var LdbPC = new LiteDatabase(settings.Profile))
+                {
+                    var pc = LdbPC.GetCollection<PlayerCharacter>();
+                    var p = pc.FindById(ID);
+                    p.Health = HealthVal;
+                    pc.Update(p);
+                }
             }
         };
     }

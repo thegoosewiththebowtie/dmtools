@@ -34,6 +34,15 @@ public class plusminbutton : TemplatedControl
         get => GetValue(modmoddProperty);
         set => SetValue(modmoddProperty, value);
     }
+
+    public static readonly StyledProperty<int> profProperty = AvaloniaProperty.Register<plusminbutton, int>(
+        "prof", defaultValue:2);
+
+    public int prof
+    {
+        get => GetValue(profProperty);
+        set => SetValue(profProperty, value);
+    }
     
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
@@ -53,6 +62,18 @@ public class plusminbutton : TemplatedControl
             {
                 Value0 = (Convert.ToInt32(Value0) - 1).ToString();
                 modmodd = ((int)Math.Floor(Convert.ToDecimal((Convert.ToInt32(Value0) - 10) / 2))).ToString();
+            }
+        };
+        var probtn = e.NameScope.Find<ToggleButton>("pro");
+        probtn.IsCheckedChanged += (s, e) =>
+        {
+            if ((s as ToggleButton).IsChecked == true)
+            {
+                modmodd = (Convert.ToInt32(modmodd) + prof).ToString();
+            }
+            if ((s as ToggleButton).IsChecked == false)
+            {
+                modmodd = (Convert.ToInt32(modmodd) - prof).ToString();
             }
         };
     }

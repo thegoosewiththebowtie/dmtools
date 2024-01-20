@@ -23,6 +23,7 @@
 				  RowDefinitions="*, *, *, *, *, *, *, *, *">
 				  <templates:plusminbuttonless
 					  Labll="Level"
+					  Name="level0"
 					  Value0="{TemplateBinding Level, Mode=TwoWay}"
 					  Grid.RowSpan="2"
 					  Grid.ColumnSpan="2"></templates:plusminbuttonless>
@@ -174,6 +175,7 @@
 				  </TextBox>
 				  <templates:plusminbutton 
 					  Value0="{TemplateBinding StrVal, Mode=TwoWay}"
+					  prof="{TemplateBinding profbon, Mode=TwoWay}"
 					  Labll="Strength"
 					  Grid.ColumnSpan="2" 
 					  Grid.RowSpan="2" 
@@ -181,6 +183,7 @@
 					  Grid.Column="0"></templates:plusminbutton>
 				  <templates:plusminbutton 
 					  Value0="{TemplateBinding DexVal, Mode=TwoWay}"
+					  prof="{TemplateBinding profbon, Mode=TwoWay}"
 					  Labll="Dexterity"
 					  Grid.ColumnSpan="2" 
 					  Grid.RowSpan="2" 
@@ -188,6 +191,7 @@
 					  Grid.Column="2"></templates:plusminbutton>
 				  <templates:plusminbutton 
 					  Value0="{TemplateBinding ConVal, Mode=TwoWay}"
+					  prof="{TemplateBinding profbon, Mode=TwoWay}"
 					  Labll="Constitution"
 					  Grid.ColumnSpan="2" 
 					  Grid.RowSpan="2" 
@@ -195,6 +199,7 @@
 					  Grid.Column="4"></templates:plusminbutton>
 				  <templates:plusminbutton 
 					  Value0="{TemplateBinding IntVal, Mode=TwoWay}"
+					  prof="{TemplateBinding profbon, Mode=TwoWay}"
 					  Labll="Intelligence"
 					  Grid.ColumnSpan="2" 
 					  Grid.RowSpan="2" 
@@ -202,6 +207,7 @@
 					  Grid.Column="6"></templates:plusminbutton>
 				  <templates:plusminbutton 
 					  Value0="{TemplateBinding WisVal, Mode=TwoWay}"
+					  prof="{TemplateBinding profbon, Mode=TwoWay}"
 					  Labll="Wisdom"
 					  Grid.ColumnSpan="2" 
 					  Grid.RowSpan="2" 
@@ -209,6 +215,7 @@
 					  Grid.Column="8"></templates:plusminbutton>
 				  <templates:plusminbutton 
 					  Value0="{TemplateBinding ChaVal, Mode=TwoWay}"
+					  prof="{TemplateBinding profbon, Mode=TwoWay}"
 					  Labll="Charisma"
 					  Grid.ColumnSpan="2" 
 					  Grid.RowSpan="2" 

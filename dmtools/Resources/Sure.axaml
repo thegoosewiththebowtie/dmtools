@@ -7,9 +7,9 @@
         CanResize="False"
         Height="100"
         Width="200"
-        
+        WindowStartupLocation="CenterOwner"
         Title="Sure">
-        <Grid RowDefinitions="*, *, *" ColumnDefinitions="*, *, *" Background="White">
+        <Grid RowDefinitions="*, *" ColumnDefinitions="*, 2*, *, 2*, *" Background="White">
                 <TextBlock
                         Grid.RowSpan="2"
                         Grid.ColumnSpan="3"
@@ -17,17 +17,17 @@
                         TextWrapping="Wrap"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center">
-                        Are you sure you want to delete this?
+                        Are you sure?
                 </TextBlock>
                 <Button
                         Name="ButtonDelete"
-                        Grid.Row="2"
-                        Grid.Column="0"
+                        Grid.Row="1"
+                        Grid.Column="1"
                         Click="Button_Delete">Delete</Button>
                 <Button 
                         Name="ButtonCancel"
-                        Grid.Row="2"
-                        Grid.Column="2"
+                        Grid.Row="1"
+                        Grid.Column="3"
                         Click="ButtonCancel_OnClick">Cancel</Button>
         </Grid>
 </Window>
