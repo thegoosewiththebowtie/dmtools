@@ -17,6 +17,15 @@ public class plusminbutton : TemplatedControl
         set => SetValue(Value0Property, value);
     }
 
+    public static readonly StyledProperty<bool> ischeckedProperty = AvaloniaProperty.Register<plusminbutton, bool>(
+        "ischecked", defaultValue:false);
+
+    public bool ischecked
+    {
+        get => GetValue(ischeckedProperty);
+        set => SetValue(ischeckedProperty, value);
+    }
+
     public static readonly StyledProperty<string> LabllProperty = AvaloniaProperty.Register<plusminbutton, string>(
         nameof(Labll), defaultValue:"Strength");
 
@@ -35,10 +44,10 @@ public class plusminbutton : TemplatedControl
         set => SetValue(modmoddProperty, value);
     }
 
-    public static readonly StyledProperty<int> profProperty = AvaloniaProperty.Register<plusminbutton, int>(
-        "prof", defaultValue:2);
+    public static readonly StyledProperty<string> profProperty = AvaloniaProperty.Register<plusminbutton, string>(
+        "prof", defaultValue:"2");
 
-    public int prof
+    public string prof
     {
         get => GetValue(profProperty);
         set => SetValue(profProperty, value);
@@ -47,8 +56,12 @@ public class plusminbutton : TemplatedControl
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);
-        var pbtn = e.NameScope.Find<Button>("plus");
         modmodd = ((int)Math.Floor(Convert.ToDecimal((Convert.ToInt32(Value0) - 10) / 2))).ToString();
+        if (e.NameScope.Find<ToggleButton>("pro").IsChecked == true)
+        {
+            modmodd = (Convert.ToInt32(modmodd) + Convert.ToInt32(prof)).ToString();
+        }
+        var pbtn = e.NameScope.Find<Button>("plus");
         pbtn.Click += (s, e) =>
         {
                 Value0 = (Convert.ToInt32(Value0) + 1).ToString();
@@ -69,11 +82,13 @@ public class plusminbutton : TemplatedControl
         {
             if ((s as ToggleButton).IsChecked == true)
             {
-                modmodd = (Convert.ToInt32(modmodd) + prof).ToString();
+                modmodd = (Convert.ToInt32(modmodd) + Convert.ToInt32(prof)).ToString();
+                ischecked = true;
             }
             if ((s as ToggleButton).IsChecked == false)
             {
-                modmodd = (Convert.ToInt32(modmodd) - prof).ToString();
+                modmodd = (Convert.ToInt32(modmodd) - Convert.ToInt32(prof)).ToString();
+                ischecked = false;
             }
         };
     }

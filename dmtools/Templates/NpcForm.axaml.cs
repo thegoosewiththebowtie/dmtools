@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -12,19 +13,27 @@ namespace dmtools.Templates;
 
 public class NpcForm : TemplatedControl
 {
-    ISettings settings = new ConfigurationBuilder<ISettings>().UseIniFile("Settings.ini").Build();
     
     public int ID { get; set; }
-    public static readonly StyledProperty<string> FirstNameProperty = AvaloniaProperty.Register<CharForm, string>(
-        "FirstName");
+    public static readonly StyledProperty<List<bool>> IsCheckProperty = AvaloniaProperty.Register<NpcForm, List<bool>>(
+        "IsCheck");
 
+    public List<bool> IsCheck
+    {
+        get => GetValue(IsCheckProperty);
+        set => SetValue(IsCheckProperty, value);
+    }
+    
+    public static readonly StyledProperty<string> FirstNameProperty = AvaloniaProperty.Register<NpcForm, string>(
+        "FirstName");
+    
     public string FirstName
     {
         get => GetValue(FirstNameProperty);
         set => SetValue(FirstNameProperty, value);
     }
 
-    public static readonly StyledProperty<string> OtherNamesProperty = AvaloniaProperty.Register<CharForm, string>(
+    public static readonly StyledProperty<string> OtherNamesProperty = AvaloniaProperty.Register<NpcForm, string>(
         "OtherNames");
 
     public string OtherNames
@@ -33,7 +42,7 @@ public class NpcForm : TemplatedControl
         set => SetValue(OtherNamesProperty, value);
     }
 
-    public static readonly StyledProperty<string> PlayerProperty = AvaloniaProperty.Register<CharForm, string>(
+    public static readonly StyledProperty<string> PlayerProperty = AvaloniaProperty.Register<NpcForm, string>(
         "Player");
 
     public string Player
@@ -42,7 +51,7 @@ public class NpcForm : TemplatedControl
         set => SetValue(PlayerProperty, value);
     }
 
-    public static readonly StyledProperty<string> RaceProperty = AvaloniaProperty.Register<CharForm, string>(
+    public static readonly StyledProperty<string> RaceProperty = AvaloniaProperty.Register<NpcForm, string>(
         "Race");
 
     public string Race
@@ -51,7 +60,7 @@ public class NpcForm : TemplatedControl
         set => SetValue(RaceProperty, value);
     }
 
-    public static readonly StyledProperty<string> ClassProperty = AvaloniaProperty.Register<CharForm, string>(
+    public static readonly StyledProperty<string> ClassProperty = AvaloniaProperty.Register<NpcForm, string>(
         "Class");
 
     public string Class
@@ -60,7 +69,7 @@ public class NpcForm : TemplatedControl
         set => SetValue(ClassProperty, value);
     }
 
-    public static readonly StyledProperty<string> BackgrounddProperty = AvaloniaProperty.Register<CharForm, string>(
+    public static readonly StyledProperty<string> BackgrounddProperty = AvaloniaProperty.Register<NpcForm, string>(
         "Backgroundd");
 
     public string Backgroundd
@@ -69,7 +78,7 @@ public class NpcForm : TemplatedControl
         set => SetValue(BackgrounddProperty, value);
     }
 
-    public static readonly StyledProperty<string> AlligmentProperty = AvaloniaProperty.Register<CharForm, string>(
+    public static readonly StyledProperty<string> AlligmentProperty = AvaloniaProperty.Register<NpcForm, string>(
         "Alligment");
 
     public string Alligment
@@ -78,7 +87,7 @@ public class NpcForm : TemplatedControl
         set => SetValue(AlligmentProperty, value);
     }
 
-    public static readonly StyledProperty<string> NotesProperty = AvaloniaProperty.Register<CharForm, string>(
+    public static readonly StyledProperty<string> NotesProperty = AvaloniaProperty.Register<NpcForm, string>(
         "Notes");
 
     public string Notes
@@ -87,7 +96,7 @@ public class NpcForm : TemplatedControl
         set => SetValue(NotesProperty, value);
     }
 
-    public static readonly StyledProperty<string> StrValProperty = AvaloniaProperty.Register<CharForm, string>(
+    public static readonly StyledProperty<string> StrValProperty = AvaloniaProperty.Register<NpcForm, string>(
         "StrVal", defaultValue:"10");
 
     public string StrVal
@@ -96,7 +105,7 @@ public class NpcForm : TemplatedControl
         set => SetValue(StrValProperty, value);
     }
 
-    public static readonly StyledProperty<string> DexValProperty = AvaloniaProperty.Register<CharForm, string>(
+    public static readonly StyledProperty<string> DexValProperty = AvaloniaProperty.Register<NpcForm, string>(
         "DexVal", defaultValue:"10");
 
     public string DexVal
@@ -105,7 +114,7 @@ public class NpcForm : TemplatedControl
         set => SetValue(DexValProperty, value);
     }
 
-    public static readonly StyledProperty<string> ConValProperty = AvaloniaProperty.Register<CharForm, string>(
+    public static readonly StyledProperty<string> ConValProperty = AvaloniaProperty.Register<NpcForm, string>(
         "ConVal", defaultValue:"10");
 
     public string ConVal
@@ -114,7 +123,7 @@ public class NpcForm : TemplatedControl
         set => SetValue(ConValProperty, value);
     }
 
-    public static readonly StyledProperty<string> IntValProperty = AvaloniaProperty.Register<CharForm, string>(
+    public static readonly StyledProperty<string> IntValProperty = AvaloniaProperty.Register<NpcForm, string>(
         "IntVal", defaultValue:"10");
 
     public string IntVal
@@ -123,7 +132,7 @@ public class NpcForm : TemplatedControl
         set => SetValue(IntValProperty, value);
     }
 
-    public static readonly StyledProperty<string> WisValProperty = AvaloniaProperty.Register<CharForm, string>(
+    public static readonly StyledProperty<string> WisValProperty = AvaloniaProperty.Register<NpcForm, string>(
         "WisVal", defaultValue:"10");
 
     public string WisVal
@@ -132,7 +141,7 @@ public class NpcForm : TemplatedControl
         set => SetValue(WisValProperty, value);
     }
 
-    public static readonly StyledProperty<string> ChaValProperty = AvaloniaProperty.Register<CharForm, string>(
+    public static readonly StyledProperty<string> ChaValProperty = AvaloniaProperty.Register<NpcForm, string>(
         "ChaVal", defaultValue:"10");
 
     public string ChaVal
@@ -141,7 +150,7 @@ public class NpcForm : TemplatedControl
         set => SetValue(ChaValProperty, value);
     }
 
-    public static readonly StyledProperty<string> LevelProperty = AvaloniaProperty.Register<CharForm, string>(
+    public static readonly StyledProperty<string> LevelProperty = AvaloniaProperty.Register<NpcForm, string>(
         "Level");
 
     public string Level
@@ -150,7 +159,7 @@ public class NpcForm : TemplatedControl
         set => SetValue(LevelProperty, value);
     }
 
-    public static readonly StyledProperty<string> ExpProperty = AvaloniaProperty.Register<CharForm, string>(
+    public static readonly StyledProperty<string> ExpProperty = AvaloniaProperty.Register<NpcForm, string>(
         "Exp");
 
     public string Exp
@@ -159,7 +168,7 @@ public class NpcForm : TemplatedControl
         set => SetValue(ExpProperty, value);
     }
 
-    public static readonly StyledProperty<string> HealthProperty = AvaloniaProperty.Register<CharForm, string>(
+    public static readonly StyledProperty<string> HealthProperty = AvaloniaProperty.Register<NpcForm, string>(
         "Health");
 
     public string Health
@@ -168,7 +177,7 @@ public class NpcForm : TemplatedControl
         set => SetValue(HealthProperty, value);
     }
 
-    public static readonly StyledProperty<string> AcProperty = AvaloniaProperty.Register<CharForm, string>(
+    public static readonly StyledProperty<string> AcProperty = AvaloniaProperty.Register<NpcForm, string>(
         "Ac");
 
     public string Ac
@@ -177,7 +186,7 @@ public class NpcForm : TemplatedControl
         set => SetValue(AcProperty, value);
     }
 
-    public static readonly StyledProperty<string> profbonProperty = AvaloniaProperty.Register<CharForm, string>(
+    public static readonly StyledProperty<string> profbonProperty = AvaloniaProperty.Register<NpcForm, string>(
         "profbon");
 
     public string profbon
@@ -187,13 +196,15 @@ public class NpcForm : TemplatedControl
     }
     
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
-    {
+    { 
         base.OnApplyTemplate(e);
-        var dbtn = e.NameScope.Find<Button>("Delete");
+        Profile profile = new ConfigurationBuilder<Profile>().UseIniFile("Profile.ini").Build();
+        ISettings settings = new ConfigurationBuilder<ISettings>().UseIniFile("Settings/q0" + profile.ProfileID +".ini").Build();
         profbon ="+" + (Math.Floor(Convert.ToDecimal(Level) / 4) + 1).ToString();
+        var dbtn = e.NameScope.Find<Button>("Delete");
         dbtn.Click += (sender, args) =>
         {
-            Sure huh = new Sure(ID);
+            Sure huh = new Sure(ID, 99);
             if (Avalonia.Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 huh.ShowDialog(desktop.MainWindow);
@@ -202,19 +213,24 @@ public class NpcForm : TemplatedControl
         var sbtn = e.NameScope.Find<Button>("Save");
         sbtn.Click += (sender, args) =>
         {
-            using (var LdbPC = new LiteDatabase(settings.Profile))
+            using (var LdbPC = new LiteDatabase(settings.DataPath))
             {
-                var pccol = LdbPC.GetCollection<PlayerCharacter>();
+                var pccol = LdbPC.GetCollection<NPC>();
                 pccol.Delete(ID );
-                pccol.Insert(new PlayerCharacter
+                pccol.Insert(new NPC()
                 {
                     ID = ID, FirstName = FirstName, OtherName = OtherNames, Player = Player, Race = Race, Class = Class,
                     Backgroundd = Backgroundd, Alligment = Alligment, Notes = Notes, Strength = StrVal, Dexterity = DexVal,
                     Constitution = ConVal, Intelligence = IntVal, Wisdom = WisVal, Charisma = ChaVal, Level = Level,
-                    Experience = Exp, Health = Health, ArmorClass = Ac
+                    Experience = Exp, Health = Health, ArmorClass = Ac, IsCCharisma = IsCheck[0], IsCWisdom = IsCheck[5],
+                    IsCIntelligence = IsCheck[4], IsCConstitution = IsCheck[3], IsCDexterity = IsCheck[2], IsCStrength = IsCheck[1]
                 });
             }
         };
+        var lvl = e.NameScope.Find<plusminbuttonless>("LevelN");
+        lvl.PropertyChanged += (sender, args) =>
+        {
+            profbon ="+" + (Math.Ceiling(Convert.ToDecimal(Level) / 4) + 1).ToString();
+        };
     }
-
 }

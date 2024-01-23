@@ -176,6 +176,7 @@
 				  <templates:plusminbutton 
 					  Value0="{TemplateBinding StrVal, Mode=TwoWay}"
 					  prof="{TemplateBinding profbon, Mode=TwoWay}"
+					  ischecked="{Binding IsCheck[1], RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
 					  Labll="Strength"
 					  Grid.ColumnSpan="2" 
 					  Grid.RowSpan="2" 
@@ -184,6 +185,7 @@
 				  <templates:plusminbutton 
 					  Value0="{TemplateBinding DexVal, Mode=TwoWay}"
 					  prof="{TemplateBinding profbon, Mode=TwoWay}"
+					  ischecked="{Binding IsCheck[2], RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
 					  Labll="Dexterity"
 					  Grid.ColumnSpan="2" 
 					  Grid.RowSpan="2" 
@@ -192,6 +194,7 @@
 				  <templates:plusminbutton 
 					  Value0="{TemplateBinding ConVal, Mode=TwoWay}"
 					  prof="{TemplateBinding profbon, Mode=TwoWay}"
+					  ischecked="{Binding IsCheck[3], RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
 					  Labll="Constitution"
 					  Grid.ColumnSpan="2" 
 					  Grid.RowSpan="2" 
@@ -200,6 +203,7 @@
 				  <templates:plusminbutton 
 					  Value0="{TemplateBinding IntVal, Mode=TwoWay}"
 					  prof="{TemplateBinding profbon, Mode=TwoWay}"
+					  ischecked="{Binding IsCheck[4], RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
 					  Labll="Intelligence"
 					  Grid.ColumnSpan="2" 
 					  Grid.RowSpan="2" 
@@ -208,6 +212,7 @@
 				  <templates:plusminbutton 
 					  Value0="{TemplateBinding WisVal, Mode=TwoWay}"
 					  prof="{TemplateBinding profbon, Mode=TwoWay}"
+					  ischecked="{Binding IsCheck[5], RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
 					  Labll="Wisdom"
 					  Grid.ColumnSpan="2" 
 					  Grid.RowSpan="2" 
@@ -216,6 +221,7 @@
 				  <templates:plusminbutton 
 					  Value0="{TemplateBinding ChaVal, Mode=TwoWay}"
 					  prof="{TemplateBinding profbon, Mode=TwoWay}"
+					  ischecked="{Binding IsCheck[0], RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
 					  Labll="Charisma"
 					  Grid.ColumnSpan="2" 
 					  Grid.RowSpan="2" 

@@ -14,15 +14,18 @@ namespace dmtools.Views;
 
 public partial class SettingsView : UserControl
 {
+    Profile profile = new ConfigurationBuilder<Profile>().UseIniFile("Profile.ini").Build();
+    public ISettings settings { get; set; }
+    public int profid { get; set; }
     public SettingsView()
     {
         InitializeComponent();
+        profid = profile.ProfileID;
         ButIni();
     }
-    ISettings settings = new ConfigurationBuilder<ISettings>().UseIniFile("Settings.ini").Build();
-
     public void ButIni()
     {
+        settings = new ConfigurationBuilder<ISettings>().UseIniFile("Settings/q0" + profid +".ini").Build();
         MusPa.Text = settings.MusPath;
         AmbPa.Text = settings.AmbPath;
         SndPa.Text = settings.SndPath;

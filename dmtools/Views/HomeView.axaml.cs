@@ -25,7 +25,7 @@ using Avalonia.Platform.Storage.FileIO;
 using Avalonia.Threading;
 using NAudio.Wave;
 using Config.Net;
-using DynamicData;
+using dmtools.Templates;
 
 
 namespace dmtools.Views;
@@ -39,7 +39,6 @@ public class FightData
     public int ID { get; set; }
     public int Health { get; set; }
 }
-
 public class FightDataNpc
 {
     public int Initiative { get; set; }
@@ -66,20 +65,45 @@ public class PlayerCharacter
     public string Intelligence { get; set; }
     public string Wisdom { get; set; }
     public string Charisma { get; set; }
+    public bool IsCStrength { get; set; }
+    public bool IsCDexterity { get; set; }
+    public bool IsCConstitution { get; set; }
+    public bool IsCIntelligence { get; set; }
+    public bool IsCWisdom { get; set; }
+    public bool IsCCharisma { get; set; }
     public string Level { get; set; }
     public string Experience { get; set; }
     public string Health { get; set; }
     public string ArmorClass { get; set; }
-    
-    public int Insp { get; set; }
 }
-
-public class Notes
+public class NPC
 {
     public int ID { get; set; }
-    public string MainNotes { get; set; }
+    public string FirstName { get; set; }
+    public string OtherName { get; set; }
+    public string Player { get; set; }
+    public string Race { get; set; }
+    public string Class { get; set; }
+    public string Backgroundd { get; set; }
+    public string Alligment { get; set; }
+    public string Notes { get; set; }
+    public string Strength { get; set; }
+    public string Dexterity { get; set; }
+    public string Constitution { get; set; }
+    public string Intelligence { get; set; }
+    public string Wisdom { get; set; }
+    public string Charisma { get; set; }
+    public bool IsCStrength { get; set; }
+    public bool IsCDexterity { get; set; }
+    public bool IsCConstitution { get; set; }
+    public bool IsCIntelligence { get; set; }
+    public bool IsCWisdom { get; set; }
+    public bool IsCCharisma { get; set; }
+    public string Level { get; set; }
+    public string Experience { get; set; }
+    public string Health { get; set; }
+    public string ArmorClass { get; set; }
 }
-
 public class ToDoL
 {
     public int ID { get; set; }
@@ -88,109 +112,78 @@ public class ToDoL
 }
 public interface ISettings
 {
+    string MainNotes { get; set; }
     string MusPath { get; set; }
     string AmbPath { get; set; }
     string SndPath { get; set; }
     string ImgPath { get; set; }
+    string DataPath { get; set; }
     double Volume { get; set; }
     double VolumeAmb { get; set; }
+    double VolumeSnd { get; set; }
     string Profile { get; set; }
+    string Player { get; set; }
+    int ID { get; set; }
 }
+
+
 public partial class HomeView : UserControl
 {
+    Profile profile = new ConfigurationBuilder<Profile>().UseIniFile("Profile.ini").Build();
+    public ISettings settings { get; set; }
+    public int profid { get; set; }
     public HomeView()
     {
         InitializeComponent();
+        profid = profile.ProfileID;
         SetSetup();
         AmbIni();
         SndIni();
         VolumeS.Value = settings.Volume;
+        VolumeAmb.Value = settings.VolumeAmb;
+        VolumeSnd.Value = settings.VolumeSnd;
         MainWindow.SizzeChanged += SizeChange;
         Picture.Closeed += ClozedEv;
         Sure.Delete += pcupdate;
         Sure.Delete += SizeChange;
+        Sure.Delete += npcupdate;
         NoteInit();
         DashFightUp();
         picinit();
         ToDoInit();
     }
-    ISettings settings = new ConfigurationBuilder<ISettings>().UseIniFile("Settings.ini").Build();
     public void SetSetup()
     {
-        if (settings.Profile != "Profiles/q01" || settings.Profile != "Profiles/q02" || settings.Profile != "Profiles/q03")
-        {
-            settings.Profile = "Profiles/q01";
-        }
-        if (!Uri.TryCreate(settings.MusPath, UriKind.RelativeOrAbsolute, out Uri m))
-        {
-            settings.MusPath = "Music/Mus";
-        }
-
-        if (!Uri.TryCreate(settings.AmbPath, UriKind.RelativeOrAbsolute, out Uri a))
-        {
-            settings.AmbPath = "Music/Amb";
-        }
-
-        if (!Uri.TryCreate(settings.SndPath, UriKind.RelativeOrAbsolute, out Uri s))
-        {
-            settings.SndPath = "Music/Snd";
-        }
-        
-        if (!Uri.TryCreate(settings.ImgPath, UriKind.RelativeOrAbsolute, out Uri i))
-        {
-            settings.ImgPath = "Images";
-        }
-
-        if (settings.Volume == 0)
-        {
-            settings.Volume = 10;
-        }
-        if (settings.VolumeAmb == 0)
-        {
-            settings.VolumeAmb = 10;
-        }
+        settings = new ConfigurationBuilder<ISettings>().UseIniFile("Settings/q0" + profid +".ini").Build();
+        settings.DataPath = "Data/q0" + profid + ".db";
+        if (!Uri.TryCreate(settings.MusPath, UriKind.RelativeOrAbsolute, out Uri m)) { settings.MusPath = "Music/Mus"; }
+        if (!Uri.TryCreate(settings.AmbPath, UriKind.RelativeOrAbsolute, out Uri a)) { settings.AmbPath = "Music/Amb"; }
+        if (!Uri.TryCreate(settings.SndPath, UriKind.RelativeOrAbsolute, out Uri s)) { settings.SndPath = "Music/Snd"; }
+        if (!Uri.TryCreate(settings.ImgPath, UriKind.RelativeOrAbsolute, out Uri i)) { settings.ImgPath = "Images"; }
+        if (settings.Volume == 0) { settings.Volume = 10; } 
+        if (settings.VolumeAmb == 0) { settings.VolumeAmb = 10; }
+        if (settings.VolumeSnd == 0) { settings.VolumeSnd = 10; }
     }
     
     
     
     
-    
-    //dashboard
+    //DASHBOARD
     
     
     //notes
     private void NoteInit()
     {
-        using (var LdbPC = new LiteDatabase(settings.Profile))
-        {
-            var nots = LdbPC.GetCollection<Notes>();
-            if (nots.FindAll().Count() != 0)
-            {
-                MainNotesT.Text = nots.FindById(1).MainNotes;
-            }
-        }
+        MainNotesT.Text = settings.MainNotes;
     }
     private void SaveNotes_OnClick(object? sender, RoutedEventArgs e)
     {
-        using (var LdbPC = new LiteDatabase(settings.Profile))
-        {
-            var nots = LdbPC.GetCollection<Notes>();
-            nots.DeleteAll();
-            nots.Insert(new Notes()
-            {
-                ID = 0,
-                MainNotes = MainNotesT.Text
-            });
-        }
+        settings.MainNotes = MainNotesT.Text;
     }
     private void DeleteNotes_OnClick(object? sender, RoutedEventArgs e)
     {
-        using (var LdbPC = new LiteDatabase(settings.Profile))
-        {
-            var nots = LdbPC.GetCollection<Notes>();
-            nots.DeleteAll();
-            MainNotesT.Text = "";
-        }
+        settings.MainNotes = "";
+        MainNotesT.Text = "";
     }
     
     
@@ -201,7 +194,7 @@ public partial class HomeView : UserControl
     ObservableCollection<FightData> fin = new ObservableCollection<FightData>();
     public void DashFightUp()
     {
-        using (var LdbPC = new LiteDatabase(settings.Profile))
+        using (var LdbPC = new LiteDatabase(settings.DataPath))
         {
             fin.Clear();
             FightGrid.ItemsSource = null;
@@ -256,10 +249,10 @@ public partial class HomeView : UserControl
     }
     private async void Startf(object? sender, RoutedEventArgs e)
     {
-        if ((sender as ToggleButton).IsChecked == true)
+        if ((sender as ToggleButton).IsChecked == true && Avalonia.Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             int s = 1;
-            using (var LdbPC = new LiteDatabase(settings.Profile))
+            using (var LdbPC = new LiteDatabase(settings.DataPath))
             {
                 var playChar = LdbPC.GetCollection<PlayerCharacter>();
                 int c = 0;
@@ -267,22 +260,19 @@ public partial class HomeView : UserControl
                 {
                     Init inn = new Init(pc.FirstName);
                     int dice = 0;
-                    if (Avalonia.Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+                    await inn.ShowDialog(desktop.MainWindow);
+                    if (inn.result == -1)
+                    { 
+                        s = 0;
+                        break;
+                    }
+                    if (inn.result < 21 && inn.result > 0)
+                    { 
+                        dice = inn.result;
+                    }
+                    else 
                     {
-                        await inn.ShowDialog(desktop.MainWindow);
-                        if (inn.result == -1)
-                        {
-                            s = 0;
-                            break;
-                        }
-                        else if (inn.result < 21 && inn.result > 0)
-                        {
-                            dice = inn.result;
-                        }
-                        else
-                        {
-                            dice = rndm.Next(1, 20);
-                        }
+                        dice = rndm.Next(1, 21);
                     }
                     init[c] = init[c] +
                               (int)Math.Floor(Convert.ToDecimal((Convert.ToInt32(pc.Dexterity) - 10) / 2)) + dice;
@@ -314,22 +304,23 @@ public partial class HomeView : UserControl
     }
     private async void AddCus_OnClick(object? sender, RoutedEventArgs e)
     {
-        AddCustNpc acn = new AddCustNpc();
         if (Avalonia.Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
+            AddCustNpc acn = new AddCustNpc();
             await acn.ShowDialog(desktop.MainWindow);
-            if (acn.res.initiative != -1)
+            if (acn.res.initiative == -1)
             {
-                npcsf.Add(new FightDataNpc()
-                {
-                    Name = acn.res.name,
-                    Player = acn.res.playe,
-                    Initiative = acn.res.initiative,
-                    ArCl = acn.res.ac,
-                    ID = 999,
-                    Health = acn.res.hp
-                });
+                return;
             }
+            npcsf.Add(new FightDataNpc()
+            {
+                Name = acn.res.name,
+                Player = acn.res.playe,
+                Initiative = acn.res.initiative,
+                ArCl = acn.res.ac,
+                ID = 999,
+                Health = acn.res.hp
+            });
         }
         DashFightUp();
     }
@@ -344,7 +335,7 @@ public partial class HomeView : UserControl
     private void ToDoInit()
     {
         tdl.Items.Clear();
-        using (var LdbPC = new LiteDatabase(settings.Profile))
+        using (var LdbPC = new LiteDatabase(settings.DataPath))
         {
             var todos = LdbPC.GetCollection<ToDoL>();
             foreach (var todo in todos.FindAll())
@@ -360,7 +351,7 @@ public partial class HomeView : UserControl
     }
     public void CbOnIsCheckedChanged(object? sender, RoutedEventArgs e)
     {
-        using (var LdbPC = new LiteDatabase(settings.Profile))
+        using (var LdbPC = new LiteDatabase(settings.DataPath))
         {
             var todos = LdbPC.GetCollection<ToDoL>();
             var tt = todos.FindById(Convert.ToInt32((sender as CheckBox).Name));
@@ -370,29 +361,28 @@ public partial class HomeView : UserControl
     }
     private void Deltd_OnClick(object? sender, RoutedEventArgs e)
     {
-        if (tdl.SelectedItem != null)
+        if (tdl.SelectedItem == null)
+        {
+            return;
+        }
+        using (var LdbPC = new LiteDatabase(settings.DataPath))
         {
             CheckBox delth = (tdl.SelectedItem as CheckBox);
-            using (var LdbPC = new LiteDatabase(settings.Profile))
-            {
-                var todos = LdbPC.GetCollection<ToDoL>();
-                todos.Delete(Convert.ToInt32(delth.Name));
-            }
+            var todos = LdbPC.GetCollection<ToDoL>(); 
+            todos.Delete(Convert.ToInt32(delth.Name));
         }
         ToDoInit();
     }
-
     private void Addtd_OnClick(object? sender, RoutedEventArgs e)
     {
         maintodoll.IsVisible = false;
         addtodol.IsVisible = true;
-
     }
     private void SaveNTD_OnClick(object? sender, RoutedEventArgs e)
     {
         maintodoll.IsVisible = true;
         addtodol.IsVisible = false;
-        using (var LdbPC = new LiteDatabase(settings.Profile))
+        using (var LdbPC = new LiteDatabase(settings.DataPath))
         {
             var todos = LdbPC.GetCollection<ToDoL>();
             todos.Insert(new ToDoL()
@@ -402,9 +392,7 @@ public partial class HomeView : UserControl
             });
         }
         ToDoInit();
-        
     }
-
     private void CanNTD_OnClick(object? sender, RoutedEventArgs e)
     {
         maintodoll.IsVisible = true;
@@ -427,11 +415,11 @@ public partial class HomeView : UserControl
             if (imgs.Name.EndsWith(".png") || imgs.Name.EndsWith(".jpg") || imgs.Name.EndsWith(".jpeg") || imgs.Name.EndsWith(".bmp"))
             {
                 Bitmap bitmap = new Bitmap(imgs.FullName);
-                Image image = new Image()
+                Image image = new Image
                 {
                     Source = bitmap,
                 };
-                ToggleButton button = new ToggleButton()
+                ToggleButton button = new ToggleButton
                 {
                     Height = 100,
                     Width = 100,
@@ -446,24 +434,27 @@ public partial class HomeView : UserControl
     }
     private void ImgChanger(object? sender, RoutedEventArgs e)
     {
-        if ((sender as ToggleButton).IsChecked == true)
-        {
-            Bitmap mainimg = new Bitmap((sender as ToggleButton).Name);
-            selimg = (sender as ToggleButton).Name;
-            ImagePreview.Source = mainimg;
-            picwin.pichange(mainimg);
-            foreach (var tgche in wpip.Children.OfType<ToggleButton>())
-            {
-                if (tgche.Name != (sender as ToggleButton).Name)
-                {
-                    tgche.IsChecked = false;
-                }
-            }
-        }
-        else if ((sender as ToggleButton).IsChecked != true && selimg == (sender as ToggleButton).Name)
+        if (selimg == (sender as ToggleButton).Name)
         {
             (sender as ToggleButton).IsChecked = true;
+            return;
         }
+        if ((sender as ToggleButton).IsChecked != true)
+        {
+            return;
+        }
+        Bitmap mainimg = new Bitmap((sender as ToggleButton).Name);
+        selimg = (sender as ToggleButton).Name;
+        ImagePreview.Source = mainimg;
+        picwin.pichange(mainimg);
+        foreach (var tgche in wpip.Children.OfType<ToggleButton>())
+        { 
+            if (tgche.Name != (sender as ToggleButton).Name)
+            { 
+                tgche.IsChecked = false;
+            }
+        }
+
     }
     private void LeftRight_OnClick(object? sender, RoutedEventArgs e)
     {
@@ -474,10 +465,7 @@ public partial class HomeView : UserControl
             {
                 break;
             }
-            else
-            {
-                i++;
-            }
+            i++;
         }
         if ((sender as Button).Name == "Right")
         {
@@ -486,6 +474,7 @@ public partial class HomeView : UserControl
                 if (i != pics.Count - 1 && but.Name == pics[i+1])
                 {
                     but.IsChecked = true;
+                    return;
                 }
             }
         }
@@ -496,7 +485,7 @@ public partial class HomeView : UserControl
                 if (i != 0 && but.Name == pics[i-1])
                 {
                     but.IsChecked = true;
-                    break;
+                    return;
                 }
             }
         }
@@ -546,17 +535,18 @@ public partial class HomeView : UserControl
     public DispatcherTimer mainTime { get; set; }
     public string NowPlaying { get; set; } = "0";
     public TimeSpan TotalLength { get; set; }
-    private async void MoodChooser_OnDropDownOpened(object? sender, EventArgs e)
+    private void MoodChooser_OnDropDownOpened(object? sender, EventArgs e)
     {
         var MusDir = new DirectoryInfo(settings.MusPath).GetDirectories();
         MoodChooser.Items.Clear();
-        if (MusDir.Count() != 0)
+        if (MusDir.Count() == 0)
         {
-            foreach (var musdir in MusDir)
-            {
-                var name = musdir.Name;
-                MoodChooser.Items.Add(name);
-            }
+            return;
+        }
+        foreach (var musdir in MusDir)
+        {
+            var name = musdir.Name;
+            MoodChooser.Items.Add(name);
         }
     }
     private void MoodChooser_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
@@ -572,20 +562,22 @@ public partial class HomeView : UserControl
         }
         if (MoodChooser.SelectedItem != null)
         {
-            SongChooser.SelectedIndex = rndm.Next(0, SongChooser.ItemCount);
+            SongChooser.SelectedIndex = rndm.Next(0, SongChooser.ItemCount + 1);
         }
     }
     private void SongChooser_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
-        if (SongChooser.SelectedItem != null)
+        if (SongChooser.SelectedItem == null)
         {
-            MusicControl();
+            return;
         }
+        MusicControl();
     }
     private void Stop_OnClick(object? sender, RoutedEventArgs e)
     {
         mainPlayer.Stop();
         mainTime.Stop();
+        SongChooser.SelectedItem = null;
         MusState.Text = "00:00";
         nowPlaying.Text = "";
     }
@@ -598,18 +590,18 @@ public partial class HomeView : UserControl
         int i;
         do
         {
-            i = rndm.Next(0, SongChooser.ItemCount);
+            i = rndm.Next(0, SongChooser.ItemCount+1);
+            if (i < 10)
+            {
+                break;
+            }
         } while (SongChooser.SelectedIndex == i);
         SongChooser.SelectedIndex = i;
     }
     public void MusicControl()
     {
-        Uri.TryCreate(settings.MusPath + "/" + MoodChooser.SelectedItem + "/" + SongChooser.SelectedItem,
-            UriKind.RelativeOrAbsolute, out Uri s);
-        if (s.IsFile)
+        if (mainPlayer.PlaybackState == PlaybackState.Stopped)
         {
-            if (mainPlayer.PlaybackState == PlaybackState.Stopped)
-            {
                 auf = new AudioFileReader(settings.MusPath + "/" + MoodChooser.SelectedItem + "/" + SongChooser.SelectedItem);
                 NowPlaying = settings.MusPath + "/" + MoodChooser.SelectedItem + "/" + SongChooser.SelectedItem;
                 TotalLength = auf.TotalTime;
@@ -619,22 +611,25 @@ public partial class HomeView : UserControl
                 mainTime.Tick += MainTimeOnTick;
                 mainTime.Start();
                 nowPlaying.Text = SongChooser.SelectedItem.ToString();
-                mainPlayer.Volume = (float)settings.Volume/10;
-            }
-            else if (mainPlayer.PlaybackState == PlaybackState.Playing && NowPlaying == settings.MusPath + "/" + MoodChooser.SelectedItem + "/" + SongChooser.SelectedItem)
-            {
+                auf.Volume = (float)settings.Volume/10;
+                Pause.IsChecked = true;
+        }
+        else if (mainPlayer.PlaybackState == PlaybackState.Playing && NowPlaying == settings.MusPath + "/" + MoodChooser.SelectedItem + "/" + SongChooser.SelectedItem)
+        {
                 mainPlayer.Pause();
                 mainTime.Stop();
                 nowPlaying.Text = nowPlaying.Text = SongChooser.SelectedItem.ToString();
-            }
-            else if (mainPlayer.PlaybackState == PlaybackState.Paused && NowPlaying == settings.MusPath + "/" + MoodChooser.SelectedItem + "/" + SongChooser.SelectedItem)
-            {
+                Pause.IsChecked = false;
+        }
+        else if (mainPlayer.PlaybackState == PlaybackState.Paused && NowPlaying == settings.MusPath + "/" + MoodChooser.SelectedItem + "/" + SongChooser.SelectedItem)
+        {
                 mainPlayer.Play();
                 mainTime.Start();
                 nowPlaying.Text = SongChooser.SelectedItem.ToString();
-            }
-            else if (NowPlaying != settings.MusPath + "/" + MoodChooser.SelectedItem + "/" + SongChooser.SelectedItem)
-            {
+                Pause.IsChecked = true;
+        }
+        else if (NowPlaying != settings.MusPath + "/" + MoodChooser.SelectedItem + "/" + SongChooser.SelectedItem)
+        {
                 mainTime.Stop();
                 mainPlayer.Stop();
                 mainPlayer.Dispose();
@@ -646,13 +641,17 @@ public partial class HomeView : UserControl
                 mainTime.Tick += MainTimeOnTick;
                 mainTime.Start();
                 nowPlaying.Text = SongChooser.SelectedItem.ToString();
-            }
+                Pause.IsChecked = true;
         }
     }
     private void Volume_OnPropertyChanged(object? sender, AvaloniaPropertyChangedEventArgs e)
     {
+        if (auf == null)
+        {
+            return;
+        }
         settings.Volume = (sender as Slider).Value;
-        mainPlayer.Volume = (float)settings.Volume/10;
+        auf.Volume = (float)settings.Volume/10;
     }
     private void MainTimeOnTick(object? sender, EventArgs e)
     {
@@ -681,15 +680,22 @@ public partial class HomeView : UserControl
         var ambf = new DirectoryInfo(settings.AmbPath);
         Ambience.Children.Clear();
         int i = 0;
-        if (ambf.GetFiles().Count() != 0)
+        if (ambf.GetFiles().Count() == 0)
         {
-
-            foreach (var amb in ambf.GetFiles())
+            TextBlock n = new TextBlock()
             {
-                if (amb.Name.EndsWith(".mp3"))
+                Text = "no files",
+                FontSize = 46
+            };
+            Ambience.Children.Add(n);
+            return;
+        }
+        foreach (var amb in ambf.GetFiles())
+        {
+            if (amb.Name.EndsWith(".mp3")) 
+            {
+                ToggleButton tg0 = new ToggleButton()
                 {
-                    ToggleButton tg0 = new ToggleButton()
-                    {
                         Name = amb.Name + "_" + i,
                         Content = amb.Name.Replace(".mp3", ""),
                         Width = 150,
@@ -698,34 +704,24 @@ public partial class HomeView : UserControl
                         VerticalContentAlignment = VerticalAlignment.Center,
                         FontSize = 24,
                         Margin = new Thickness(5)
-                    };
-                    i++;
-                    tg0.IsCheckedChanged += AmbChangeState;
-                    Ambience.Children.Add(tg0);
-                    AudioFileReader af = new AudioFileReader(settings.AmbPath + "/" + amb.Name);
-                    IDDin.Add(af);
-                    WaveOutEvent ap = new WaveOutEvent();
-                    IDAmb.Add(ap);
-                    DispatcherTimer dt = new DispatcherTimer();
-                    IDTim.Add(dt);
-                }
+                };
+                i++;
+                tg0.IsCheckedChanged += AmbChangeState;
+                Ambience.Children.Add(tg0);
+                AudioFileReader af = new AudioFileReader(settings.AmbPath + "/" + amb.Name);
+                IDDin.Add(af);
+                WaveOutEvent ap = new WaveOutEvent();
+                IDAmb.Add(ap);
+                DispatcherTimer dt = new DispatcherTimer();
+                IDTim.Add(dt);
             }
-        }
-        else
-        {
-            TextBlock n = new TextBlock()
-            {
-                Text = "no files",
-                FontSize = 46
-            };
-            Ambience.Children.Add(n);
         }
     }
     private void AmbChangeState(object? sender, RoutedEventArgs e)
     {
         int tick = 0;
         int ID = Convert.ToInt32((sender as ToggleButton).Name.Split("_")[1]);
-        IDAmb[ID].Volume =(float)settings.VolumeAmb/10;
+        IDDin[ID].Volume =(float)settings.VolumeAmb/10;
         IDTim[ID].Tick += AmbControl;
         if ((sender as ToggleButton).IsChecked == true)
         {
@@ -757,23 +753,33 @@ public partial class HomeView : UserControl
             }
         }
     }
+    private void RangeBase_OnValueChanged(object? sender, RangeBaseValueChangedEventArgs e)
+    {
+        foreach (var pl in IDDin)
+        {
+            settings.VolumeAmb = (sender as Slider).Value;
+            pl.Volume = (float)settings.VolumeAmb/10;
+        }
+    }
     
     
     
     //sounds
+    public List<AudioFileReader> af = new List<AudioFileReader>();
     public void SndIni()
     {
         var sndf = new DirectoryInfo(settings.SndPath);
         Sounds.Children.Clear();
         if (sndf.GetFiles().Length != 0)
         {
+            int c = 0;
             foreach (var snd in sndf.GetFiles())
             {
                 if (snd.Name.EndsWith(".mp3"))
                 {
                     Button tg0 = new Button()
                     {
-                        Name = snd.Name,
+                        Name = c.ToString(),
                         Content = snd.Name.Replace(".mp3", ""),
                         Width = 150,
                         Height = 50,
@@ -782,9 +788,12 @@ public partial class HomeView : UserControl
                         FontSize = 24,
                         Margin = new Thickness(5)
                     };
+                    var x = new AudioFileReader(snd.FullName);
+                    x.Volume = (float)settings.VolumeSnd;
+                    af.Add(x);
                     tg0.Click += boom;
                     Sounds.Children.Add(tg0);
-
+                    c++;
                 }
             }
         }
@@ -799,13 +808,80 @@ public partial class HomeView : UserControl
         }
     }
     private void boom(object? sender, RoutedEventArgs e)
-    {                    
-        AudioFileReader af = new AudioFileReader(settings.AmbPath + "/" + (sender as Button).Name);
+    {
         WaveOutEvent ap = new WaveOutEvent();
-        ap.Init(af);
+        ap.Init(af[Convert.ToInt32((sender as Button).Name)]);
         ap.Play();
     }
+    private void VolumeSnd_OnValueChanged(object? sender, RangeBaseValueChangedEventArgs e)
+    {
+        foreach (var pl in af)
+        {
+            settings.VolumeSnd = (sender as Slider).Value;
+            pl.Volume = (float)settings.VolumeSnd/10;
+        }
+    }
     
+    
+    
+    
+    //npcs
+    private void AddNpcP(object? sender, RoutedEventArgs e)
+    {
+        using (var LdbNPC = new LiteDatabase(settings.DataPath))
+        {
+            var npc = LdbNPC.GetCollection<NPC>();
+            npc.Insert(new NPC
+            {
+                Level = "1", ArmorClass = "10", Health = "5", Strength = "10", Dexterity = "10",
+                Constitution = "10", Experience = "0", Wisdom = "10", Intelligence = "10", Charisma = "10", IsCCharisma = false,
+                IsCConstitution = false, IsCDexterity = false, IsCStrength = false, IsCIntelligence = false, IsCWisdom = false
+            });
+        }
+        npcupdate(sender, e);
+        SizeChange(sender, e);
+    }
+    public void npcupdate(object? sender, EventArgs e)
+    {
+        wpnpc.Children.Clear();
+        using (var LdbPC = new LiteDatabase(settings.DataPath))
+        {
+            var npc = LdbPC.GetCollection<NPC>();
+            foreach (var pc in npc.FindAll())
+            {
+                NpcForm charForm = new NpcForm();
+                charForm.ID = pc.ID;
+                charForm.FirstName = pc.FirstName;
+                charForm.OtherNames = pc.OtherName;
+                charForm.Player = pc.Player;
+                charForm.Class = pc.Class;
+                charForm.Race = pc.Race;
+                charForm.Alligment = pc.Alligment;
+                charForm.Notes = pc.Notes;
+                charForm.Backgroundd = pc.Backgroundd;
+                charForm.StrVal = pc.Strength;
+                charForm.DexVal = pc.Dexterity;
+                charForm.ConVal = pc.Constitution;
+                charForm.IntVal = pc.Intelligence;
+                charForm.WisVal = pc.Wisdom;
+                charForm.ChaVal = pc.Charisma;
+                charForm.Level = pc.Level;
+                charForm.Exp = pc.Experience;
+                charForm.Health = pc.Health;
+                charForm.Ac = pc.ArmorClass;
+                charForm.IsCheck = new List<bool>()
+                {
+                    pc.IsCCharisma, pc.IsCStrength, pc.IsCDexterity, pc.IsCConstitution, pc.IsCIntelligence, pc.IsCWisdom,
+                };
+                wpnpc.Children.Add(charForm);
+            }
+        }
+    }
+    private void NPCs_OnPointerReleased(object? sender, PointerReleasedEventArgs e)
+    {
+        npcupdate(sender, e);
+        SizeChange(sender, e);
+    }
     
     
     
@@ -813,13 +889,14 @@ public partial class HomeView : UserControl
     //playercharacters
     public void Add(object sender, RoutedEventArgs args)
     {
-        using (var LdbPC = new LiteDatabase(settings.Profile))
+        using (var LdbPC = new LiteDatabase(settings.DataPath))
         {
             var playChar = LdbPC.GetCollection<PlayerCharacter>();
             playChar.Insert(new PlayerCharacter
             {
                 Level = "1", ArmorClass = "10", Health = "5", Strength = "10", Dexterity = "10",
-                Constitution = "10", Experience = "0", Wisdom = "10", Intelligence = "10", Charisma = "10"
+                Constitution = "10", Experience = "0", Wisdom = "10", Intelligence = "10", Charisma = "10", IsCCharisma = false,
+                IsCConstitution = false, IsCDexterity = false, IsCStrength = false, IsCIntelligence = false, IsCWisdom = false
             });
         }
         pcupdate(sender, args);
@@ -828,7 +905,7 @@ public partial class HomeView : UserControl
     public void pcupdate(object? sender, EventArgs e)
     {
         wppc.Children.Clear();
-        using (var LdbPC = new LiteDatabase(settings.Profile))
+        using (var LdbPC = new LiteDatabase(settings.DataPath))
         {
             var playChar = LdbPC.GetCollection<PlayerCharacter>();
             foreach (var pc in playChar.FindAll())
@@ -853,6 +930,10 @@ public partial class HomeView : UserControl
                 charForm.Exp = pc.Experience;
                 charForm.Health = pc.Health;
                 charForm.Ac = pc.ArmorClass;
+                charForm.IsCheck = new List<bool>()
+                {
+                    pc.IsCCharisma, pc.IsCStrength, pc.IsCDexterity, pc.IsCConstitution, pc.IsCIntelligence, pc.IsCWisdom,
+                };
                 wppc.Children.Add(charForm);
             }
         }
@@ -885,6 +966,25 @@ public partial class HomeView : UserControl
             else
             {
                 cf.Width = svpc.Bounds.Width - 10;
+                cf.Height = cf.Width / 1.33333;
+            }
+        }
+        
+        foreach (NpcForm cf in wpnpc.Children.OfType<NpcForm>())
+        {
+            if (svnpc.Bounds.Width > 1500)
+            {
+                cf.Width = svnpc.Bounds.Width / 3 - 10;
+                cf.Height = cf.Width / 1.33333;
+            }
+            else if (svnpc.Bounds.Width > 1000)
+            {
+                cf.Width = svnpc.Bounds.Width / 2 - 10;
+                cf.Height = cf.Width / 1.33333;
+            }
+            else
+            {
+                cf.Width = svnpc.Bounds.Width - 10;
                 cf.Height = cf.Width / 1.33333;
             }
         }

@@ -19,6 +19,7 @@
 				  ColumnDefinitions="*, *, *, *, *, *, *, *, *, *, *, *" 
 				  RowDefinitions="*, *, *, *, *, *, *, *, *">
 				  <controls:plusminbuttonless
+					  Name="LevelN"
 					  Labll="Level"
 					  Value0="{TemplateBinding Level, Mode=TwoWay}"
 					  Grid.RowSpan="2"
@@ -105,11 +106,11 @@
 					  FontSize="20"
 					  Grid.Row="2"
 					  Grid.ColumnSpan="4"
-					  Text="{TemplateBinding Player, Mode=TwoWay}"
+					  IsEnabled="False"
 					  Margin="5"
 					  VerticalContentAlignment="Center"
 					  CornerRadius="5"
-					  Watermark="Player">
+					  Watermark="Player"> NPC
 				  </TextBox>
 				  <TextBox
 					  Grid.Column="2" 
@@ -171,6 +172,8 @@
 				  </TextBox>
 				  <controls:plusminbutton 
 					  Value0="{TemplateBinding StrVal, Mode=TwoWay}"
+					  prof="{TemplateBinding profbon, Mode=TwoWay}"
+					  ischecked="{Binding IsCheck[1], RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
 					  Labll="Strength"
 					  Grid.ColumnSpan="2" 
 					  Grid.RowSpan="2" 
@@ -178,6 +181,8 @@
 					  Grid.Column="0"></controls:plusminbutton>
 				  <controls:plusminbutton 
 					  Value0="{TemplateBinding DexVal, Mode=TwoWay}"
+					  prof="{TemplateBinding profbon, Mode=TwoWay}"
+					  ischecked="{Binding IsCheck[2], RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
 					  Labll="Dexterity"
 					  Grid.ColumnSpan="2" 
 					  Grid.RowSpan="2" 
@@ -185,6 +190,8 @@
 					  Grid.Column="2"></controls:plusminbutton>
 				  <controls:plusminbutton 
 					  Value0="{TemplateBinding ConVal, Mode=TwoWay}"
+					  prof="{TemplateBinding profbon, Mode=TwoWay}"
+					  ischecked="{Binding IsCheck[3], RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
 					  Labll="Constitution"
 					  Grid.ColumnSpan="2" 
 					  Grid.RowSpan="2" 
@@ -192,6 +199,8 @@
 					  Grid.Column="4"></controls:plusminbutton>
 				  <controls:plusminbutton 
 					  Value0="{TemplateBinding IntVal, Mode=TwoWay}"
+					  prof="{TemplateBinding profbon, Mode=TwoWay}"
+					  ischecked="{Binding IsCheck[4], RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
 					  Labll="Intelligence"
 					  Grid.ColumnSpan="2" 
 					  Grid.RowSpan="2" 
@@ -199,6 +208,8 @@
 					  Grid.Column="6"></controls:plusminbutton>
 				  <controls:plusminbutton 
 					  Value0="{TemplateBinding WisVal, Mode=TwoWay}"
+					  prof="{TemplateBinding profbon, Mode=TwoWay}"
+					  ischecked="{Binding IsCheck[5], RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
 					  Labll="Wisdom"
 					  Grid.ColumnSpan="2" 
 					  Grid.RowSpan="2" 
@@ -206,6 +217,8 @@
 					  Grid.Column="8"></controls:plusminbutton>
 				  <controls:plusminbutton 
 					  Value0="{TemplateBinding ChaVal, Mode=TwoWay}"
+					  prof="{TemplateBinding profbon, Mode=TwoWay}"
+					  ischecked="{Binding IsCheck[0], RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
 					  Labll="Charisma"
 					  Grid.ColumnSpan="2" 
 					  Grid.RowSpan="2" 

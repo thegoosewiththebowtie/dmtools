@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -13,11 +14,19 @@ using ReactiveUI;
 namespace dmtools;
 public class CharForm : TemplatedControl
 {
-    ISettings settings = new ConfigurationBuilder<ISettings>().UseIniFile("Settings.ini").Build();
     public int ID { get; set; }
+    
+    public static readonly StyledProperty<List<bool>> IsCheckProperty = AvaloniaProperty.Register<CharForm, List<bool>>(
+        "IsCheck");
+
+    public List<bool> IsCheck
+    {
+        get => GetValue(IsCheckProperty);
+        set => SetValue(IsCheckProperty, value);
+    }
+    
     public static readonly StyledProperty<string> FirstNameProperty = AvaloniaProperty.Register<CharForm, string>(
         "FirstName");
-
     public string FirstName
     {
         get => GetValue(FirstNameProperty);
@@ -189,11 +198,13 @@ public class CharForm : TemplatedControl
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);
-        var dbtn = e.NameScope.Find<Button>("Delete");
+        Profile profile = new ConfigurationBuilder<Profile>().UseIniFile("Profile.ini").Build();
+        ISettings settings = new ConfigurationBuilder<ISettings>().UseIniFile("Settings/q0" + profile.ProfileID +".ini").Build();
         profbon ="+" + (Math.Ceiling(Convert.ToDecimal(Level) / 4) + 1).ToString();
+        var dbtn = e.NameScope.Find<Button>("Delete");
         dbtn.Click += (sender, args) =>
         {
-            Sure huh = new Sure(ID);
+            Sure huh = new Sure(ID, 0);
             if (Avalonia.Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 huh.ShowDialog(desktop.MainWindow);
@@ -202,7 +213,7 @@ public class CharForm : TemplatedControl
         var sbtn = e.NameScope.Find<Button>("Save");
         sbtn.Click += (sender, args) =>
         {
-            using (var LdbPC = new LiteDatabase(settings.Profile))
+            using (var LdbPC = new LiteDatabase(settings.DataPath))
             {
                 var pccol = LdbPC.GetCollection<PlayerCharacter>();
                 pccol.Delete(ID );
@@ -211,7 +222,8 @@ public class CharForm : TemplatedControl
                     ID = ID, FirstName = FirstName, OtherName = OtherNames, Player = Player, Race = Race, Class = Class,
                     Backgroundd = Backgroundd, Alligment = Alligment, Notes = Notes, Strength = StrVal, Dexterity = DexVal,
                     Constitution = ConVal, Intelligence = IntVal, Wisdom = WisVal, Charisma = ChaVal, Level = Level,
-                    Experience = Exp, Health = Health, ArmorClass = Ac
+                    Experience = Exp, Health = Health, ArmorClass = Ac, IsCCharisma = IsCheck[0], IsCWisdom = IsCheck[5],
+                    IsCIntelligence = IsCheck[4], IsCConstitution = IsCheck[3], IsCDexterity = IsCheck[2], IsCStrength = IsCheck[1]
                 });
             }
         };

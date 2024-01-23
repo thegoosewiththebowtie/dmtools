@@ -13,24 +13,41 @@ public partial class Sure : Window
 {
     public static event EventHandler Delete;
     public int id;
-    public Sure(int ID)
+    public int tyid;
+    public Sure(int ID, int TyID)
     {
         InitializeComponent();
         id = ID;
+        tyid = TyID;
     }
-    ISettings settings = new ConfigurationBuilder<ISettings>().UseIniFile("Settings.ini").Build();
 
     private void Button_Delete(object? sender, RoutedEventArgs e)
     {
-        using (var ldbpc = new LiteDatabase(settings.Profile))
+        Profile profile = new ConfigurationBuilder<Profile>().UseIniFile("Profile.ini").Build();
+        ISettings settings = new ConfigurationBuilder<ISettings>().UseIniFile("Settings/q0" + profile.ProfileID +".ini").Build();
+        using (var ldbpc = new LiteDatabase(settings.DataPath))
         {
-            var chars = ldbpc.GetCollection<PlayerCharacter>();
-            chars.Delete(id);
-            foreach (var pc in chars.FindAll())
+            if (tyid == 0)
             {
+                var chars = ldbpc.GetCollection<PlayerCharacter>();
+                chars.Delete(id);
                 int i = 1;
-                pc.ID = i;
-                i++;
+                foreach (var pc in chars.FindAll())
+                {
+                    pc.ID = i;
+                    i++;
+                }
+            }
+            else if (tyid == 99)
+            {
+                var chars = ldbpc.GetCollection<NPC>();
+                chars.Delete(id);
+                int i = 1;
+                foreach (var pc in chars.FindAll())
+                {
+                    pc.ID = i;
+                    i++;
+                }
             }
         }
         EventHandler del = Delete;

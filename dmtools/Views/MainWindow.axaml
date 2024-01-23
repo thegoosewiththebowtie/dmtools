@@ -15,55 +15,129 @@
         Name="SplitView"
         IsPaneOpen="False"
                DisplayMode="CompactInline"
-               CompactPaneLength="75"
+               CompactPaneLength="40"
                OpenPaneLength="300">
         <SplitView.Pane>
             <Grid RowDefinitions="*, *">
                 <StackPanel
                     VerticalAlignment="Top">
                     <Button
+                        Margin="0,5,6.5,5"
+                        Padding="5"
                         HorizontalAlignment="Right"
                         FontSize="20"
                         Name="Expand"
                         Click="Expand_OnClick">
                         >
                     </Button>
-                        <Expander
+                    <Grid>
+                    <Expander
+                        IsVisible="False"
+                        Name="ProfSwitcher"
+                        HorizontalAlignment="Stretch"
+                        BorderBrush="Transparent"
+                        BorderThickness="0">
+                        <StackPanel
+                            Name="ProfilesButtons">
+                        </StackPanel>
+                    </Expander>
+                        <Border
+                            Name="ProfPrev1"
+                            Classes="DefBorder"
+                            Background="White"
                             Margin="0"
-                            HorizontalAlignment="Stretch"
-                            Header="Profile">
-                            <StackPanel>
-                                <Button Margin="0" HorizontalAlignment="Stretch">Profile1</Button>
-                                <Button Margin="0" HorizontalAlignment="Stretch">Profile2</Button>
-                                <Button Margin="0" HorizontalAlignment="Stretch">Profile3</Button>
-                            </StackPanel>
-                        </Expander>
+                            Height="47">
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontSize="32"
+                                Name="profIDd">
+                            </TextBlock>
+                        </Border>
+                    </Grid>
                     <Button 
+                        Name="Home"
+                        Margin="0,5,0,5"
+                        Padding="0"
+                        Height="40"
                         FontSize="20"
                         Command="{Binding $parent[Window].DataContext.Home}"
                         HorizontalAlignment="Stretch"
-                        VerticalAlignment="Top">Home
+                        VerticalAlignment="Top">
+                        <StackPanel Orientation="Horizontal">
+                            <PathIcon
+                                VerticalAlignment="Center"
+                                Margin="9,0,9,0"
+                                Data="{StaticResource stop_regular}"></PathIcon>
+                            <TextBlock
+                                Margin="0,1,0,0"
+                                VerticalAlignment="Center">
+                                Home
+                            </TextBlock>
+                        </StackPanel>
                     </Button>
                     <Button
+                        Margin="0,5,0,5"
+                        Padding="0"
+                        Height="40"
                         HorizontalAlignment="Stretch"
                         FontSize="20">
-                        Info
+                        <StackPanel 
+                            Orientation="Horizontal">
+                            <PathIcon
+                                VerticalAlignment="Center"
+                                Margin="9,0,9,0"
+                                Data="{StaticResource stop_regular}"></PathIcon>
+                            <TextBlock
+                                Margin="0,1,0,0"
+                                VerticalAlignment="Center">
+                                Glossary
+                            </TextBlock>
+                        </StackPanel>
                     </Button>
                 </StackPanel>
                 <StackPanel
                     Grid.Row="1"
                     VerticalAlignment="Bottom">
                     <Button
+                        Height="40"
+                        Margin="0,5,0,5"
+                        Padding="0"
                         HorizontalAlignment="Stretch"
                         FontSize="20"
                         Command="{Binding $parent[Window].DataContext.Settings}">
-                        Settings
+                        <StackPanel 
+                            Orientation="Horizontal">
+                            <PathIcon
+                                VerticalAlignment="Center"
+                                Margin="9,0,9,0"
+                                Data="{StaticResource stop_regular}"></PathIcon>
+                            <TextBlock
+                                Margin="0,1,0,0"
+                                VerticalAlignment="Center">
+                                Settings
+                            </TextBlock>
+                        </StackPanel>
                     </Button>
                     <Button
+                        Height="40"
+                        Margin="0,5,0,5"
+                        Padding="0"
                         HorizontalAlignment="Stretch"
                         FontSize="20"
                         Command="{Binding $parent[Window].DataContext.About}">
-                        About
+                        <StackPanel 
+                            Orientation="Horizontal">
+                            <PathIcon
+                                VerticalAlignment="Center"
+                                Margin="9,0,9,0"
+                                Data="{StaticResource stop_regular}"></PathIcon>
+                            <TextBlock
+                                Margin="0,1,0,0"
+                                VerticalAlignment="Center">
+                                About
+                            </TextBlock>
+                        </StackPanel>
                     </Button>
                 </StackPanel>
                 <TextBlock
@@ -75,6 +149,6 @@
                     >[wip]</TextBlock>
             </Grid>
         </SplitView.Pane>
-        <ContentControl Content="{Binding Content}"/>
+        <ContentControl Name="contn" Content="{Binding Content}"/>
     </SplitView>
 </Window>

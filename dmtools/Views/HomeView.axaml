@@ -7,12 +7,41 @@
              mc:Ignorable="d" d:DesignWidth="1600" d:DesignHeight="900"
              x:Class="dmtools.Views.HomeView">
 	<TabControl Name="TheTabControl">
+		
+		
+		
+		
+		
+		<!-- DASHBOARD -->
 		<TabItem
 			PointerPressed="InputElement_OnPointerPressed"
 			Header="Dashboard">
 			<Grid
 				ColumnDefinitions="*, *, *, *"
-				RowDefinitions="0.25*, *, *">
+				RowDefinitions="0.10*, 1.15*, *">
+				
+				
+				
+				<!-- GREETING & CLOCK -->
+				<TextBlock
+						Grid.ColumnSpan="4"
+						Margin="5"
+						VerticalAlignment="Center"
+						FontSize="32">
+						Hello, %username%, it's %weather% inside the universe, 00st of the %monthname%, 0000
+					</TextBlock>
+				<ToggleButton
+					Grid.Row="0"
+					Margin="5"
+					CornerRadius="5"
+					HorizontalAlignment="Right"
+					Grid.Column="3">
+					<PathIcon Data="{StaticResource clock_regular}"></PathIcon>
+				</ToggleButton>
+				
+				
+				
+				<!-- NOTES -->
 				<Border
 					Grid.Column="0"
 					Grid.Row="1"
@@ -75,6 +104,10 @@
 						</TextBox>
 					</DockPanel>
 				</Border>
+				
+				
+				
+				<!-- FIGHT -->
 				<Border
 					Grid.Column="1"
 					Grid.Row="1"
@@ -160,6 +193,10 @@
 						</DataGrid>
 					</DockPanel>
 				</Border>
+				
+				
+				
+				<!-- TO-DO -->
 				<Border
 					Grid.Column="3"
 					Grid.Row="1"
@@ -263,6 +300,10 @@
 						</Grid>
 				</DockPanel>
 				</Border>
+				
+				
+				
+				<!-- IMAGE CONTROL -->
 				<Border
 					Grid.Column="0"
 					Grid.Row="2"
@@ -341,6 +382,10 @@
 						</Grid>
 					</DockPanel>
 				</Border>
+				
+				
+				
+				<!-- DICE -->
 				<Border
 					Grid.Column="2"
 					Grid.Row="2"
@@ -401,8 +446,8 @@
 								HorizontalContentAlignment="Center">
 								<Grid>
 									<PathIcon
-										Width="75"
-										Height="75"
+										Width="{Binding d2.Bounds.Width}"
+										Height="{Binding d2.Bounds.Height}"
 										Data="{StaticResource d2}"></PathIcon>
 									<TextBlock
 										FontSize="32"
@@ -423,8 +468,8 @@
 								HorizontalContentAlignment="Center">
 								<Grid>
 									<PathIcon
-										Width="75"
-										Height="75"
+										Width="{Binding d4.Bounds.Width}"
+										Height="{Binding d4.Bounds.Height}"
 										Data="{StaticResource d4}"></PathIcon>
 									<TextBlock
 										FontSize="32"
@@ -446,8 +491,8 @@
 								HorizontalContentAlignment="Center">
 								<Grid>
 									<PathIcon
-										Width="75"
-										Height="75"
+										Width="{Binding d6.Bounds.Width}"
+										Height="{Binding d6.Bounds.Height}"
 										Data="{StaticResource d6}"></PathIcon>
 									<TextBlock
 										FontSize="32"
@@ -468,8 +513,8 @@
 								HorizontalContentAlignment="Center">
 								<Grid>
 									<PathIcon
-										Width="75"
-										Height="75"
+										Width="{Binding d8.Bounds.Width}"
+										Height="{Binding d8.Bounds.Height}"
 										Data="{StaticResource d8}"></PathIcon>
 									<TextBlock
 										FontSize="32"
@@ -491,8 +536,8 @@
 								HorizontalContentAlignment="Center">
 								<Grid>
 								<PathIcon
-									Width="75"
-									Height="75"
+									Width="{Binding d10.Bounds.Width}"
+									Height="{Binding d10.Bounds.Height}"
 									Data="{StaticResource d10}"></PathIcon>
 								<TextBlock
 									FontSize="25"
@@ -515,8 +560,8 @@
 								HorizontalContentAlignment="Center">
 								<Grid>
 								<PathIcon
-									Width="75"
-									Height="75"
+									Width="{Binding d12.Bounds.Width}"
+									Height="{Binding d12.Bounds.Height}"
 									Data="{StaticResource d12}"></PathIcon>
 								<TextBlock
 									FontSize="25"
@@ -540,8 +585,8 @@
 								HorizontalContentAlignment="Center">
 								<Grid>
 								<PathIcon
-									Width="200"
-									Height="200"
+									Width="{Binding d20.Bounds.Width}"
+									Height="{Binding d20.Bounds.Height}"
 									Data="{StaticResource d20}"></PathIcon>
 								<TextBlock
 									FontSize="32"
@@ -703,11 +748,21 @@
 				</Border>
 			</Grid>
 		</TabItem>
+		
+		
+		
+		
+		
+		<!-- MEDIA -->
 		<TabItem Name="Media" Header="Media">
 			<Grid
 				RowDefinitions="0.3*, *, *"
 				ColumnDefinitions="*, *"
 				ShowGridLines="False">
+				
+				
+				
+				<!-- MAIN MUSIC -->
 				<Border
 					Grid.ColumnSpan="4"
 					Classes="DefBorder">
@@ -775,11 +830,11 @@
 								Name="Stop">
 								<PathIcon Data="{StaticResource stop_regular}"></PathIcon>
 							</Button>
-							<Button
+							<ToggleButton
 								Name="Pause"
 								Click="Pause_OnClick">
 								<PathIcon Data="{StaticResource video_play_pause_regular}"></PathIcon>
-							</Button>
+							</ToggleButton>
 							<Button
 								Click="Next_OnClick"
 								Name="Next">
@@ -811,6 +866,10 @@
 						</Slider>
 					</Grid>
 				</Border>
+				
+				
+				
+				<!-- AMBIENCE -->
 				<Border
 					Grid.Column="0"
 					Grid.Row = "1" 
@@ -821,6 +880,27 @@
 							HorizontalAlignment="Left"
 							VerticalAlignment="Center"
 							Classes="Header2">Ambience</TextBlock>
+						<Slider
+							Maximum="10"
+							Name="VolumeAmb"
+							Minimum="0"
+							FontSize="20"
+							ValueChanged="RangeBase_OnValueChanged"
+							TickFrequency="1"
+							VerticalAlignment="Center"
+							IsSnapToTickEnabled="True"
+							TickPlacement="TopLeft"
+							Margin="5,0,5,0"
+							Grid.Column="1">
+							<Slider.Styles>
+								<Style Selector="Slider /template/ Thumb">
+									<Setter Property="ToolTip.Tip" Value="{Binding $parent[Slider].Value, Mode=OneWay, StringFormat='Volume \{0\}0 %'}" />
+									<Setter Property="ToolTip.Placement" Value="Top" />
+									<Setter Property="ToolTip.VerticalOffset" Value="-10" />
+									<Setter Property="ToolTip.HorizontalOffset" Value="-30" />
+								</Style>
+							</Slider.Styles>
+						</Slider>
 						<ScrollViewer 
 							Grid.ColumnSpan="2"
 							Grid.Row="1">
@@ -831,6 +911,10 @@
 						</ScrollViewer>
 					</Grid>
 				</Border>
+				
+				
+				
+				<!-- SOUNDS -->
 				<Border
 					Classes="DefBorder"
 					Grid.Row="1"
@@ -842,6 +926,27 @@
 							HorizontalAlignment="Right"
 							VerticalAlignment="Center"
 							Classes="Header2">Sounds</TextBlock>
+						<Slider
+							Maximum="10"
+							Name="VolumeSnd"
+							Minimum="0"
+							FontSize="20"
+							ValueChanged="VolumeSnd_OnValueChanged"
+							TickFrequency="1"
+							VerticalAlignment="Center"
+							IsSnapToTickEnabled="True"
+							TickPlacement="TopLeft"
+							Margin="5,0,5,0"
+							Grid.Column="0">
+							<Slider.Styles>
+								<Style Selector="Slider /template/ Thumb">
+									<Setter Property="ToolTip.Tip" Value="{Binding $parent[Slider].Value, Mode=OneWay, StringFormat='Volume \{0\}0 %'}" />
+									<Setter Property="ToolTip.Placement" Value="Top" />
+									<Setter Property="ToolTip.VerticalOffset" Value="-10" />
+									<Setter Property="ToolTip.HorizontalOffset" Value="-30" />
+								</Style>
+							</Slider.Styles>
+						</Slider>
 					<ScrollViewer 
 						Grid.Row="2"
 						Grid.ColumnSpan="2">
@@ -852,6 +957,10 @@
 					</ScrollViewer>
 					</Grid>
 				</Border>
+				
+				
+				
+				<!-- YT -->
 				<Border
 					Grid.Column="0"
 					Grid.Row = "2" 
@@ -860,14 +969,42 @@
 				</Border>
 			</Grid>
 		</TabItem>
-		<TabItem Header="NPCs">
+		
+		
+		
+		
+		
+		<!-- NPCS -->
+		<TabItem Name="NPCs" PointerReleased="NPCs_OnPointerReleased" Header="NPCs">
+			<Grid RowDefinitions="*,16*">
+				<Button 
+					Grid.Row="0"
+					HorizontalAlignment="Right"
+					Click="AddNpcP">ADD</Button>
+				<ScrollViewer
+					Name="svnpc"
+					VerticalAlignment="Stretch"
+					HorizontalAlignment="Stretch" 
+					Grid.Row="1">
+					<WrapPanel 
+						VerticalAlignment="Stretch" 
+						HorizontalAlignment="Stretch" 
+						Name="wpnpc"></WrapPanel>
+				</ScrollViewer>
+			</Grid>
 		</TabItem>
+		
+		
+		
+		
+		
+		<!-- PLAYERS -->
 		<TabItem Name="Players" PointerReleased="Players_OnPointerReleased" Header="Players">
 			<Grid RowDefinitions="*,16*">
 				<Button 
 					Grid.Row="0"
 					HorizontalAlignment="Right"
-					Click="Add" >ADD</Button>
+					Click="Add">ADD</Button>
 				<ScrollViewer
 					Name="svpc"
 				              VerticalAlignment="Stretch"
@@ -879,8 +1016,6 @@
 						Name="wppc"></WrapPanel>
 				</ScrollViewer>
 			</Grid>
-		</TabItem>
-		<TabItem Header="Tools">
 		</TabItem>
 	</TabControl>
 </UserControl>

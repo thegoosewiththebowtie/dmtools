@@ -4,6 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         CanResize="False"
+        WindowStartupLocation="CenterOwner"
         Height="255"
         Width="300"
         x:Class="dmtools.Resources.AddCustNpc"
