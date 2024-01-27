@@ -7,26 +7,21 @@ using System.Linq;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
-using Avalonia.Platform.Storage;
-using dmtools.Resources;
+using dmtools.PopUps;
 using LiteDB;
-using System.IO;
-using System.Runtime;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Controls.Primitives;
 using Avalonia.Layout;
 using Avalonia.LogicalTree;
 using Avalonia.Media.Imaging;
-using Avalonia.Platform;
-using NAudio;
-using Avalonia.Platform.Storage;
-using Avalonia.Platform.Storage.FileIO;
 using Avalonia.Threading;
 using NAudio.Wave;
 using Config.Net;
 using dmtools.Templates;
-
+using Avalonia.Visuals;
+using AvaloniaWebView;
+using dmtools.Generators;
 
 namespace dmtools.Views;
 
@@ -123,12 +118,39 @@ public interface ISettings
     double VolumeSnd { get; set; }
     string Profile { get; set; }
     string Player { get; set; }
+    string Weather { get; set; }
+    int MinutesInHour { get; set; }
+    int HoursInDay { get; set; }
+    int DaysInWeek { get; set; }
+    int DaysInYear { get; set; }
+    int MonthsInYear { get; set; }
+    long DateAndTime { get; set; }
+    int CurrentMinute { get; set; }
+    int CurrentHour { get; set; }
+    int CurrentDay { get; set; }
+    int CurrentMonth { get; set; }
+    int CurrentYear { get; set; }
+    string BrLink0 { get; set; }
+    string BrLink1 { get; set; }
+    string BrLink2 { get; set; }
+    string BrLink3 { get; set; }
     int ID { get; set; }
 }
+public class Months0
+{
+    public int ID { get; set; }
+    public int days { get; set; }
+    public string monthname { get; set; }
+}
 
-
+public class Weeks0
+{
+    public int ID { get; set; }
+    public string weekname { get; set; }
+}
 public partial class HomeView : UserControl
 {
+    public static event EventHandler YTC ;
     Profile profile = new ConfigurationBuilder<Profile>().UseIniFile("Profile.ini").Build();
     public ISettings settings { get; set; }
     public int profid { get; set; }
@@ -151,6 +173,7 @@ public partial class HomeView : UserControl
         DashFightUp();
         picinit();
         ToDoInit();
+        GreetIni();
     }
     public void SetSetup()
     {
@@ -160,13 +183,177 @@ public partial class HomeView : UserControl
         if (!Uri.TryCreate(settings.AmbPath, UriKind.RelativeOrAbsolute, out Uri a)) { settings.AmbPath = "Music/Amb"; }
         if (!Uri.TryCreate(settings.SndPath, UriKind.RelativeOrAbsolute, out Uri s)) { settings.SndPath = "Music/Snd"; }
         if (!Uri.TryCreate(settings.ImgPath, UriKind.RelativeOrAbsolute, out Uri i)) { settings.ImgPath = "Images"; }
+        if (settings.MinutesInHour == 0) { settings.MinutesInHour = 60;}
+        if (settings.HoursInDay == 0) { settings.HoursInDay = 24;}
+        if (settings.DaysInWeek == 0) { settings.DaysInWeek = 7;}
+        if (settings.DaysInYear == 0) { settings.DaysInYear = 365;}
+        if (settings.MonthsInYear == 0) { settings.MonthsInYear = 12;}
         if (settings.Volume == 0) { settings.Volume = 10; } 
         if (settings.VolumeAmb == 0) { settings.VolumeAmb = 10; }
         if (settings.VolumeSnd == 0) { settings.VolumeSnd = 10; }
+        using (var ldb = new LiteDatabase(settings.DataPath))
+        {
+            var Months = ldb.GetCollection<Months0>();
+            var Weeks = ldb.GetCollection<Weeks0>();
+            if (Months.Count() != settings.MonthsInYear)
+            {
+                Months.DeleteAll();
+                for (int j = 0; j < settings.MonthsInYear; j++)
+                {
+                    Months.Insert(new Months0()
+                    {
+                        ID = j+1,
+                        monthname = (j+1).ToString()
+                    });
+                }
+            }
+            if (Weeks.Count() != settings.DaysInWeek)
+            {
+                Weeks.DeleteAll();
+                for (int j = 0; j < settings.DaysInWeek; j++)
+                {
+                    Weeks.Insert(new Weeks0()
+                    {
+                        ID = j+1,
+                        weekname = (j+1).ToString()
+                    });
+                }
+            }
+        }
     }
-    
-    
-    
+
+    public void GreetIni()
+    {
+        long AllMinutes = settings.DateAndTime;
+        long AllHours = (long)Math.Floor((decimal)(AllMinutes / settings.MinutesInHour));
+        int AllDays = (int)Math.Floor((decimal)(AllHours / settings.HoursInDay));
+        int AllWeeks = AllDays % settings.DaysInWeek;
+        int AllYears = (int)Math.Floor((decimal)(AllDays / settings.DaysInYear));
+        int CurrentYear = AllYears;
+        int CurrentYearDay = (AllDays - AllYears * settings.DaysInYear)+1;
+        int CurrentHour = (int)(AllHours - AllDays * settings.HoursInDay);
+        int CurrentMinute = (int)(AllMinutes - AllHours * settings.MinutesInHour);
+        int halfday = settings.HoursInDay / 2;
+        int ProperHour = CurrentHour;
+        string TimeOfDay = "";
+        switch (CurrentHour)
+        {
+            case 0:
+                ProperHour = halfday;
+                TimeOfDay = "am";
+                break;
+            case var hd when hd < halfday:
+                TimeOfDay = "am";
+                break;
+            case var hd when hd == halfday:
+                TimeOfDay = "pm";
+                break;
+            case var hd when hd > halfday:
+                ProperHour -= halfday;
+                TimeOfDay = "pm";
+                break;
+        }
+        int CurrentMonth = 0;
+        int CurrentMonthsDays = 0;
+        int CurrentDay = CurrentYearDay;
+        string MonthName = "";
+        string WeekDayName = "";
+        using (var ldb = new LiteDatabase(settings.DataPath))
+        {
+            var Months = ldb.GetCollection<Months0>();
+            var Weeks = ldb.GetCollection<Weeks0>();
+            foreach (var Month in Months.FindAll())
+            {
+                CurrentMonthsDays += Month.days;
+                if (CurrentMonthsDays >= CurrentYearDay)
+                {
+                    break;
+                }
+                CurrentDay -= Month.days;
+                CurrentMonth++;
+            }
+            MonthName = Months.FindById(CurrentMonth + 1).monthname;
+            WeekDayName = Weeks.FindById(AllWeeks + 1).weekname;
+        }
+        string ProperDay = "";
+        if (CurrentDay.ToString().First() != '1')
+        {
+            switch (CurrentDay.ToString().Last())
+            {
+                case '1':
+                    ProperDay = CurrentDay + "st";
+                    break;
+                case '2':
+                    ProperDay = CurrentDay + "nd";
+                    break;
+                case '3':
+                    ProperDay = CurrentDay + "rd";
+                    break;
+                default:
+                    ProperDay = CurrentDay + "th";
+                    break;
+            }
+        }
+        else
+        {
+            ProperDay = CurrentDay + "th";
+        }
+        Greeting.Text =
+            $"Hello, {settings.Player}, it's {settings.Weather} in the universe,  " +
+            $"{ProperHour.ToString("00")}:{CurrentMinute.ToString("00")} {TimeOfDay}   {ProperDay} of the {MonthName} ({CurrentMonth+1}) {CurrentYear}, {WeekDayName}";
+    }
+    private void Button_OnClick(object? sender, RoutedEventArgs e)
+    {
+            switch ((sender as Button).Name)
+            {
+                case "minpl":
+                    settings.DateAndTime++;
+                    break;
+                case "houpl":
+                    settings.DateAndTime += settings.MinutesInHour;
+                    break;
+                case "daypl":
+                    settings.DateAndTime += settings.HoursInDay * settings.MinutesInHour;
+                    break;
+                case "monpl":
+                    settings.DateAndTime += settings.DaysInYear * settings.HoursInDay * settings.MinutesInHour;
+                    break;
+            }
+            GreetIni();
+        
+    }
+
+    private void Buttonmin_OnClick(object? sender, RoutedEventArgs e)
+    {
+            switch ((sender as Button).Name)
+            {
+                case "minmi":
+                    if (settings.DateAndTime != 0)
+                    {
+                        settings.DateAndTime--;
+                    }
+                    break;
+                case "houmi":
+                    if (settings.DateAndTime > settings.MinutesInHour)
+                    {
+                        settings.DateAndTime -= settings.MinutesInHour;
+                    }
+                    break;
+                case "daymi":
+                    if (settings.DateAndTime > settings.HoursInDay * settings.MinutesInHour)
+                    {
+                        settings.DateAndTime -= settings.HoursInDay * settings.MinutesInHour;
+                    }
+                    break;
+                case "monmi":
+                    if (settings.DateAndTime > settings.DaysInYear * settings.HoursInDay * settings.MinutesInHour)
+                    {
+                        settings.DateAndTime -= settings.DaysInYear * settings.HoursInDay * settings.MinutesInHour;
+                    }
+                    break;
+            }
+            GreetIni();
+    }
     
     //DASHBOARD
     
@@ -522,6 +709,63 @@ public partial class HomeView : UserControl
     }
     
     
+    //dice
+    public List<int> his = new List<int>();
+    private void DiceThrow(object? sender, RoutedEventArgs e)
+    {
+        foreach (var g in (sender as Button).GetLogicalChildren().OfType<Grid>())
+        {
+            foreach (var res in g.Children.OfType<TextBlock>())
+            {
+                int ress = 0;
+                for (int i = 0; i < Convert.ToInt32(seldm.Remove(0,1)); i++)
+                {
+                    var rsr = rndm.Next(1, Convert.ToInt32((sender as Button).Name.Remove(0, 1))+1);
+                    ress += rsr;
+                    HistoryD.Items.Insert(0, rsr);
+                }
+                res.Text = ress.ToString();
+                TotalD.Text = (Convert.ToInt32(TotalD.Text) + ress).ToString();
+            }
+        }
+    }
+    public string seldm { get; set; } = "x1";
+    private void moredice(object? sender, RoutedEventArgs e)
+    {
+        if (Dicess == null)
+        {
+            return;
+        }
+        if ((sender as ToggleButton).IsChecked == false)
+        {
+            return;
+        }
+        seldm = (sender as ToggleButton).Name;
+        foreach (var tb in Dicess.Children.OfType<ToggleButton>())
+        {
+            if (tb.Name != seldm)
+            {
+                tb.IsChecked = false;
+            }
+        }
+    }
+    private void Cleardice_OnClick(object? sender, RoutedEventArgs e)
+    {
+        foreach (var d in Dicess.Children.OfType<Button>())
+        {
+            var r = d.Name.Remove(0, 1);
+            foreach (var g in d.GetLogicalChildren().OfType<Grid>())
+            {
+                foreach (var tb in g.Children.OfType<TextBlock>())
+                {
+                    tb.Text = r;
+                }
+            }
+        }
+        HistoryD.Items.Clear();
+        TotalD.Text = "0";
+    }
+    
     
     
     
@@ -824,6 +1068,9 @@ public partial class HomeView : UserControl
     
     
     
+    //YT
+    
+    
     
     //npcs
     private void AddNpcP(object? sender, RoutedEventArgs e)
@@ -951,6 +1198,7 @@ public partial class HomeView : UserControl
     //common
     public void SizeChange(object? sender, EventArgs e)
     {
+        Greeting.FontSize = Greeting.Bounds.Width * 0.02;
         foreach (CharForm cf in wppc.Children.OfType<CharForm>())
         {
             if (svpc.Bounds.Width > 1500)
@@ -969,7 +1217,6 @@ public partial class HomeView : UserControl
                 cf.Height = cf.Width / 1.33333;
             }
         }
-        
         foreach (NpcForm cf in wpnpc.Children.OfType<NpcForm>())
         {
             if (svnpc.Bounds.Width > 1500)
@@ -989,62 +1236,8 @@ public partial class HomeView : UserControl
             }
         }
     }
-
-    public List<int> his = new List<int>();
-    private void DiceThrow(object? sender, RoutedEventArgs e)
+    private void TheTabControl_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
-        foreach (var g in (sender as Button).GetLogicalChildren().OfType<Grid>())
-        {
-            foreach (var res in g.Children.OfType<TextBlock>())
-            {
-                int ress = 0;
-                for (int i = 0; i < Convert.ToInt32(seldm.Remove(0,1)); i++)
-                {
-                    var rsr = rndm.Next(1, Convert.ToInt32((sender as Button).Name.Remove(0, 1))+1);
-                    ress += rsr;
-                    HistoryD.Items.Insert(0, rsr);
-                }
-                res.Text = ress.ToString();
-                TotalD.Text = (Convert.ToInt32(TotalD.Text) + ress).ToString();
-            }
-        }
-    }
-
-    public string seldm { get; set; } = "x1";
-    private void moredice(object? sender, RoutedEventArgs e)
-    {
-        if (Dicess == null)
-        {
-            return;
-        }
-        if ((sender as ToggleButton).IsChecked == false)
-        {
-            return;
-        }
-        seldm = (sender as ToggleButton).Name;
-        foreach (var tb in Dicess.Children.OfType<ToggleButton>())
-        {
-            if (tb.Name != seldm)
-            {
-                tb.IsChecked = false;
-            }
-        }
-    }
-
-    private void Cleardice_OnClick(object? sender, RoutedEventArgs e)
-    {
-        foreach (var d in Dicess.Children.OfType<Button>())
-        {
-            var r = d.Name.Remove(0, 1);
-            foreach (var g in d.GetLogicalChildren().OfType<Grid>())
-            {
-                foreach (var tb in g.Children.OfType<TextBlock>())
-                {
-                    tb.Text = r;
-                }
-            }
-        }
-        HistoryD.Items.Clear();
-        TotalD.Text = "0";
+        YTC(sender, e);
     }
 }

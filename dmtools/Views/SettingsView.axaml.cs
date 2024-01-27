@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Security.Permissions;
 using Avalonia;
 using Avalonia.Controls;
@@ -9,6 +10,8 @@ using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Platform.Storage;
 using Config.Net;
+using LiteDB;
+using dmtools.Templates;
 
 namespace dmtools.Views;
 
@@ -63,6 +66,10 @@ public partial class SettingsView : UserControl
         {
             Img.IsChecked = false;
         }
+        MiHs.Value = settings.MonthsInYear;
+        HiDs.Value = settings.HoursInDay;
+        DiWs.Value = settings.DaysInWeek;
+        MiYs.Value = settings.MonthsInYear;
     }
     private void Default(object? sender, RoutedEventArgs e)
     {
@@ -125,5 +132,106 @@ public partial class SettingsView : UserControl
             }
         }
         ButIni();
+    }
+    private void SaveAms_OnClick(object? sender, RoutedEventArgs e)
+    {
+        settings.MinutesInHour = (int)MiHs.Value;
+        settings.HoursInDay = (int)HiDs.Value;
+        settings.DaysInWeek = (int)DiWs.Value;
+        settings.MonthsInYear = (int)MiYs.Value;
+    }
+
+    private void Months_OnExpanded(object? sender, RoutedEventArgs e)
+    {
+        using (var Ldb = new LiteDatabase(settings.DataPath))
+        {
+            var m = Ldb.GetCollection<Months0>();
+            Months.Children.Clear();
+            for (int i = 0; i < settings.MonthsInYear; i++)
+            {
+                Months.Children.Add(new WeekMonthEdit()
+                {
+                    Name = (i + 1).ToString(),
+                    MonthName = m.FindById(i+1).monthname,
+                    Days = m.FindById(i+1).days,
+                    MainWatermark = "Month " + (i + 1),
+                });
+            }
+        }
+
+        Button savemonth = new Button()
+        {
+            Content = "Save",
+            Margin = new Thickness(5)
+        };
+        savemonth.Click += SavemonthOnClick;
+        Months.Children.Add(savemonth);
+    }
+
+    private void SavemonthOnClick(object? sender, RoutedEventArgs e)
+    {
+        using (var LdbPC = new LiteDatabase(settings.DataPath))
+        {
+            var months = LdbPC.GetCollection<Months0>();
+            months.DeleteAll();
+            int diy = 0;
+            foreach (var month in Months.Children.OfType<WeekMonthEdit>())
+            {
+                months.Insert(new Months0()
+                {
+                    ID = Convert.ToInt32(month.Name),
+                    days = (int)month.Days,
+                    monthname = month.MonthName,
+                });
+                diy += (int)month.Days;
+            }
+            settings.DaysInYear = diy;
+        }
+    }
+    
+
+    private void Weeks_OnExpanded(object? sender, RoutedEventArgs e)
+    {
+        using (var Ldb = new LiteDatabase(settings.DataPath))
+        {
+            var w = Ldb.GetCollection<Weeks0>();
+            Weeks.Children.Clear();
+            for (int i = 0; i < settings.DaysInWeek; i++)
+            {
+                Weeks.Children.Add(new TextBox()
+                {
+                    Name = (i + 1).ToString(),
+                    Watermark = "Day " + (i + 1),
+                    Text = w.FindById(i+1).weekname,
+                    Margin = new Thickness(5)
+                });
+            }
+        }
+
+        Button saveweek = new Button()
+        {
+            Content = "Save",
+            Margin = new Thickness(5)
+        };
+        saveweek.Click += SaveweekOnClick;
+        Weeks.Children.Add(saveweek);
+    }
+
+    private void SaveweekOnClick(object? sender, RoutedEventArgs e)
+    {
+        using (var LdbPC = new LiteDatabase(settings.DataPath))
+        {
+            var weeks = LdbPC.GetCollection<Weeks0>();
+            weeks.DeleteAll();
+            foreach (var week in Weeks.Children.OfType<TextBox>())
+            {
+                weeks.Insert(new Weeks0()
+                {
+                    ID = Convert.ToInt32(week.Name),
+                    weekname = week.Text,
+                });
+
+            }
+        }
     }
 }

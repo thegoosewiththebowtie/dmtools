@@ -5,7 +5,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Controls.Primitives;
 using Config.Net;
-using dmtools.Resources;
+using dmtools.PopUps;
 using dmtools.Views;
 using LiteDB;
 
@@ -200,7 +200,7 @@ public class NpcForm : TemplatedControl
         base.OnApplyTemplate(e);
         Profile profile = new ConfigurationBuilder<Profile>().UseIniFile("Profile.ini").Build();
         ISettings settings = new ConfigurationBuilder<ISettings>().UseIniFile("Settings/q0" + profile.ProfileID +".ini").Build();
-        profbon ="+" + (Math.Floor(Convert.ToDecimal(Level) / 4) + 1).ToString();
+        profbon ="+" + (Math.Ceiling(Convert.ToDecimal(Level) / 4) + 1).ToString();
         var dbtn = e.NameScope.Find<Button>("Delete");
         dbtn.Click += (sender, args) =>
         {

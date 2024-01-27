@@ -6,7 +6,9 @@
              xmlns:templates="clr-namespace:dmtools.Templates"
              mc:Ignorable="d" d:DesignWidth="1600" d:DesignHeight="900"
              x:Class="dmtools.Views.HomeView">
-	<TabControl Name="TheTabControl">
+	<TabControl
+		SelectionChanged="TheTabControl_OnSelectionChanged"
+		Name="TheTabControl">
 		
 		
 		
@@ -14,6 +16,7 @@
 		
 		<!-- DASHBOARD -->
 		<TabItem
+			Name="Dashboard"
 			PointerPressed="InputElement_OnPointerPressed"
 			Header="Dashboard">
 			<Grid
@@ -24,20 +27,65 @@
 				
 				<!-- GREETING & CLOCK -->
 				<TextBlock
+					Name="Greeting"
 						Grid.ColumnSpan="4"
 						Margin="5"
 						VerticalAlignment="Center"
 						FontSize="32">
-						Hello, %username%, it's %weather% inside the universe, 00st of the %monthname%, 0000
 					</TextBlock>
-				<ToggleButton
+				<StackPanel
+					Grid.Column="3"
 					Grid.Row="0"
 					Margin="5"
-					CornerRadius="5"
-					HorizontalAlignment="Right"
-					Grid.Column="3">
-					<PathIcon Data="{StaticResource clock_regular}"></PathIcon>
-				</ToggleButton>
+					Orientation="Horizontal"
+					HorizontalAlignment="Right">
+					<Button
+						Name="minpl"
+						Click="Button_OnClick">
+						Min+
+					</Button>
+					<Button
+						Name="minmi"
+						Click="Buttonmin_OnClick">
+						Min-
+					</Button>
+					<Button
+						Name="houpl"
+						Click="Button_OnClick">
+						H+
+					</Button>
+					<Button
+						Name="houmi"
+						Click="Buttonmin_OnClick">
+						H-
+					</Button>
+					<Button
+						Name="daypl"
+						Click="Button_OnClick">
+						day+
+					</Button>
+					<Button
+						Name="daymi"
+						Click="Buttonmin_OnClick">
+						day-
+					</Button>
+					<Button
+						Name="monpl"
+						Click="Button_OnClick">
+						mon+
+					</Button>
+					<Button
+						Name="monmi"
+						Click="Buttonmin_OnClick">
+						mon-
+					</Button>
+					<ToggleButton
+						CornerRadius="5">
+						<PathIcon Data="{StaticResource clock_regular}">
+						</PathIcon>
+					</ToggleButton>
+				</StackPanel>
+
 				
 				
 				
@@ -67,7 +115,6 @@
 									Name="SaveNotes"
 									Click="SaveNotes_OnClick"
 									VerticalAlignment="Stretch"
-									Grid.Column="2"
 									HorizontalAlignment="Right"
 									Margin="0,0,0,-1"
 									CornerRadius="0,0,0,0">
@@ -230,7 +277,7 @@
 								</Button>
 							</StackPanel>
 							<TextBlock
-								Grid.Column="2"
+								Grid.Column="1"
 								Margin="5"
 								FontSize="20"
 								VerticalAlignment="Center"
@@ -293,7 +340,7 @@
 								VerticalContentAlignment="Center"
 								VerticalAlignment="Top"
 								HorizontalAlignment="Stretch"
-								Grid.Row="2">
+								Grid.Row="1">
 								Cancel
 							</Button>
 						</Grid>
@@ -962,10 +1009,11 @@
 				
 				<!-- YT -->
 				<Border
-					Grid.Column="0"
-					Grid.Row = "2" 
+					IsHitTestVisible="False"
+					Grid.Row="2"
 					Grid.ColumnSpan="2"
-					Classes="DefBorder">
+					Margin="5">
+					
 				</Border>
 			</Grid>
 		</TabItem>

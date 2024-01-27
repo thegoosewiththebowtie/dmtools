@@ -1,0 +1,161 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="dmtools.Views.GensView">
+    <TabControl>
+        <TabItem
+            Header="NPC">
+            <Grid
+                ColumnDefinitions="*, 2*, *">
+                <Border
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Classes="DefBorder">
+                    <Grid
+                        ColumnDefinitions="*, 2*">
+                    <DataGrid
+                        Name="History"
+                        SelectionChanged="History_OnSelectionChanged"
+                        Margin="5">
+                        <DataGrid.Columns>
+                        <DataGridTextColumn
+                            Header="First Name"
+                            Binding="{Binding Path=Name}">
+                            
+                        </DataGridTextColumn>
+                        <DataGridTextColumn
+                            Header="Second Name"
+                            Binding="{Binding Path=Name2}">
+                            
+                        </DataGridTextColumn>
+                        <DataGridTextColumn
+                            Header="Race"
+                            Binding="{Binding Path=Race}">
+                            
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                    </Grid>
+                    </Border>
+                <Border
+                    Grid.Column="1"
+                    Classes="DefBorder">
+                    <TextBlock
+                        Name="CurrentNpc"
+                        FontSize="22">
+                    </TextBlock>
+                </Border>
+                <Border
+                    Classes="DefBorder"
+                    Grid.Column="2">
+                    <StackPanel>
+                        <Button
+                                Name="GenerateNPC"
+                                Click="GenerateNPC_OnClick"
+                                Margin="5"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Stretch"
+                                VerticalContentAlignment="Center"
+                                HorizontalContentAlignment="Center">
+                            GENERATE
+                        </Button>
+                        <ComboBox
+                            Name="Age"
+                            PlaceholderText="Age"
+                            Margin="5"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Stretch"
+                            VerticalContentAlignment="Center"
+                            HorizontalContentAlignment="Center">
+                            <TextBlock
+                                Name="a0a1001">
+                                Random
+                            </TextBlock>
+                            <TextBlock
+                                Name="a0a100">
+                                Child
+                            </TextBlock>
+                            <TextBlock
+                                Name="a100a130">
+                                Young
+                            </TextBlock>
+                            <TextBlock
+                                Name="a130a250">
+                                Young adult
+                            </TextBlock>
+                            <TextBlock
+                                Name="a250a300">
+                                Adult
+                            </TextBlock>
+                            <TextBlock
+                                Name="a300a600">
+                                Middle aged
+                            </TextBlock>
+                            <TextBlock
+                                Name="a600a1001">
+                                Old
+                            </TextBlock>
+                        </ComboBox>
+                        <ComboBox
+                            PlaceholderText=""
+                            Margin="5"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Stretch"
+                            VerticalContentAlignment="Center"
+                            HorizontalContentAlignment="Center">
+                        </ComboBox>
+                        <ComboBox
+                            Margin="5"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Stretch"
+                            VerticalContentAlignment="Center"
+                            HorizontalContentAlignment="Center">
+                        </ComboBox>
+                        <ComboBox
+                            Margin="5"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Stretch"
+                            VerticalContentAlignment="Center"
+                            HorizontalContentAlignment="Center">
+                        </ComboBox>
+                        <ComboBox
+                            Margin="5"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Stretch"
+                            VerticalContentAlignment="Center"
+                            HorizontalContentAlignment="Center">
+                        </ComboBox>
+                        <Slider
+                            Margin="5"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Stretch">
+                        </Slider>
+                        <Slider
+                            Margin="5"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Stretch">
+                        </Slider>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </TabItem>
+        <TabItem
+            Header="Loot">
+            
+        </TabItem>
+        <TabItem
+            Header="Encounters">
+            
+        </TabItem>
+        <TabItem
+            Header="Cities">
+            
+        </TabItem>
+        <TabItem
+            Header="Dungeons">
+            
+        </TabItem>
+    </TabControl>
+</UserControl>

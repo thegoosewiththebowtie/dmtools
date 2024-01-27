@@ -7,7 +7,7 @@
         WindowStartupLocation="CenterOwner"
         Height="255"
         Width="300"
-        x:Class="dmtools.Resources.AddCustNpc"
+        x:Class="dmtools.PopUps.AddCustNpc"
         Title="AddCustNpc">
         <StackPanel>
                 <TextBox

@@ -2,6 +2,8 @@
 
 using Avalonia;
 using Avalonia.ReactiveUI;
+using Avalonia.WebView.Desktop;
+
 
 namespace dmtools.Desktop;
 
@@ -20,5 +22,9 @@ class Program
             .UsePlatformDetect()
             .WithInterFont()
             .LogToTrace()
-            .UseReactiveUI();
+            .UseReactiveUI()
+            .UsePlatformDetect()
+            .LogToTrace()
+            .UseReactiveUI()
+            .UseDesktopWebView(); 
 }

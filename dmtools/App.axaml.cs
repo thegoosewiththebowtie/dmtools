@@ -6,6 +6,7 @@ using dmtools.Views;
 using System;
 using System.Configuration;
 using Avalonia.Controls;
+using AvaloniaWebView;
 
 namespace dmtools;
 
@@ -15,7 +16,13 @@ public partial class App : Application
     {
         AvaloniaXamlLoader.Load(this);
     }
-
+    public override void RegisterServices()
+    {
+        base.RegisterServices();
+     
+        // if you use only WebView  
+        AvaloniaWebViewBuilder.Initialize(default);
+    }
     public override void OnFrameworkInitializationCompleted()
     {
         base.OnFrameworkInitializationCompleted();

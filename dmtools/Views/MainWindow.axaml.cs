@@ -14,8 +14,9 @@ using Avalonia.Controls.Primitives;
 using Avalonia.Interactivity;
 using Avalonia.Layout;
 using Avalonia.Platform.Storage;
+using AvaloniaWebView;
 using Config.Net;
-using dmtools.Resources;
+using dmtools.PopUps;
 using dmtools.ViewModels;
 
 namespace dmtools.Views;
@@ -29,7 +30,8 @@ public interface Profile
 public partial class MainWindow : Window
 {
     public static event EventHandler SizzeChanged;
-
+    public ISettings settings { get; set; }
+    public int profid { get; set; }
     public MainWindow()
     {
         InitializeComponent();
@@ -41,6 +43,8 @@ public partial class MainWindow : Window
         System.IO.Directory.CreateDirectory("Music/Snd");
         System.IO.Directory.CreateDirectory("Images");
         InitProf();
+        HomeView.YTC += YTLInit;
+        YTInit();
     }
     Profile profile = new ConfigurationBuilder<Profile>().UseIniFile("Profile.ini").Build();
     public void InitProf()
@@ -71,6 +75,7 @@ public partial class MainWindow : Window
         add.Content = "New Profile";
         add.Click += AddOnClick;
         ProfilesButtons.Children.Add(add);
+        profid = profile.ProfileID;
     }
 
     private void AddOnClick(object? sender, RoutedEventArgs e)
@@ -118,7 +123,143 @@ public partial class MainWindow : Window
             ProfPrev1.IsVisible = false;
             Expand.Content = "<";
         }
-
+    }
+    private void Home_OnClick(object? sender, RoutedEventArgs e)
+    {
+        if ((sender as ToggleButton).IsChecked == false)
+        {
+            (sender as ToggleButton).IsChecked = true;
+            return;
+        }
+        List<ToggleButton> mtb = new List<ToggleButton>() { Home, Gens, Glossary, Set, Abt };
+        foreach (var tb in mtb)
+        {
+            if (tb != (sender as ToggleButton))
+            {
+                tb.IsChecked = false;
+            }
+            if (tb.Name == "Home" && tb.IsChecked == false)
+            {
+                YTControl.IsVisible = false;
+                home.IsVisible = false;
+            }
+            else if (tb.Name == "Home" && tb.IsChecked == true)
+            {
+                home.IsVisible = true;
+                if (isactiveyt == true)
+                {
+                    YTControl.IsVisible = true;
+                }
+            }
+        }
     }
     
+    
+    //YT
+    public List<WebView> browsers { get; set; }
+    public bool isactiveyt { get; set; }
+    public void YTLInit(object? sender, EventArgs eventArgs)
+    {
+        if (!this.home.IsLoaded)
+        {
+            return;
+        }
+        if ((sender as TabControl).SelectedIndex != 1)
+        {
+            isactiveyt = false;
+            YTControl.IsVisible = false;
+            return;
+        }
+        YTControl.IsVisible = true;
+        isactiveyt = true;
+        if (settings.BrLink0 != null && settings.BrLink0.Contains("https://www.youtube.com/embed/") == true)
+        {
+            BrowserBox0.Text = settings.BrLink0.Replace("https://www.youtube.com/embed/", "https://youtu.be/");
+        }
+        if (settings.BrLink1 != null && settings.BrLink1.Contains("https://www.youtube.com/embed/"))
+        {
+            BrowserBox1.Text = settings.BrLink1.Replace("https://www.youtube.com/embed/", "https://youtu.be/");
+        }
+        if (settings.BrLink2 != null && settings.BrLink2.Contains("https://www.youtube.com/embed/"))
+        {
+            BrowserBox2.Text = settings.BrLink2.Replace("https://www.youtube.com/embed/", "https://youtu.be/");
+        }
+        if (settings.BrLink3 != null && settings.BrLink3.Contains("https://www.youtube.com/embed/")) 
+        {
+            BrowserBox3.Text = settings.BrLink3.Replace("https://www.youtube.com/embed/", "https://youtu.be/");
+        }
+        
+    }
+    public void YTInit()
+    {
+        settings = new ConfigurationBuilder<ISettings>().UseIniFile("Settings/q0" + profid +".ini").Build();
+        browsers = new List<WebView>()
+        {
+            new WebView(),
+            new WebView(),
+            new WebView(),
+            new WebView()
+        };
+    }
+
+    public void BrowserButton0_OnClick(object? sender, RoutedEventArgs e)
+    {
+        //https://www.youtube.com/embed/
+        //https://youtu.be/
+        switch ((sender as Button).Name)
+        {
+            case "BrowserButton0":
+                if (!BrowserBox0.Text.Contains("https://youtu.be/"))
+                {
+                   break;
+                }
+                settings.BrLink0 = BrowserBox0.Text.Replace("https://youtu.be/", "https://www.youtube.com/embed/");
+                if (settings.BrLink0 == null || !settings.BrLink0.Contains("https://www.youtube.com/embed/"))
+                {
+                    break;
+                }
+                browsers[0].Url = new Uri(settings.BrLink0);
+                Browser0.Child = browsers[0];
+                break;
+            case "BrowserButton1":
+                if (!BrowserBox1.Text.Contains("https://youtu.be/"))
+                {
+                    break;
+                }
+                settings.BrLink1 = BrowserBox1.Text.Replace("https://youtu.be/", "https://www.youtube.com/embed/");
+                if (settings.BrLink1 == null || !settings.BrLink1.Contains("https://www.youtube.com/embed/"))
+                {
+                    break;
+                }
+                browsers[1].Url = new Uri(settings.BrLink1);
+                Browser1.Child = browsers[1];
+                break;
+            case "BrowserButton2":
+                if (!BrowserBox2.Text.Contains("https://youtu.be/"))
+                {
+                   break;
+                }
+                settings.BrLink2 = BrowserBox2.Text.Replace("https://youtu.be/", "https://www.youtube.com/embed/");
+                if (settings.BrLink2 == null || !settings.BrLink2.Contains("https://www.youtube.com/embed/"))
+                {
+                    break;
+                }
+                browsers[2].Url = new Uri(settings.BrLink2);
+                Browser2.Child = browsers[2];
+                break;
+            case "BrowserButton3":
+                if (!BrowserBox3.Text.Contains("https://youtu.be/"))
+                {
+                    break;
+                }
+                settings.BrLink3 = BrowserBox3.Text.Replace("https://youtu.be/", "https://www.youtube.com/embed/");
+                if (settings.BrLink3 == null || !settings.BrLink3.Contains("https://www.youtube.com/embed/"))
+                {
+                    break;
+                }
+                browsers[3].Url = new Uri(settings.BrLink3);
+                Browser3.Child = browsers[3];
+                break;
+        }
+    }
 }

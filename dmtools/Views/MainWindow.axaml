@@ -55,8 +55,10 @@
                             </TextBlock>
                         </Border>
                     </Grid>
-                    <Button 
+                    <ToggleButton 
+                        IsChecked="True"
                         Name="Home"
+                        Click="Home_OnClick"
                         Margin="0,5,0,5"
                         Padding="0"
                         Height="40"
@@ -68,15 +70,18 @@
                             <PathIcon
                                 VerticalAlignment="Center"
                                 Margin="9,0,9,0"
-                                Data="{StaticResource stop_regular}"></PathIcon>
+                                Data="{StaticResource home_regular}"></PathIcon>
                             <TextBlock
                                 Margin="0,1,0,0"
                                 VerticalAlignment="Center">
                                 Home
                             </TextBlock>
                         </StackPanel>
-                    </Button>
-                    <Button
+                    </ToggleButton>
+                    <ToggleButton
+                        Click="Home_OnClick"
+                        Name="Gens"
+                        Command="{Binding $parent[Window].DataContext.Gens}"
                         Margin="0,5,0,5"
                         Padding="0"
                         Height="40"
@@ -87,19 +92,44 @@
                             <PathIcon
                                 VerticalAlignment="Center"
                                 Margin="9,0,9,0"
-                                Data="{StaticResource stop_regular}"></PathIcon>
+                                Data="{StaticResource people_settings_regular}"></PathIcon>
                             <TextBlock
                                 Margin="0,1,0,0"
                                 VerticalAlignment="Center">
-                                Glossary
+                                Generators
                             </TextBlock>
                         </StackPanel>
-                    </Button>
+                    </ToggleButton>
+	                <ToggleButton 
+		                IsChecked="False"
+		                Name="Glossary"
+		                Click="Home_OnClick"
+		                Margin="0,5,0,5"
+		                Padding="0"
+		                Height="40"
+		                FontSize="20"
+		                Command="{Binding $parent[Window].DataContext.Glossary}"
+		                HorizontalAlignment="Stretch"
+		                VerticalAlignment="Top">
+		                <StackPanel Orientation="Horizontal">
+			                <PathIcon
+				                VerticalAlignment="Center"
+				                Margin="9,0,9,0"
+				                Data="{StaticResource book_regular}"></PathIcon>
+			                <TextBlock
+				                Margin="0,1,0,0"
+				                VerticalAlignment="Center">
+				                Glossary
+			                </TextBlock>
+		                </StackPanel>
+	                </ToggleButton>
                 </StackPanel>
                 <StackPanel
                     Grid.Row="1"
                     VerticalAlignment="Bottom">
-                    <Button
+                    <ToggleButton
+                        Click="Home_OnClick"
+                        Name="Set"
                         Height="40"
                         Margin="0,5,0,5"
                         Padding="0"
@@ -111,15 +141,17 @@
                             <PathIcon
                                 VerticalAlignment="Center"
                                 Margin="9,0,9,0"
-                                Data="{StaticResource stop_regular}"></PathIcon>
+                                Data="{StaticResource settings_regular}"></PathIcon>
                             <TextBlock
                                 Margin="0,1,0,0"
                                 VerticalAlignment="Center">
                                 Settings
                             </TextBlock>
                         </StackPanel>
-                    </Button>
-                    <Button
+                    </ToggleButton>
+                    <ToggleButton
+                        Click="Home_OnClick"
+                        Name="Abt"
                         Height="40"
                         Margin="0,5,0,5"
                         Padding="0"
@@ -131,14 +163,14 @@
                             <PathIcon
                                 VerticalAlignment="Center"
                                 Margin="9,0,9,0"
-                                Data="{StaticResource stop_regular}"></PathIcon>
+                                Data="{StaticResource info_regular}"></PathIcon>
                             <TextBlock
                                 Margin="0,1,0,0"
                                 VerticalAlignment="Center">
                                 About
                             </TextBlock>
                         </StackPanel>
-                    </Button>
+                    </ToggleButton>
                 </StackPanel>
                 <TextBlock
                     VerticalAlignment="Center"
@@ -149,6 +181,185 @@
                     >[wip]</TextBlock>
             </Grid>
         </SplitView.Pane>
-        <ContentControl Name="contn" Content="{Binding Content}"/>
+        <Grid
+	        RowDefinitions="0.3*, *, *"
+            ColumnDefinitions="*, *"
+            Margin="0, 0,0,0">
+            <Border
+	            Margin="16,30,16,5"
+	            IsVisible="False"
+	            ZIndex="2"
+	            Name="YTControl"
+                Grid.Row="2"
+                Grid.ColumnSpan="2"
+                Classes="DefBorder">
+                <Grid
+                    ColumnDefinitions="*,*,*,*">
+                    <Border
+							Grid.Column="0"
+							Classes="DefBorder">
+							<DockPanel>
+								<Grid
+									DockPanel.Dock="Top"
+									ColumnDefinitions="7*,*">
+									<TextBox
+										Watermark="https://youtu.be/..."
+										Name="BrowserBox0"
+										Margin="5"
+										HorizontalAlignment="Stretch"
+										VerticalAlignment="Center"
+										FontSize="20"> 
+									</TextBox>
+									<Button
+										Click="BrowserButton0_OnClick"
+										Name="BrowserButton0"
+										Margin="0"
+										Padding="0"
+										VerticalAlignment="Stretch"
+										HorizontalAlignment="Stretch"
+										CornerRadius="0,5,0,0"
+										Grid.Column="1">
+										<PathIcon
+											Data="{StaticResource open_regular}"></PathIcon>
+									</Button>
+								</Grid>
+								<Rectangle
+									Height="1"
+									DockPanel.Dock="Top"
+									Fill="DimGray">
+								</Rectangle>
+								<Border Name="Browser0">
+									
+								</Border>
+							</DockPanel>
+						</Border>
+	                <Border
+							Grid.Column="1"
+							Classes="DefBorder">
+							<DockPanel>
+								<Grid
+									DockPanel.Dock="Top"
+									ColumnDefinitions="7*,*">
+									<TextBox
+										Watermark="https://youtu.be/..."
+										Name="BrowserBox1"
+										Margin="5"
+										HorizontalAlignment="Stretch"
+										VerticalAlignment="Center"
+										FontSize="20"> 
+									</TextBox>
+									<Button
+										Click="BrowserButton0_OnClick"
+										Name="BrowserButton1"
+										Margin="0"
+										Padding="0"
+										VerticalAlignment="Stretch"
+										HorizontalAlignment="Stretch"
+										CornerRadius="0,5,0,0"
+										Grid.Column="1">
+										<PathIcon
+											Data="{StaticResource open_regular}"></PathIcon>
+									</Button>
+								</Grid>
+								<Rectangle
+									Height="1"
+									DockPanel.Dock="Top"
+									Fill="DimGray">
+								</Rectangle>
+								<Border Name="Browser1">
+									
+								</Border>
+								</DockPanel>
+						</Border>
+	                <Border
+							Grid.Column="2"
+							Classes="DefBorder">
+							<DockPanel>
+								<Grid
+									DockPanel.Dock="Top"
+									ColumnDefinitions="7*,*">
+									<TextBox
+										Watermark="https://youtu.be/..."
+										Name="BrowserBox2"
+										Margin="5"
+										HorizontalAlignment="Stretch"
+										VerticalAlignment="Center"
+										FontSize="20"> 
+									</TextBox>
+									<Button
+										Click="BrowserButton0_OnClick"
+										Name="BrowserButton2"
+										Margin="0"
+										Padding="0"
+										VerticalAlignment="Stretch"
+										HorizontalAlignment="Stretch"
+										CornerRadius="0,5,0,0"
+										Grid.Column="1">
+										<PathIcon
+											Data="{StaticResource open_regular}"></PathIcon>
+									</Button>
+								</Grid>
+								<Rectangle
+									Height="1"
+									DockPanel.Dock="Top"
+									Fill="DimGray">
+								</Rectangle>
+								<Border Name="Browser2">
+									
+								</Border>
+								</DockPanel>
+						</Border>
+	                <Border
+							Grid.Column="3"
+							Classes="DefBorder">
+							<DockPanel>
+								<Grid
+									DockPanel.Dock="Top"
+									ColumnDefinitions="7*,*">
+									<TextBox
+										Watermark="https://youtu.be/..."
+										Name="BrowserBox3"
+										Margin="5"
+										HorizontalAlignment="Stretch"
+										VerticalAlignment="Center"
+										FontSize="20"> 
+									</TextBox>
+									<Button
+										
+										Click="BrowserButton0_OnClick"
+										Name="BrowserButton3"
+										Margin="0"
+										Padding="0"
+										VerticalAlignment="Stretch"
+										HorizontalAlignment="Stretch"
+										CornerRadius="0,5,0,0"
+										Grid.Column="1">
+										<PathIcon
+											Data="{StaticResource open_regular}"></PathIcon>
+									</Button>
+								</Grid>
+								<Rectangle
+									Height="1"
+									DockPanel.Dock="Top"
+									Fill="DimGray">
+								</Rectangle>
+								<Border Name="Browser3">
+									
+								</Border>
+								</DockPanel>
+						</Border>
+                </Grid>
+            </Border>
+            <ContentControl
+	            Grid.ColumnSpan="2"
+	            Grid.RowSpan="3"
+	            ZIndex="1"
+	            Name="contn" Content="{Binding Content}"/>
+            <ContentControl
+	            Grid.ColumnSpan="2"
+	            Grid.RowSpan="3"
+	            ZIndex="0"
+	            Name="home" Content="{Binding Home0}"/>
+        </Grid>
     </SplitView>
 </Window>

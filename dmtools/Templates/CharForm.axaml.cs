@@ -5,7 +5,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Controls.Primitives;
 using Config.Net;
-using dmtools.Resources;
+using dmtools.PopUps;
 using dmtools.Templates;
 using dmtools.Views;
 using LiteDB;

@@ -3,7 +3,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="200" d:DesignHeight="100"
-        x:Class="dmtools.Resources.Sure"
+        x:Class="dmtools.PopUps.Sure"
         CanResize="False"
         Height="100"
         Width="200"

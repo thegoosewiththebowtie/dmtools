@@ -10,7 +10,7 @@ using Config.Net;
 using dmtools.ViewModels;
 using dmtools.Views;
 
-namespace dmtools.Resources;
+namespace dmtools.PopUps;
 
 public partial class NewProfile : Window
 {

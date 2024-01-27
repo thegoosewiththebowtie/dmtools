@@ -8,7 +8,7 @@
         CanResize="False"
         WindowStartupLocation="CenterOwner"
         Closing="Window_OnClosing"
-        x:Class="dmtools.Resources.NewProfile"
+        x:Class="dmtools.PopUps.NewProfile"
         Title="New Profile">
         <Grid
                 ColumnDefinitions="*, 2*, *, 2*, *"

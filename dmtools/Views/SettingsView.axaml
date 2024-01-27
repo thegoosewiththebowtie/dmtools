@@ -2,7 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="1600" d:DesignHeight="900"
              x:Class="dmtools.Views.SettingsView">
     <Grid
         ShowGridLines="False"
@@ -15,6 +15,35 @@
             BorderThickness="2"
             BorderBrush="DimGray"
             Margin="5">
+            <DockPanel>
+                <TextBlock
+                    FontSize="20"
+                    Margin="5"
+                    DockPanel.Dock="Top">
+                    Profile
+                </TextBlock>
+                <Rectangle
+                    DockPanel.Dock="Top"
+                    Fill="DimGray"
+                    Height="1">
+                </Rectangle>
+                <Grid
+                    ColumnDefinitions="3*, *, 2*, *"
+                    RowDefinitions="*, *, *, *"
+                    ShowGridLines="False">
+                    <Button
+                        Grid.Column="1"
+                        Grid.ColumnSpan="3"
+                        Grid.Row="3"
+                        Background="RosyBrown"
+                        VerticalContentAlignment="Center"
+                        HorizontalContentAlignment="Center"
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch">
+                        Delete Profile
+                    </Button>
+                </Grid>
+            </DockPanel>
             
         </Border>
         <Border
@@ -24,7 +53,137 @@
             BorderThickness="2"
             BorderBrush="DimGray"
             Margin="5">
-            
+            <DockPanel>
+                <TextBlock
+                    FontSize="20"
+                    Margin="5"
+                    DockPanel.Dock="Top">
+                    Date and time
+                </TextBlock>
+                <Rectangle
+                    DockPanel.Dock="Top"
+                    Fill="DimGray"
+                    Height="1">
+                </Rectangle>
+                <ScrollViewer>
+                    <StackPanel>
+                        <Expander
+                            Header="Amounts"
+                            Margin="5"
+                            BorderBrush="DimGray"
+                            BorderThickness="1"
+                            VerticalAlignment="Stretch"
+                            HorizontalAlignment="Stretch">
+                                <StackPanel>
+                                    <Grid
+                                        ColumnDefinitions="3*, 2*">
+                                        <TextBlock
+                                            Grid.Column="0"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Left"
+                                            Margin="5"
+                                            Classes="Text0">
+                                            Minutes in an hour
+                                        </TextBlock>
+                                        <NumericUpDown
+                                            Value="60"
+                                            Name="MiHs"
+                                            ParsingNumberStyle="Integer"
+                                            Margin="5"
+                                            Grid.Column="1">
+                                        </NumericUpDown>
+                                    </Grid>
+                                    <Grid
+                                        ColumnDefinitions="3*, 2*">
+                                        <TextBlock
+                                            Grid.Column="0"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Left"
+                                            Margin="5"
+                                            Classes="Text0">
+                                            Hours in a day
+                                        </TextBlock>
+                                        <NumericUpDown
+                                            Value="24"
+                                            Name="HiDs"
+                                            ParsingNumberStyle="Integer"
+                                            Margin="5"
+                                            Grid.Column="1">
+                                        </NumericUpDown>
+                                    </Grid>
+                                    <Grid
+                                        ColumnDefinitions="3*, 2*">
+                                        <TextBlock
+                                            Grid.Column="0"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Left"
+                                            Margin="5"
+                                            Classes="Text0">
+                                            Days in a week
+                                        </TextBlock>
+                                        <NumericUpDown
+                                            Name="DiWs"
+                                            Value="7"
+                                            ParsingNumberStyle="Integer"
+                                            Margin="5"
+                                            Grid.Column="1">
+                                        </NumericUpDown>
+                                    </Grid>
+                                    <Grid
+                                        ColumnDefinitions="3*, 2*">
+                                        <TextBlock
+                                            Grid.Column="0"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Left"
+                                            Margin="5"
+                                            Classes="Text0">
+                                            Months in a year
+                                        </TextBlock>
+                                        <NumericUpDown
+                                            Name="MiYs"
+                                            Value="12"
+                                            ParsingNumberStyle="Integer"
+                                            Margin="5"
+                                            Grid.Column="1">
+                                        </NumericUpDown>
+                                    </Grid>
+                                    <Button
+                                        Name="SaveAms"
+                                        Click="SaveAms_OnClick"
+                                        HorizontalContentAlignment="Center"
+                                        HorizontalAlignment="Stretch"
+                                        Margin="0">
+                                        Save
+                                    </Button>
+                                </StackPanel>
+                        </Expander>
+                        <Expander
+                            Expanded="Weeks_OnExpanded"
+                            Header="Weeks"
+                            Margin="5"
+                            BorderBrush="DimGray"
+                            BorderThickness="1"
+                            VerticalAlignment="Stretch"
+                            HorizontalAlignment="Stretch">
+                            <StackPanel Name="Weeks">
+                                
+                            </StackPanel>
+                        </Expander>
+                        <Expander
+                            Expanded="Months_OnExpanded"
+                            Header="Months"
+                            Margin="5"
+                            BorderBrush="DimGray"
+                            BorderThickness="1"
+                            VerticalAlignment="Stretch"
+                            HorizontalAlignment="Stretch">
+                            <StackPanel Name="Months">
+                                
+                            </StackPanel>
+                        </Expander>
+                    </StackPanel>
+                </ScrollViewer>
+            </DockPanel>
         </Border>
         <Border
             Grid.Column="0"
@@ -33,25 +192,33 @@
             BorderThickness="2"
             BorderBrush="DimGray"
             Margin="5">
+            <DockPanel>
+                <TextBlock
+                    VerticalAlignment="Center"
+                    Margin="5"
+                    DockPanel.Dock="Top"
+                    FontSize="20">
+                    Media
+                </TextBlock>
+                <Rectangle
+                    DockPanel.Dock="Top"
+                    Fill="DimGray"
+                    Height="1">
+                </Rectangle>
             <Grid
                 ColumnDefinitions="3*, *, 2*, *"
-                RowDefinitions="*, *, *, *, *"
+                RowDefinitions="*, *, *, *"
                 ShowGridLines="False">
                 <TextBlock
                     VerticalAlignment="Center"
                     Margin="5"
-                    Classes="Header2"
-                    Grid.Row="0">Media</TextBlock>
-                <TextBlock
-                    VerticalAlignment="Center"
-                    Margin="5"
                     Classes="Text0"
-                    Grid.Row="1">
+                    Grid.Row="0">
                     Ambient music source
                 </TextBlock>
                 <ToggleButton
                     IsCheckedChanged="Default"
-                    Grid.Row="1"
+                    Grid.Row="0"
                     Grid.Column="1"
                     Name="Mus"
                     HorizontalAlignment="Stretch"
@@ -60,7 +227,7 @@
                 <Border
                     Classes="DefBorder"
                     VerticalAlignment="Center"
-                    Grid.Row="1"
+                    Grid.Row="0"
                     Grid.Column="2">
                     <TextBlock
                         Name="MusPa"
@@ -71,7 +238,7 @@
                 </Border>
                 <Button
                     Click="Browse"
-                    Grid.Row="1"
+                    Grid.Row="0"
                     Grid.Column="3"
                     Name="MusBrs"
                     HorizontalAlignment="Stretch"
@@ -81,12 +248,12 @@
                     VerticalAlignment="Center"
                     Margin="5"
                     Classes="Text0"
-                    Grid.Row="2">
+                    Grid.Row="1">
                     Ambient sounds source
                 </TextBlock>
                 <ToggleButton
                     IsCheckedChanged="Default"
-                    Grid.Row="2"
+                    Grid.Row="1"
                     Grid.Column="1"
                     Name="Amb"
                     HorizontalAlignment="Stretch"
@@ -94,7 +261,7 @@
                 </ToggleButton>
                 <Border
                     Classes="DefBorder"
-                    Grid.Row="2"
+                    Grid.Row="1"
                     VerticalAlignment="Center"
                     Grid.Column="2">
                     <TextBlock
@@ -106,7 +273,7 @@
                 </Border>
                 <Button
                     Click="Browse"
-                    Grid.Row="2"
+                    Grid.Row="1"
                     Grid.Column="3"
                     Name="AmbBrs"
                     HorizontalAlignment="Stretch"
@@ -116,12 +283,12 @@
                     VerticalAlignment="Center"
                     Margin="5"
                     Classes="Text0"
-                    Grid.Row="3">
+                    Grid.Row="2">
                     One-time sounds source
                 </TextBlock>
                 <ToggleButton
                     IsCheckedChanged="Default"
-                        Grid.Row="3"
+                        Grid.Row="2"
                         Grid.Column="1"
                         Name="Snd"
                         HorizontalAlignment="Stretch"
@@ -129,7 +296,7 @@
                 </ToggleButton>
                 <Border
                     Classes="DefBorder"
-                    Grid.Row="3"
+                    Grid.Row="2"
                     VerticalAlignment="Center"
                     Grid.Column="2">
                     <TextBlock
@@ -141,7 +308,7 @@
                 </Border>
                 <Button
                     Click="Browse"
-                        Grid.Row="3"
+                        Grid.Row="2"
                         Grid.Column="3"
                         Name="SndBrs"
                         HorizontalAlignment="Stretch"
@@ -183,6 +350,7 @@
                     Content="Browse">
                 </Button>
             </Grid>
+            </DockPanel>
         </Border>
         <Border
             Grid.Column="1"

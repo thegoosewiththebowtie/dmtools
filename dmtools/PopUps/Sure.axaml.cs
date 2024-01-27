@@ -1,13 +1,11 @@
 ﻿using System;
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using Avalonia.Markup.Xaml;
 using Config.Net;
 using dmtools.Views;
 using LiteDB;
 
-namespace dmtools.Resources;
+namespace dmtools.PopUps;
 
 public partial class Sure : Window
 {

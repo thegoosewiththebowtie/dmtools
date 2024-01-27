@@ -6,7 +6,7 @@ using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 
-namespace dmtools.Resources;
+namespace dmtools.PopUps;
 
 public class Res
 {

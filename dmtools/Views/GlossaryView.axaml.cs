@@ -2,11 +2,11 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace dmtools.Resources;
+namespace dmtools.Views;
 
-public partial class AddNpc : Window
+public partial class GlossaryView : UserControl
 {
-    public AddNpc()
+    public GlossaryView()
     {
         InitializeComponent();
     }

@@ -4,7 +4,7 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media.Imaging;
 
-namespace dmtools.Views;
+namespace dmtools.PopUps;
 
 public partial class Picture : Window
 {

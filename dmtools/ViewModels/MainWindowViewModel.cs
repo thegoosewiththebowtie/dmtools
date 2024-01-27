@@ -1,9 +1,5 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using Avalonia.Controls.ApplicationLifetimes;
+﻿using System.IO;
 using Config.Net;
-using dmtools.Resources;
 using dmtools.Views;
 using ReactiveUI;
 
@@ -12,6 +8,7 @@ namespace dmtools.ViewModels;
 public class MainWindowViewModel : ViewModelBase
 {
     ViewModelBase _content;
+    ViewModelBase _home0;
 
     public MainWindowViewModel()
     {
@@ -23,7 +20,7 @@ public class MainWindowViewModel : ViewModelBase
         }
         else
         {
-            Content = new HomeViewModel();
+            Home0 = new HomeViewModel();
         }
     }
     
@@ -33,20 +30,35 @@ public class MainWindowViewModel : ViewModelBase
         get => _content;
         private set => this.RaiseAndSetIfChanged(ref _content, value);
     }
+    public ViewModelBase Home0
+    {
+        get => _home0;
+        private set => this.RaiseAndSetIfChanged(ref _home0, value);
+    }
 
     //HomeViewModel List { get; }
 
+
+    public void Home()
+    {
+        Content = null;
+    }
+
+    public void Gens()
+    {
+        var vm = new GensViewModel();
+        Content = vm;
+    }
+    public void Glossary()
+    {
+        var vm = new GlossaryViewModel();
+        Content = vm;
+    }
     public void Settings()
     {
         var vm = new SettingsViewModel();
         Content = vm;
     }
-    public void Home()
-    {
-        var vm = new HomeViewModel();
-        Content = vm;
-    }
-
     public void About()
     {
         var vm = new AboutViewModel();
