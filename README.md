@@ -3,8 +3,8 @@ This is a unique software, that i decided to make, because i couldn't find anyth
 without any payment or nessesity to open browser. So, here it is! Its aimed on dungeon masters, who would like to make 
 their life easier and get rid of dozens of tabs with different random generators or information, because this app is going
 to have them all!
-## Release date
-I'm planning to make first alpha version publically available on the 21st of January
+## Updates
+Alpha is going to get updates weekly, public beta (not out yet) is going to be updated monthly. Or not , what do you want from me, im just a depressed girl locked in her room xdddd, follow me on tg to get the latest news. Release is going to be available as soon as i will think its ready. if you want to get the latest build (highly unstable tho) you can build the program from alpha branch yourself.
 ## Contacts
 * updates and news:
 https://t.me/dmtoolsbyvtg
@@ -32,10 +32,10 @@ https://reddit.com/r/dmtools
 - [ ] and a looooooot of other features and ui customization.
 Also im thinking about making an embedded interactive map creator (i have a touchscreen display just for them, usually i make 
 them in powerpoint, but i dunno, thats plans for a veeeerrryy distant future)
-- [x] and finally go to sleep, cause i didnt sleep for over 25 hours already, my brain isnt braining anymore, i hope i wrote this readme without any mistakes lol (UPD: i went to sleep)
 ## Free and open-sourse forever
 i have no plans to monetize this app in any way, i think that we should have more free software
 ## First glance:
+(outdated)
 ![image](https://github.com/thegoosewiththebowtie/dmtools/assets/153792474/7242a83b-2e29-4cbe-82f3-a9a28fd38869)
 ![image](https://github.com/thegoosewiththebowtie/dmtools/assets/153792474/45e7846e-d9af-44ea-bfb7-cdd677da503b)
 ![image](https://github.com/thegoosewiththebowtie/dmtools/assets/153792474/df03594f-2782-4160-b200-f9fa80394fc4)
