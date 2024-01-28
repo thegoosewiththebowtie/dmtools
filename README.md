@@ -32,6 +32,9 @@ https://reddit.com/r/dmtools
 - [ ] and a looooooot of other features and ui customization.
 Also im thinking about making an embedded interactive map creator (i have a touchscreen display just for them, usually i make 
 them in powerpoint, but i dunno, thats plans for a veeeerrryy distant future)
+##Credits
+- https://github.com/naudio/NAudio
+- https://github.com/MicroSugarDeveloperOrg/Avalonia.WebView
 ## Free and open-sourse forever
 i have no plans to monetize this app in any way, i think that we should have more free software
 ## Screenshots:
