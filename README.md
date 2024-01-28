@@ -18,13 +18,13 @@ https://reddit.com/r/dmtools
 - [x] Character lists to keep track on your players
 - [x] Ability to change music/sound's sourse
 - [x] Notes & to-do
-- [ ] Npc generator - almost ready
-- [ ] Npc lists - almost ready
+- [x] Npc generator
+- [x] Npc cards
 - [x] Second-screen image control - almost ready
-- [ ] Embedded YT player (for music, if you prefer streaming instead of .mp3s) - almost ready
+- [x] Embedded YT player (for music, if you prefer streaming to .mp3s)
 - [ ] Calculator for important formulas
-- [ ] Dice
-- [ ] Guidebook with short descriptions of the most important stuff
+- [x] Dice
+- [ ] Guidebook
 - [ ] town/inn/tavern randomizers
 - [ ] Dark theme
 - [ ] Sounds and music library
@@ -34,9 +34,11 @@ Also im thinking about making an embedded interactive map creator (i have a touc
 them in powerpoint, but i dunno, thats plans for a veeeerrryy distant future)
 ## Free and open-sourse forever
 i have no plans to monetize this app in any way, i think that we should have more free software
-## First glance:
-(outdated)
-![image](https://github.com/thegoosewiththebowtie/dmtools/assets/153792474/7242a83b-2e29-4cbe-82f3-a9a28fd38869)
-![image](https://github.com/thegoosewiththebowtie/dmtools/assets/153792474/45e7846e-d9af-44ea-bfb7-cdd677da503b)
-![image](https://github.com/thegoosewiththebowtie/dmtools/assets/153792474/df03594f-2782-4160-b200-f9fa80394fc4)
+## Screenshots:
+(yes, i was too lazy to open the photoshop)
+![image](https://github.com/thegoosewiththebowtie/dmtools/assets/153792474/95c277f7-ab99-4174-bbd2-ffb53b1fcf2a)
+![image](https://github.com/thegoosewiththebowtie/dmtools/assets/153792474/fa419803-d46a-46b4-b727-8c8e8a29036a)
+![image](https://github.com/thegoosewiththebowtie/dmtools/assets/153792474/4a820f3d-993c-4f9f-8409-18805d734680)
+![image](https://github.com/thegoosewiththebowtie/dmtools/assets/153792474/0d498322-4ee0-49cd-b7ac-def30dcf2af6)
+
 
