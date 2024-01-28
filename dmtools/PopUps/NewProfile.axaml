@@ -5,6 +5,7 @@
         mc:Ignorable="d"
         Width="250"
         Height="150"
+        Icon="/Assets/dmtools.ico"
         CanResize="False"
         WindowStartupLocation="CenterOwner"
         Closing="Window_OnClosing"

@@ -1,0 +1,50 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="300"
+        Width="300" Height="300"
+        CanResize="False"
+        WindowStartupLocation="CenterOwner"
+        Icon="/Assets/dmtools.ico"
+        x:Class="dmtools.PopUps.NO"
+        Title="NO">
+        <Grid
+                RowDefinitions="158,*,*">
+                <Image
+                        Width="300"
+                        Source="../Assets/PLEASEDONOTTHECAT.png">
+                </Image>
+                <TextBlock
+                        TextWrapping="Wrap"
+                        Name="huhh"
+                        VerticalAlignment="Center"
+                        Margin="5"
+                        Grid.Row="1">
+                </TextBlock>
+                <Grid
+                        Grid.Row="2"
+                        ColumnDefinitions="*, *">
+                        <Button
+                                Click="dothe"
+                                HorizontalAlignment="Stretch"
+                                Margin="5"
+                                HorizontalContentAlignment="Center"
+                                VerticalAlignment="Bottom"
+                                FontSize="20"
+                                Grid.Column="0">
+                                Do the cat
+                        </Button>
+                        <Button
+                                Click="okk"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Bottom"
+                                Margin="5"
+                                HorizontalContentAlignment="Center"
+                                FontSize="20"
+                                Grid.Column="1">
+                                OK
+                        </Button>
+                </Grid>
+        </Grid>
+</Window>

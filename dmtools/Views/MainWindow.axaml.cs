@@ -111,6 +111,7 @@ public partial class MainWindow : Window
     {
         if (SplitView.IsPaneOpen)
         {
+            state.IsVisible = false;
             SplitView.IsPaneOpen = false;
             ProfSwitcher.IsVisible = false;
             ProfPrev1.IsVisible = true;
@@ -118,6 +119,7 @@ public partial class MainWindow : Window
         }
         else
         {
+            state.IsVisible = true;
             SplitView.IsPaneOpen = true;
             ProfSwitcher.IsVisible = true;
             ProfPrev1.IsVisible = false;
@@ -209,8 +211,11 @@ public partial class MainWindow : Window
         switch ((sender as Button).Name)
         {
             case "BrowserButton0":
-                if (!BrowserBox0.Text.Contains("https://youtu.be/"))
+                if (BrowserBox0.Text == null || !BrowserBox0.Text.Contains("https://youtu.be/"))
                 {
+                    var noo = new NO("Link has to start with 'https://youtu.be/' "); 
+                    noo.Height = 250;
+                    noo.ShowDialog(this);
                    break;
                 }
                 settings.BrLink0 = BrowserBox0.Text.Replace("https://youtu.be/", "https://www.youtube.com/embed/");
@@ -222,8 +227,11 @@ public partial class MainWindow : Window
                 Browser0.Child = browsers[0];
                 break;
             case "BrowserButton1":
-                if (!BrowserBox1.Text.Contains("https://youtu.be/"))
+                if (BrowserBox0.Text == null || !BrowserBox1.Text.Contains("https://youtu.be/"))
                 {
+                    var noo = new NO("Link has to start with 'https://youtu.be/' "); 
+                    noo.Height = 250;
+                    noo.ShowDialog(this);
                     break;
                 }
                 settings.BrLink1 = BrowserBox1.Text.Replace("https://youtu.be/", "https://www.youtube.com/embed/");
@@ -235,8 +243,11 @@ public partial class MainWindow : Window
                 Browser1.Child = browsers[1];
                 break;
             case "BrowserButton2":
-                if (!BrowserBox2.Text.Contains("https://youtu.be/"))
+                if (BrowserBox0.Text == null || !BrowserBox2.Text.Contains("https://youtu.be/"))
                 {
+                    var noo = new NO("Link has to start with 'https://youtu.be/' ");
+                    noo.Height = 250;
+                    noo.ShowDialog(this);
                    break;
                 }
                 settings.BrLink2 = BrowserBox2.Text.Replace("https://youtu.be/", "https://www.youtube.com/embed/");
@@ -248,8 +259,11 @@ public partial class MainWindow : Window
                 Browser2.Child = browsers[2];
                 break;
             case "BrowserButton3":
-                if (!BrowserBox3.Text.Contains("https://youtu.be/"))
+                if (BrowserBox0.Text == null || !BrowserBox3.Text.Contains("https://youtu.be/"))
                 {
+                    var noo = new NO("Link has to start with 'https://youtu.be/' "); 
+                    noo.Height = 250;
+                    noo.ShowDialog(this);
                     break;
                 }
                 settings.BrLink3 = BrowserBox3.Text.Replace("https://youtu.be/", "https://www.youtube.com/embed/");

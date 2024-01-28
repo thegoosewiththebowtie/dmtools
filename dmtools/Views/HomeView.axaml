@@ -21,70 +21,96 @@
 			Header="Dashboard">
 			<Grid
 				ColumnDefinitions="*, *, *, *"
-				RowDefinitions="0.10*, 1.15*, *">
+				RowDefinitions="0.15*, 1.15*, *">
 				
 				
 				
 				<!-- GREETING & CLOCK -->
-				<TextBlock
-					Name="Greeting"
-						Grid.ColumnSpan="4"
+				<Grid
+					RowDefinitions="*,*,*"
+					Grid.ColumnSpan="4">
+					<TextBlock
+						Grid.RowSpan="3"
+						Name="Greeting"
 						Margin="5"
 						VerticalAlignment="Center"
 						FontSize="32">
 					</TextBlock>
-				<StackPanel
-					Grid.Column="3"
-					Grid.Row="0"
-					Margin="5"
-					Orientation="Horizontal"
-					HorizontalAlignment="Right">
-					<Button
-						Name="minpl"
-						Click="Button_OnClick">
-						Min+
-					</Button>
-					<Button
-						Name="minmi"
-						Click="Buttonmin_OnClick">
-						Min-
-					</Button>
-					<Button
-						Name="houpl"
-						Click="Button_OnClick">
-						H+
-					</Button>
-					<Button
-						Name="houmi"
-						Click="Buttonmin_OnClick">
-						H-
-					</Button>
-					<Button
-						Name="daypl"
-						Click="Button_OnClick">
-						day+
-					</Button>
-					<Button
-						Name="daymi"
-						Click="Buttonmin_OnClick">
-						day-
-					</Button>
-					<Button
-						Name="monpl"
-						Click="Button_OnClick">
-						mon+
-					</Button>
-					<Button
-						Name="monmi"
-						Click="Buttonmin_OnClick">
-						mon-
-					</Button>
-					<ToggleButton
-						CornerRadius="5">
-						<PathIcon Data="{StaticResource clock_regular}">
-						</PathIcon>
-					</ToggleButton>
-				</StackPanel>
+					<StackPanel
+						Grid.Column="3"
+						Grid.Row="0"
+						Grid.RowSpan="3"
+						Margin="5"
+						Orientation="Horizontal"
+						HorizontalAlignment="Right">
+						<StackPanel>
+							<Button
+								HorizontalAlignment="Stretch"
+								VerticalAlignment="Stretch"
+								Name="minpl"
+								Click="Button_OnClick">
+								M+
+							</Button>
+							<Button
+								HorizontalAlignment="Stretch"
+								VerticalAlignment="Stretch"
+								Name="minmi"
+								Click="Buttonmin_OnClick">
+								M-
+							</Button>
+						</StackPanel>
+						<StackPanel>
+							<Button
+								HorizontalAlignment="Stretch"
+								VerticalAlignment="Stretch"
+								Name="houpl"
+								Click="Button_OnClick">
+								H+
+							</Button>
+							<Button
+								HorizontalAlignment="Stretch"
+								VerticalAlignment="Stretch"
+								Name="houmi"
+								Click="Buttonmin_OnClick">
+								H-
+							</Button>
+						</StackPanel>
+						<StackPanel>
+							<Button
+								HorizontalAlignment="Stretch"
+								VerticalAlignment="Stretch"
+								Name="daypl"
+								Click="Button_OnClick">
+								d+
+							</Button>
+							<Button
+								HorizontalAlignment="Stretch"
+								VerticalAlignment="Stretch"
+								Name="daymi"
+								Click="Buttonmin_OnClick">
+								d-
+							</Button>
+						</StackPanel>
+						<StackPanel>
+							<Button
+								HorizontalAlignment="Stretch"
+								VerticalAlignment="Stretch"
+								Name="monpl"
+								Click="Button_OnClick">
+								y+
+							</Button>
+							<Button
+								HorizontalAlignment="Stretch"
+								VerticalAlignment="Stretch"
+								Name="monmi"
+								Click="Buttonmin_OnClick">
+								y-
+							</Button>
+						</StackPanel>
+					</StackPanel>
+				</Grid>
+				
+				
 
 				
 				

@@ -5,11 +5,17 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="dmtools.Views.GlossaryView">
     <Button
+        Click="Button_OnClick"
         VerticalAlignment="Stretch"
         HorizontalAlignment="Stretch"
         FontSize="150"
         VerticalContentAlignment="Center"
         HorizontalContentAlignment="Center">
-        Button
+        <StackPanel>
+            <TextBlock
+                FontSize="200">
+                DO THE CAT
+            </TextBlock>
+        </StackPanel>
     </Button>
 </UserControl>

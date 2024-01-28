@@ -12,13 +12,15 @@
         SizeChanged="Control_OnSizeChanged"
         Title="dmtools">
     <SplitView
+	    PaneBackground="GhostWhite"
         Name="SplitView"
         IsPaneOpen="False"
                DisplayMode="CompactInline"
                CompactPaneLength="40"
                OpenPaneLength="300">
         <SplitView.Pane>
-            <Grid RowDefinitions="*, *">
+            <Grid 
+	            RowDefinitions="*, *">
                 <StackPanel
                     VerticalAlignment="Top">
                     <Button
@@ -173,12 +175,14 @@
                     </ToggleButton>
                 </StackPanel>
                 <TextBlock
+	                Name="state"
+	                IsVisible="False"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
-                    FontSize="72"
+                    FontSize="30"
                     Grid.RowSpan="2"
-                    Foreground="Red"
-                    >[wip]</TextBlock>
+                    Foreground="Gray"
+                    >[alpha]</TextBlock>
             </Grid>
         </SplitView.Pane>
         <Grid

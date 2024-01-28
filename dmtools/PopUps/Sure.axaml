@@ -6,6 +6,7 @@
         x:Class="dmtools.PopUps.Sure"
         CanResize="False"
         Height="100"
+        Icon="/Assets/dmtools.ico"
         Width="200"
         WindowStartupLocation="CenterOwner"
         Title="Sure">

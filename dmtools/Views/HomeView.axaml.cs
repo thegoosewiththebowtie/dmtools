@@ -203,7 +203,8 @@ public partial class HomeView : UserControl
                     Months.Insert(new Months0()
                     {
                         ID = j+1,
-                        monthname = (j+1).ToString()
+                        days = 30,
+                        monthname = "Month " + (j+1).ToString()
                     });
                 }
             }
@@ -215,7 +216,7 @@ public partial class HomeView : UserControl
                     Weeks.Insert(new Weeks0()
                     {
                         ID = j+1,
-                        weekname = (j+1).ToString()
+                        weekname = "Weekday " + (j+1).ToString()
                     });
                 }
             }

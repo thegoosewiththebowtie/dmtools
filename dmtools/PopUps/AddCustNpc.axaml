@@ -5,6 +5,7 @@
         mc:Ignorable="d"
         CanResize="False"
         WindowStartupLocation="CenterOwner"
+        Icon="/Assets/dmtools.ico"
         Height="255"
         Width="300"
         x:Class="dmtools.PopUps.AddCustNpc"

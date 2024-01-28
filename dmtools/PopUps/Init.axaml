@@ -4,6 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="100"
         CanResize="False"
+        Icon="/Assets/dmtools.ico"
         Width="300" Height="100"
         WindowStartupLocation="CenterOwner"
         x:Class="dmtools.PopUps.Init">

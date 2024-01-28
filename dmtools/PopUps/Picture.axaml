@@ -5,6 +5,8 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="dmtools.PopUps.Picture"
         Closing="Window_OnClosing"
+        Icon="/Assets/dmtools.ico"
+        WindowStartupLocation="CenterScreen"
         Title="Picture">
     <Grid
         Background="Black">

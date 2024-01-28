@@ -32,6 +32,8 @@
                     RowDefinitions="*, *, *, *"
                     ShowGridLines="False">
                     <Button
+                        Name="DelPro"
+                        Click="DelPro_OnClick"
                         Grid.Column="1"
                         Grid.ColumnSpan="3"
                         Grid.Row="3"

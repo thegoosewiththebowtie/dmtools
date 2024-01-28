@@ -42,6 +42,10 @@ public class MainWindowViewModel : ViewModelBase
     public void Home()
     {
         Content = null;
+        if (Home0 == null)
+        {
+            Home0 = new HomeViewModel();
+        }
     }
 
     public void Gens()
@@ -58,6 +62,7 @@ public class MainWindowViewModel : ViewModelBase
     {
         var vm = new SettingsViewModel();
         Content = vm;
+        Home0 = null;
     }
     public void About()
     {

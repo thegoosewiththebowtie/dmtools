@@ -5,11 +5,13 @@ using System.Linq;
 using System.Security.Permissions;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Controls.Primitives;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Platform.Storage;
 using Config.Net;
+using dmtools.PopUps;
 using LiteDB;
 using dmtools.Templates;
 
@@ -232,6 +234,15 @@ public partial class SettingsView : UserControl
                 });
 
             }
+        }
+    }
+
+    private void DelPro_OnClick(object? sender, RoutedEventArgs e)
+    {
+        var nooo = new NO("for now you have to do it manually, just find /Data/q0%profileid%.db and /Settings/q0%profileid%.ini files and delete them");
+        if (Avalonia.Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        {
+            nooo.ShowDialog(desktop.MainWindow);
         }
     }
 }
