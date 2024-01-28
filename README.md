@@ -33,7 +33,7 @@ https://reddit.com/r/dmtools
 Also im thinking about making an embedded interactive map creator (i have a touchscreen display just for them, usually i make 
 them in powerpoint, but i dunno, thats plans for a veeeerrryy distant future)
 
-##Credits
+## Credits
 - https://github.com/naudio/NAudio
 - https://github.com/MicroSugarDeveloperOrg/Avalonia.WebView
 
