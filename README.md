@@ -1,3 +1,7 @@
+# IMPORTANT
+dmtools development is frozen atm, because i have commission (working on a project is cool, but $50 is $50 xddd) for a different software (interactive maps + stores editor) 
+in some time it will be available on GitHub, can't say the exact day or month, but it will be soon
+
 # DmTools by VTG
 This is a unique software, that i decided to make, because i couldn't find anything that would work natively on desktop,
 without any payment or nessesity to open browser. So, here it is! Its aimed on dungeon masters, who would like to make 
