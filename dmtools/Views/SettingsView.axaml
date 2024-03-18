@@ -76,7 +76,7 @@
                         Margin="5"
                         PlaceholderText="Language">
                         <ComboBoxItem>English</ComboBoxItem>
-                        <ComboBoxItem>French [Help with translation found, WIP]</ComboBoxItem>
+                        <ComboBoxItem>French [Credits to Akanea]</ComboBoxItem>
                         <ComboBoxItem>Spanish [Auto-translated]</ComboBoxItem>
                         <ComboBoxItem>German [Auto-translated]</ComboBoxItem>
                         <ComboBoxItem>Chinese [Auto-translated]</ComboBoxItem>
