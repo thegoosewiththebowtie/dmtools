@@ -14,17 +14,16 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Controls.Primitives;
 using Avalonia.Layout;
 using Avalonia.LogicalTree;
+using Avalonia.Markup.Xaml.Styling;
 using Avalonia.Media.Imaging;
 using Avalonia.Threading;
 using NAudio.Wave;
 using Config.Net;
-using dmtools.Templates;
-using Avalonia.Visuals;
-using AvaloniaWebView;
 using dmtools.Generators;
+using dmtools.Templates;
+using Pango;
 
 namespace dmtools.Views;
-
 public class FightData
 {
     public int Initiative { get; set; }
@@ -125,15 +124,12 @@ public interface ISettings
     int DaysInYear { get; set; }
     int MonthsInYear { get; set; }
     long DateAndTime { get; set; }
-    int CurrentMinute { get; set; }
-    int CurrentHour { get; set; }
-    int CurrentDay { get; set; }
-    int CurrentMonth { get; set; }
-    int CurrentYear { get; set; }
     string BrLink0 { get; set; }
     string BrLink1 { get; set; }
     string BrLink2 { get; set; }
     string BrLink3 { get; set; }
+    int PrevDay { get; set; }
+    string Language { get; set; }
     int ID { get; set; }
 }
 public class Months0
@@ -148,6 +144,12 @@ public class Weeks0
     public int ID { get; set; }
     public string weekname { get; set; }
 }
+
+public class PictureWindow
+{
+    public static Picture picwin { get; set; } = new Picture();
+    public static bool win = false;
+}
 public partial class HomeView : UserControl
 {
     public static event EventHandler YTC ;
@@ -157,6 +159,7 @@ public partial class HomeView : UserControl
     public HomeView()
     {
         InitializeComponent();
+        TheTabControl.SelectionChanged += TheTabControl_OnSelectionChanged;
         profid = profile.ProfileID;
         SetSetup();
         AmbIni();
@@ -173,6 +176,7 @@ public partial class HomeView : UserControl
         DashFightUp();
         picinit();
         ToDoInit();
+        LanSet();
         GreetIni();
     }
     public void SetSetup()
@@ -186,11 +190,12 @@ public partial class HomeView : UserControl
         if (settings.MinutesInHour == 0) { settings.MinutesInHour = 60;}
         if (settings.HoursInDay == 0) { settings.HoursInDay = 24;}
         if (settings.DaysInWeek == 0) { settings.DaysInWeek = 7;}
-        if (settings.DaysInYear == 0) { settings.DaysInYear = 365;}
+        if (settings.DaysInYear == 0) { settings.DaysInYear = 360;}
         if (settings.MonthsInYear == 0) { settings.MonthsInYear = 12;}
         if (settings.Volume == 0) { settings.Volume = 10; } 
         if (settings.VolumeAmb == 0) { settings.VolumeAmb = 10; }
         if (settings.VolumeSnd == 0) { settings.VolumeSnd = 10; }
+        if (settings.Language == null) { settings.Language = "en"; }
         using (var ldb = new LiteDatabase(settings.DataPath))
         {
             var Months = ldb.GetCollection<Months0>();
@@ -223,6 +228,23 @@ public partial class HomeView : UserControl
         }
     }
 
+    public void LanSet()
+    {
+        var translations = App.Current.Resources.MergedDictionaries.OfType<ResourceInclude>().FirstOrDefault(x => x.Source?.OriginalString?.Contains("/Locals/") ?? false);
+
+        if (translations != null)
+            App.Current.Resources.MergedDictionaries.Remove(translations);
+        
+        App.Current.Resources.MergedDictionaries.Add(
+            new ResourceInclude(new Uri($"avares://dmtools/Locals/{settings.Language}.axaml"))
+            {
+                Source = new Uri($"avares://dmtools/Locals/{settings.Language}.axaml")
+            });
+    }
+
+    //DASHBOARD
+    
+    //greeting
     public void GreetIni()
     {
         long AllMinutes = settings.DateAndTime;
@@ -276,32 +298,44 @@ public partial class HomeView : UserControl
             MonthName = Months.FindById(CurrentMonth + 1).monthname;
             WeekDayName = Weeks.FindById(AllWeeks + 1).weekname;
         }
+        if (CurrentDay != settings.PrevDay)
+        {
+            settings.Weather = Weather.ChangeWeather();
+        }
+        settings.PrevDay = CurrentDay;
         string ProperDay = "";
-        if (CurrentDay.ToString().First() != '1')
+        if (CurrentDay.ToString().First() != '1' || CurrentDay.ToString().Length == 1)
         {
             switch (CurrentDay.ToString().Last())
             {
                 case '1':
-                    ProperDay = CurrentDay + "st";
+                    ProperDay = CurrentDay + Application.Current.FindResource("st").ToString();
                     break;
                 case '2':
-                    ProperDay = CurrentDay + "nd";
+                    ProperDay = CurrentDay + Application.Current.FindResource("nd").ToString();
                     break;
                 case '3':
-                    ProperDay = CurrentDay + "rd";
+                    ProperDay = CurrentDay + Application.Current.FindResource("rd").ToString();
                     break;
                 default:
-                    ProperDay = CurrentDay + "th";
+                    ProperDay = CurrentDay + Application.Current.FindResource("th").ToString();
                     break;
             }
         }
         else
         {
-            ProperDay = CurrentDay + "th";
+            ProperDay = CurrentDay + Application.Current.FindResource("th").ToString();
         }
-        Greeting.Text =
-            $"Hello, {settings.Player}, it's {settings.Weather} in the universe,  " +
-            $"{ProperHour.ToString("00")}:{CurrentMinute.ToString("00")} {TimeOfDay}   {ProperDay} of the {MonthName} ({CurrentMonth+1}) {CurrentYear}, {WeekDayName}";
+        Greeting.Text = $"{Application.Current.FindResource("Hello")}, {settings.Player}, ";
+        weather.Text = $"{Application.Current.FindResource("its")} {settings.Weather}{Application.Current.FindResource("itu")} ";
+        Hours.Text = $"{ProperHour:00}";
+        Minutes.Text = $"{CurrentMinute:00} ";
+        timeod.Text = $"{TimeOfDay}{Application.Current.FindResource("the")}";
+        day.Text = $"{ProperDay}";
+        month.Text = $"{Application.Current.FindResource("of")}{MonthName}";
+        monthn.Text = $"({(CurrentMonth + 1)}), ";
+        year.Text = $"{CurrentYear:0000}";
+        Week.Text = $", {WeekDayName}";
     }
     private void Button_OnClick(object? sender, RoutedEventArgs e)
     {
@@ -323,7 +357,17 @@ public partial class HomeView : UserControl
             GreetIni();
         
     }
-
+    private void Clockch_OnIsCheckedChanged(object? sender, RoutedEventArgs e)
+    {
+        bool state = (sender as ToggleButton).IsChecked.Value;
+        foreach (var ch in GreetGrid.Children.OfType<Button>())
+        {
+            if (ch != sender)
+            {
+                ch.IsVisible = state;
+            }
+        }
+    }
     private void Buttonmin_OnClick(object? sender, RoutedEventArgs e)
     {
             switch ((sender as Button).Name)
@@ -356,7 +400,7 @@ public partial class HomeView : UserControl
             GreetIni();
     }
     
-    //DASHBOARD
+
     
     
     //notes
@@ -591,8 +635,6 @@ public partial class HomeView : UserControl
     
     //picture
     public string openclose { get; set; }
-    public Picture picwin = new Picture();
-    public bool win = false;
     public List<string> pics = new List<string>();
     public string selimg { get; set; }
     public void picinit()
@@ -619,6 +661,10 @@ public partial class HomeView : UserControl
                 wpip.Children.Add(button);
             }
         }
+        if (PictureWindow.win)
+        {
+            OpenWin.IsChecked = true;
+        }
     }
     private void ImgChanger(object? sender, RoutedEventArgs e)
     {
@@ -634,7 +680,7 @@ public partial class HomeView : UserControl
         Bitmap mainimg = new Bitmap((sender as ToggleButton).Name);
         selimg = (sender as ToggleButton).Name;
         ImagePreview.Source = mainimg;
-        picwin.pichange(mainimg);
+        PictureWindow.picwin.pichange(mainimg);
         foreach (var tgche in wpip.Children.OfType<ToggleButton>())
         { 
             if (tgche.Name != (sender as ToggleButton).Name)
@@ -680,20 +726,22 @@ public partial class HomeView : UserControl
     }
     private void OpenPictureWindow(object? sender, RoutedEventArgs e)
     {
-        if (win)
+        if (PictureWindow.win)
         {
-            picwin.Hide();
-            win = false;
+            PictureWindow.picwin.Hide();
+            PictureWindow.win = false;
+            OpenWin.IsChecked = false;
         }
-        else if (!win)
+        else if (!PictureWindow.win)
         {
-            picwin.Show();
-            win = true;
+            PictureWindow.picwin.Show();
+            PictureWindow.win = true;
+            OpenWin.IsChecked = true;
         }
     }
     private void ClozedEv(object? o, EventArgs e)
     {
-        win = false;
+        PictureWindow.win = false;
     }
     private void GridVVI_OnIsCheckedChanged(object? sender, RoutedEventArgs e)
     {
@@ -779,6 +827,7 @@ public partial class HomeView : UserControl
     public AudioFileReader auf;
     public DispatcherTimer mainTime { get; set; }
     public string NowPlaying { get; set; } = "0";
+    public string CurrentSongPath { get; set; } = "0";
     public TimeSpan TotalLength { get; set; }
     private void MoodChooser_OnDropDownOpened(object? sender, EventArgs e)
     {
@@ -816,6 +865,7 @@ public partial class HomeView : UserControl
         {
             return;
         }
+        CurrentSongPath = nowPlaying.Text = settings.MusPath + "/" + MoodChooser.SelectedItem + "/" + SongChooser.SelectedItem;
         MusicControl();
     }
     private void Stop_OnClick(object? sender, RoutedEventArgs e)
@@ -845,10 +895,14 @@ public partial class HomeView : UserControl
     }
     public void MusicControl()
     {
+        if (!File.Exists(CurrentSongPath))
+        {
+            return;
+        }
         if (mainPlayer.PlaybackState == PlaybackState.Stopped)
         {
-                auf = new AudioFileReader(settings.MusPath + "/" + MoodChooser.SelectedItem + "/" + SongChooser.SelectedItem);
-                NowPlaying = settings.MusPath + "/" + MoodChooser.SelectedItem + "/" + SongChooser.SelectedItem;
+                auf = new AudioFileReader(CurrentSongPath);
+                NowPlaying = CurrentSongPath;
                 TotalLength = auf.TotalTime;
                 mainPlayer.Init(auf);
                 mainPlayer.Play();
@@ -859,27 +913,27 @@ public partial class HomeView : UserControl
                 auf.Volume = (float)settings.Volume/10;
                 Pause.IsChecked = true;
         }
-        else if (mainPlayer.PlaybackState == PlaybackState.Playing && NowPlaying == settings.MusPath + "/" + MoodChooser.SelectedItem + "/" + SongChooser.SelectedItem)
+        else if (mainPlayer.PlaybackState == PlaybackState.Playing && NowPlaying == CurrentSongPath)
         {
                 mainPlayer.Pause();
                 mainTime.Stop();
                 nowPlaying.Text = nowPlaying.Text = SongChooser.SelectedItem.ToString();
                 Pause.IsChecked = false;
         }
-        else if (mainPlayer.PlaybackState == PlaybackState.Paused && NowPlaying == settings.MusPath + "/" + MoodChooser.SelectedItem + "/" + SongChooser.SelectedItem)
+        else if (mainPlayer.PlaybackState == PlaybackState.Paused && NowPlaying == CurrentSongPath)
         {
                 mainPlayer.Play();
                 mainTime.Start();
                 nowPlaying.Text = SongChooser.SelectedItem.ToString();
                 Pause.IsChecked = true;
         }
-        else if (NowPlaying != settings.MusPath + "/" + MoodChooser.SelectedItem + "/" + SongChooser.SelectedItem)
+        else if (NowPlaying != CurrentSongPath)
         {
                 mainTime.Stop();
                 mainPlayer.Stop();
                 mainPlayer.Dispose();
-                auf = new AudioFileReader(settings.MusPath + "/" + MoodChooser.SelectedItem + "/" + SongChooser.SelectedItem);
-                NowPlaying = settings.MusPath + "/" + MoodChooser.SelectedItem + "/" + SongChooser.SelectedItem;
+                auf = new AudioFileReader(CurrentSongPath);
+                NowPlaying = CurrentSongPath;
                 mainPlayer.Init(auf);
                 mainPlayer.Play();
                 mainTime = new DispatcherTimer();
@@ -929,7 +983,7 @@ public partial class HomeView : UserControl
         {
             TextBlock n = new TextBlock()
             {
-                Text = "no files",
+                Text = Application.Current.FindResource("nofiles").ToString(),
                 FontSize = 46
             };
             Ambience.Children.Add(n);
@@ -1046,7 +1100,7 @@ public partial class HomeView : UserControl
         {
             TextBlock n = new TextBlock()
             {
-              Text = "no files",
+              Text = Application.Current.FindResource("nofiles").ToString(),
                 FontSize = 46
             };
             Sounds.Children.Add(n);
@@ -1199,7 +1253,18 @@ public partial class HomeView : UserControl
     //common
     public void SizeChange(object? sender, EventArgs e)
     {
-        Greeting.FontSize = Greeting.Bounds.Width * 0.02;
+        double Size = GreetGrid.Bounds.Width * 0.02;
+        Greeting.FontSize = Size;
+        weather.FontSize = Size;
+        Hours.FontSize = Size;
+        ee.FontSize = Size;
+        Minutes.FontSize = Size;
+        timeod.FontSize = Size;
+        day.FontSize = Size;
+        month.FontSize = Size;
+        monthn.FontSize = Size;
+        year.FontSize = Size;
+        Week.FontSize = Size;
         foreach (CharForm cf in wppc.Children.OfType<CharForm>())
         {
             if (svpc.Bounds.Width > 1500)

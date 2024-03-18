@@ -1,11 +1,16 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using Avalonia.Media.Imaging;
+using Avalonia.Platform.Storage;
 using Config.Net;
 using dmtools.ViewModels;
 using dmtools.Views;
@@ -29,20 +34,25 @@ public partial class NewProfile : Window
     {
         Profile profile = new ConfigurationBuilder<Profile>().UseIniFile("Profile.ini").Build();
         DirectoryInfo prof = new DirectoryInfo("Settings");
+        int num;
         if (prof.GetFiles().Length == 0)
         {
             profile.ProfileID = 1;
+            num = 1;
         }
         else
         {
-            profile.ProfileID = prof.GetFiles().Length + 1;
+            num = Convert.ToInt32(prof.GetFiles()[prof.GetFiles().Length-1].Name.Replace("q0", "").Replace(".ini", "")) +1;
+            profile.ProfileID = num;
             profile.ProfileName = profilename.Text;
         }
-        ISettings settings = new ConfigurationBuilder<ISettings>().UseIniFile("Settings/q0" + (prof.GetFiles().Length + 1) +".ini").Build();
-        settings.DataPath = "Data/q0" + (prof.GetFiles().Length + 1) + ".db";
+        var tst = $"Settings/q0{num}.ini";
+        ISettings settings = new ConfigurationBuilder<ISettings>().UseIniFile(tst).Build();
+        settings.DataPath = "Data/q0" + (num);
         settings.Profile = profilename.Text;
         settings.Player = playername.Text;
         shouldi = false;
+        (addpfp.Source as Bitmap).Save($"Data/q0{num}.bmp");
         this.Close();
         Process p = Process.GetCurrentProcess();    
         Process.Start(p.ProcessName + ".exe");
@@ -64,5 +74,19 @@ public partial class NewProfile : Window
         {
             desktop.MainWindow.Close();
         }
+    }
+
+    private async void Addpfp_OnPointerPressed(object? sender, PointerPressedEventArgs e)
+    {
+        var topLevel = TopLevel.GetTopLevel(this);
+        var result = await topLevel.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions(){ Title = "Choose profile picture", 
+            FileTypeFilter = new[] { FilePickerFileTypes.ImageAll }});
+        if (result.Count == 0)
+        {
+            return;
+        }
+        Bitmap pfp = new Bitmap(result[0].Path.ToString().Replace("file:///", ""));
+        addpfp.Source = pfp;
+
     }
 }

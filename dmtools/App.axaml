@@ -3,13 +3,21 @@
              xmlns:reactiveUi="clr-namespace:ReactiveUI;assembly=ReactiveUI"
              x:Class="dmtools.App"
              xmlns:local="clr-namespace:dmtools"
-             RequestedThemeVariant="Default">
+             RequestedThemeVariant="Light">
 	<Application.DataTemplates>
 		<local:ViewLocator/>
 	</Application.DataTemplates>
+	<Application.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceInclude Source="/Locals/en.axaml" />
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</Application.Resources>
 	<Application.Styles>
         <FluentTheme />
         <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
+        <StyleInclude Source="Templates/SpellDisplay.axaml"></StyleInclude>
         <StyleInclude Source="Templates/WeekMonthEdit.axaml"></StyleInclude>
 		<StyleInclude Source="/Templates/CharForm.axaml"/>
         <StyleInclude Source="Templates/NpcForm.axaml"></StyleInclude>

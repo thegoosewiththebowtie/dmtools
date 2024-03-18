@@ -7,7 +7,6 @@
              mc:Ignorable="d" d:DesignWidth="1600" d:DesignHeight="900"
              x:Class="dmtools.Views.HomeView">
 	<TabControl
-		SelectionChanged="TheTabControl_OnSelectionChanged"
 		Name="TheTabControl">
 		
 		
@@ -18,96 +17,215 @@
 		<TabItem
 			Name="Dashboard"
 			PointerPressed="InputElement_OnPointerPressed"
-			Header="Dashboard">
+			Header="{DynamicResource DashboardTab}">
 			<Grid
 				ColumnDefinitions="*, *, *, *"
-				RowDefinitions="0.15*, 1.15*, *">
+				RowDefinitions="Auto, 1.15*, *">
 				
 				
 				
 				<!-- GREETING & CLOCK -->
 				<Grid
-					RowDefinitions="*,*,*"
+					Name="GreetGrid"
+					ColumnDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, *"
+					RowDefinitions="Auto,Auto,Auto"
 					Grid.ColumnSpan="4">
 					<TextBlock
-						Grid.RowSpan="3"
+						Grid.Column="0"
+						Grid.Row="1"
 						Name="Greeting"
-						Margin="5"
+						VerticalAlignment="Center"
+						FontSize="32">
+						Hello, Master
+					</TextBlock>
+					<TextBlock
+						Grid.Column="1"
+						Grid.Row="1"
+						Name="weather"
+						VerticalAlignment="Center"
+						FontSize="32">
+						its Weather inside the universe
+					</TextBlock>
+					<RepeatButton
+						Delay="500"
+						Grid.Column="2"
+						Grid.Row="0"
+						IsVisible="False"
+						HorizontalAlignment="Stretch"
+						HorizontalContentAlignment="Center"
+						VerticalAlignment="Stretch"
+						Name="houpl"
+						Click="Button_OnClick">
+						ᐱ
+					</RepeatButton>
+					<TextBlock
+						Grid.Column="2"
+						Grid.Row="1"
+						Name="Hours"
+						VerticalAlignment="Center"
+						FontSize="32">
+						12
+					</TextBlock>
+					<RepeatButton
+						Delay="500"
+						Grid.Column="2"
+						Grid.Row="2"
+						IsVisible="False"
+						HorizontalContentAlignment="Center"
+						HorizontalAlignment="Stretch"
+						VerticalAlignment="Stretch"
+						Name="houmi"
+						Click="Buttonmin_OnClick">
+						ᐯ
+					</RepeatButton>
+
+					
+					<RepeatButton
+						Delay="500"
+						Grid.Column="4"
+						Grid.Row="0"
+						IsVisible="False"
+						HorizontalContentAlignment="Center"
+						HorizontalAlignment="Stretch"
+						VerticalAlignment="Stretch"
+						Name="minpl"
+						Click="Button_OnClick">
+						ᐱ
+					</RepeatButton>
+					<TextBlock
+						Grid.Column="3"
+						Grid.Row="1"
+						Name="ee"
+						Padding="0"
+						Margin="0"
+						VerticalAlignment="Center"
+						FontSize="32">
+						:
+					</TextBlock>
+					<TextBlock
+						Grid.Column="4"
+						Grid.Row="1"
+						Name="Minutes"
+						VerticalAlignment="Center"
+						FontSize="32">
+						00
+					</TextBlock>
+					<RepeatButton
+						Delay="500"
+						Grid.Column="4"
+						Grid.Row="2"
+						IsVisible="False"
+						HorizontalContentAlignment="Center"
+						HorizontalAlignment="Stretch"
+						VerticalAlignment="Stretch"
+						Name="minmi"
+						Click="Buttonmin_OnClick">
+						ᐯ
+					</RepeatButton>
+					
+					<TextBlock
+						Grid.Column="5"
+						Grid.Row="1"
+						Name="timeod"
 						VerticalAlignment="Center"
 						FontSize="32">
 					</TextBlock>
-					<StackPanel
-						Grid.Column="3"
+					
+					<RepeatButton
+						Delay="500"
+						Grid.Column="6"
 						Grid.Row="0"
-						Grid.RowSpan="3"
-						Margin="5"
-						Orientation="Horizontal"
-						HorizontalAlignment="Right">
-						<StackPanel>
-							<Button
-								HorizontalAlignment="Stretch"
-								VerticalAlignment="Stretch"
-								Name="minpl"
-								Click="Button_OnClick">
-								M+
-							</Button>
-							<Button
-								HorizontalAlignment="Stretch"
-								VerticalAlignment="Stretch"
-								Name="minmi"
-								Click="Buttonmin_OnClick">
-								M-
-							</Button>
-						</StackPanel>
-						<StackPanel>
-							<Button
-								HorizontalAlignment="Stretch"
-								VerticalAlignment="Stretch"
-								Name="houpl"
-								Click="Button_OnClick">
-								H+
-							</Button>
-							<Button
-								HorizontalAlignment="Stretch"
-								VerticalAlignment="Stretch"
-								Name="houmi"
-								Click="Buttonmin_OnClick">
-								H-
-							</Button>
-						</StackPanel>
-						<StackPanel>
-							<Button
-								HorizontalAlignment="Stretch"
-								VerticalAlignment="Stretch"
-								Name="daypl"
-								Click="Button_OnClick">
-								d+
-							</Button>
-							<Button
-								HorizontalAlignment="Stretch"
-								VerticalAlignment="Stretch"
-								Name="daymi"
-								Click="Buttonmin_OnClick">
-								d-
-							</Button>
-						</StackPanel>
-						<StackPanel>
-							<Button
-								HorizontalAlignment="Stretch"
-								VerticalAlignment="Stretch"
-								Name="monpl"
-								Click="Button_OnClick">
-								y+
-							</Button>
-							<Button
-								HorizontalAlignment="Stretch"
-								VerticalAlignment="Stretch"
-								Name="monmi"
-								Click="Buttonmin_OnClick">
-								y-
-							</Button>
-						</StackPanel>
-					</StackPanel>
+						IsVisible="False"
+						HorizontalContentAlignment="Center"
+						HorizontalAlignment="Stretch"
+						VerticalAlignment="Stretch"
+						Name="daypl"
+						Click="Button_OnClick">
+						ᐱ
+					</RepeatButton>
+					<TextBlock
+						Grid.Column="6"
+						Grid.Row="1"
+						Name="day"
+						VerticalAlignment="Center"
+						FontSize="32">
+					</TextBlock>
+					<RepeatButton
+						Delay="500"
+						Grid.Column="6"
+						Grid.Row="2"
+						IsVisible="False"
+						HorizontalContentAlignment="Center"
+						HorizontalAlignment="Stretch"
+						VerticalAlignment="Stretch"
+						Name="daymi"
+						Click="Buttonmin_OnClick">
+						ᐯ
+					</RepeatButton>
+					
+					<TextBlock
+						Grid.Column="7"
+						Grid.Row="1"
+						Name="month"
+						VerticalAlignment="Center"
+						FontSize="32">
+					</TextBlock>
+					<TextBlock
+						Grid.Column="8"
+						Grid.Row="1"
+						Name="monthn"
+						VerticalAlignment="Center"
+						FontSize="32">
+					</TextBlock>
+					
+					<RepeatButton
+						Delay="500"
+						Grid.Column="9"
+						Grid.Row="0"
+						IsVisible="False"
+						HorizontalContentAlignment="Center"
+						HorizontalAlignment="Stretch"
+						VerticalAlignment="Stretch"
+						Name="monpl"
+						Click="Button_OnClick">
+						ᐱ
+					</RepeatButton>
+					<TextBlock
+						Grid.Column="9"
+						Grid.Row="1"
+						Name="year"
+						VerticalAlignment="Center"
+						FontSize="32">
+					</TextBlock>
+					<RepeatButton
+						Delay="500"
+						Grid.Column="9"
+						Grid.Row="2"
+						HorizontalContentAlignment="Center"
+						HorizontalAlignment="Stretch"
+						VerticalAlignment="Stretch"
+						Name="monmi"
+						IsVisible="False"
+						Click="Buttonmin_OnClick">
+						ᐯ
+					</RepeatButton>
+					
+					<TextBlock
+						Grid.Column="10"
+						Grid.Row="1"
+						Name="Week"
+						VerticalAlignment="Center"
+						FontSize="32">
+					</TextBlock>
+					<ToggleButton
+						Name="clockch"
+						IsCheckedChanged="Clockch_OnIsCheckedChanged"
+						HorizontalAlignment="Right"
+						Grid.Column="11"
+						Grid.RowSpan="3">
+						<PathIcon Data="{StaticResource clock_regular}">
+						</PathIcon>
+					</ToggleButton>
 				</Grid>
 				
 				
@@ -130,8 +248,8 @@
 								Margin="5"
 								FontSize="20"
 								VerticalAlignment="Center"
-								HorizontalAlignment="Left">
-								 Notes
+								HorizontalAlignment="Left"
+								Text="{DynamicResource DashboardNotes}">
 							</TextBlock>
 							<StackPanel
 								Grid.Column="1"
@@ -169,7 +287,7 @@
 							ZIndex="2"
 							FontSize="20"
 							Margin="0"
-							Watermark="Type something here,&#x0a;and i'll dissapear :>"
+							Watermark="{DynamicResource DashboardNotesWatermark}"
 							BorderThickness="0"
 							CornerRadius="0, 0, 5, 5"
 							AcceptsReturn="True"
@@ -213,8 +331,7 @@
 								VerticalContentAlignment="Center"
 								HorizontalContentAlignment="Center"
 								HorizontalAlignment="Stretch"
-								VerticalAlignment="Stretch">
-								Fight!
+								Content="{DynamicResource DashboardFight}">
 							</ToggleButton>
 							<Button
 								Click="AddNpc_OnClick"
@@ -247,11 +364,11 @@
 								<DataGridTextColumn 
 									IsVisible="False"
 									Binding="{Binding Path=Initiative}"
-									Header="Initiative"/>
-								<DataGridTextColumn Binding="{Binding Path=Name}" Header="Name" />
-								<DataGridTextColumn Binding="{Binding Path=Player}" Header="Player" />
-								<DataGridTextColumn Binding="{Binding Path=ArCl}" Header="Armor Class" />
-								<DataGridTemplateColumn Header="Health">
+									Header="{DynamicResource DashboardFInit}"/>
+								<DataGridTextColumn Binding="{Binding Path=Name}" Header="{DynamicResource DashboardFName}" />
+								<DataGridTextColumn Binding="{Binding Path=Player}" Header="{DynamicResource DashboardFPlayer}" />
+								<DataGridTextColumn Binding="{Binding Path=ArCl}" Header="{DynamicResource DashboardFArCL}" />
+								<DataGridTemplateColumn Header="{DynamicResource Health}">
 									<DataGridTemplateColumn.CellTemplate>
 										<DataTemplate>
 											<templates:HealthGrid
@@ -307,8 +424,8 @@
 								Margin="5"
 								FontSize="20"
 								VerticalAlignment="Center"
-								HorizontalAlignment="Right">
-								To-Do
+								HorizontalAlignment="Right"
+								Text="{DynamicResource ToDo}">
 							</TextBlock>
 						</Grid>
 						<Rectangle
@@ -352,8 +469,8 @@
 								HorizontalAlignment="Stretch"
 								VerticalAlignment="Top"
 								CornerRadius="5"
-								Grid.Row="1">
-								Save
+								Grid.Row="1"
+								Content="{DynamicResource ToDoSave}">
 							</Button>
 							<Button
 								Name="CanNTD"
@@ -366,8 +483,8 @@
 								VerticalContentAlignment="Center"
 								VerticalAlignment="Top"
 								HorizontalAlignment="Stretch"
-								Grid.Row="1">
-								Cancel
+								Grid.Row="1"
+								Content="{DynamicResource ToDoDelete}">
 							</Button>
 						</Grid>
 						</Grid>
@@ -392,8 +509,8 @@
 								VerticalAlignment="Center"
 								Margin="5"
 								FontSize="20"
-								HorizontalAlignment="Left">
-								Image control
+								HorizontalAlignment="Left"
+								Text="{DynamicResource ImageControl}">
 							</TextBlock>
 							<StackPanel
 								Grid.Column="1"
@@ -409,7 +526,8 @@
 									VerticalContentAlignment="Center">
 									<PathIcon Data="{StaticResource grid_regular}"></PathIcon>
 								</ToggleButton>
-								<Button
+								<ToggleButton
+									Name="OpenWin"
 									CornerRadius="0,5,0, 0"
 									HorizontalAlignment="Right"
 									VerticalAlignment="Stretch"
@@ -418,7 +536,7 @@
 									Click="OpenPictureWindow"
 									FontSize="150">
 									<PathIcon Data="{StaticResource open_regular}"></PathIcon>
-								</Button>
+								</ToggleButton>
 							</StackPanel>
 						</Grid>
 						<Rectangle
@@ -475,8 +593,8 @@
 								VerticalAlignment="Center"
 								Margin="5"
 								FontSize="20"
-								HorizontalAlignment="Right">
-								Dice panel
+								HorizontalAlignment="Right"
+								Text="{DynamicResource Dicepanel}">
 							</TextBlock>
 							<StackPanel
 								Grid.Column="0"
@@ -779,7 +897,8 @@
 										HorizontalAlignment="Center"
 										VerticalAlignment="Center"
 										DockPanel.Dock="Top"
-										FontSize="20"> Total 
+										Text="{DynamicResource Total}"
+										FontSize="20"> 
 									</TextBlock>
 									<Rectangle
 										Height="1"
@@ -804,7 +923,8 @@
 										HorizontalAlignment="Center"
 										VerticalAlignment="Center"
 										DockPanel.Dock="Top"
-										FontSize="20"> History
+										FontSize="20"
+										Text="{DynamicResource History}">
 									</TextBlock>
 									<Rectangle
 										Height="1"
@@ -827,7 +947,7 @@
 		
 		
 		<!-- MEDIA -->
-		<TabItem Name="Media" Header="Media">
+		<TabItem Name="Media" Header="{DynamicResource Media}">
 			<Grid
 				RowDefinitions="0.3*, *, *"
 				ColumnDefinitions="*, *"
@@ -871,7 +991,7 @@
 							VerticalAlignment="Bottom"></TextBlock>
 						<ComboBox
 							Name="MoodChooser"
-							PlaceholderText="Music Mood"
+							PlaceholderText="{DynamicResource MusicMood}"
 							SelectionChanged="MoodChooser_OnSelectionChanged"
 							DropDownOpened="MoodChooser_OnDropDownOpened"
 							Padding="10, 0, 0, 0"
@@ -882,7 +1002,7 @@
 							HorizontalAlignment="Stretch"></ComboBox>
 						<ComboBox 
 							Name="SongChooser"
-							PlaceholderText="Songs"
+							PlaceholderText="{DynamicResource Songs}"
 							Grid.Row="1"
 							FontSize="20"
 							Padding="10, 0, 0, 0" 
@@ -952,7 +1072,8 @@
 							Margin="5"
 							HorizontalAlignment="Left"
 							VerticalAlignment="Center"
-							Classes="Header2">Ambience</TextBlock>
+							Classes="Header2"
+							Text="{DynamicResource Ambience}"></TextBlock>
 						<Slider
 							Maximum="10"
 							Name="VolumeAmb"
@@ -998,7 +1119,8 @@
 							Margin="5"
 							HorizontalAlignment="Right"
 							VerticalAlignment="Center"
-							Classes="Header2">Sounds</TextBlock>
+							Classes="Header2"
+							Text="{DynamicResource Sounds}"></TextBlock>
 						<Slider
 							Maximum="10"
 							Name="VolumeSnd"
@@ -1054,7 +1176,7 @@
 				<Button 
 					Grid.Row="0"
 					HorizontalAlignment="Right"
-					Click="AddNpcP">ADD</Button>
+					Click="AddNpcP" Content="{DynamicResource ADD}"></Button>
 				<ScrollViewer
 					Name="svnpc"
 					VerticalAlignment="Stretch"
@@ -1078,7 +1200,7 @@
 				<Button 
 					Grid.Row="0"
 					HorizontalAlignment="Right"
-					Click="Add">ADD</Button>
+					Click="Add" Content="{DynamicResource ADD}"></Button>
 				<ScrollViewer
 					Name="svpc"
 				              VerticalAlignment="Stretch"

@@ -1,0 +1,128 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+    <!-- Add Resources Here -->
+    <system:String x:Key="Test">en</system:String>
+    <!-- HOME -->
+    <!-- DASHBOARD -->
+    <system:String x:Key="DashboardTab">仪表板</system:String>
+    <system:String x:Key="DashboardGreeting">0</system:String>
+    <system:String x:Key="DashboardNotes">笔记</system:String>
+    <system:String x:Key="DashboardNotesWatermark">在这里输入一些内容，&#x0a;我会消失 :></system:String>
+    <system:String x:Key="DashboardFight">斗争！</system:String>
+    <system:String x:Key="DashboardFInit">倡议</system:String>
+    <system:String x:Key="DashboardFName">姓名</system:String>
+    <system:String x:Key="DashboardFPlayer">仪表板</system:String>
+    <system:String x:Key="DashboardFArCL">装甲等级</system:String>
+    <system:String x:Key="DashboardFHealth">健康</system:String>
+    <system:String x:Key="ToDo">去做</system:String>
+    <system:String x:Key="ToDoSave">节省</system:String>
+    <system:String x:Key="ToDoDelete">取消</system:String>
+    <system:String x:Key="ImageControl">图像控制</system:String>
+    <system:String x:Key="Dicepanel">骰子面板</system:String>
+    <system:String x:Key="History">历史</system:String>
+    <system:String x:Key="Total">全部的</system:String>
+    <!-- MEDIA-->
+    <system:String x:Key="Media">媒体</system:String>
+    <system:String x:Key="MusicMood">音乐心情</system:String>
+    <system:String x:Key="Songs">歌曲</system:String>
+    <system:String x:Key="Ambience">环境</system:String>
+    <system:String x:Key="Sounds">声音</system:String>
+    <!--NPC PC -->
+    <system:String x:Key="ADD">添加</system:String>
+    <!-- CharForm -->
+    <system:String x:Key="Level">等级</system:String>
+    <system:String x:Key="Experience">经验</system:String>
+    <system:String x:Key="Health">健康</system:String>
+    <system:String x:Key="ArmorClass">装甲等级</system:String>
+    <system:String x:Key="FirstName">主要名称</system:String>
+    <system:String x:Key="OtherName">其他名称</system:String>
+    <system:String x:Key="Player">玩家</system:String>
+    <system:String x:Key="Race">种族</system:String>
+    <system:String x:Key="Class">班级</system:String>
+    <system:String x:Key="BackgroundCF">背景</system:String>
+    <system:String x:Key="Alligment">对齐</system:String>
+    <system:String x:Key="Notes">笔记</system:String>
+    <system:String x:Key="Strength">力量</system:String>
+    <system:String x:Key="Dexterity">灵巧</system:String>
+    <system:String x:Key="Constitution">宪法</system:String>
+    <system:String x:Key="Intelligence">智力</system:String>
+    <system:String x:Key="Wisdom">智慧</system:String>
+    <system:String x:Key="Charisma">魅力</system:String>
+    <!-- MAINWINDOW -->
+    <system:String x:Key="Home">家</system:String>
+    <system:String x:Key="Generators">发电机</system:String>
+    <system:String x:Key="Glossary">词汇表</system:String>
+    <system:String x:Key="Settings">设置</system:String>
+    <system:String x:Key="About">关于</system:String>
+    <system:String x:Key="alpha">[阿尔法]</system:String>
+    <!--Glossary-->
+    <system:String x:Key="Spells">法术</system:String>
+    <system:String x:Key="Search">搜索</system:String>
+    <system:String x:Key="NameS">姓名</system:String>
+    <system:String x:Key="AttackType">攻击类型</system:String>
+    <system:String x:Key="LevelS">等级</system:String>
+    <system:String x:Key="Star">星星</system:String>
+    <!--GENERATORS-->
+    <system:String x:Key="FirstNameG">名</system:String>
+    <system:String x:Key="SecondNameG">第二个名字</system:String>
+    <system:String x:Key="RaceG">种族</system:String>
+    <system:String x:Key="Generate">产生</system:String>
+    <system:String x:Key="Age">年龄</system:String>
+    <system:String x:Key="RandomDB">随机的</system:String>
+    <system:String x:Key="Child">孩子</system:String>
+    <system:String x:Key="Young">年轻的</system:String>
+    <system:String x:Key="Youngadult">年轻成人</system:String>
+    <system:String x:Key="Adult">成人</system:String>
+    <system:String x:Key="Middleaged">中年</system:String>
+    <system:String x:Key="Loot">抢劫</system:String>
+    <system:String x:Key="Encounters">遭遇</system:String>
+    <system:String x:Key="Cities">城市</system:String>
+    <system:String x:Key="Dungeons">地下城</system:String>
+    <system:String x:Key="Old">老的</system:String>
+    <!--SETTINGS-->
+    <system:String x:Key="Profile">轮廓</system:String>
+    <system:String x:Key="DeleteProfile">删除个人资料</system:String>
+    <system:String x:Key="Dateandtime">日期和时间</system:String>
+    <system:String x:Key="Amounts">金额</system:String>
+    <system:String x:Key="Minutesinanhour">一小时内的分钟数</system:String>
+    <system:String x:Key="Hoursinaday">一天中的几个小时</system:String>
+    <system:String x:Key="Daysinaweek">一周中的天数</system:String>
+    <system:String x:Key="Monthsinayear">一年中的几个月</system:String>
+    <system:String x:Key="Save">节省</system:String>
+    <system:String x:Key="Weeks">周数</system:String>
+    <system:String x:Key="Months">几个月</system:String>
+    <system:String x:Key="Ambientmusicsource">环境音乐源</system:String>
+    <system:String x:Key="Browse">浏览</system:String>
+    <system:String x:Key="Default">默认</system:String>
+    <system:String x:Key="Ambientsoundssource">环境声源</system:String>
+    <system:String x:Key="Onetimesoundsource">一次性音源</system:String>
+    <system:String x:Key="Imagessource">图片来源</system:String>
+    <!--CODETEXTS, HELLO-->
+    <system:String x:Key="Hello">你好</system:String>
+    <system:String x:Key="its">它是</system:String>
+    <system:String x:Key="itu"> 宇宙内部,</system:String>
+    <system:String x:Key="the">, 这 </system:String>
+    <system:String x:Key="st">英石</system:String>
+    <system:String x:Key="nd">ND</system:String>
+    <system:String x:Key="rd">RD</system:String>
+    <system:String x:Key="th">th</system:String>
+    <system:String x:Key="of"> 的 </system:String>
+    <!--CODETEXTS, MUSIC-->
+    <system:String x:Key="nofiles">没有文件</system:String>
+    <!--CODETEXTS, WEATHER-->
+    <system:String x:Key="sunny">阳光明媚</system:String>
+    <system:String x:Key="partiallycloudy">部分多云</system:String>
+    <system:String x:Key="overcast">灰蒙蒙</system:String>
+    <system:String x:Key="fog">多雾路段</system:String>
+    <system:String x:Key="drizzle">细雨</system:String>
+    <system:String x:Key="rain">雨</system:String>
+    <system:String x:Key="storm">风暴</system:String>
+    <system:String x:Key="thunderstorm">雷雨</system:String>
+    <!--NEW PROFILE-->
+    <system:String x:Key="Profilename">个人资料名称</system:String>
+    <system:String x:Key="Yourname">你的名字</system:String>
+    <!--INIT-->
+    <system:String x:Key="imhoRTDisthebestdwshowrunner">掷骰子!</system:String>
+    <system:String x:Key="lnggg">主动，留空随机</system:String>
+</ResourceDictionary>

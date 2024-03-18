@@ -12,7 +12,6 @@ namespace dmtools.Templates;
 
 public class HealthGrid : TemplatedControl
 {
-    ISettings settings = new ConfigurationBuilder<ISettings>().UseIniFile("Settings.ini").Build();
     public static readonly StyledProperty<string> HealthValProperty = AvaloniaProperty.Register<HealthGrid, string>(
         "HealthVal", defaultValue:"10");
     public string HealthVal
@@ -33,35 +32,40 @@ public class HealthGrid : TemplatedControl
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
+        Profile profile = new ConfigurationBuilder<Profile>().UseIniFile("Profile.ini").Build();
+        var profid = profile.ProfileID;
+        ISettings settings = new ConfigurationBuilder<ISettings>().UseIniFile("Settings/q0" + profid +".ini").Build();
         base.OnApplyTemplate(e);
         var pbtn = e.NameScope.Find<Button>("bPlus");
         pbtn.Click += (sender, args) =>
         {
             HealthVal = (Convert.ToInt32(HealthVal) + 1).ToString();
-            if (ID != 999)
+            if (ID == 999)
             {
-                using (var LdbPC = new LiteDatabase(settings.Profile))
-                {
+                return;
+            }
+            using (var LdbPC = new LiteDatabase(settings.DataPath))
+            {
                     var pc = LdbPC.GetCollection<PlayerCharacter>();
                     var p = pc.FindById(ID);
                     p.Health = HealthVal;
                     pc.Update(p);
-                }
             }
         };
         var mbtn = e.NameScope.Find<Button>("bMinus");
         mbtn.Click += (sender, args) =>
         {
             HealthVal = (Convert.ToInt32(HealthVal) - 1).ToString();
-            if (ID != 999)
+            if (ID == 999)
             {
-                using (var LdbPC = new LiteDatabase(settings.Profile))
-                {
+                return;
+            }
+            using (var LdbPC = new LiteDatabase(settings.DataPath))
+            {
                     var pc = LdbPC.GetCollection<PlayerCharacter>();
                     var p = pc.FindById(ID);
                     p.Health = HealthVal;
                     pc.Update(p);
-                }
             }
         };
     }

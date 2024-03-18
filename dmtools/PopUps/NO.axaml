@@ -33,7 +33,7 @@
                                 VerticalAlignment="Bottom"
                                 FontSize="20"
                                 Grid.Column="0">
-                                Do the cat
+                                The cat
                         </Button>
                         <Button
                                 Click="okk"

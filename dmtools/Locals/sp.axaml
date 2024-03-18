@@ -1,0 +1,128 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+    <!-- Add Resources Here -->
+    <system:String x:Key="Test">en</system:String>
+    <!-- HOME -->
+    <!-- DASHBOARD -->
+    <system:String x:Key="DashboardTab">Panel</system:String>
+    <system:String x:Key="DashboardGreeting">0</system:String>
+    <system:String x:Key="DashboardNotes">Notas</system:String>
+    <system:String x:Key="DashboardNotesWatermark">Escribe algo aquí,&#x0a;y desapareceré :></system:String>
+    <system:String x:Key="DashboardFight">¡Luchar!</system:String>
+    <system:String x:Key="DashboardFInit">Iniciativa</system:String>
+    <system:String x:Key="DashboardFName">Nombre</system:String>
+    <system:String x:Key="DashboardFPlayer">Panel</system:String>
+    <system:String x:Key="DashboardFArCL">Clase de armadura</system:String>
+    <system:String x:Key="DashboardFHealth">Salud</system:String>
+    <system:String x:Key="ToDo">Hacer</system:String>
+    <system:String x:Key="ToDoSave">Ahorrar</system:String>
+    <system:String x:Key="ToDoDelete">Cancelar</system:String>
+    <system:String x:Key="ImageControl">Control de imagen</system:String>
+    <system:String x:Key="Dicepanel">Panel de dados</system:String>
+    <system:String x:Key="History">Historia</system:String>
+    <system:String x:Key="Total">Total</system:String>
+    <!-- MEDIA-->
+    <system:String x:Key="Media">Medios de comunicación</system:String>
+    <system:String x:Key="MusicMood">Estado de ánimo musical</system:String>
+    <system:String x:Key="Songs">Canciones</system:String>
+    <system:String x:Key="Ambience">Ambiente</system:String>
+    <system:String x:Key="Sounds">Sonidos</system:String>
+    <!--NPC PC -->
+    <system:String x:Key="ADD">Agregar</system:String>
+    <!-- CharForm -->
+    <system:String x:Key="Level">Nivel</system:String>
+    <system:String x:Key="Experience">Experiencia</system:String>
+    <system:String x:Key="Health">Salud</system:String>
+    <system:String x:Key="ArmorClass">Clase de armadura</system:String>
+    <system:String x:Key="FirstName">Nombre principal</system:String>
+    <system:String x:Key="OtherName">Otros nombres</system:String>
+    <system:String x:Key="Player">Jugador</system:String>
+    <system:String x:Key="Race">Carrera</system:String>
+    <system:String x:Key="Class">Clase</system:String>
+    <system:String x:Key="BackgroundCF">Fondo</system:String>
+    <system:String x:Key="Alligment">Cocodrilo</system:String>
+    <system:String x:Key="Notes">Notas</system:String>
+    <system:String x:Key="Strength">Fortaleza</system:String>
+    <system:String x:Key="Dexterity">Destreza</system:String>
+    <system:String x:Key="Constitution">Constitución</system:String>
+    <system:String x:Key="Intelligence">Inteligencia</system:String>
+    <system:String x:Key="Wisdom">Sabiduría</system:String>
+    <system:String x:Key="Charisma">Carisma</system:String>
+    <!-- MAINWINDOW -->
+    <system:String x:Key="Home">Hogar</system:String>
+    <system:String x:Key="Generators">Generadores</system:String>
+    <system:String x:Key="Glossary">Glosario</system:String>
+    <system:String x:Key="Settings">Ajustes</system:String>
+    <system:String x:Key="About">Acerca de</system:String>
+    <system:String x:Key="alpha">[alfa]</system:String>
+    <!--Glossary-->
+    <system:String x:Key="Spells">Hechizos</system:String>
+    <system:String x:Key="Search">Buscar</system:String>
+    <system:String x:Key="NameS">Nombre</system:String>
+    <system:String x:Key="AttackType">Tipo de ataque</system:String>
+    <system:String x:Key="LevelS">Nivel</system:String>
+    <system:String x:Key="Star">Estrella</system:String>
+    <!--GENERATORS-->
+    <system:String x:Key="FirstNameG">Nombre de pila</system:String>
+    <system:String x:Key="SecondNameG">Segundo nombre</system:String>
+    <system:String x:Key="RaceG">Carrera</system:String>
+    <system:String x:Key="Generate">Generar</system:String>
+    <system:String x:Key="Age">Edad</system:String>
+    <system:String x:Key="RandomDB">Aleatorio</system:String>
+    <system:String x:Key="Child">Niño</system:String>
+    <system:String x:Key="Young">Joven</system:String>
+    <system:String x:Key="Youngadult">Adulto joven</system:String>
+    <system:String x:Key="Adult">Adulto</system:String>
+    <system:String x:Key="Middleaged">De edad mediana</system:String>
+    <system:String x:Key="Loot">Botín</system:String>
+    <system:String x:Key="Encounters">Encuentros</system:String>
+    <system:String x:Key="Cities">Ciudades</system:String>
+    <system:String x:Key="Dungeons">Mazmorras</system:String>
+    <system:String x:Key="Old">Viejo</system:String>
+    <!--SETTINGS-->
+    <system:String x:Key="Profile">Perfil</system:String>
+    <system:String x:Key="DeleteProfile">Borrar perfil</system:String>
+    <system:String x:Key="Dateandtime">Fecha y hora</system:String>
+    <system:String x:Key="Amounts">Cantidades</system:String>
+    <system:String x:Key="Minutesinanhour">Minutos en una hora</system:String>
+    <system:String x:Key="Hoursinaday">Horas en un día</system:String>
+    <system:String x:Key="Daysinaweek">Días en una semana</system:String>
+    <system:String x:Key="Monthsinayear">Meses en un año</system:String>
+    <system:String x:Key="Save">Ahorrar</system:String>
+    <system:String x:Key="Weeks">Semanas</system:String>
+    <system:String x:Key="Months">Meses</system:String>
+    <system:String x:Key="Ambientmusicsource">fuente de música ambiental</system:String>
+    <system:String x:Key="Browse">Navegar</system:String>
+    <system:String x:Key="Default">Por defecto</system:String>
+    <system:String x:Key="Ambientsoundssource">Fuente de sonidos ambientales</system:String>
+    <system:String x:Key="Onetimesoundsource">Fuente de sonidos única</system:String>
+    <system:String x:Key="Imagessource">Fuente de imágenes</system:String>
+    <!--CODETEXTS, HELLO-->
+    <system:String x:Key="Hello">Hola</system:String>
+    <system:String x:Key="its">Es </system:String>
+    <system:String x:Key="itu"> dentro del universo,</system:String>
+    <system:String x:Key="the">, el </system:String>
+    <system:String x:Key="st">calle</system:String>
+    <system:String x:Key="nd">Dakota del Norte</system:String>
+    <system:String x:Key="rd">tercero</system:String>
+    <system:String x:Key="th">th</system:String>
+    <system:String x:Key="of"> de </system:String>
+    <!--CODETEXTS, MUSIC-->
+    <system:String x:Key="nofiles">sin archivos</system:String>
+    <!--CODETEXTS, WEATHER-->
+    <system:String x:Key="sunny">soleado</system:String>
+    <system:String x:Key="partiallycloudy">parcialmente nublado</system:String>
+    <system:String x:Key="overcast">nublado</system:String>
+    <system:String x:Key="fog">niebla</system:String>
+    <system:String x:Key="drizzle">llovizna</system:String>
+    <system:String x:Key="rain">lluvia</system:String>
+    <system:String x:Key="storm">tormenta</system:String>
+    <system:String x:Key="thunderstorm">tormenta</system:String>
+    <!--NEW PROFILE-->
+    <system:String x:Key="Profilename">Nombre de perfil</system:String>
+    <system:String x:Key="Yourname">Su nombre</system:String>
+    <!--INIT-->
+    <system:String x:Key="imhoRTDisthebestdwshowrunner">¡Tirar los dados!</system:String>
+    <system:String x:Key="lnggg">Iniciativa, déjela vacía para que sea aleatoria.</system:String>
+</ResourceDictionary>

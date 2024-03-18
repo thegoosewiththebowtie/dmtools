@@ -5,6 +5,8 @@ using dmtools.ViewModels;
 using dmtools.Views;
 using System;
 using System.Configuration;
+using System.Globalization;
+using System.Net.Mime;
 using Avalonia.Controls;
 using AvaloniaWebView;
 
@@ -25,7 +27,6 @@ public partial class App : Application
     }
     public override void OnFrameworkInitializationCompleted()
     {
-        base.OnFrameworkInitializationCompleted();
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow = new MainWindow
@@ -34,5 +35,6 @@ public partial class App : Application
             };
             desktop.ShutdownMode = Avalonia.Controls.ShutdownMode.OnMainWindowClose;
         }
+        base.OnFrameworkInitializationCompleted();
     }
 }

@@ -3,10 +3,11 @@
         xmlns:vm="using:dmtools.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:views="clr-namespace:dmtools.Views"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:DataType="vm:MainWindowViewModel"
         x:Class="dmtools.Views.MainWindow"
+        MinHeight="600" MinWidth="800"
+        SystemDecorations="Full"
         Icon="/Assets/dmtools.ico"
         TransparencyLevelHint="AcrylicBlur"
         SizeChanged="Control_OnSizeChanged"
@@ -39,7 +40,23 @@
                         HorizontalAlignment="Stretch"
                         BorderBrush="Transparent"
                         BorderThickness="0">
-                        <StackPanel
+	                    <Expander.Header>
+		                    <StackPanel 
+			                    Orientation="Horizontal">
+			                    <Image
+				                    VerticalAlignment="Center"
+				                    HorizontalAlignment="Left"
+				                    Margin="5"
+				                    Source="{Binding #pfp.Source}"
+				                    Width="{Binding #pfp.Bounds.Width}"
+				                    Height="{Binding #pfp.Bounds.Height}"></Image>
+			                    <TextBlock
+				                    Name="prnm"
+				                    VerticalAlignment="Center"
+				                    HorizontalAlignment="Center"></TextBlock>
+		                    </StackPanel>
+	                    </Expander.Header>
+	                    <StackPanel
                             Name="ProfilesButtons">
                         </StackPanel>
                     </Expander>
@@ -49,12 +66,12 @@
                             Background="White"
                             Margin="0"
                             Height="47">
-                            <TextBlock
+                            <Image
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
-                                FontSize="32"
-                                Name="profIDd">
-                            </TextBlock>
+                                Source="../Assets/dmtools.png"
+                                Name="pfp">
+                            </Image>
                         </Border>
                     </Grid>
                     <ToggleButton 
@@ -75,8 +92,8 @@
                                 Data="{StaticResource home_regular}"></PathIcon>
                             <TextBlock
                                 Margin="0,1,0,0"
-                                VerticalAlignment="Center">
-                                Home
+                                VerticalAlignment="Center"
+                                Text="{DynamicResource Home}">
                             </TextBlock>
                         </StackPanel>
                     </ToggleButton>
@@ -97,8 +114,9 @@
                                 Data="{StaticResource people_settings_regular}"></PathIcon>
                             <TextBlock
                                 Margin="0,1,0,0"
-                                VerticalAlignment="Center">
-                                Generators
+                                VerticalAlignment="Center"
+                                Text="{DynamicResource Generators}">
+                                
                             </TextBlock>
                         </StackPanel>
                     </ToggleButton>
@@ -120,8 +138,8 @@
 				                Data="{StaticResource book_regular}"></PathIcon>
 			                <TextBlock
 				                Margin="0,1,0,0"
-				                VerticalAlignment="Center">
-				                Glossary
+				                VerticalAlignment="Center"
+				                Text="{DynamicResource Glossary}">
 			                </TextBlock>
 		                </StackPanel>
 	                </ToggleButton>
@@ -146,8 +164,8 @@
                                 Data="{StaticResource settings_regular}"></PathIcon>
                             <TextBlock
                                 Margin="0,1,0,0"
-                                VerticalAlignment="Center">
-                                Settings
+                                VerticalAlignment="Center"
+                                Text="{DynamicResource Settings}">
                             </TextBlock>
                         </StackPanel>
                     </ToggleButton>
@@ -168,8 +186,8 @@
                                 Data="{StaticResource info_regular}"></PathIcon>
                             <TextBlock
                                 Margin="0,1,0,0"
-                                VerticalAlignment="Center">
-                                About
+                                VerticalAlignment="Center"
+                                Text="{DynamicResource About}">
                             </TextBlock>
                         </StackPanel>
                     </ToggleButton>
@@ -182,7 +200,9 @@
                     FontSize="30"
                     Grid.RowSpan="2"
                     Foreground="Gray"
-                    >[alpha]</TextBlock>
+					Text="{DynamicResource alpha}"
+	                >
+                </TextBlock>
             </Grid>
         </SplitView.Pane>
         <Grid

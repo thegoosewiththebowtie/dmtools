@@ -1,0 +1,127 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+    <system:String x:Key="Test">ру</system:String>
+    <!-- HOME -->
+    <!-- DASHBOARD -->
+    <system:String x:Key="DashboardTab">Основная Панель</system:String>
+    <system:String x:Key="DashboardGreeting">0</system:String>
+    <system:String x:Key="DashboardNotes">Заметки</system:String>
+    <system:String x:Key="DashboardNotesWatermark">Напиши здесь что-нибудь,&#x0a;и я исчезну :></system:String>
+    <system:String x:Key="DashboardFight">Начать Бой!</system:String>
+    <system:String x:Key="DashboardFInit">Инициатива</system:String>
+    <system:String x:Key="DashboardFName">Имя</system:String>
+    <system:String x:Key="DashboardFPlayer">Медиа</system:String>
+    <system:String x:Key="DashboardFArCL">Класс Брони</system:String>
+    <system:String x:Key="DashboardFHealth">Здоровье</system:String>
+    <system:String x:Key="ToDo">Задачи</system:String>
+    <system:String x:Key="ToDoSave">Сохранить</system:String>
+    <system:String x:Key="ToDoDelete">Удалить</system:String>
+    <system:String x:Key="ImageControl">Управление изображениями</system:String>
+    <system:String x:Key="Dicepanel">Кубы</system:String>
+    <system:String x:Key="History">История</system:String>
+    <system:String x:Key="Total">Всего</system:String>
+    <!-- MEDIA-->
+    <system:String x:Key="Media">Медиа</system:String>
+    <system:String x:Key="MusicMood">Настроение Музыки</system:String>
+    <system:String x:Key="Songs">Музыка</system:String>
+    <system:String x:Key="Ambience">Фон</system:String>
+    <system:String x:Key="Sounds">Звуки</system:String>
+    <!--NPC PC -->
+    <system:String x:Key="ADD">Добавить</system:String>
+    <!-- CharForm -->
+    <system:String x:Key="Level">Уровень</system:String>
+    <system:String x:Key="Experience">Опыт</system:String>
+    <system:String x:Key="Health">Здоровье</system:String>
+    <system:String x:Key="ArmorClass">Класс Брони</system:String>
+    <system:String x:Key="FirstName">Основное Имя</system:String>
+    <system:String x:Key="OtherName">Доп. Имена</system:String>
+    <system:String x:Key="Player">Игрок</system:String>
+    <system:String x:Key="Race">Раса</system:String>
+    <system:String x:Key="Class">Класс</system:String>
+    <system:String x:Key="BackgroundCF">Прошлое</system:String>
+    <system:String x:Key="Alligment">Мировоззрение</system:String>
+    <system:String x:Key="Notes">Заметки</system:String>
+    <system:String x:Key="Strength">Сила</system:String>
+    <system:String x:Key="Dexterity">Ловкость</system:String>
+    <system:String x:Key="Constitution">Телосложение</system:String>
+    <system:String x:Key="Intelligence">Интеллект</system:String>
+    <system:String x:Key="Wisdom">Мудрость</system:String>
+    <system:String x:Key="Charisma">Харизма</system:String>
+    <!-- MAINWINDOW -->
+    <system:String x:Key="Home">Домашний Экран</system:String>
+    <system:String x:Key="Generators">Генератор</system:String>
+    <system:String x:Key="Glossary">Энциклопедия</system:String>
+    <system:String x:Key="Settings">Настройки</system:String>
+    <system:String x:Key="About">О программе</system:String>
+    <system:String x:Key="alpha">[альфа-тест]</system:String>
+    <!--Glossary-->
+    <system:String x:Key="Spells">Заклинания</system:String>
+    <system:String x:Key="Search">Поиск</system:String>
+    <system:String x:Key="NameS">Имя</system:String>
+    <system:String x:Key="AttackType">Тип Атаки</system:String>
+    <system:String x:Key="LevelS">Уровень</system:String>
+    <system:String x:Key="Star">В Избранное</system:String>
+    <!--GENERATORS-->
+    <system:String x:Key="FirstNameG">Основное Имя</system:String>
+    <system:String x:Key="SecondNameG">Доп. Имена</system:String>
+    <system:String x:Key="RaceG">Раса</system:String>
+    <system:String x:Key="Generate">Сгенерировать</system:String>
+    <system:String x:Key="Age">Возраст</system:String>
+    <system:String x:Key="RandomDB">Случайно</system:String>
+    <system:String x:Key="Child">Ребенок</system:String>
+    <system:String x:Key="Young">Подросток</system:String>
+    <system:String x:Key="Youngadult">Молодой</system:String>
+    <system:String x:Key="Adult">Взрослый</system:String>
+    <system:String x:Key="Middleaged">Пожилой</system:String>
+    <system:String x:Key="Loot">Лут</system:String>
+    <system:String x:Key="Encounters">Случайные Встречи</system:String>
+    <system:String x:Key="Cities">Города</system:String>
+    <system:String x:Key="Dungeons">Подземелья</system:String>
+    <system:String x:Key="Old">Старый</system:String>
+    <!--SETTINGS-->
+    <system:String x:Key="Profile">Профиль</system:String>
+    <system:String x:Key="DeleteProfile">Удалить профиль</system:String>
+    <system:String x:Key="Dateandtime">Дата и время</system:String>
+    <system:String x:Key="Amounts">Количество</system:String>
+    <system:String x:Key="Minutesinanhour">Минут в часе</system:String>
+    <system:String x:Key="Hoursinaday">Часов в дне</system:String>
+    <system:String x:Key="Daysinaweek">Дней в неделе</system:String>
+    <system:String x:Key="Monthsinayear">Месяцов в году</system:String>
+    <system:String x:Key="Save">Сохранить</system:String>
+    <system:String x:Key="Weeks">Недели</system:String>
+    <system:String x:Key="Months">Месяца</system:String>
+    <system:String x:Key="Ambientmusicsource">Источник фоновой музыки</system:String>
+    <system:String x:Key="Browse">Искать</system:String>
+    <system:String x:Key="Default">Стандарт</system:String>
+    <system:String x:Key="Ambientsoundssource">Источник фоновых звуков</system:String>
+    <system:String x:Key="Onetimesoundsource">Источник кратких звуков</system:String>
+    <system:String x:Key="Imagessource">Источник изображений</system:String>
+    <!--CODETEXTS, HELLO-->
+    <system:String x:Key="Hello">Привет</system:String>
+    <system:String x:Key="its">во вселенной сейчас</system:String>
+    <system:String x:Key="itu">,</system:String>
+    <system:String x:Key="the">, </system:String>
+    <system:String x:Key="st">ое</system:String>
+    <system:String x:Key="nd">ое</system:String>
+    <system:String x:Key="rd">ое</system:String>
+    <system:String x:Key="th">е</system:String>
+    <system:String x:Key="of">, </system:String>
+    <!--CODETEXTS, MUSIC-->
+    <system:String x:Key="nofiles">нет файла</system:String>
+    <!--CODETEXTS, WEATHER-->
+    <system:String x:Key="sunny">солнечно</system:String>
+    <system:String x:Key="partiallycloudy">облачно</system:String>
+    <system:String x:Key="overcast">пасмурно</system:String>
+    <system:String x:Key="fog">туманно</system:String>
+    <system:String x:Key="drizzle">изморось</system:String>
+    <system:String x:Key="rain">дождь</system:String>
+    <system:String x:Key="storm">ливень</system:String>
+    <system:String x:Key="thunderstorm">гроза</system:String>
+    <!--NEW PROFILE-->
+    <system:String x:Key="Profilename">Имя профиля</system:String>
+    <system:String x:Key="Yourname">Ваше имя</system:String>
+    <!--INIT-->
+    <system:String x:Key="imhoRTDisthebestdwshowrunner">Бросаем кубы!</system:String>
+    <system:String x:Key="lnggg">Инициатива, оставьте пустым на случайный случай</system:String>
+</ResourceDictionary>

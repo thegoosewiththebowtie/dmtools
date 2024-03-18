@@ -1,20 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Security.Permissions;
+using System.Runtime.InteropServices.JavaScript;
+using System.Threading;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Controls.Primitives;
+using Avalonia.Input;
 using Avalonia.Interactivity;
-using Avalonia.Markup.Xaml;
+using Avalonia.Markup.Xaml.MarkupExtensions;
 using Avalonia.Platform.Storage;
+using Avalonia.Styling;
 using Config.Net;
 using dmtools.PopUps;
 using LiteDB;
 using dmtools.Templates;
-
 namespace dmtools.Views;
 
 public partial class SettingsView : UserControl
@@ -72,6 +76,19 @@ public partial class SettingsView : UserControl
         HiDs.Value = settings.HoursInDay;
         DiWs.Value = settings.DaysInWeek;
         MiYs.Value = settings.MonthsInYear;
+        if (File.Exists($"Data/q0{settings.ID}.bmp"))
+        {
+            PfPSett.Source = new Avalonia.Media.Imaging.Bitmap($"Data/q0{settings.ID}.bmp");
+        }
+        ProfName.Text = settings.Profile;
+        DmName.Text = settings.Player;
+        foreach (var lng in LanguageChanger.Items)
+        {
+            if ((lng as ComboBoxItem).Content.ToString().Contains(System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(settings.Language.ToLower())))
+            {
+                LanguageChanger.SelectedItem = lng;
+            }
+        }
     }
     private void Default(object? sender, RoutedEventArgs e)
     {
@@ -239,10 +256,64 @@ public partial class SettingsView : UserControl
 
     private void DelPro_OnClick(object? sender, RoutedEventArgs e)
     {
-        var nooo = new NO("for now you have to do it manually, just find /Data/q0%profileid%.db and /Settings/q0%profileid%.ini files and delete them");
+        var topLevel = TopLevel.GetTopLevel(this);
+        List<int> profs = new List<int>();
+        DirectoryInfo profilesset = new DirectoryInfo("Settings/");
+        foreach (var profilen in profilesset.GetFiles())
+        {
+            profs.Add(Convert.ToInt32(profilen.Name.Replace("q0", "").Replace(".ini", "")));
+        }
+        profs.Remove(profid);
+        File.Delete($"Settings/q0{profid}.ini");
+        File.Delete($"Data/q0{profid}.db");
+        File.Delete($"Data/q0{profid}.bmp");
+        if (profs.Count != 0)
+        {
+            profile.ProfileID = profs[0];
+        }
+        else
+        {
+            File.Delete("Profile.ini");
+        }
+        Process p = Process.GetCurrentProcess();    
+        Process.Start(p.ProcessName + ".exe");
         if (Avalonia.Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            nooo.ShowDialog(desktop.MainWindow);
+            Thread.Sleep(1000);
+            desktop.Shutdown();
         }
+    }
+
+    private async void Pfpb_OnPointerPressed(object? sender, PointerPressedEventArgs e)
+    {
+        var topLevel = TopLevel.GetTopLevel(this);
+        var result = await topLevel.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions(){ Title = "Choose profile picture", 
+            FileTypeFilter = new[] { FilePickerFileTypes.ImageAll }});
+        if (result.Count == 0)
+        {
+            return;
+        }
+        Bitmap pfp = new Bitmap(result[0].Path.ToString().Replace("file:///", ""));
+        pfp.Save($"Data/q0{settings.ID}.bmp");
+        PfPSett.Source = new Avalonia.Media.Imaging.Bitmap($"Data/q0{settings.ID}.bmp");
+        if (Avalonia.Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        {
+            (desktop.MainWindow as MainWindow).pfp.Source = new Avalonia.Media.Imaging.Bitmap($"Data/q0{settings.ID}.bmp");
+        }
+    }
+
+    private void LanguageChanger_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        settings.Language = ((sender as ComboBox).SelectedItem as ComboBoxItem).Content.ToString().ToLower().Remove(2);
+    }
+
+    private async void ProfName_OnTextChanged(object? sender, TextChangedEventArgs e)
+    {
+        settings.Profile = (sender as TextBox).Text;
+    }
+
+    private void DmName_OnTextChanged(object? sender, TextChangedEventArgs e)
+    {
+        settings.Player = (sender as TextBox).Text;
     }
 }

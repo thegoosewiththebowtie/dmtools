@@ -1,0 +1,128 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+    <!-- Add Resources Here -->
+    <system:String x:Key="Test">ру</system:String>
+    <!-- HOME -->
+    <!-- DASHBOARD -->
+    <system:String x:Key="DashboardTab">Основна панель</system:String>
+    <system:String x:Key="DashboardGreeting">0</system:String>
+    <system:String x:Key="DashboardNotes">Нотатки</system:String>
+    <system:String x:Key="DashboardNotesWatermark">Напиши тут щось,&#x0a;і я зникну :></system:String>
+    <system:String x:Key="DashboardFight">Почати Бій!</system:String>
+    <system:String x:Key="DashboardFInit">Ініціатива</system:String>
+    <system:String x:Key="DashboardFName">Ім'я</system:String>
+    <system:String x:Key="DashboardFPlayer">Медіа</system:String>
+    <system:String x:Key="DashboardFArCL">Клас Броні</system:String>
+    <system:String x:Key="DashboardFHealth">Здоров'я</system:String>
+    <system:String x:Key="ToDo">Завдання</system:String>
+    <system:String x:Key="ToDoSave">Зберегти</system:String>
+    <system:String x:Key="ToDoDelete">Видалити</system:String>
+    <system:String x:Key="ImageControl">Керування зображеннями</system:String>
+    <system:String x:Key="Dicepanel">Куби</system:String>
+    <system:String x:Key="History">Історія</system:String>
+    <system:String x:Key="Total">Усього</system:String>
+    <!-- MEDIA-->
+    <system:String x:Key="Media">Медіа</system:String>
+    <system:String x:Key="MusicMood">Настрій Музики</system:String>
+    <system:String x:Key="Songs">Музика</system:String>
+    <system:String x:Key="Ambience">Фон</system:String>
+    <system:String x:Key="Sounds">Звуки</system:String>
+    <!--NPC PC -->
+    <system:String x:Key="ADD">Додати</system:String>
+    <!-- CharForm -->
+    <system:String x:Key="Level">Рівень</system:String>
+    <system:String x:Key="Experience">Досвід</system:String>
+    <system:String x:Key="Health">Здоров'я</system:String>
+    <system:String x:Key="ArmorClass">Клас Броні</system:String>
+    <system:String x:Key="FirstName">Основне Ім'я</system:String>
+    <system:String x:Key="OtherName">Дод. Імена</system:String>
+    <system:String x:Key="Player">Гравець</system:String>
+    <system:String x:Key="Race">Раса</system:String>
+    <system:String x:Key="Class">Клас</system:String>
+    <system:String x:Key="BackgroundCF">Минуле</system:String>
+    <system:String x:Key="Alligment">Світогляд</system:String>
+    <system:String x:Key="Notes">Нотатки</system:String>
+    <system:String x:Key="Strength">Сила</system:String>
+    <system:String x:Key="Dexterity">Спритність</system:String>
+    <system:String x:Key="Constitution">Статура</system:String>
+    <system:String x:Key="Intelligence">Інтелект</system:String>
+    <system:String x:Key="Wisdom">Мудрість</system:String>
+    <system:String x:Key="Charisma">Харизма</system:String>
+    <!-- MAINWINDOW -->
+    <system:String x:Key="Home">Домашній Екран</system:String>
+    <system:String x:Key="Generators">Генератор</system:String>
+    <system:String x:Key="Glossary">Енциклопедія</system:String>
+    <system:String x:Key="Settings">Налаштування</system:String>
+    <system:String x:Key="About">Про програму</system:String>
+    <system:String x:Key="alpha">[альфа-тест]</system:String>
+    <!--Glossary-->
+    <system:String x:Key="Spells">Заклинання</system:String>
+    <system:String x:Key="Search">Пошук</system:String>
+    <system:String x:Key="NameS">Ім'я</system:String>
+    <system:String x:Key="AttackType">Тип Атаки</system:String>
+    <system:String x:Key="LevelS">Рівень</system:String>
+    <system:String x:Key="Star">У обране</system:String>
+    <!--GENERATORS-->
+    <system:String x:Key="FirstNameG">Основне Ім'я</system:String>
+    <system:String x:Key="SecondNameG">Дод. Імена</system:String>
+    <system:String x:Key="RaceG">Раса</system:String>
+    <system:String x:Key="Generate">Згенерувати</system:String>
+    <system:String x:Key="Age">Вік</system:String>
+    <system:String x:Key="RandomDB">Випадково</system:String>
+    <system:String x:Key="Child">Дитина</system:String>
+    <system:String x:Key="Young">Підліток</system:String>
+    <system:String x:Key="Youngadult">Молодий</system:String>
+    <system:String x:Key="Adult">Дорослий</system:String>
+    <system:String x:Key="Middleaged">Літній</system:String>
+    <system:String x:Key="Loot">Лут</system:String>
+    <system:String x:Key="Encounters">Випадкові Зустрічі</system:String>
+    <system:String x:Key="Cities">Міста</system:String>
+    <system:String x:Key="Dungeons">Підземелля</system:String>
+    <system:String x:Key="Old">Старий</system:String>
+    <!--SETTINGS-->
+    <system:String x:Key="Profile">Профіль</system:String>
+    <system:String x:Key="DeleteProfile">Видалити профіль</system:String>
+    <system:String x:Key="Dateandtime">Дата та час</system:String>
+    <system:String x:Key="Amounts">Кількість</system:String>
+    <system:String x:Key="Minutesinanhour">Хвилин за годину</system:String>
+    <system:String x:Key="Hoursinaday">Годинник у дні</system:String>
+    <system:String x:Key="Daysinaweek">Днів у тижні</system:String>
+    <system:String x:Key="Monthsinayear">Місяців у році</system:String>
+    <system:String x:Key="Save">Зберегти</system:String>
+    <system:String x:Key="Weeks">Тижні</system:String>
+    <system:String x:Key="Months">Місяця</system:String>
+    <system:String x:Key="Ambientmusicsource">Джерело фонової музики</system:String>
+    <system:String x:Key="Browse">Шукати</system:String>
+    <system:String x:Key="Default">Стандарт</system:String>
+    <system:String x:Key="Ambientsoundssource">Джерело фонових звуків</system:String>
+    <system:String x:Key="Onetimesoundsource">Джерело коротких звуків</system:String>
+    <system:String x:Key="Imagessource">Джерело зображень</system:String>
+    <!--CODETEXTS, HELLO-->
+    <system:String x:Key="Hello">Привіт</system:String>
+    <system:String x:Key="its">у всесвіті зараз</system:String>
+    <system:String x:Key="itu">,</system:String>
+    <system:String x:Key="the">, </system:String>
+    <system:String x:Key="st">ое</system:String>
+    <system:String x:Key="nd">ое</system:String>
+    <system:String x:Key="rd">ое</system:String>
+    <system:String x:Key="th">е</system:String>
+    <system:String x:Key="of">, </system:String>
+    <!--CODETEXTS, MUSIC-->
+    <system:String x:Key="nofiles">немає файлу</system:String>
+    <!--CODETEXTS, WEATHER-->
+    <system:String x:Key="sunny">сонячно</system:String>
+    <system:String x:Key="partiallycloudy">хмарно</system:String>
+    <system:String x:Key="overcast">похмуро</system:String>
+    <system:String x:Key="fog">туманно</system:String>
+    <system:String x:Key="drizzle">виморись</system:String>
+    <system:String x:Key="rain">дощ</system:String>
+    <system:String x:Key="storm">злива</system:String>
+    <system:String x:Key="thunderstorm">гроза</system:String>
+    <!--NEW PROFILE-->
+    <system:String x:Key="Profilename">Ім'я профілю</system:String>
+    <system:String x:Key="Yourname">Ваше ім'я</system:String>
+    <!--INIT-->
+    <system:String x:Key="imhoRTDisthebestdwshowrunner">Кидаємо куби!</system:String>
+    <system:String x:Key="lnggg">Ініціатива, залиште порожнім на випадковий випадок</system:String>
+</ResourceDictionary>

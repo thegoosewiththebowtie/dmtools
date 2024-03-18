@@ -1,21 +1,80 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="using:dmtools.Templates"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="dmtools.Views.GlossaryView">
-    <Button
-        Click="Button_OnClick"
-        VerticalAlignment="Stretch"
-        HorizontalAlignment="Stretch"
-        FontSize="150"
-        VerticalContentAlignment="Center"
-        HorizontalContentAlignment="Center">
-        <StackPanel>
-            <TextBlock
-                FontSize="200">
-                DO THE CAT
-            </TextBlock>
-        </StackPanel>
-    </Button>
+    <TabControl>
+        <TabItem
+            Header="{DynamicResource Spells}">
+            <Grid
+                ColumnDefinitions="*, 2*, *">
+                <Border
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Classes="DefBorder">
+                    <Grid
+                        RowDefinitions="*, 10*"
+                        ColumnDefinitions="*, 2*">
+                        <AutoCompleteBox
+                            Name="SearchSpells"
+                            Watermark="{DynamicResource Search}"
+                            Margin="5"
+                            Grid.Column="0"
+                            Grid.Row="0">
+                        </AutoCompleteBox>
+                        <DataGrid
+                            SelectionChanged="List_OnSelectionChanged"
+                            Grid.Row="1"
+                        Name="SpelsGrid"
+                        Margin="5,0,5,5">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn
+                            Header="{DynamicResource NameS}"
+                            Binding="{Binding Path=name}">
+                            
+                        </DataGridTextColumn>
+                        <DataGridTextColumn
+                            Header="{DynamicResource AttackType}"
+                            Binding="{Binding Path=spellAttack}">
+                            
+                        </DataGridTextColumn>
+                        <DataGridTextColumn
+                            Header="{DynamicResource LevelS}"
+                            Binding="{Binding Path=level}">
+                            
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                    </Grid>
+                    </Border>
+                <Border
+                    Grid.Column="1"
+                    Classes="DefBorder">
+                    <ScrollViewer>
+                        <controls:SpellDisplay>
+                            
+                        </controls:SpellDisplay>
+                    </ScrollViewer>
+                </Border>
+                <Border
+                    Classes="DefBorder"
+                    Grid.Column="2">
+                    <StackPanel>
+                        <ToggleButton
+                                Name="SaveToFav"
+                                Margin="5"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Stretch"
+                                VerticalContentAlignment="Center"
+                                HorizontalContentAlignment="Center"
+                                Content="{DynamicResource Star}">
+                        </ToggleButton>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </TabItem>
+    </TabControl>
+    
 </UserControl>

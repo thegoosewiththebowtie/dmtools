@@ -21,17 +21,17 @@
                         Margin="5">
                         <DataGrid.Columns>
                         <DataGridTextColumn
-                            Header="First Name"
+                            Header="{DynamicResource FirstNameG}"
                             Binding="{Binding Path=Name}">
                             
                         </DataGridTextColumn>
                         <DataGridTextColumn
-                            Header="Second Name"
+                            Header="{DynamicResource SecondNameG}"
                             Binding="{Binding Path=Name2}">
                             
                         </DataGridTextColumn>
                         <DataGridTextColumn
-                            Header="Race"
+                            Header="{DynamicResource RaceG}"
                             Binding="{Binding Path=Race}">
                             
                         </DataGridTextColumn>
@@ -58,12 +58,12 @@
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Stretch"
                                 VerticalContentAlignment="Center"
-                                HorizontalContentAlignment="Center">
-                            GENERATE
+                                HorizontalContentAlignment="Center"
+                                Content="{DynamicResource Generate}">
                         </Button>
                         <ComboBox
                             Name="Age"
-                            PlaceholderText="Age"
+                            PlaceholderText="{DynamicResource Age}"
                             Margin="5"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Stretch"
@@ -74,28 +74,29 @@
                                 Random
                             </TextBlock>
                             <TextBlock
-                                Name="a0a100">
-                                Child
+                                Name="a0a100"
+                                Text="{DynamicResource Child}">
+                                
                             </TextBlock>
                             <TextBlock
-                                Name="a100a130">
-                                Young
+                                Name="a100a130"
+                                Text="{DynamicResource Young}">
                             </TextBlock>
                             <TextBlock
-                                Name="a130a250">
-                                Young adult
+                                Name="a130a250"
+                                Text="{DynamicResource Youngadult}" >
                             </TextBlock>
                             <TextBlock
-                                Name="a250a300">
-                                Adult
+                                Name="a250a300"
+                                Text="{DynamicResource Adult}" >
                             </TextBlock>
                             <TextBlock
-                                Name="a300a600">
-                                Middle aged
+                                Name="a300a600"
+                                Text="{DynamicResource Middleaged}">
                             </TextBlock>
                             <TextBlock
-                                Name="a600a1001">
-                                Old
+                                Name="a600a1001"
+                                Text="{DynamicResource Old}">
                             </TextBlock>
                         </ComboBox>
                         <ComboBox
@@ -142,19 +143,19 @@
             </Grid>
         </TabItem>
         <TabItem
-            Header="Loot">
+            Header="{DynamicResource Loot}">
             
         </TabItem>
         <TabItem
-            Header="Encounters">
+            Header="{DynamicResource Encounters}">
             
         </TabItem>
         <TabItem
-            Header="Cities">
+            Header="{DynamicResource Cities}">
             
         </TabItem>
         <TabItem
-            Header="Dungeons">
+            Header="{DynamicResource Dungeons}">
             
         </TabItem>
     </TabControl>

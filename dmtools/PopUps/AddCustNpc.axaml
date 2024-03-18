@@ -14,11 +14,11 @@
                 <TextBox
                         KeyDown="TestInt"
                         Name="Initiative"
-                        Watermark="Initiative, leave empty for random"
+                        Watermark="{DynamicResource lnggg}"
                         Margin="5"></TextBox>
                 <TextBox
                         Name="Name"
-                        Watermark="Name"
+                        Watermark="{DynamicResource NameS}"
                         Margin="5"></TextBox>
                 <TextBox
                         Name="NPC"
@@ -29,12 +29,12 @@
                 <TextBox
                         KeyDown="TestInt"
                         Name="AC"
-                        Watermark="Armor class"
+                        Watermark="{DynamicResource ArmorClass}"
                         Margin="5"></TextBox>
                 <TextBox
                         KeyDown="TestInt"
                         Name="HP"
-                        Watermark="Hit Points"
+                        Watermark="{DynamicResource Health}"
                         Margin="5"></TextBox>
                 <Grid ColumnDefinitions="*, 2*, *, 2*, *">
                         <Button
@@ -45,7 +45,8 @@
                                 HorizontalContentAlignment="Center"
                                 VerticalAlignment="Stretch"
                                 HorizontalAlignment="Stretch"
-                                Grid.Column="1">Add</Button>
+                                Grid.Column="1"
+                                Content="{DynamicResource ADD}"></Button>
                         <Button
                                 Click="Cancel"
                                 Margin="5"
@@ -53,7 +54,8 @@
                                 HorizontalContentAlignment="Center"
                                 VerticalAlignment="Stretch"
                                 HorizontalAlignment="Stretch"
-                                Grid.Column="3">Cancel</Button>
+                                Grid.Column="3"
+                                Content="{DynamicResource ToDoDelete}"></Button>
                 </Grid>
         </StackPanel>
 </Window>
