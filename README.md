@@ -1,9 +1,3 @@
-# IMPORTANT
-~dmtools development is frozen atm, because i have commission (working on a project is cool, but $50 is $50 xddd) for a different software (interactive maps + stores editor) 
-in some time it will be available on GitHub, can't say the exact day or month, but it will be soon~
-Unfrozen lol
-and that project didn't work out, ive been playing Minecraft for the whole month, sorry, now im getting back to work :>
-
 # DmTools by VTG
 This is a unique software, that i decided to make, because i couldn't find anything that would work natively on desktop,
 without any payment or nessesity to open browser. So, here it is! Its aimed on dungeon masters, who would like to make 
@@ -34,7 +28,7 @@ https://reddit.com/r/dmtools
 - [ ] town/inn/tavern randomizers
 - [ ] Dark theme
 - [ ] Sounds and music library
-- [ ] Localization
+- [x] Localization
 - [ ] and a looooooot of other features and ui customization.
 Also im thinking about making an embedded interactive map creator (i have a touchscreen display just for them, usually i make 
 them in powerpoint, but i dunno, thats plans for a veeeerrryy distant future)
@@ -44,12 +38,12 @@ them in powerpoint, but i dunno, thats plans for a veeeerrryy distant future)
 - https://github.com/MicroSugarDeveloperOrg/Avalonia.WebView
 
 ## Free and open-sourse forever
-i have no plans to monetize this app in any way, i think that we should have more free software
+i have no plans to monetize this app in any way. Maybe i will make it possible to donate after 1.0
 ## Screenshots:
-(yes, i was too lazy to open the photoshop)
-![image](https://github.com/thegoosewiththebowtie/dmtools/assets/153792474/95c277f7-ab99-4174-bbd2-ffb53b1fcf2a)
-![image](https://github.com/thegoosewiththebowtie/dmtools/assets/153792474/fa419803-d46a-46b4-b727-8c8e8a29036a)
-![image](https://github.com/thegoosewiththebowtie/dmtools/assets/153792474/4a820f3d-993c-4f9f-8409-18805d734680)
-![image](https://github.com/thegoosewiththebowtie/dmtools/assets/153792474/0d498322-4ee0-49cd-b7ac-def30dcf2af6)
+![image](https://github.com/thegoosewiththebowtie/dmtools/assets/153792474/5ec3c7dd-8a95-4bee-87a8-160d31342357)
+![image](https://github.com/thegoosewiththebowtie/dmtools/assets/153792474/eb675e9d-a728-4935-bc40-443eaf03cd93)
+![image](https://github.com/thegoosewiththebowtie/dmtools/assets/153792474/565f059b-4278-42b6-9c4d-e46891c694b0)
+
+
 
 
