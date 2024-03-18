@@ -20,13 +20,13 @@
 				  RowDefinitions="*, *, *, *, *, *, *, *, *">
 				  <controls:plusminbuttonless
 					  Name="LevelN"
-					  Labll="Level"
+					  Labll="{DynamicResource Level}"
 					  Value0="{TemplateBinding Level, Mode=TwoWay}"
 					  Grid.RowSpan="2"
 					  Grid.ColumnSpan="2"></controls:plusminbuttonless>
 				  <controls:Longplusminmore 
 					  theval="{TemplateBinding Exp, Mode=TwoWay}"
-					  labellss="Experience"
+					  labellss="{DynamicResource Experience}"
 					  Grid.Row="0"
 					  Grid.RowSpan="2"
 					  Grid.Column="6"
@@ -44,13 +44,13 @@
 					             VerticalAlignment="Center"></TextBlock>
 				  </Border>
 				  <controls:plusminbuttonless
-					  Labll="Health"
+					  Labll="{DynamicResource Health}"
 					  Value0="{TemplateBinding Health, Mode=TwoWay}"
 					  Grid.RowSpan="2"
 					  Grid.ColumnSpan="2"
 					  Grid.Row="3"></controls:plusminbuttonless>
 				  <controls:plusminbuttonless
-					  Labll="Armor Class"
+					  Labll="{DynamicResource ArmorClass}"
 					  Value0="{TemplateBinding Ac, Mode=TwoWay}"
 					  Grid.RowSpan="2"
 					  Grid.ColumnSpan="2"
@@ -88,7 +88,7 @@
 					  Margin="5"
 					  VerticalContentAlignment="Center"
 					  CornerRadius="5"
-					  Watermark="First Name">
+					  Watermark="{DynamicResource FirstName}">
 				  </TextBox>
 				  <TextBox 
 					  Grid.Column="2" 
@@ -99,7 +99,7 @@
 					  Margin="5"
 					  VerticalContentAlignment="Center"
 					  CornerRadius="5"
-					  Watermark="Other names">
+					  Watermark="{DynamicResource OtherName}">
 				  </TextBox>
 				  <TextBox
 					  Grid.Column="2" 
@@ -121,7 +121,7 @@
 					  Margin="5"
 					  VerticalContentAlignment="Center"
 					  CornerRadius="5"
-					  Watermark="Race">
+					  Watermark="{DynamicResource Race}">
 				  </TextBox>
 				  <TextBox
 					  Grid.Column="2" 
@@ -132,7 +132,7 @@
 					  Margin="5"
 					  VerticalContentAlignment="Center"
 					  CornerRadius="5"
-					  Watermark="Class">
+					  Watermark="{DynamicResource Class}">
 				  </TextBox>
 				  <TextBox
 					  Grid.Column="2" 
@@ -143,7 +143,7 @@
 					  Margin="5"
 					  VerticalContentAlignment="Center"
 					  CornerRadius="5"
-					  Watermark="Background">
+					  Watermark="{DynamicResource BackgroundCF}">
 				  </TextBox>
 				  <TextBox
 					  Grid.Column="2" 
@@ -154,7 +154,7 @@
 					  Margin="5"
 					  Text="{TemplateBinding Alligment, Mode=TwoWay}"
 					  VerticalContentAlignment="Center"
-					  Watermark="Alligment">
+					  Watermark="{DynamicResource Alligment}">
 				  </TextBox>
 				  <TextBox 
 					  Grid.Column="6"
@@ -168,13 +168,13 @@
 					  AcceptsReturn="True"
 					  AcceptsTab="True"
 					  VerticalContentAlignment="Top"
-					  Watermark="Notes">
+					  Watermark="{DynamicResource Notes}">
 				  </TextBox>
 				  <controls:plusminbutton 
 					  Value0="{TemplateBinding StrVal, Mode=TwoWay}"
 					  prof="{TemplateBinding profbon, Mode=TwoWay}"
 					  ischecked="{Binding IsCheck[1], RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-					  Labll="Strength"
+					  Labll="{DynamicResource Strength}"
 					  Grid.ColumnSpan="2" 
 					  Grid.RowSpan="2" 
 					  Grid.Row="7" 
@@ -183,7 +183,7 @@
 					  Value0="{TemplateBinding DexVal, Mode=TwoWay}"
 					  prof="{TemplateBinding profbon, Mode=TwoWay}"
 					  ischecked="{Binding IsCheck[2], RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-					  Labll="Dexterity"
+					  Labll="{DynamicResource Dexterity}"
 					  Grid.ColumnSpan="2" 
 					  Grid.RowSpan="2" 
 					  Grid.Row="7" 
@@ -192,7 +192,7 @@
 					  Value0="{TemplateBinding ConVal, Mode=TwoWay}"
 					  prof="{TemplateBinding profbon, Mode=TwoWay}"
 					  ischecked="{Binding IsCheck[3], RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-					  Labll="Constitution"
+					  Labll="{DynamicResource Constitution}"
 					  Grid.ColumnSpan="2" 
 					  Grid.RowSpan="2" 
 					  Grid.Row="7" 
@@ -201,7 +201,7 @@
 					  Value0="{TemplateBinding IntVal, Mode=TwoWay}"
 					  prof="{TemplateBinding profbon, Mode=TwoWay}"
 					  ischecked="{Binding IsCheck[4], RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-					  Labll="Intelligence"
+					  Labll="{DynamicResource Intelligence}"
 					  Grid.ColumnSpan="2" 
 					  Grid.RowSpan="2" 
 					  Grid.Row="7" 
@@ -210,7 +210,7 @@
 					  Value0="{TemplateBinding WisVal, Mode=TwoWay}"
 					  prof="{TemplateBinding profbon, Mode=TwoWay}"
 					  ischecked="{Binding IsCheck[5], RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-					  Labll="Wisdom"
+					  Labll="{DynamicResource Wisdom}"
 					  Grid.ColumnSpan="2" 
 					  Grid.RowSpan="2" 
 					  Grid.Row="7" 
@@ -219,7 +219,7 @@
 					  Value0="{TemplateBinding ChaVal, Mode=TwoWay}"
 					  prof="{TemplateBinding profbon, Mode=TwoWay}"
 					  ischecked="{Binding IsCheck[0], RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-					  Labll="Charisma"
+					  Labll="{DynamicResource Charisma}"
 					  Grid.ColumnSpan="2" 
 					  Grid.RowSpan="2" 
 					  Grid.Row="7" 

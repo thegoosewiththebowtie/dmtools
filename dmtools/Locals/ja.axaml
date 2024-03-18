@@ -1,0 +1,128 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+    <!-- Add Resources Here -->
+    <system:String x:Key="Test">en</system:String>
+    <!-- HOME -->
+    <!-- DASHBOARD -->
+    <system:String x:Key="DashboardTab">ダッシュボード</system:String>
+    <system:String x:Key="DashboardGreeting">0</system:String>
+    <system:String x:Key="DashboardNotes">ノート</system:String>
+    <system:String x:Key="DashboardNotesWatermark">ここに何かを入力し、&#x0a;そして私は消えます:></system:String>
+    <system:String x:Key="DashboardFight">戦い！</system:String>
+    <system:String x:Key="DashboardFInit">主導権</system:String>
+    <system:String x:Key="DashboardFName">名前</system:String>
+    <system:String x:Key="DashboardFPlayer">ダッシュボード</system:String>
+    <system:String x:Key="DashboardFArCL">アーマークラス</system:String>
+    <system:String x:Key="DashboardFHealth">健康</system:String>
+    <system:String x:Key="ToDo">やるべきこと</system:String>
+    <system:String x:Key="ToDoSave">保存</system:String>
+    <system:String x:Key="ToDoDelete">キャンセル</system:String>
+    <system:String x:Key="ImageControl">画像制御</system:String>
+    <system:String x:Key="Dicepanel">サイコロパネル</system:String>
+    <system:String x:Key="History">歴史</system:String>
+    <system:String x:Key="Total">合計</system:String>
+    <!-- MEDIA-->
+    <system:String x:Key="Media">メディア</system:String>
+    <system:String x:Key="MusicMood">音楽の気分</system:String>
+    <system:String x:Key="Songs">曲</system:String>
+    <system:String x:Key="Ambience">雰囲気</system:String>
+    <system:String x:Key="Sounds">音</system:String>
+    <!--NPC PC -->
+    <system:String x:Key="ADD">追加</system:String>
+    <!-- CharForm -->
+    <system:String x:Key="Level">レベル</system:String>
+    <system:String x:Key="Experience">経験</system:String>
+    <system:String x:Key="Health">健康</system:String>
+    <system:String x:Key="ArmorClass">アーマークラス</system:String>
+    <system:String x:Key="FirstName">メインネーム</system:String>
+    <system:String x:Key="OtherName">他の名前</system:String>
+    <system:String x:Key="Player">プレーヤー</system:String>
+    <system:String x:Key="Race">人種</system:String>
+    <system:String x:Key="Class">クラス</system:String>
+    <system:String x:Key="BackgroundCF">背景</system:String>
+    <system:String x:Key="Alligment">アライメント</system:String>
+    <system:String x:Key="Notes">ノート</system:String>
+    <system:String x:Key="Strength">強さ</system:String>
+    <system:String x:Key="Dexterity">器用さ</system:String>
+    <system:String x:Key="Constitution">憲法</system:String>
+    <system:String x:Key="Intelligence">知能</system:String>
+    <system:String x:Key="Wisdom">知恵</system:String>
+    <system:String x:Key="Charisma">カリスマ</system:String>
+    <!-- MAINWINDOW -->
+    <system:String x:Key="Home">家</system:String>
+    <system:String x:Key="Generators">発電機</system:String>
+    <system:String x:Key="Glossary">用語集</system:String>
+    <system:String x:Key="Settings">設定</system:String>
+    <system:String x:Key="About">について</system:String>
+    <system:String x:Key="alpha">[アルファ]</system:String>
+    <!--Glossary-->
+    <system:String x:Key="Spells">呪文</system:String>
+    <system:String x:Key="Search">検索</system:String>
+    <system:String x:Key="NameS">名前</system:String>
+    <system:String x:Key="AttackType">攻撃タイプ</system:String>
+    <system:String x:Key="LevelS">レベル</system:String>
+    <system:String x:Key="Star">星</system:String>
+    <!--GENERATORS-->
+    <system:String x:Key="FirstNameG">ファーストネーム</system:String>
+    <system:String x:Key="SecondNameG">ミドルネーム</system:String>
+    <system:String x:Key="RaceG">人種</system:String>
+    <system:String x:Key="Generate">生成する</system:String>
+    <system:String x:Key="Age">年</system:String>
+    <system:String x:Key="RandomDB">ランダム</system:String>
+    <system:String x:Key="Child">子供</system:String>
+    <system:String x:Key="Young">若い</system:String>
+    <system:String x:Key="Youngadult">ヤングアダルト</system:String>
+    <system:String x:Key="Adult">アダルト</system:String>
+    <system:String x:Key="Middleaged">中年</system:String>
+    <system:String x:Key="Loot">戦利品</system:String>
+    <system:String x:Key="Encounters">出会い</system:String>
+    <system:String x:Key="Cities">都市</system:String>
+    <system:String x:Key="Dungeons">ダンジョン</system:String>
+    <system:String x:Key="Old">古い</system:String>
+    <!--SETTINGS-->
+    <system:String x:Key="Profile">プロフィール</system:String>
+    <system:String x:Key="DeleteProfile">プロフィールの削除</system:String>
+    <system:String x:Key="Dateandtime">日時</system:String>
+    <system:String x:Key="Amounts">金額</system:String>
+    <system:String x:Key="Minutesinanhour">1時間のうちの分</system:String>
+    <system:String x:Key="Hoursinaday">1日の時間数</system:String>
+    <system:String x:Key="Daysinaweek">一週間の日数</system:String>
+    <system:String x:Key="Monthsinayear">1 年の月数</system:String>
+    <system:String x:Key="Save">保存</system:String>
+    <system:String x:Key="Weeks">週間</system:String>
+    <system:String x:Key="Months">月</system:String>
+    <system:String x:Key="Ambientmusicsource">アンビエント音楽ソース</system:String>
+    <system:String x:Key="Browse">ブラウズ</system:String>
+    <system:String x:Key="Default">デフォルト</system:String>
+    <system:String x:Key="Ambientsoundssource">環境音源</system:String>
+    <system:String x:Key="Onetimesoundsource">ワンタイム音源</system:String>
+    <system:String x:Key="Imagessource">画像ソース</system:String>
+    <!--CODETEXTS, HELLO-->
+    <system:String x:Key="Hello">こんにちは</system:String>
+    <system:String x:Key="its">その</system:String>
+    <system:String x:Key="itu"> 宇宙の中で,</system:String>
+    <system:String x:Key="the">, の </system:String>
+    <system:String x:Key="st">セント</system:String>
+    <system:String x:Key="nd">nd</system:String>
+    <system:String x:Key="rd">rd</system:String>
+    <system:String x:Key="th">番目</system:String>
+    <system:String x:Key="of"> の </system:String>
+    <!--CODETEXTS, MUSIC-->
+    <system:String x:Key="nofiles">ファイルがありません</system:String>
+    <!--CODETEXTS, WEATHER-->
+    <system:String x:Key="sunny">晴れた</system:String>
+    <system:String x:Key="partiallycloudy">部分的に曇り</system:String>
+    <system:String x:Key="overcast">曇り</system:String>
+    <system:String x:Key="fog">霧</system:String>
+    <system:String x:Key="drizzle">霧雨</system:String>
+    <system:String x:Key="rain">雨</system:String>
+    <system:String x:Key="storm">嵐</system:String>
+    <system:String x:Key="thunderstorm">雷雨</system:String>
+    <!--NEW PROFILE-->
+    <system:String x:Key="Profilename">プロファイル名</system:String>
+    <system:String x:Key="Yourname">あなたの名前</system:String>
+    <!--INIT-->
+    <system:String x:Key="imhoRTDisthebestdwshowrunner">サイコロを転がす！</system:String>
+    <system:String x:Key="lnggg">イニシアチブ、ランダムの場合は空のままにしておきます</system:String>
+</ResourceDictionary>

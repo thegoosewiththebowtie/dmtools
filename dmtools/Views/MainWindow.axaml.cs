@@ -2,22 +2,16 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using Avalonia.Controls;
-using LiteDB;
 using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Mime;
 using System.Threading;
-using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Controls.Primitives;
+using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Layout;
-using Avalonia.Platform.Storage;
 using AvaloniaWebView;
 using Config.Net;
 using dmtools.PopUps;
-using dmtools.ViewModels;
 
 namespace dmtools.Views;
 
@@ -36,6 +30,7 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         System.IO.Directory.CreateDirectory("Data");
+        System.IO.Directory.CreateDirectory("GlossData");
         System.IO.Directory.CreateDirectory("Settings");
         System.IO.Directory.CreateDirectory("Music");
         System.IO.Directory.CreateDirectory("Music/Amb");
@@ -45,37 +40,39 @@ public partial class MainWindow : Window
         InitProf();
         HomeView.YTC += YTLInit;
         YTInit();
+        if (File.Exists($"Data/q0{settings.ID}.bmp"))
+        {
+            pfp.Source = new Avalonia.Media.Imaging.Bitmap($"Data/q0{settings.ID}.bmp");
+        }
     }
     Profile profile = new ConfigurationBuilder<Profile>().UseIniFile("Profile.ini").Build();
     public void InitProf()
     {
-        int i = 1;
         DirectoryInfo prof = new DirectoryInfo("Settings");
         foreach (var p in prof.GetFiles())
         {
             ISettings settings = new ConfigurationBuilder<ISettings>().UseIniFile(p.FullName).Build();
             ToggleButton tb = new ToggleButton();
             settings.DataPath = "Data/" + p.Name;
-            settings.ID = i;
-            tb.Name = i.ToString();
+            settings.ID = Convert.ToInt32(p.Name.Replace("q0", "").Replace(".ini", ""));
+            tb.Name = settings.ID.ToString();
             tb.Content = settings.Profile;
             tb.HorizontalAlignment = HorizontalAlignment.Stretch;
-            if (profile.ProfileID == i)
+            if (profile.ProfileID == settings.ID)
             {
                 tb.IsChecked = true;
             }
             tb.IsCheckedChanged += ProfileChanger;
-            i++;
             ProfilesButtons.Children.Add(tb);
         }
-        ProfSwitcher.Header = profile.ProfileName;
-        profIDd.Text = profile.ProfileID.ToString();
+        profid = profile.ProfileID;
+        settings = new ConfigurationBuilder<ISettings>().UseIniFile("Settings/q0" + profid +".ini").Build();
+        prnm.Text = settings.Profile;
         Button add = new Button();
         add.HorizontalAlignment = HorizontalAlignment.Stretch;
         add.Content = "New Profile";
         add.Click += AddOnClick;
         ProfilesButtons.Children.Add(add);
-        profid = profile.ProfileID;
     }
 
     private void AddOnClick(object? sender, RoutedEventArgs e)
@@ -88,7 +85,6 @@ public partial class MainWindow : Window
     private void ProfileChanger(object? sender, RoutedEventArgs e)
     {
         profile.ProfileID = Convert.ToInt32((sender as ToggleButton).Name);
-        profile.ProfileName = (sender as ToggleButton).Content.ToString();
         Process p = Process.GetCurrentProcess();    
         Process.Start(p.ProcessName + ".exe");
         if (Avalonia.Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
@@ -275,5 +271,10 @@ public partial class MainWindow : Window
                 Browser3.Child = browsers[3];
                 break;
         }
+    }
+
+    private void InputElement_OnPointerPressed(object? sender, PointerPressedEventArgs e)
+    {
+        throw new Exception();
     }
 }

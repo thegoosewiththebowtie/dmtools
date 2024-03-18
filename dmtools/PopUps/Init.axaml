@@ -21,7 +21,7 @@
                         Grid.ColumnSpan="5"
                         VerticalContentAlignment="Center"
                         HorizontalContentAlignment="Left"
-                        Watermark="Roll the dice!"></TextBox>
+                        Watermark="{DynamicResource imhoRTDisthebestdwshowrunner}"></TextBox>
                 <Button
                         Click="ok"
                         IsDefault="True"
@@ -40,8 +40,8 @@
                         VerticalAlignment="Center"
                         HorizontalAlignment="Stretch"
                         Grid.Column="3"
-                        Grid.Row="1">
-                        Cancel
+                        Grid.Row="1"
+                        Content="{DynamicResource ToDoDelete}">
                 </Button>
                 
         </Grid>
