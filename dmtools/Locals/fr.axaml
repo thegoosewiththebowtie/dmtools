@@ -1,4 +1,4 @@
-﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=System.Runtime">
     <!-- Add Resources Here -->
@@ -24,10 +24,10 @@
     <system:String x:Key="Total">Total</system:String>
     <!-- MEDIA-->
     <system:String x:Key="Media">Médias</system:String>
-    <system:String x:Key="MusicMood">Ambiance musicale</system:String>
+    <system:String x:Key="MusicMood">Musique d'ambiance</system:String>
     <system:String x:Key="Songs">Musique</system:String>
     <system:String x:Key="Ambience">Arrière-plan</system:String>
-    <system:String x:Key="Sounds">Des sons</system:String>
+    <system:String x:Key="Sounds">Sons</system:String>
     <!--NPC PC -->
     <system:String x:Key="ADD">Ajouter</system:String>
     <!-- CharForm -->
@@ -36,22 +36,22 @@
     <system:String x:Key="Health">Santé</system:String>
     <system:String x:Key="ArmorClass">Classe d'armure</system:String>
     <system:String x:Key="FirstName">Nom principal</system:String>
-    <system:String x:Key="OtherName">Ajouter. Des noms</system:String>
+    <system:String x:Key="OtherName">Autre nom</system:String>
     <system:String x:Key="Player">Joueur</system:String>
-    <system:String x:Key="Race">Course</system:String>
+    <system:String x:Key="Race">Race</system:String>
     <system:String x:Key="Class">Classe</system:String>
     <system:String x:Key="BackgroundCF">Passé</system:String>
-    <system:String x:Key="Alligment">Vision du monde</system:String>
+    <system:String x:Key="Alligment">Alignement</system:String>
     <system:String x:Key="Notes">Remarques</system:String>
-    <system:String x:Key="Strength">Forcer</system:String>
+    <system:String x:Key="Strength">Force</system:String>
     <system:String x:Key="Dexterity">Dextérité</system:String>
-    <system:String x:Key="Constitution">Type de corps</system:String>
+    <system:String x:Key="Constitution">Constitution</system:String>
     <system:String x:Key="Intelligence">Intelligence</system:String>
     <system:String x:Key="Wisdom">Sagesse</system:String>
     <system:String x:Key="Charisma">Charisme</system:String>
     <!-- MAINWINDOW -->
     <system:String x:Key="Home">Écran d'accueil</system:String>
-    <system:String x:Key="Generators">Générateur</system:String>
+    <system:String x:Key="Generators">Générateurs</system:String>
     <system:String x:Key="Glossary">Glossaire</system:String>
     <system:String x:Key="Settings">Paramètres</system:String>
     <system:String x:Key="About">À propos du programme</system:String>
@@ -62,11 +62,11 @@
     <system:String x:Key="NameS">Nom</system:String>
     <system:String x:Key="AttackType">Type d'attaque</system:String>
     <system:String x:Key="LevelS">Niveau</system:String>
-    <system:String x:Key="Star">Vers les favoris</system:String>
+    <system:String x:Key="Star">Favoris</system:String>
     <!--GENERATORS-->
     <system:String x:Key="FirstNameG">Nom principal</system:String>
-    <system:String x:Key="SecondNameG">Ajouter. Des noms</system:String>
-    <system:String x:Key="RaceG">Course</system:String>
+    <system:String x:Key="SecondNameG">Autres noms</system:String>
+    <system:String x:Key="RaceG">Race</system:String>
     <system:String x:Key="Generate">Générer</system:String>
     <system:String x:Key="Age">Âge</system:String>
     <system:String x:Key="RandomDB">Aléatoire</system:String>
@@ -84,11 +84,11 @@
     <system:String x:Key="Profile">Profil</system:String>
     <system:String x:Key="DeleteProfile">Supprimer le profil</system:String>
     <system:String x:Key="Dateandtime">Date et l'heure</system:String>
-    <system:String x:Key="Amounts">Quantité</system:String>
+    <system:String x:Key="Amounts">Quantités</system:String>
     <system:String x:Key="Minutesinanhour">Minutes dans une heure</system:String>
     <system:String x:Key="Hoursinaday">Heures dans une journée</system:String>
     <system:String x:Key="Daysinaweek">Jours dans une semaine</system:String>
-    <system:String x:Key="Monthsinayear">Mois de l'année</system:String>
+    <system:String x:Key="Monthsinayear">Mois dans l'année</system:String>
     <system:String x:Key="Save">Sauvegarder</system:String>
     <system:String x:Key="Weeks">Semaines</system:String>
     <system:String x:Key="Months">Mois</system:String>
@@ -96,32 +96,32 @@
     <system:String x:Key="Browse">Recherche</system:String>
     <system:String x:Key="Default">Standard</system:String>
     <system:String x:Key="Ambientsoundssource">Source des bruits de fond</system:String>
-    <system:String x:Key="Onetimesoundsource">Source de sons courts</system:String>
+    <system:String x:Key="Onetimesoundsource">Source de sons unique</system:String>
     <system:String x:Key="Imagessource">Source des images</system:String>
     <!--CODETEXTS, HELLO-->
     <system:String x:Key="Hello">Bonjour</system:String>
-    <system:String x:Key="its">dans l'univers maintenant</system:String>
-    <system:String x:Key="itu">,</system:String>
-    <system:String x:Key="the">, </system:String>
-    <system:String x:Key="st">.</system:String>
-    <system:String x:Key="nd">Dakota du Nord</system:String>
+    <system:String x:Key="its">c'est</system:String>
+    <system:String x:Key="itu"> dans l'univers</system:String>
+    <system:String x:Key="the">le</system:String>
+    <system:String x:Key="st">er</system:String>
+    <system:String x:Key="nd">nd</system:String>
     <system:String x:Key="rd">troisième</system:String>
-    <system:String x:Key="th">ème</system:String>
-    <system:String x:Key="of">, de </system:String>
+    <system:String x:Key="th">ième</system:String>
+    <system:String x:Key="of">de</system:String>
     <!--CODETEXTS, MUSIC-->
     <system:String x:Key="nofiles">pas de fichier</system:String>
     <!--CODETEXTS, WEATHER-->
     <system:String x:Key="sunny">ensoleillé</system:String>
     <system:String x:Key="partiallycloudy">nuageux</system:String>
-    <system:String x:Key="overcast">généralement nuageux</system:String>
+    <system:String x:Key="overcast">très nuageux</system:String>
     <system:String x:Key="fog">brumeux</system:String>
     <system:String x:Key="drizzle">bruine</system:String>
     <system:String x:Key="rain">pluie</system:String>
-    <system:String x:Key="storm">douche</system:String>
-    <system:String x:Key="thunderstorm">tempête</system:String>
+    <system:String x:Key="storm">tempête</system:String>
+    <system:String x:Key="thunderstorm">orage</system:String>
     <!--NEW PROFILE-->
     <system:String x:Key="Profilename">Nom de profil</system:String>
-    <system:String x:Key="Yourname">votre nom</system:String>
+    <system:String x:Key="Yourname">Votre nom</system:String>
     <!--INIT-->
     <system:String x:Key="imhoRTDisthebestdwshowrunner">Faisons rouler les cubes !</system:String>
     <system:String x:Key="lnggg">Initiative, laisser vide pour une occasion aléatoire</system:String>
