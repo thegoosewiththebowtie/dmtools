@@ -72,7 +72,7 @@
                 DockPanel.Dock="Top"
                 Margin="10"
                 FontSize="20"
-                Text="Version: v.0.0.2-a &#x0a;Maintained by: thegoosewiththebowtie a.k.a. VTG&#x0a;Distributed by: Triangle on The Wall Organization">
+                Text="Version: v.0.0.3-a &#x0a;Maintained by: thegoosewiththebowtie a.k.a. VTG&#x0a;Distributed by: Triangle on The Wall Organization">
             </TextBlock>
             <TextBlock
                 DockPanel.Dock="Bottom"
