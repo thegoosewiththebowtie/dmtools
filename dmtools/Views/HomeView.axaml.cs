@@ -406,7 +406,12 @@ public partial class HomeView : UserControl
     //notes
     private void NoteInit()
     {
-        MainNotesT.Text = settings.MainNotes;
+        var res = String.Empty;
+        foreach (var x in settings.MainNotes.Split(@"\r\n"))
+        {
+            res += $"{x}\r\n";
+        }
+        MainNotesT.Text = res;
     }
     private void SaveNotes_OnClick(object? sender, RoutedEventArgs e)
     {

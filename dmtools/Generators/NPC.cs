@@ -44,9 +44,12 @@ public class NPC
         };
         public static List<string> DisLikes = new List<string>()
         {
-            "Violence/Peace","Talking to strangers", "Meet new people", "Stay alone", "Be outside", "Read", "Their eyecolor", "Their height", "Their weight", "To make desisions",
-            "Sports", "People around them", "One-night stands", "Nature/Technology", "Red/Orange/Yellow/Green/Blue/Purple", "Kids", "Neighbours", "Smart people/Dumb people",
-            "One of your party members", "Darkness", "Spider", "Random person from their Village", "Sleeping"
+            "Violence/Peace","Talking to strangers/Meet new people", "Stay alone", "Be outside", "Read", "Their eyecolor",
+            "Their height", "Their weight", "To make desicions", "Sports", "People around them", "One-night stands",
+            "Nature/Technology", "Red/Orange/Yellow/Green/Blue/Purple", "Kids", "Their neighbours", "Smart people/Dumb people",
+            "One of your party members", "Darkness", "Spider", "Random person from their village", "Sleeping", "Ruler of the country/Their work/Their work/Their work",
+            
+            
         };
         public static Random rnd = new Random();
         public static List<List<string>> CreateNPC(string MinMaxAge)
@@ -191,14 +194,23 @@ public class NPC
             List<string> Likes = new List<string>();
             foreach (var dl in DisLikes)
             {
-                var i = rnd.Next(0, 3);
+                var i = rnd.Next(0, 4);
+                var dli = dl;
+                var l = dl.Split("/").Length;
+                if (l != null)
+                {
+                    var dd =rnd.Next(0, l);
+                    dli = dl.Split("/")[dd];
+                }
                 switch (i)
                 {
                     case 0:
-                        Dis.Add(dl);
+                        Dis.Add(dli);
                         break;
                     case 1:
-                        Likes.Add(dl);
+                        Likes.Add(dli);
+                        break;
+                    case 2:
                         break;
                     case 3:
                         break;
