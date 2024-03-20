@@ -58,6 +58,11 @@ public class MainWindowViewModel : ViewModelBase
         var vm = new GlossaryViewModel();
         Content = vm;
     }
+    public void Bot()
+    {
+        var vm = new BotTestViewModel();
+        Content = vm;
+    }
     public void Settings()
     {
         var vm = new SettingsViewModel();

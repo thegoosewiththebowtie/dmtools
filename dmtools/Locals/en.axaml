@@ -124,4 +124,8 @@
     <!--INIT-->
     <system:String x:Key="imhoRTDisthebestdwshowrunner">Roll the dice!</system:String>
     <system:String x:Key="lnggg">Initiative, leave empty for random</system:String>
+    <!--ALPHANEW-->
+    <system:String x:Key="likes">Likes</system:String>
+    <system:String x:Key="dislikes">Dislikes</system:String>
+
 </ResourceDictionary>
