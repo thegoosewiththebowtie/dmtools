@@ -156,20 +156,151 @@
 					  VerticalContentAlignment="Center"
 					  Watermark="{DynamicResource Alligment}">
 				  </TextBox>
-				  <TextBox 
+				  <TabControl
 					  Grid.Column="6"
-					  FontSize="20"
 					  Grid.Row="2"
 					  Grid.ColumnSpan="6"
-					  Grid.RowSpan="5"
-					  CornerRadius="5"
-					  Text="{TemplateBinding Notes, Mode=TwoWay}"
-					  Margin="5"
-					  AcceptsReturn="True"
-					  AcceptsTab="True"
-					  VerticalContentAlignment="Top"
-					  Watermark="{DynamicResource Notes}">
-				  </TextBox>
+					  Grid.RowSpan="5">
+					  <TabItem
+						  Header="Notes">
+						  <TextBox 
+							  FontSize="20"
+							  CornerRadius="5"
+							  Text="{TemplateBinding Notes, Mode=TwoWay}"
+							  Margin="-6,7,-5,5"
+							  AcceptsReturn="True"
+							  AcceptsTab="True"
+							  VerticalContentAlignment="Top"
+							  Watermark="{DynamicResource Notes}">
+						  </TextBox>
+					  </TabItem>
+					  <TabItem
+						  Header="Likes">
+						  <Border
+							  Margin="-6,7,-5,5"
+							  BorderBrush="DimGray"
+							  BorderThickness="1"
+							  CornerRadius="5">
+							  <DockPanel
+								  LastChildFill="True">
+								  <StackPanel
+									  VerticalAlignment="Stretch"
+									  HorizontalAlignment="Right"
+									  DockPanel.Dock="Bottom"
+									  Orientation="Horizontal">
+									  <Button
+										  Name="DELETEL"
+										  Content="Delete"
+										  CornerRadius="0,0,0,0"
+									  ></Button>
+									  <ToggleButton
+										  Name="AddSCL"
+										  CornerRadius="0,0,5,0"
+										  Content="{DynamicResource ADD}"
+										  DockPanel.Dock="Bottom"></ToggleButton>
+								  </StackPanel>
+								  <Grid
+									  DockPanel.Dock="Top"
+									  HorizontalAlignment="Stretch"
+									  Name="addl"
+									  IsVisible="False"
+									  RowDefinitions="*, *" 
+									  Margin="5"
+									  ColumnDefinitions="*,2*,*">
+									  <TextBox
+										  Name="Ladd"
+										  Grid.ColumnSpan="5"
+										  CornerRadius="5"
+										  FontSize="16"
+										  BorderBrush="DimGray"
+										  Margin="0, 5, 0, 5">
+									  </TextBox>
+									  <Button
+										  Name="SaveL"
+										  Grid.Column="1"
+										  Margin="5"
+										  FontSize="16"
+										  HorizontalContentAlignment="Center"
+										  VerticalContentAlignment="Center"
+										  HorizontalAlignment="Stretch"
+										  VerticalAlignment="Top"
+										  CornerRadius="5"
+										  Grid.Row="1"
+										  Content="{DynamicResource ToDoSave}">
+									  </Button>
+								  </Grid>
+								  <ListBox
+									  Name="LikesList"
+									  ItemsSource="{TemplateBinding Likes}"
+									  Background="Transparent">
+								  </ListBox>
+							  </DockPanel>
+						  </Border>
+					  </TabItem>
+					  <TabItem
+						  Header="Dislikes">
+						  <Border
+							  Margin="-6,7,-5,5"
+							  BorderBrush="DimGray"
+							  BorderThickness="1"
+							  CornerRadius="5">
+							  <DockPanel
+								  LastChildFill="True">
+								  <StackPanel
+									  VerticalAlignment="Stretch"
+									  HorizontalAlignment="Right"
+									  DockPanel.Dock="Bottom"
+									  Orientation="Horizontal">
+									  <Button
+										  Name="DELETEDL"
+										  Content="Delete"
+										  CornerRadius="0,0,0,0"
+										  ></Button>
+									  <ToggleButton
+										  Name="AddSCDL"
+										  Content="{DynamicResource ADD}"
+										  CornerRadius="0,0,5,0"></ToggleButton>
+								  </StackPanel>
+								  <Grid
+									  DockPanel.Dock="Top"
+									  HorizontalAlignment="Stretch"
+									  Name="addDl"
+									  IsVisible="False"
+									  RowDefinitions="*, *" 
+									  Margin="5"
+									  ColumnDefinitions="*,2*,*">
+									  <TextBox
+										  Name="DLadd"
+										  Grid.ColumnSpan="5"
+										  CornerRadius="5"
+										  FontSize="16"
+										  BorderBrush="DimGray"
+										  Margin="0, 5, 0, 5">
+									  </TextBox>
+									  <Button
+										  Name="SaveDL"
+										  Grid.Column="1"
+										  Margin="5"
+										  FontSize="16"
+										  HorizontalContentAlignment="Center"
+										  VerticalContentAlignment="Center"
+										  HorizontalAlignment="Stretch"
+										  VerticalAlignment="Top"
+										  CornerRadius="5"
+										  Grid.Row="1"
+										  Content="{DynamicResource ToDoSave}">
+									  </Button>
+								  </Grid>
+								  <ListBox
+									  Name="DisLikesList"
+									  ItemsSource="{TemplateBinding Dis}"
+									  Background="Transparent">
+								  </ListBox>
+							  </DockPanel>
+						  </Border>
+					  </TabItem>
+				  </TabControl>
+				  
 				  <controls:plusminbutton 
 					  Value0="{TemplateBinding StrVal, Mode=TwoWay}"
 					  prof="{TemplateBinding profbon, Mode=TwoWay}"

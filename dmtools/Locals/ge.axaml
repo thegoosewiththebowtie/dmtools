@@ -26,7 +26,7 @@
     <system:String x:Key="Media">Medien</system:String>
     <system:String x:Key="MusicMood">Musikstimmung</system:String>
     <system:String x:Key="Songs">Lieder</system:String>
-    <system:String x:Key="Ambience">Ambiente</system:String>
+    <system:String x:Key="Ambience">Ambience</system:String>
     <system:String x:Key="Sounds">Geräusche</system:String>
     <!--NPC PC -->
     <system:String x:Key="ADD">Hinzufügen</system:String>
@@ -72,7 +72,7 @@
     <system:String x:Key="RandomDB">Zufällig</system:String>
     <system:String x:Key="Child">Kind</system:String>
     <system:String x:Key="Young">Jung</system:String>
-    <system:String x:Key="Youngadult">Junger Erwachsener</system:String>
+    <system:String x:Key="Youngadult">Junger Person</system:String>
     <system:String x:Key="Adult">Erwachsene</system:String>
     <system:String x:Key="Middleaged">Im mittleren Alter</system:String>
     <system:String x:Key="Loot">Beute</system:String>
@@ -103,10 +103,10 @@
     <system:String x:Key="its">Es ist</system:String>
     <system:String x:Key="itu"> im Inneren des Universums,</system:String>
     <system:String x:Key="the">, die </system:String>
-    <system:String x:Key="st">st</system:String>
-    <system:String x:Key="nd">nd</system:String>
-    <system:String x:Key="rd">rd</system:String>
-    <system:String x:Key="th">th</system:String>
+    <system:String x:Key="st">.</system:String>
+    <system:String x:Key="nd">.</system:String>
+    <system:String x:Key="rd">.</system:String>
+    <system:String x:Key="th">.</system:String>
     <system:String x:Key="of"> von </system:String>
     <!--CODETEXTS, MUSIC-->
     <system:String x:Key="nofiles">keine dateien</system:String>

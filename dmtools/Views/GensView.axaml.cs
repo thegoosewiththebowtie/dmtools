@@ -5,6 +5,9 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using dmtools.Generators;
 using Avalonia.Markup.Xaml;
+using Config.Net;
+using LiteDB;
+using Microsoft.VisualBasic;
 
 namespace dmtools.Views;
 
@@ -30,9 +33,14 @@ public class GenNpc
 public partial class GensView : UserControl
 {
     public List<GenNpc> HistNpcs = new List<GenNpc>();
+    Profile profile = new ConfigurationBuilder<Profile>().UseIniFile("Profile.ini").Build();
+    public int profid { get; set; }
+    private ISettings settings { get; set; }
     public GensView()
     {
         InitializeComponent();
+        profid = profile.ProfileID;
+        settings = new ConfigurationBuilder<ISettings>().UseIniFile("Settings/q0" + profid +".ini").Build();
     }
 
     private void GenerateNPC_OnClick(object? sender, RoutedEventArgs e)
@@ -82,5 +90,26 @@ public partial class GensView : UserControl
         CurrentNpc.cha = (History.SelectedItem as GenNpc).cha;
         CurrentNpc.dislikes = (History.SelectedItem as GenNpc).DisList;
         CurrentNpc.likes = (History.SelectedItem as GenNpc).LikesList;
+    }
+
+    private void SaveNPC_OnClick(object? sender, RoutedEventArgs e)
+    {
+        if (History.SelectedItem == null)
+        {
+            return;
+        }
+        using (var LdbNPC = new LiteDatabase(settings.DataPath))
+        {
+            var npc = LdbNPC.GetCollection<NPC>();
+            npc.Insert(new NPC
+            {
+                Level = "1", ArmorClass = "10", Health = "5", Strength = CurrentNpc.str, Dexterity = CurrentNpc.dex,
+                Constitution = CurrentNpc.con, Experience = "0", Wisdom = CurrentNpc.wis, Intelligence = CurrentNpc.inte, Charisma = CurrentNpc.cha, IsCCharisma = false,
+                IsCConstitution = false, IsCDexterity = false, IsCStrength = false, IsCIntelligence = false, IsCWisdom = false,
+                Likes = String.Join("/", CurrentNpc.likes), Dislikes = string.Join("/", CurrentNpc.dislikes), Notes = CurrentNpc.des,
+                FirstName = (History.SelectedItem as GenNpc).Name, OtherName = (History.SelectedItem as GenNpc).Name2,
+                Race = (History.SelectedItem as GenNpc).Race,
+            });
+        }
     }
 }

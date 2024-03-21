@@ -7,13 +7,13 @@
         CanResize="False"
         Height="100"
         Icon="/Assets/dmtools.ico"
-        Width="200"
+        Width="250"
         WindowStartupLocation="CenterOwner"
-        Title="Sure">
-        <Grid RowDefinitions="*, *" ColumnDefinitions="*, 2*, *, 2*, *" Background="White">
+        Title="Sure?">
+        <Grid RowDefinitions="*, *" ColumnDefinitions="*, 3*, *, 3*, *" Background="White">
                 <TextBlock
-                        Grid.RowSpan="2"
-                        Grid.ColumnSpan="3"
+                        Grid.ColumnSpan="5"
+                        FontSize="22"
                         TextAlignment="Center"
                         TextWrapping="Wrap"
                         VerticalAlignment="Center"
@@ -22,10 +22,14 @@
                 </TextBlock>
                 <Button
                         Name="ButtonDelete"
+                        HorizontalContentAlignment="Center"
+                        HorizontalAlignment="Stretch"
                         Grid.Row="1"
                         Grid.Column="1"
                         Click="Button_Delete">Delete</Button>
                 <Button 
+                        HorizontalContentAlignment="Center"
+                        HorizontalAlignment="Stretch"
                         Name="ButtonCancel"
                         Grid.Row="1"
                         Grid.Column="3"

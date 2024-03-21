@@ -54,6 +54,16 @@
                     Grid.Column="2">
                     <StackPanel>
                         <Button
+                            Name="SaveNPC"
+                            Click="SaveNPC_OnClick"
+                            Margin="5"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Stretch"
+                            VerticalContentAlignment="Center"
+                            HorizontalContentAlignment="Center"
+                            Content="{DynamicResource Save}">
+                        </Button>
+                        <Button
                                 Name="GenerateNPC"
                                 Click="GenerateNPC_OnClick"
                                 Margin="5"
@@ -101,45 +111,7 @@
                                 Text="{DynamicResource Old}">
                             </TextBlock>
                         </ComboBox>
-                        <ComboBox
-                            PlaceholderText=""
-                            Margin="5"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Stretch"
-                            VerticalContentAlignment="Center"
-                            HorizontalContentAlignment="Center">
-                        </ComboBox>
-                        <ComboBox
-                            Margin="5"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Stretch"
-                            VerticalContentAlignment="Center"
-                            HorizontalContentAlignment="Center">
-                        </ComboBox>
-                        <ComboBox
-                            Margin="5"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Stretch"
-                            VerticalContentAlignment="Center"
-                            HorizontalContentAlignment="Center">
-                        </ComboBox>
-                        <ComboBox
-                            Margin="5"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Stretch"
-                            VerticalContentAlignment="Center"
-                            HorizontalContentAlignment="Center">
-                        </ComboBox>
-                        <Slider
-                            Margin="5"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Stretch">
-                        </Slider>
-                        <Slider
-                            Margin="5"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Stretch">
-                        </Slider>
+                        
                     </StackPanel>
                 </Border>
             </Grid>

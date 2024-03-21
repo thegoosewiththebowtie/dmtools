@@ -97,6 +97,8 @@ public class NPC
     public string Experience { get; set; }
     public string Health { get; set; }
     public string ArmorClass { get; set; }
+    public string Likes { get; set; }
+    public string Dislikes { get; set; }
 }
 public class ToDoL
 {
@@ -170,8 +172,8 @@ public partial class HomeView : UserControl
         MainWindow.SizzeChanged += SizeChange;
         Picture.Closeed += ClozedEv;
         Sure.Delete += pcupdate;
-        Sure.Delete += SizeChange;
         Sure.Delete += npcupdate;
+        Sure.Delete += SizeChange;
         NoteInit();
         DashFightUp();
         picinit();
@@ -1142,7 +1144,8 @@ public partial class HomeView : UserControl
             {
                 Level = "1", ArmorClass = "10", Health = "5", Strength = "10", Dexterity = "10",
                 Constitution = "10", Experience = "0", Wisdom = "10", Intelligence = "10", Charisma = "10", IsCCharisma = false,
-                IsCConstitution = false, IsCDexterity = false, IsCStrength = false, IsCIntelligence = false, IsCWisdom = false
+                IsCConstitution = false, IsCDexterity = false, IsCStrength = false, IsCIntelligence = false, IsCWisdom = false,
+                Likes = string.Empty, Dislikes = string.Empty
             });
         }
         npcupdate(sender, e);
@@ -1180,6 +1183,14 @@ public partial class HomeView : UserControl
                 {
                     pc.IsCCharisma, pc.IsCStrength, pc.IsCDexterity, pc.IsCConstitution, pc.IsCIntelligence, pc.IsCWisdom,
                 };
+                if (pc.Likes != null)
+                {
+                    charForm.Likes = pc.Likes.Split("/").ToList();
+                }
+                if (pc.Dislikes != null)
+                {
+                    charForm.Dis = pc.Dislikes.Split("/").ToList();
+                }
                 wpnpc.Children.Add(charForm);
             }
         }
