@@ -16,7 +16,7 @@ using JsonSerializer = LiteDB.JsonSerializer;
 
 namespace dmtools.GlossData;
 
-// Root myDeserializedClass = JsonConvert.DeserializeObject<List<Root>>(myJsonResponse);
+/* Root myDeserializedClass = JsonConvert.DeserializeObject<List<Root>>(myJsonResponse);
     public class AreaOfEffect
     {
         public string type { get; set; }
@@ -380,3 +380,4 @@ public class convertSpells
         }
     }
 }
+*/

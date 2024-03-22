@@ -280,6 +280,6 @@ public partial class MainWindow : Window
 
     private void Bt_OnClick(object? sender, RoutedEventArgs e)
     {
-        dmtools.GlossData.convertSpells.ConvertStartTest();
+        dmtools.GlossData.test.test0();
     }
 }
