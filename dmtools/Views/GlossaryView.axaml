@@ -9,14 +9,14 @@
         <TabItem
             Header="{DynamicResource Spells}">
             <Grid
-                ColumnDefinitions="*, 2*, *">
+                ColumnDefinitions="2*, 2*, *">
                 <Border
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
                     Classes="DefBorder">
                     <Grid
                         RowDefinitions="*, 10*"
-                        ColumnDefinitions="*, 2*">
+                        ColumnDefinitions="*, *">
                         <AutoCompleteBox
                             Name="SearchSpells"
                             Watermark="{DynamicResource Search}"
@@ -25,38 +25,21 @@
                             Grid.Row="0">
                         </AutoCompleteBox>
                         <DataGrid
-                            SelectionChanged="List_OnSelectionChanged"
                             Grid.Row="1"
-                        Name="SpelsGrid"
-                        Margin="5,0,5,5">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn
-                            Header="{DynamicResource NameS}"
-                            Binding="{Binding Path=name}">
-                            
-                        </DataGridTextColumn>
-                        <DataGridTextColumn
-                            Header="{DynamicResource AttackType}"
-                            Binding="{Binding Path=spellAttack}">
-                            
-                        </DataGridTextColumn>
-                        <DataGridTextColumn
-                            Header="{DynamicResource LevelS}"
-                            Binding="{Binding Path=level}">
-                            
-                        </DataGridTextColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
+                            Name="SpelsGrid"
+                            Margin="5,0,5,5">
+                            <DataGrid.Columns>    <!--SelectionChanged="List_OnSelectionChanged"-->
+                                <DataGridTextColumn
+                                    Header="{DynamicResource NameS}"
+                                    Binding="{Binding Path=name}">
+                                </DataGridTextColumn>
+                                <DataGridTextColumn
+                                    Header="{DynamicResource LevelS}"
+                                    Binding="{Binding Path=level}">
+                                </DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
                     </Grid>
-                    </Border>
-                <Border
-                    Grid.Column="1"
-                    Classes="DefBorder">
-                    <ScrollViewer>
-                        <controls:SpellDisplay>
-                            
-                        </controls:SpellDisplay>
-                    </ScrollViewer>
                 </Border>
                 <Border
                     Classes="DefBorder"

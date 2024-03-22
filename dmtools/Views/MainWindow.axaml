@@ -143,15 +143,13 @@
 			                </TextBlock>
 		                </StackPanel>
 	                </ToggleButton>
-	                <ToggleButton 
-		                IsChecked="False"
+	                <Button 
 		                Name="bt"
-		                Click="Home_OnClick"
+		                Click="Bt_OnClick"
 		                Margin="0,5,0,5"
 		                Padding="0"
 		                Height="40"
 		                FontSize="20"
-		                Command="{Binding $parent[Window].DataContext.Bot}"
 		                HorizontalAlignment="Stretch"
 		                VerticalAlignment="Top">
 		                <StackPanel Orientation="Horizontal">
@@ -165,7 +163,7 @@
 				                Text="Bot?">
 			                </TextBlock>
 		                </StackPanel>
-	                </ToggleButton>
+	                </Button>
                 </StackPanel>
                 <StackPanel
                     Grid.Row="1"

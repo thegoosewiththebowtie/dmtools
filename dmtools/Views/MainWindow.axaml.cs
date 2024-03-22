@@ -277,4 +277,9 @@ public partial class MainWindow : Window
     {
         throw new Exception();
     }
+
+    private void Bt_OnClick(object? sender, RoutedEventArgs e)
+    {
+        dmtools.GlossData.convertSpells.ConvertStartTest();
+    }
 }
