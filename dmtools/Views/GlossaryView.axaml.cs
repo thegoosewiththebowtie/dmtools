@@ -6,6 +6,7 @@ using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml.Styling;
 using dmtools.PopUps;
 using dmtools.GlossData;
+using DynamicData;
 using LiteDB;
 
 namespace dmtools.Views;
@@ -122,30 +123,123 @@ public class Bestiary
 }
 public partial class GlossaryView : UserControl
 {
-    /*public List<SpellData0> spells { get; set; }
+    public List<Spells> spells { get; set; }
     public GlossaryView()
     {
         InitializeComponent();
-        spells = new List<SpellData0>();
-        using (var ldb = new LiteDatabase("GlossData/Glossary.db"))
+        spells = new List<Spells>();
+        using (var ldb = new LiteDatabase("GlossData/Spells.db"))
         {
-            var spellss = ldb.GetCollection<SpellData0>();
+            var spellss = ldb.GetCollection<Spells>();
             foreach (var spl in spellss.FindAll())
             {
                 spells.Add(spl);
             }
         }
         SearchSpells.ItemsSource = spells;
-        SpelsGrid.ItemsSource = spells;
+        SpellsGrid.ItemsSource = spells;
     }
 
 
     private void List_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
-        using (var ldb = new LiteDatabase("GlossData/Glossary.db"))
+        var thisspell = (SpellsGrid.SelectedItem as Spells);
+        List<string> lvlss = new List<string>()
         {
-            var spellss = ldb.GetCollection<SpellData0>();
-            var selspl = spellss.FindById(((sender as DataGrid).SelectedItem as SpellData0).ID);
+            "Spell Slot Level 1 - " + thisspell.SL1,
+            "Spell Slot Level 2 - " + thisspell.SL2,
+            "Spell Slot Level 3 - " + thisspell.SL3,
+            "Spell Slot Level 4 - " + thisspell.SL4,
+            "Spell Slot Level 5 - " + thisspell.SL5,
+            "Spell Slot Level 6 - " + thisspell.SL6,
+            "Spell Slot Level 7 - " +   thisspell.SL7,
+            "Spell Slot Level 8 - " +   thisspell.SL8,
+            "Spell Slot Level 9 - " +   thisspell.SL9,
+            "Character Level 1 - " +   thisspell.CL1,
+            "Character Level 5 - " +    thisspell.CL5,
+            "Character Level 11 - " +   thisspell.CL11,
+            "Character Level 17 - " +   thisspell.CL17,
+            "Spell Slot Level 1 - " +   thisspell.HASL1,
+            "Spell Slot Level 2 - " +   thisspell.HASL2,
+            "Spell Slot Level 3 - " +   thisspell.HASL3,
+            "Spell Slot Level 4 - " +   thisspell.HASL4,
+            "Spell Slot Level 5 - " +  thisspell.HASL5,
+            "Spell Slot Level 6 - " +   thisspell.HASL6,
+            "Spell Slot Level 7 - " +   thisspell.HASL7,
+            "Spell Slot Level 8 - " +  thisspell.HASL8,
+            "Spell Slot Level 9 - " + thisspell.HASL9
+        };
+        for (int i = 0; i < lvlss.Count; i++)
+        {
+            if (lvlss[i].Length < 22)
+            {
+                lvlss[i] = "";
+            }
         }
-    }*/
+        lvlss.RemoveAll(string.IsNullOrWhiteSpace);
+        ThisSpell.Levels = lvlss;
+        ThisSpell.Desc = $"{thisspell.desc}\r\n\r\n{thisspell.higher_level}";
+        ThisSpell.Level = thisspell.level.ToString();
+        ThisSpell.SpellName = thisspell.name;
+        if (thisspell.components.Contains("V")) {
+            ThisSpell.Verbal = true;
+        }else 
+        {
+            ThisSpell.Verbal = false; 
+        }
+
+        if (thisspell.components.Contains("S"))
+        {
+            ThisSpell.Somatic = true;
+        }else
+        {
+            ThisSpell.Somatic = false;
+        }
+        if (thisspell.material != null)
+        {
+            ThisSpell.Material = true;
+            ThisSpell.Materials = thisspell.material;
+        }else
+        {
+            ThisSpell.Material = false;
+            ThisSpell.Materials = "none";
+        }
+        if (thisspell.concentration)
+        {
+            ThisSpell.Conc = true;
+        }else
+        {
+            ThisSpell.Conc = false;
+        }
+        if (thisspell.ritual)
+        {
+            ThisSpell.Ritual = true;
+        }else
+        {
+            ThisSpell.Ritual = false;
+        }
+        ThisSpell.School = thisspell.school;
+        ThisSpell.Duration = thisspell.duration;
+        ThisSpell.CastingTime = thisspell.casting_time;
+        ThisSpell.Range = thisspell.range;
+        ThisSpell.classes = $"Classes: {thisspell.classes}";
+        ThisSpell.subclasses = $"Subclasses: {thisspell.subclasses}";
+        if (thisspell.dctype != null || thisspell.dcsuccess != null || thisspell.dcdesc != null)
+        {
+            ThisSpell.dctypensucess = $"Saving Throw: {thisspell.dctype} {thisspell.dcsuccess} {thisspell.dcdesc}";
+        }
+        if (thisspell.DamageType != null || thisspell.attack_type != null)
+        {
+            ThisSpell.damage = $"Damage: {thisspell.DamageType} {thisspell.attack_type}";
+        }
+        int? m = null;
+        if (thisspell.AreaSize != -99)
+        {
+            m = thisspell.AreaSize;
+        }
+        if (thisspell.AreaType != null || m != null)
+        {
+            ThisSpell.Area = $"Area damage: {thisspell.AreaType} - {m}ft";
+        }
+    }
 }
