@@ -20,10 +20,10 @@ public partial class AboutView : UserControl
 
     public void SizeChange(object o, EventArgs e)
     {
-        dmt.FontSize = dmtl.Bounds.Width * 0.1;
+        dmt.FontSize = totwl.Bounds.Width * 0.1;
         totw.FontSize = totwl.Bounds.Width * 0.05;
-        idn.FontSize = dmtl.Bounds.Width * 0.05;
-        ndi.FontSize = dmtl.Bounds.Width * 0.05;
+        idn.FontSize = totwl.Bounds.Width * 0.05;
+        ndi.FontSize = totwl.Bounds.Width * 0.05;
     }
 
     public void TextIni()

@@ -3,7 +3,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Width="250"
+        Width="350"
         Height="150"
         Icon="/Assets/dmtools.ico"
         CanResize="False"
@@ -12,13 +12,16 @@
         x:Class="dmtools.PopUps.NewProfile"
         Title="New Profile">
         <Grid
-                ColumnDefinitions="Auto, *"
+                ColumnDefinitions="Auto, *, Auto"
                 RowDefinitions="*, *, *">
                 <Border
+                        Name="pfb"
                         Grid.RowSpan="2"
                         ClipToBounds="True"
+                        Width="{Binding #pfb.Bounds.Height}"
                         Classes="DefBorder">
                         <Image
+                                Margin="1"
                                 PointerPressed="Addpfp_OnPointerPressed"
                                 ClipToBounds="True"
                                 Name="addpfp"
@@ -63,6 +66,33 @@
                                 Content="{DynamicResource ToDoDelete}">
                         </Button>
                 </Grid>
+                <Button
+                        Name="Import"
+                        Width="{Binding #Import.Bounds.Height}"
+                        Grid.RowSpan="2"
+                        Margin="5"
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch"
+                        Grid.Row="0"
+                        Grid.Column="2"
+                        Click="Import_OnClick">
+                        <Grid
+                                RowDefinitions="*, Auto">
+                                <PathIcon 
+                                        Grid.Row="0"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Data="{StaticResource arrow_down_square_regular}"></PathIcon>
+                                <TextBlock
+                                        Margin="0,0,0,5"
+                                        Grid.Row="1"
+                                        Classes="Text1"
+                                        VerticalAlignment="Bottom"
+                                        HorizontalAlignment="Center"
+                                        Text="Import&#x0a;Profile">
+                                </TextBlock>
+                        </Grid>
+                </Button>
         </Grid>
     
 </Window>

@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using Avalonia;
+using Avalonia.Controls;
+using GLib;
 
 namespace dmtools.Generators;
 
@@ -17,10 +20,6 @@ public class NPC
         public static List<string> letters = new List<string>()
         {
            "a", "e", "i", "o", "u", "b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z"
-        };
-        public static List<string> statnames = new List<string>()
-        {
-            "Strength - ", "Dexterity - ", "Constitution - ", "Intelligence - ", "Wisdom - ", "Charisma - "
         };
         public static List<string> Races = new List<string>()
         {
@@ -43,22 +42,36 @@ public class NPC
         {
             "Extremely skinny", "Skinny", "Regular", "Overweight", "Extremely Overweight"
         };
+        public static List<string> DisLikes = new List<string>()
+        {
+            "Violence/Peace","Talking to strangers/Meet new people", "Stay alone", "Be outside", "Read", "Their eyecolor",
+            "Their height", "Their weight", "To make desicions", "Sports", "People around them", "One-night stands",
+            "Nature/Technology", "Red/Orange/Yellow/Green/Blue/Purple", "Kids", "Their neighbours", "Smart people/Dumb people",
+            "One of your party members", "Darkness", "Spider", "Random person from their village", "Sleeping",
+            "Ruler of the country/Their work/Their work/Their work",/*"","","",
+            "","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",
+            "","","","","","","","",*/
+            
+            
+        };
         public static Random rnd = new Random();
-        public static List<string> CreateNPC(string MinMaxAge)
+        public static List<List<string>> CreateNPC(string MinMaxAge)
         {
             string n = Name();
             string sn = Name();
             List<string> stats = new List<string>();
             for (int i = 0; i < 6; i++)
             {
-                stats.Add(statnames[i] + Convert.ToString(Stats()));
+                stats.Add( Convert.ToString(Stats()));
             }
-            List<string> NPC = new List<string>()
-            {
-                Name(), Name(),
-            };
             string MinMaxAge0 = MinMaxAge;
-            NPC.AddRange(Appearance(MinMaxAge0));
+            var DLL = DisLikesR();
+            List<List<string>> NPC = new List<List<string>>()
+            {
+                new List<string>(){n, sn},
+                Appearance(MinMaxAge0),
+                DLL[0], DLL[1]
+            };
             return NPC;
         }
         public static string Name()
@@ -168,7 +181,6 @@ public class NPC
                 age = (int)Math.Ceiling(age * 0.75);
                 eyecolor = Eyecolor[rnd.Next(0, 4)];
             }
-
             List<string> appres = new List<string>()
             {
                 Race, age.ToString(), hair, height.ToString(), bodytype, eyecolor, 
@@ -177,5 +189,39 @@ public class NPC
                 Stats().ToString(), Stats().ToString(), Stats().ToString(), Stats().ToString(), Stats().ToString(), Stats().ToString(),
             };
             return appres;
+        }
+
+        public static List<List<string>> DisLikesR()
+        {
+            List<string> Dis = new List<string>();
+            List<string> Likes = new List<string>();
+            foreach (var dl in DisLikes)
+            {
+                var i = rnd.Next(0, 4);
+                var dli = dl;
+                var l = dl.Split("/").Length;
+                if (l != null)
+                {
+                    var dd =rnd.Next(0, l);
+                    dli = dl.Split("/")[dd];
+                }
+                switch (i)
+                {
+                    case 0:
+                        Dis.Add(dli);
+                        break;
+                    case 1:
+                        Likes.Add(dli);
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                }
+            }
+            List<List<string>> Return = new List<List<string>>();
+            Return.Add(Dis);
+            Return.Add(Likes);
+            return Return;
         }
 }

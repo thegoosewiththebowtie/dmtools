@@ -1,0 +1,188 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:dmtools.Templates">
+    <Design.PreviewWith>
+        <controls:GeneratedNPC />
+    </Design.PreviewWith>
+
+    <Style Selector="controls|GeneratedNPC">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Grid
+                    ColumnDefinitions="*,*,*,*,*,*"
+                    RowDefinitions="*,*,*,*,*,*,8*,2*">
+                    <Border
+                        Grid.Column="0"
+                        Grid.ColumnSpan="6"
+                        Grid.RowSpan="6"
+                        Classes="DefBorder">
+                        <TextBlock
+                            Padding="10"
+                            Text="{TemplateBinding des}"
+                            Classes="Header3">
+                        </TextBlock>
+                    </Border>
+                    <Border
+                        Grid.Column="0"
+                        Grid.Row="6"
+                        Grid.ColumnSpan="3"
+                        Classes="DefBorder">
+                        <DockPanel
+                            Margin="0">
+                                <TextBlock
+                                    DockPanel.Dock="Top"
+                                    Margin="5"
+                                    FontSize="20"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Left"
+                                    Text="{DynamicResource likes}">
+                                </TextBlock>
+                            <Rectangle
+                                Height="1"
+                                DockPanel.Dock="Top"
+                                Fill="DimGray">
+                            </Rectangle>
+                        <ListBox
+                            ItemsSource="{TemplateBinding likes}"
+                            Background="Transparent"></ListBox>
+                        </DockPanel>
+                    </Border>
+                    <Border
+                        Grid.ColumnSpan="3"
+                        Grid.Column="3"
+                        Grid.Row="6"
+                        Classes="DefBorder">
+                        <DockPanel
+                            Margin="0">
+                            <TextBlock
+                                DockPanel.Dock="Top"
+                                Margin="5"
+                                FontSize="20"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Right"
+                                Text="{DynamicResource dislikes}">
+                            </TextBlock>
+                            <Rectangle
+                                Height="1"
+                                DockPanel.Dock="Top"
+                                Fill="DimGray">
+                            </Rectangle>
+                        <ListBox
+                            ItemsSource="{TemplateBinding dislikes}"
+                            Background="Transparent"></ListBox>
+                        </DockPanel>
+                    </Border>
+                    <Border
+                        Grid.Row="7"
+                        Grid.Column="0"
+                        Classes="DefBorder">
+                        <Grid
+                            RowDefinitions="*,3*">
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Text="{DynamicResource Strength}"></TextBlock>
+                            <TextBlock
+                                Classes="Header1"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Grid.Row="1"
+                                Text="{TemplateBinding str}"></TextBlock>
+                        </Grid>
+                    </Border>
+                    <Border
+                        Grid.Row="7"
+                        Grid.Column="1"
+                        Classes="DefBorder">
+                        <Grid
+                            RowDefinitions="*,3*">
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Text="{DynamicResource Dexterity}"></TextBlock>
+                            <TextBlock
+                                Classes="Header1"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Grid.Row="1"
+                                Text="{TemplateBinding dex}"></TextBlock>
+                        </Grid>
+                    </Border>
+                    <Border
+                        Grid.Row="7"
+                        Grid.Column="2"
+                        Classes="DefBorder">
+                        <Grid
+                            RowDefinitions="*,3*">
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Text="{DynamicResource Constitution}"></TextBlock>
+                            <TextBlock
+                                Classes="Header1"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Grid.Row="1"
+                                Text="{TemplateBinding str}"></TextBlock>
+                        </Grid>
+                    </Border>
+                    <Border
+                        Grid.Row="7"
+                        Grid.Column="3"
+                        Classes="DefBorder">
+                        <Grid
+                            RowDefinitions="*,3*">
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Text="{DynamicResource Intelligence}"></TextBlock>
+                            <TextBlock
+                                Classes="Header1"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Grid.Row="1"
+                                Text="{TemplateBinding inte}"></TextBlock>
+                        </Grid>
+                    </Border>
+                    <Border
+                        Grid.Row="7"
+                        Grid.Column="4"
+                        Classes="DefBorder">
+                        <Grid
+                            RowDefinitions="*,3*">
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Text="{DynamicResource Wisdom}"></TextBlock>
+                            <TextBlock
+                                Classes="Header1"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Grid.Row="1"
+                                Text="{TemplateBinding wis}"></TextBlock>
+                        </Grid>
+                    </Border>
+                    <Border
+                        Grid.Row="7"
+                        Grid.Column="5"
+                        Classes="DefBorder">
+                        <Grid
+                            RowDefinitions="*,3*">
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Text="{DynamicResource Charisma}"></TextBlock>
+                            <TextBlock
+                                Classes="Header1"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Grid.Row="1"
+                                Text="{TemplateBinding cha}"></TextBlock>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

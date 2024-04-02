@@ -66,6 +66,10 @@ public partial class MainWindow : Window
             ProfilesButtons.Children.Add(tb);
         }
         profid = profile.ProfileID;
+        if (profid == 0 || profid == null)
+        {
+            return;
+        }
         settings = new ConfigurationBuilder<ISettings>().UseIniFile("Settings/q0" + profid +".ini").Build();
         prnm.Text = settings.Profile;
         Button add = new Button();
@@ -276,5 +280,10 @@ public partial class MainWindow : Window
     private void InputElement_OnPointerPressed(object? sender, PointerPressedEventArgs e)
     {
         throw new Exception();
+    }
+
+    private void Bt_OnClick(object? sender, RoutedEventArgs e)
+    {
+        dmtools.GlossData.test.test0();
     }
 }

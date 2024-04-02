@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
@@ -97,6 +98,8 @@ public class NPC
     public string Experience { get; set; }
     public string Health { get; set; }
     public string ArmorClass { get; set; }
+    public string Likes { get; set; }
+    public string Dislikes { get; set; }
 }
 public class ToDoL
 {
@@ -131,6 +134,12 @@ public interface ISettings
     int PrevDay { get; set; }
     string Language { get; set; }
     int ID { get; set; }
+}
+
+public class SelNpcs
+{
+    public int id { get; set; }
+    public int init { get; set; }
 }
 public class Months0
 {
@@ -170,8 +179,8 @@ public partial class HomeView : UserControl
         MainWindow.SizzeChanged += SizeChange;
         Picture.Closeed += ClozedEv;
         Sure.Delete += pcupdate;
-        Sure.Delete += SizeChange;
         Sure.Delete += npcupdate;
+        Sure.Delete += SizeChange;
         NoteInit();
         DashFightUp();
         picinit();
@@ -406,7 +415,16 @@ public partial class HomeView : UserControl
     //notes
     private void NoteInit()
     {
-        MainNotesT.Text = settings.MainNotes;
+        var res = String.Empty;
+        if (settings.MainNotes == null)
+        {
+            return;
+        }
+        foreach (var x in settings.MainNotes.Split(@"\r\n"))
+        {
+            res += $"{x}\r\n";
+        }
+        MainNotesT.Text = res;
     }
     private void SaveNotes_OnClick(object? sender, RoutedEventArgs e)
     {
@@ -422,15 +440,17 @@ public partial class HomeView : UserControl
     
     //fight
     public List<int> init = new List<int>();
+    private List<SelNpcs> selnpc = new List<SelNpcs>();
     public List<FightDataNpc> npcsf = new List<FightDataNpc>(); 
     ObservableCollection<FightData> fin = new ObservableCollection<FightData>();
-    public void DashFightUp()
+    public async void DashFightUp()
     {
         using (var LdbPC = new LiteDatabase(settings.DataPath))
         {
             fin.Clear();
             FightGrid.ItemsSource = null;
             var playChar = LdbPC.GetCollection<PlayerCharacter>();
+            var npcChar = LdbPC.GetCollection<NPC>();
             int c = 0;
             foreach (var pc in playChar.FindAll())
             {
@@ -455,6 +475,29 @@ public partial class HomeView : UserControl
                 };
                 c++;
                 fin.Add(fightList);
+            }
+            List<int> listsn = new List<int>();
+            foreach (var sn in selnpc)
+            {
+                listsn.Add(sn.id);
+            }
+            foreach (var nep in npcChar.FindAll())
+            {
+                if (listsn.Contains(nep.ID) && Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+                {
+                    var thisnpcindex = new int();
+                    thisnpcindex = selnpc.FindIndex(r => r.id == nep.ID);
+                    FightData fightList = new FightData()
+                    {
+                        Initiative = selnpc[thisnpcindex].init,
+                        Name =  nep.FirstName,
+                        Player = "NPC",
+                        ArCl = Convert.ToInt32(nep.ArmorClass),
+                        ID = nep.ID,
+                        Health = Convert.ToInt32(nep.Health),
+                    };
+                    fin.Add(fightList);
+                }
             }
             foreach (var variNpc in npcsf)
             {
@@ -483,6 +526,24 @@ public partial class HomeView : UserControl
     {
         if ((sender as ToggleButton).IsChecked == true && Avalonia.Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
+            var MusDir = new DirectoryInfo(settings.MusPath).GetDirectories();
+            MoodChooser.Items.Clear();
+            if (MusDir.Count() == 0)
+            {
+                return;
+            }
+            foreach (var musdir in MusDir)
+            {
+                var name = musdir.Name;
+                MoodChooser.Items.Add(name);
+            }
+            foreach (var m in MoodChooser.Items)
+            {
+                if (m.ToString() == "Battle" || m.ToString() == "Fight" || m.ToString() == "fight" || m.ToString() == "battle")
+                {
+                    MoodChooser.SelectedItem = m;
+                }
+            }
             int s = 1;
             using (var LdbPC = new LiteDatabase(settings.DataPath))
             {
@@ -525,12 +586,31 @@ public partial class HomeView : UserControl
         }
         else
         {
+            var MusDir = new DirectoryInfo(settings.MusPath).GetDirectories();
+            MoodChooser.Items.Clear();
+            if (MusDir.Count() == 0)
+            {
+                return;
+            }
+            foreach (var musdir in MusDir)
+            {
+                var name = musdir.Name;
+                MoodChooser.Items.Add(name);
+            }
+            foreach (var m in MoodChooser.Items)
+            {
+                if (m.ToString() == "Normal" || m.ToString() == "Neutral" || m.ToString() == "normal" || m.ToString() == "neutral")
+                {
+                    MoodChooser.SelectedItem = m;
+                }
+            }
             npcsf.Clear();
             AddCus.IsEnabled = false;
             AddNpc.IsEnabled = false;
             FightGrid.Columns[0].IsVisible = false;
             FightGrid.Columns[1].Sort();
             init.Clear();
+            selnpc.Clear();
         }
         DashFightUp();
     }
@@ -556,9 +636,54 @@ public partial class HomeView : UserControl
         }
         DashFightUp();
     }
-    private void AddNpc_OnClick(object? sender, RoutedEventArgs e)
+    private async void AddNpc_OnClick(object? sender, RoutedEventArgs e)
     {
-        
+        if (Avalonia.Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        {
+            AddNpc addNpc = new AddNpc();
+            await addNpc.ShowDialog(desktop.MainWindow);
+            if (addNpc.SelNpc == null)
+            {
+                return;
+            }
+            List<int> listsn = new List<int>();
+            foreach (var sn in selnpc)
+            {
+                listsn.Add(sn.id);
+            }
+            if (listsn.Contains(addNpc.SelNpc.ID))
+            {
+                NO no = new NO("This characted is already in a grid or smth // i need to make a better error window");
+                no.ShowDialog(desktop.MainWindow);
+                return;
+            }
+            using (var LdbPC = new LiteDatabase(settings.DataPath))
+            {
+                var npcChar = LdbPC.GetCollection<NPC>();
+                Init inn = new Init(npcChar.FindById(addNpc.SelNpc.ID).FirstName);
+                await inn.ShowDialog(desktop.MainWindow);
+                var dice = new int();
+                if (inn.result == -1)
+                { 
+                    return;
+                }
+                if (inn.result < 21 && inn.result > 0)
+                { 
+                    dice = inn.result;
+                }
+                else 
+                {
+                    dice = rndm.Next(1, 21);
+                }
+                SelNpcs sdsdf = new SelNpcs()
+                {
+                    id = addNpc.SelNpc.ID,
+                    init = (int)Math.Floor(Convert.ToDecimal((Convert.ToInt32(npcChar.FindById(addNpc.SelNpc.ID).Dexterity) - 10) / 2)) + dice
+                };
+                selnpc.Add(sdsdf);
+            }
+            DashFightUp();
+        }
     }
     
     
@@ -820,7 +945,9 @@ public partial class HomeView : UserControl
     
     //media
     
-    
+    private void Media_OnPointerReleased(object? sender, PointerReleasedEventArgs e)
+    {
+    }
     //music
     public WaveOutEvent mainPlayer = new WaveOutEvent();
     public Random rndm = new Random();
@@ -1137,7 +1264,8 @@ public partial class HomeView : UserControl
             {
                 Level = "1", ArmorClass = "10", Health = "5", Strength = "10", Dexterity = "10",
                 Constitution = "10", Experience = "0", Wisdom = "10", Intelligence = "10", Charisma = "10", IsCCharisma = false,
-                IsCConstitution = false, IsCDexterity = false, IsCStrength = false, IsCIntelligence = false, IsCWisdom = false
+                IsCConstitution = false, IsCDexterity = false, IsCStrength = false, IsCIntelligence = false, IsCWisdom = false,
+                Likes = string.Empty, Dislikes = string.Empty
             });
         }
         npcupdate(sender, e);
@@ -1175,6 +1303,14 @@ public partial class HomeView : UserControl
                 {
                     pc.IsCCharisma, pc.IsCStrength, pc.IsCDexterity, pc.IsCConstitution, pc.IsCIntelligence, pc.IsCWisdom,
                 };
+                if (pc.Likes != null)
+                {
+                    charForm.Likes = pc.Likes.Split("/").ToList();
+                }
+                if (pc.Dislikes != null)
+                {
+                    charForm.Dis = pc.Dislikes.Split("/").ToList();
+                }
                 wpnpc.Children.Add(charForm);
             }
         }

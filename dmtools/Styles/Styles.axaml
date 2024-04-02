@@ -5,23 +5,26 @@
             <!-- Add Controls for Previewer Here -->
         </Border>
     </Design.PreviewWith>
-    <Style Selector="TextBlock.Header0">
-        <Setter Property="FontSize" Value="72"></Setter>
-    </Style>
-    <Style Selector="TextBlock.Header1">
-        <Setter Property="FontSize" Value="48"></Setter>
-    </Style>
-    <Style Selector="TextBlock.Header2">
-        <Setter Property="FontSize" Value="24"></Setter>
-    </Style>
-    <Style Selector="TextBlock.Header3">
-        <Setter Property="FontSize" Value="16"></Setter>
-    </Style>
     <Style Selector="TextBlock.Text0">
+        <Setter Property="FontSize" Value="12"></Setter>
+    </Style>
+    <Style Selector="TextBlock.Text1">
         <Setter Property="FontSize" Value="14"></Setter>
     </Style>
-    <Style Selector="TextBlock.Val0">
-        <Setter Property="FontSize" Value="72"></Setter>
+    <Style Selector="TextBlock.Text2">
+        <Setter Property="FontSize" Value="16"></Setter>
+    </Style>
+    <Style Selector="TextBlock.Text3">
+        <Setter Property="FontSize" Value="20"></Setter>
+    </Style>
+    <Style Selector="TextBlock.Text4">
+        <Setter Property="FontSize" Value="22"></Setter>
+    </Style>
+    <Style Selector="TextBlock.Text5">
+        <Setter Property="FontSize" Value="24"></Setter>
+    </Style>
+    <Style Selector="TextBlock.Number">
+        <Setter Property="FontSize" Value="30"></Setter>
     </Style>
     <Style Selector="Border.DefBorder">
         <Setter Property="BorderBrush" Value="DimGray"></Setter>

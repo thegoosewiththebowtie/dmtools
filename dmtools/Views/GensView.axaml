@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="using:dmtools.Templates"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="dmtools.Views.GensView">
     <TabControl>
@@ -42,15 +43,26 @@
                 <Border
                     Grid.Column="1"
                     Classes="DefBorder">
-                    <TextBlock
-                        Name="CurrentNpc"
-                        FontSize="22">
-                    </TextBlock>
+                    <controls:GeneratedNPC
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch"
+                        Name="CurrentNpc">
+                    </controls:GeneratedNPC>
                 </Border>
                 <Border
                     Classes="DefBorder"
                     Grid.Column="2">
                     <StackPanel>
+                        <Button
+                            Name="SaveNPC"
+                            Click="SaveNPC_OnClick"
+                            Margin="5"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Stretch"
+                            VerticalContentAlignment="Center"
+                            HorizontalContentAlignment="Center"
+                            Content="{DynamicResource Save}">
+                        </Button>
                         <Button
                                 Name="GenerateNPC"
                                 Click="GenerateNPC_OnClick"
@@ -99,45 +111,7 @@
                                 Text="{DynamicResource Old}">
                             </TextBlock>
                         </ComboBox>
-                        <ComboBox
-                            PlaceholderText=""
-                            Margin="5"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Stretch"
-                            VerticalContentAlignment="Center"
-                            HorizontalContentAlignment="Center">
-                        </ComboBox>
-                        <ComboBox
-                            Margin="5"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Stretch"
-                            VerticalContentAlignment="Center"
-                            HorizontalContentAlignment="Center">
-                        </ComboBox>
-                        <ComboBox
-                            Margin="5"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Stretch"
-                            VerticalContentAlignment="Center"
-                            HorizontalContentAlignment="Center">
-                        </ComboBox>
-                        <ComboBox
-                            Margin="5"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Stretch"
-                            VerticalContentAlignment="Center"
-                            HorizontalContentAlignment="Center">
-                        </ComboBox>
-                        <Slider
-                            Margin="5"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Stretch">
-                        </Slider>
-                        <Slider
-                            Margin="5"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Stretch">
-                        </Slider>
+                        
                     </StackPanel>
                 </Border>
             </Grid>

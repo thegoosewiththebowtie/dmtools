@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Controls.Primitives;
+using Castle.Components.DictionaryAdapter.Xml;
+using Castle.Core.Smtp;
 using Config.Net;
 using dmtools.PopUps;
 using dmtools.Views;
@@ -194,6 +197,24 @@ public class NpcForm : TemplatedControl
         get => GetValue(profbonProperty);
         set => SetValue(profbonProperty, value);
     }
+
+    public static readonly StyledProperty<List<string>> LikesProperty = AvaloniaProperty.Register<NpcForm, List<string>>(
+        "Likes");
+
+    public List<string> Likes
+    {
+        get => GetValue(LikesProperty);
+        set => SetValue(LikesProperty, value);
+    }
+
+    public static readonly StyledProperty<List<string>> DisProperty = AvaloniaProperty.Register<NpcForm, List<string>>(
+        "Dis");
+
+    public List<string> Dis
+    {
+        get => GetValue(DisProperty);
+        set => SetValue(DisProperty, value);
+    }
     
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     { 
@@ -217,14 +238,136 @@ public class NpcForm : TemplatedControl
             {
                 var pccol = LdbPC.GetCollection<NPC>();
                 pccol.Delete(ID );
+                var L = string.Empty;
+                var D = string.Empty;
+                if (Likes != null)
+                {
+                    L = String.Join("/", Likes.ToArray());
+                }
+                else
+                {
+                    L = "Empty, you should add something :>";
+                }
+                if (Dis != null)
+                {
+                    D = String.Join("/", Dis.ToArray());
+                }
+                else
+                {
+                    D = "Empty, you should add something :>";
+                }
                 pccol.Insert(new NPC()
                 {
                     ID = ID, FirstName = FirstName, OtherName = OtherNames, Player = Player, Race = Race, Class = Class,
                     Backgroundd = Backgroundd, Alligment = Alligment, Notes = Notes, Strength = StrVal, Dexterity = DexVal,
                     Constitution = ConVal, Intelligence = IntVal, Wisdom = WisVal, Charisma = ChaVal, Level = Level,
                     Experience = Exp, Health = Health, ArmorClass = Ac, IsCCharisma = IsCheck[0], IsCWisdom = IsCheck[5],
-                    IsCIntelligence = IsCheck[4], IsCConstitution = IsCheck[3], IsCDexterity = IsCheck[2], IsCStrength = IsCheck[1]
+                    IsCIntelligence = IsCheck[4], IsCConstitution = IsCheck[3], IsCDexterity = IsCheck[2], IsCStrength = IsCheck[1],
+                    Likes = L, Dislikes = D
                 });
+            }
+        };
+        List<string> empty = new List<string>() { "Empty, you should add something :>" };
+        var DeleteL = e.NameScope.Find<Button>("DELETEL");
+        DeleteL.Click += (sender, args) =>
+        {
+            var li = e.NameScope.Find<ListBox>("LikesList");
+            if (li.ItemCount != null && li.SelectedItem != null)
+            {
+                var f = li.SelectedValue.ToString();
+                li.SelectedItem = null;
+                Likes.Remove(f);
+                li.ItemsSource = empty;
+                if (Likes.Count != 0)
+                {
+                    li.ItemsSource = Likes;
+                }
+            }
+        };
+        var DeleteDL = e.NameScope.Find<Button>("DELETEDL");
+        DeleteDL.Click += (sender, args) =>
+        {
+            var li = e.NameScope.Find<ListBox>("DisLikesList");
+            if (li.ItemCount != null && li.SelectedItem != null)
+            {
+                var f = li.SelectedValue.ToString();
+                li.SelectedItem = null;
+                Dis.Remove(f);
+                li.ItemsSource = empty;
+                if (Dis.Count != 0)
+                {
+                    li.ItemsSource = Dis;    
+                }
+            }
+        };
+        var llbtn = e.NameScope.Find<ToggleButton>("AddSCL");
+        llbtn.IsCheckedChanged += (sender, args) =>
+        {
+            var gr = e.NameScope.Find<Grid>("addl");
+            var li = e.NameScope.Find<ListBox>("LikesList");
+            if ((sender as ToggleButton).IsChecked == true)
+            {
+                gr.IsVisible = true;
+                li.IsVisible = false;
+            }
+            else
+            {
+                gr.IsVisible = false;
+                li.IsVisible = true;
+            }
+        };
+        var dlbtn = e.NameScope.Find<ToggleButton>("AddSCDL");
+        dlbtn.IsCheckedChanged += (sender, args) =>
+        {
+            var gr = e.NameScope.Find<Grid>("addDl");
+            var li = e.NameScope.Find<ListBox>("DisLikesList");
+            if ((sender as ToggleButton).IsChecked == true)
+            {
+                gr.IsVisible = true;
+                li.IsVisible = false;
+            }
+            else
+            {
+                gr.IsVisible = false;
+                li.IsVisible = true;
+            }
+        };
+        var addL = e.NameScope.Find<Button>("SaveL");
+        addL.Click += (sender, args) =>
+        {
+            var li = e.NameScope.Find<ListBox>("LikesList");
+            var Ladd = e.NameScope.Find<TextBox>("Ladd");
+            if (Ladd.Text != null)
+            {
+                if (Likes == null)
+                {
+                    Likes = new List<string>() { Ladd.Text };
+                }
+                else
+                {
+                    Likes.Add(Ladd.Text);
+                }
+                li.ItemsSource = null;
+                li.ItemsSource = Likes;
+            }
+        };
+        var addDL = e.NameScope.Find<Button>("SaveDL");
+        addDL.Click += (sender, args) =>
+        {
+            var li = e.NameScope.Find<ListBox>("DisLikesList");
+            var DellA = e.NameScope.Find<TextBox>("DLadd");
+            if (DellA.Text != null)
+            {
+                if (Dis == null)
+                {
+                    Dis = new List<string>() { DellA.Text };
+                }
+                else
+                {
+                    Dis.Add(DellA.Text);
+                }
+                li.ItemsSource = null;
+                li.ItemsSource = Dis;
             }
         };
         var lvl = e.NameScope.Find<plusminbuttonless>("LevelN");

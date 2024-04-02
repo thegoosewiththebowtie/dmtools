@@ -14,7 +14,7 @@ public class MainWindowViewModel : ViewModelBase
     {
         Profile profile = new ConfigurationBuilder<Profile>().UseIniFile("Profile.ini").Build();
         DirectoryInfo prof = new DirectoryInfo("Settings"); 
-        if (prof.GetFiles().Length == 0)
+        if (prof.GetFiles().Length == 0 || profile.ProfileID == 0)
         {
            Content = new AddProfileViewModel();
         }
@@ -56,6 +56,11 @@ public class MainWindowViewModel : ViewModelBase
     public void Glossary()
     {
         var vm = new GlossaryViewModel();
+        Content = vm;
+    }
+    public void Bot()
+    {
+        var vm = new BotTestViewModel();
         Content = vm;
     }
     public void Settings()

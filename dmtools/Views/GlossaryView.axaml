@@ -9,54 +9,50 @@
         <TabItem
             Header="{DynamicResource Spells}">
             <Grid
-                ColumnDefinitions="*, 2*, *">
+                ColumnDefinitions="2*, 2*, *">
                 <Border
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
                     Classes="DefBorder">
                     <Grid
                         RowDefinitions="*, 10*"
-                        ColumnDefinitions="*, 2*">
+                        ColumnDefinitions="*, *">
                         <AutoCompleteBox
                             Name="SearchSpells"
                             Watermark="{DynamicResource Search}"
-                            Margin="5"
+                            Margin="5,5,10,5"
                             Grid.Column="0"
                             Grid.Row="0">
                         </AutoCompleteBox>
                         <DataGrid
-                            SelectionChanged="List_OnSelectionChanged"
                             Grid.Row="1"
-                        Name="SpelsGrid"
-                        Margin="5,0,5,5">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn
-                            Header="{DynamicResource NameS}"
-                            Binding="{Binding Path=name}">
-                            
-                        </DataGridTextColumn>
-                        <DataGridTextColumn
-                            Header="{DynamicResource AttackType}"
-                            Binding="{Binding Path=spellAttack}">
-                            
-                        </DataGridTextColumn>
-                        <DataGridTextColumn
-                            Header="{DynamicResource LevelS}"
-                            Binding="{Binding Path=level}">
-                            
-                        </DataGridTextColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
+                            SelectionChanged="List_OnSelectionChanged"
+                            Name="SpellsGrid"
+                            Margin="5,0,5,5">
+                            <DataGrid.Columns>    <!--SelectionChanged="List_OnSelectionChanged"-->
+                                <DataGridTextColumn
+                                    Header="{DynamicResource NameS}"
+                                    Binding="{Binding Path=name}">
+                                </DataGridTextColumn>
+                                <DataGridTextColumn
+                                    Header="{DynamicResource LevelS}"
+                                    Binding="{Binding Path=level}">
+                                </DataGridTextColumn>
+                                <DataGridTextColumn
+                                    Header="{DynamicResource Class}"
+                                    Binding="{Binding Path=classes}">
+                                </DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
                     </Grid>
-                    </Border>
+                </Border>
                 <Border
+                    Margin="-5,5,5,5"
                     Grid.Column="1"
                     Classes="DefBorder">
-                    <ScrollViewer>
-                        <controls:SpellDisplay>
-                            
-                        </controls:SpellDisplay>
-                    </ScrollViewer>
+                    <controls:SpellDisplay
+                        Name="ThisSpell">
+                    </controls:SpellDisplay>
                 </Border>
                 <Border
                     Classes="DefBorder"
@@ -75,6 +71,64 @@
                 </Border>
             </Grid>
         </TabItem>
+        <TabItem
+            Classes="MainTabs"
+            Header="Bestiary">
+            <Grid
+                ColumnDefinitions="*, 2*, *">
+                <Border
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Classes="DefBorder">
+                </Border>
+                    <Grid
+                        Grid.Column="0"
+                        RowDefinitions="*, 10*"
+                        ColumnDefinitions="*">
+                        <AutoCompleteBox
+                            Name="SearchBest"
+                            Watermark="{DynamicResource Search}"
+                            Margin="5,5,10,5"
+                            Grid.Column="0"
+                            Grid.Row="0">
+                        </AutoCompleteBox>
+                        <DataGrid
+                            Grid.Row="1"
+                            SelectionChanged="BestGrid_OnSelectionChanged"
+                            Name="BestGrid"
+                            Margin="5,0,5,5">
+                            <DataGrid.Columns>    <!--SelectionChanged="List_OnSelectionChanged"-->
+                                <DataGridTextColumn
+                                    Header="{DynamicResource NameS}"
+                                    Binding="{Binding Path=name}">
+                                </DataGridTextColumn>
+                                <DataGridTextColumn
+                                    Header="{DynamicResource LevelS}"
+                                    Binding="{Binding Path=level}">
+                                </DataGridTextColumn>
+                                <DataGridTextColumn
+                                    Header="{DynamicResource Class}"
+                                    Binding="{Binding Path=classes}">
+                                </DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                <Border
+                    Margin="-5,5,5,5"
+                    Grid.Column="1"
+                    Classes="DefBorder">
+                    <controls:BestDisplay
+                        Name="ThisBest">
+                    </controls:BestDisplay>
+                </Border>
+                <Border
+                    Classes="DefBorder"
+                    Grid.Column="2">
+                    <StackPanel>
+                        
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </TabItem>
     </TabControl>
-    
 </UserControl>

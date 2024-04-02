@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Runtime.InteropServices.JavaScript;
-using System.Threading;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -19,6 +18,12 @@ using Config.Net;
 using dmtools.PopUps;
 using LiteDB;
 using dmtools.Templates;
+using GLib;
+using Newtonsoft.Json.Linq;
+using Application = Avalonia.Application;
+using Process = System.Diagnostics.Process;
+using Thread = System.Threading.Thread;
+
 namespace dmtools.Views;
 
 public partial class SettingsView : UserControl
@@ -315,5 +320,96 @@ public partial class SettingsView : UserControl
     private void DmName_OnTextChanged(object? sender, TextChangedEventArgs e)
     {
         settings.Player = (sender as TextBox).Text;
+    }
+
+    private async void Export_OnClick(object? sender, RoutedEventArgs e)
+    {
+        try
+        {
+            var topLevel = TopLevel.GetTopLevel(this);
+            var result = await topLevel.StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions()
+                { Title = "Choose directory for exported profile" });
+            if (result.Count == 0)
+            {
+                return;
+            }
+            var thep =
+                $"{result[0].Path.ToString().Replace("file:///", "")}/ExportedProfiles/{settings.Profile}by{settings.Player}";
+            if (File.Exists($"{thep}.zip"))
+            {
+                File.Delete($"{thep}.zip");
+            }
+            if (Directory.Exists(thep))
+            {
+                Directory.Delete(thep, true);
+            }
+            System.IO.Directory.CreateDirectory(thep);
+            System.IO.File.Copy($"Settings/q0{profid}.ini", $"{thep}/Settings.ini");
+            System.IO.File.Copy($"Data/q0{profid}.db", $"{thep}/Data.db");
+            System.IO.File.Copy($"Data/q0{profid}.bmp", $"{thep}/PfP.bmp");
+            System.IO.Compression.ZipFile.CreateFromDirectory(thep, $"{thep}.zip", CompressionLevel.Optimal, false);
+            System.IO.Directory.Delete(thep, true);
+        }
+        catch (Exception exception)
+        {
+            if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            {
+                NO no = new NO(exception.ToString());
+                no.ShowDialog(desktop.MainWindow);
+            }
+        }
+    }
+
+    private void Import_OnClick(object? sender, RoutedEventArgs e)
+    {
+        Importing();
+    }
+    public static async void Importing()
+    {
+        if (Avalonia.Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        {
+            var topLevel = TopLevel.GetTopLevel(desktop.MainWindow);
+            var Zip = new FilePickerFileType("(The Magnus)Archive(s) REFERENCE!!")
+            {
+                Patterns = new[] { "*.zip"},
+                AppleUniformTypeIdentifiers = new[] { "public.archive" }, 
+                MimeTypes = new[] { "Archive/*" }
+            };
+            var result = await topLevel.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions()
+            {
+            Title = "Choose profile to import",
+            FileTypeFilter = new []{Zip} 
+            });
+            if (result.Count == 0)
+            {
+               return;
+            } 
+            var thezip = $"{result[0].Path.ToString().Replace("file:///", "")}";
+            var thep =  $"{thezip.Replace($"{result[0].Name}", "")}";
+            ZipFile.ExtractToDirectory(thezip, $"{thep}/extr", true);
+            Profile profile = new ConfigurationBuilder<Profile>().UseIniFile("Profile.ini").Build();
+            DirectoryInfo prof = new DirectoryInfo("Settings");
+            int num;
+            if (prof.GetFiles().Length == 0)
+            {
+                profile.ProfileID = 1;
+                num = 1;
+            }
+            else
+            {
+                num = Convert.ToInt32(prof.GetFiles()[prof.GetFiles().Length-1].Name.Replace("q0", "").Replace(".ini", "")) +1;
+                profile.ProfileID = num;
+            }
+            File.Copy($"{thep}/extr/Settings.ini", $"Settings/q0{num}.ini");
+            ISettings settings = new ConfigurationBuilder<ISettings>().UseIniFile($"Settings/q0{num}.ini").Build();
+            settings.DataPath = $"Data/q0{num}.db";
+            File.Copy($"{thep}/extr/Data.db",$"Data/q0{num}.db"); 
+            File.Copy($"{thep}/extr/PfP.bmp",$"Data/q0{num}.bmp");
+            Directory.Delete($"{thep}/extr", true);
+            Process p = Process.GetCurrentProcess();    
+            Process.Start(p.ProcessName + ".exe");
+            Thread.Sleep(1000);
+            desktop.Shutdown();
+        }
     }
 }

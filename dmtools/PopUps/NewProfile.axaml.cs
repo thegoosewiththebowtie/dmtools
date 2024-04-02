@@ -89,4 +89,9 @@ public partial class NewProfile : Window
         addpfp.Source = pfp;
 
     }
+
+    private void Import_OnClick(object? sender, RoutedEventArgs e)
+    {
+        SettingsView.Importing();
+    }
 }

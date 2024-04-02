@@ -11,11 +11,24 @@
                 ColumnDefinitions="*, 2*, *, 2*, *"
                 RowDefinitions="*, *">
                 <ComboBox
+                        SelectionChanged="NpcBox_OnSelectionChanged"
+                        Name="NpcBox"
                         HorizontalAlignment="Stretch"
                         Grid.ColumnSpan="5">
-                        
+                        <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding FirstName}"></TextBlock>
+                                                <TextBlock Text=" "></TextBlock>
+                                                <TextBlock Text="{Binding OtherName}"></TextBlock>
+                                        </StackPanel>
+                                </DataTemplate>
+                        </ComboBox.ItemTemplate>
                 </ComboBox>
                 <Button
+                        Name="Add"
+                        Click="Add_OnClick"
+                        IsEnabled="False"
                         IsDefault="True"
                         HorizontalContentAlignment="Center"
                         VerticalContentAlignment="Center"
@@ -26,6 +39,7 @@
                         Content="{DynamicResource ADD}">
                 </Button>
                 <Button
+                        Click="Button_OnClick"
                         HorizontalContentAlignment="Center"
                         VerticalContentAlignment="Center"
                         VerticalAlignment="Center"
@@ -33,7 +47,6 @@
                         Grid.Column="3"
                         Grid.Row="1"
                         Content="{DynamicResource ToDoDelete}">
-                        
                 </Button>
         </Grid>
 </Window>

@@ -15,6 +15,7 @@
 		
 		<!-- DASHBOARD -->
 		<TabItem
+			Classes="MainTabs"
 			Name="Dashboard"
 			PointerPressed="InputElement_OnPointerPressed"
 			Header="{DynamicResource DashboardTab}">
@@ -353,6 +354,7 @@
 							Fill="DimGray">
 						</Rectangle>
 						<DataGrid 
+							IsReadOnly="True"
 							FontSize="16"
 							HorizontalAlignment="Stretch"
 							HorizontalGridLinesBrush="DimGray"
@@ -374,6 +376,7 @@
 											<templates:HealthGrid
 												HealthVal="{Binding Health, Mode=TwoWay}"
 												ID = "{Binding ID}"
+												PlayerName="{Binding Player}"
 												VerticalAlignment="Stretch"
 												HorizontalAlignment="Stretch"></templates:HealthGrid>
 										</DataTemplate>
@@ -947,7 +950,10 @@
 		
 		
 		<!-- MEDIA -->
-		<TabItem Name="Media" Header="{DynamicResource Media}">
+		<TabItem 
+			PointerReleased="Media_OnPointerReleased"
+			Classes="MainTabs"
+			Name="Media" Header="{DynamicResource Media}">
 			<Grid
 				RowDefinitions="0.3*, *, *"
 				ColumnDefinitions="*, *"
@@ -1171,7 +1177,9 @@
 		
 		
 		<!-- NPCS -->
-		<TabItem Name="NPCs" PointerReleased="NPCs_OnPointerReleased" Header="NPCs">
+		<TabItem 
+			Classes="MainTabs"
+			Name="NPCs" PointerReleased="NPCs_OnPointerReleased" Header="NPCs">
 			<Grid RowDefinitions="*,16*">
 				<Button 
 					Grid.Row="0"
@@ -1195,7 +1203,9 @@
 		
 		
 		<!-- PLAYERS -->
-		<TabItem Name="Players" PointerReleased="Players_OnPointerReleased" Header="Players">
+		<TabItem
+			Classes="MainTabs"
+			Name="Players" PointerReleased="Players_OnPointerReleased" Header="Players">
 			<Grid RowDefinitions="*,16*">
 				<Button 
 					Grid.Row="0"

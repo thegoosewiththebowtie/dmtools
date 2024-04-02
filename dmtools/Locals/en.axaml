@@ -1,4 +1,4 @@
-﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+﻿ <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=System.Runtime">
     <system:String x:Key="Test">en</system:String>
@@ -124,4 +124,8 @@
     <!--INIT-->
     <system:String x:Key="imhoRTDisthebestdwshowrunner">Roll the dice!</system:String>
     <system:String x:Key="lnggg">Initiative, leave empty for random</system:String>
+    <!--ALPHANEW-->
+    <system:String x:Key="likes">Likes</system:String>
+    <system:String x:Key="dislikes">Dislikes</system:String>
+
 </ResourceDictionary>

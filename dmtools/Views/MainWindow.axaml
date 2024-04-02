@@ -143,6 +143,27 @@
 			                </TextBlock>
 		                </StackPanel>
 	                </ToggleButton>
+	                <Button 
+		                Name="bt"
+		                Click="Bt_OnClick"
+		                Margin="0,5,0,5"
+		                Padding="0"
+		                Height="40"
+		                FontSize="20"
+		                HorizontalAlignment="Stretch"
+		                VerticalAlignment="Top">
+		                <StackPanel Orientation="Horizontal">
+			                <PathIcon
+				                VerticalAlignment="Center"
+				                Margin="9,0,9,0"
+				                Data="{StaticResource settings_regular}"></PathIcon>
+			                <TextBlock
+				                Margin="0,1,0,0"
+				                VerticalAlignment="Center"
+				                Text="Bot?">
+			                </TextBlock>
+		                </StackPanel>
+	                </Button>
                 </StackPanel>
                 <StackPanel
                     Grid.Row="1"

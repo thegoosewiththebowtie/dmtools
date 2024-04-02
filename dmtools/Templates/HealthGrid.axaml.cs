@@ -20,6 +20,15 @@ public class HealthGrid : TemplatedControl
         set => SetValue(HealthValProperty, value);
     }
 
+    public static readonly StyledProperty<string> PlayerNameProperty = AvaloniaProperty.Register<HealthGrid, string>(
+        "PlayerName");
+
+    public string PlayerName
+    {
+        get => GetValue(PlayerNameProperty);
+        set => SetValue(PlayerNameProperty, value);
+    }
+
     public static readonly StyledProperty<int> IDProperty = AvaloniaProperty.Register<HealthGrid, int>(
         "ID");
 
@@ -44,6 +53,17 @@ public class HealthGrid : TemplatedControl
             {
                 return;
             }
+            if (PlayerName == "NPC")
+            {
+                using (var ldb = new LiteDatabase(settings.DataPath))
+                {
+                    var np = ldb.GetCollection<NPC>();
+                    var npp = np.FindById(ID);
+                    npp.Health = HealthVal;
+                    np.Update(npp);
+                }
+                return;
+            }
             using (var LdbPC = new LiteDatabase(settings.DataPath))
             {
                     var pc = LdbPC.GetCollection<PlayerCharacter>();
@@ -58,6 +78,17 @@ public class HealthGrid : TemplatedControl
             HealthVal = (Convert.ToInt32(HealthVal) - 1).ToString();
             if (ID == 999)
             {
+                return;
+            }
+            if (PlayerName == "NPC")
+            {
+                using (var ldb = new LiteDatabase(settings.DataPath))
+                {
+                    var np = ldb.GetCollection<NPC>();
+                    var npp = np.FindById(ID);
+                    npp.Health = HealthVal;
+                    np.Update(npp);
+                }
                 return;
             }
             using (var LdbPC = new LiteDatabase(settings.DataPath))
