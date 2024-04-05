@@ -122,6 +122,58 @@ public class Bestiary
     public string r_descs { get; set; }
     public string forms { get; set; }
 }
+
+public class MagicItems
+{
+    public int ID { get; set; }
+    public string name { get; set; }
+    public string equipmentcategory { get; set; }
+    public string rarity { get; set; }
+    public string variants { get; set; }
+    public bool variant { get; set; }
+    public string desc { get; set; }
+}
+
+
+public class Equipment
+{
+    public int ID { get; set; }
+    public string name { get; set; }
+    public string equipment_category { get; set; }
+    public string weapon_category { get; set; }
+    public string weapon_range { get; set; }
+    public string category_range { get; set; }
+    public string cost_amount { get; set; }
+    public string cost_coin { get; set; }
+    public string damage_dice { get; set; }
+    public string damage_type { get; set; }
+    public int range_normal{ get; set; }
+    public int? range_long{ get; set; }
+    public double weight { get; set; }
+    public string properties { get; set; }
+    public int ThrRannormal { get; set; }
+    public int ThrRanlong { get; set; }
+    public string TwoHandedDamagedamage_dice { get; set; }
+    public string TwoHandedDamagedamage_type { get; set; }
+    public string special { get; set; }
+    public string armor_category { get; set; }
+    public int ArmorClassbase { get; set; }
+    public bool ArmorClassdex_bonus { get; set; }
+    public int? ArmorClassmax_bonus { get; set; }
+    public int? str_minimum { get; set; }
+    public bool? stealth_disadvantage { get; set; }
+    public string gear_category { get; set; }
+    public string desc { get; set; }
+    public int? quantity { get; set; }
+    public string contents_items { get; set; }
+    public string contents_amountss { get; set; }
+    public string tool_category { get; set; }
+    public string vehicle_category { get; set; }
+    public string speedquantity { get; set; }
+    public string speedunit { get; set; }
+    public string capacity { get; set; }
+}
+
 public partial class GlossaryView : UserControl
 {
     public List<Spells> spells { get; set; }
