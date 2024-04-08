@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
+using Avalonia.Collections;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml.Styling;
@@ -9,6 +11,8 @@ using dmtools.PopUps;
 using dmtools.GlossData;
 using DynamicData;
 using LiteDB;
+using Avalonia.Data;
+using System.Windows;
 
 namespace dmtools.Views;
 public class Spells
@@ -176,11 +180,31 @@ public class Equipment
 
 public partial class GlossaryView : UserControl
 {
-    public List<Spells> spells { get; set; }
-    public List<Bestiary> bestiary { get; set; }
+    public List<Spells> spells { get; set; } = new List<Spells>();
+    public List<Bestiary> bestiary { get; set; } = new List<Bestiary>();
+    public List<MagicItems> magicitems { get; set; } = new List<MagicItems>();
+    public List<Equipment> EQ { get; set; } = new List<Equipment>();
     public GlossaryView()
+    
     {
         InitializeComponent();
+        ini();
+    }
+
+    private void SearchSpells_OnTextChanged(object? sender, TextChangedEventArgs e)
+    {
+        var filteredResults = from spell in spells
+            where spell.name.Contains((sender as AutoCompleteBox).Text, StringComparison.OrdinalIgnoreCase) ||
+                  spell.classes.Contains((sender as AutoCompleteBox).Text, StringComparison.OrdinalIgnoreCase)||
+                  spell.school.Contains((sender as AutoCompleteBox).Text, StringComparison.OrdinalIgnoreCase)
+            select spell;
+        SpellsGrid.ItemsSource = filteredResults;
+    }
+
+    
+    
+    public void ini()
+    {
         spells = new List<Spells>();
         bestiary = new List<Bestiary>();
         using (var ldb = new LiteDatabase("GlossData/Spells.db"))
@@ -199,15 +223,52 @@ public partial class GlossaryView : UserControl
                 bestiary.Add(best);
             }
         }
-        SearchSpells.ItemsSource = spells;
+        using (var ldb = new LiteDatabase("GlossData/MagicItems.db"))
+        {
+            var mi = ldb.GetCollection<MagicItems>();
+            foreach (var best in mi.FindAll())
+            {
+                magicitems.Add(best);
+            }
+        }
+        using (var ldb = new LiteDatabase("GlossData/Equipment.db"))
+        {
+            var eq = ldb.GetCollection<Equipment>();
+            foreach (var best in eq.FindAll())
+            {
+                EQ.Add(best);
+            }
+        }
+        List<string> nammmes = new List<string>();
+        foreach (var f in spells)
+        {
+            if (!nammmes.Contains(f.name))
+            {
+                nammmes.Add(f.name); 
+            }
+            if (!nammmes.Contains(f.classes))
+            {
+                nammmes.Add(f.classes);
+            }
+            if (!nammmes.Contains(f.school))
+            {
+                nammmes.Add(f.school);
+            }
+        }
         SpellsGrid.ItemsSource = spells;
-        SearchBest.ItemsSource = bestiary;
         BestGrid.ItemsSource = bestiary;
+        MIGrid.ItemsSource = magicitems;
+        EQGrid.ItemsSource = EQ;
+        SearchSpells.ItemsSource = nammmes;
     }
-
+    
 
     private void List_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
+        if (SpellsGrid.SelectedItem == null)
+        {
+            return;
+        }
         var thisspell = (SpellsGrid.SelectedItem as Spells);
         List<string> lvlss = new List<string>()
         {
@@ -405,4 +466,13 @@ public partial class GlossaryView : UserControl
         }
         
     }
+
+    private void EQGrid_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
+    {
+    }
+
+    private void MIGrid_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
+    {
+    }
+
 }
