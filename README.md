@@ -1,6 +1,6 @@
 # DmTools by VTG
 This is a unique software, that i decided to make, because i couldn't find anything that would work natively on a desktop,
-without any payment or nessesity to open a browser. So, here it is! It's aimed on dungeon masters, who would like to make 
+without any payment or necessity to open a browser. So, here it is! It's aimed on dungeon masters, who would like to make 
 their life easier and get rid of dozens of tabs with different random generators or information, because this app is going
 to have them all
 ## Updates
