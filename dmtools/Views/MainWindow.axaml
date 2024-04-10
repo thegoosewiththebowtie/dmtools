@@ -7,7 +7,7 @@
         x:DataType="vm:MainWindowViewModel"
         x:Class="dmtools.Views.MainWindow"
         MinHeight="600" MinWidth="800"
-        SystemDecorations="Full"
+        SystemDecorations="None"
         Icon="/Assets/dmtools.ico"
         TransparencyLevelHint="AcrylicBlur"
         SizeChanged="Control_OnSizeChanged"
