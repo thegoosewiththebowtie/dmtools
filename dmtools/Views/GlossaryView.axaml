@@ -27,6 +27,7 @@
                         </AutoCompleteBox>
                         <DataGrid
                             Grid.Row="1"
+                            IsReadOnly="True"
                             SelectionChanged="List_OnSelectionChanged"
                             Name="SpellsGrid"
                             Margin="5,0,5,5">
@@ -88,13 +89,14 @@
                         ColumnDefinitions="*">
                         <AutoCompleteBox
                             Name="SearchBest"
+                            TextChanged="SearchBest_OnTextChanged"
                             Watermark="{DynamicResource Search}"
                             Margin="10,10,15,10"
                             Grid.Column="0"
                             Grid.Row="0">
                         </AutoCompleteBox>
                         <DataGrid
-                            
+                            IsReadOnly="True"
                             Grid.Row="1"
                             SelectionChanged="BestGrid_OnSelectionChanged"
                             Name="BestGrid"
@@ -145,12 +147,14 @@
                         ColumnDefinitions="*, *">
                         <AutoCompleteBox
                             Name="SearchMI"
+                            TextChanged="SearchMI_OnTextChanged"
                             Watermark="{DynamicResource Search}"
                             Margin="5,5,10,5"
                             Grid.Column="0"
                             Grid.Row="0">
                         </AutoCompleteBox>
                         <DataGrid
+                            IsReadOnly="True"
                             Grid.Row="1"
                             SelectionChanged="MIGrid_OnSelectionChanged"
                             Name="MIGrid"
@@ -202,12 +206,14 @@
                         ColumnDefinitions="*, *">
                         <AutoCompleteBox
                             Name="SearchEQ"
+                            TextChanged="SearchEQ_OnTextChanged"
                             Watermark="{DynamicResource Search}"
                             Margin="5,5,10,5"
                             Grid.Column="0"
                             Grid.Row="0">
                         </AutoCompleteBox>
                         <DataGrid
+                            IsReadOnly="True"
                             Grid.Row="1"
                             SelectionChanged="EQGrid_OnSelectionChanged"
                             Name="EQGrid"

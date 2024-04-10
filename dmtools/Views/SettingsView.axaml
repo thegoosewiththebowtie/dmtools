@@ -301,13 +301,24 @@
             BorderBrush="DimGray"
             Margin="5">
             <DockPanel>
-                <TextBlock
-                    VerticalAlignment="Center"
-                    Margin="5"
-                    DockPanel.Dock="Top"
-                    Text="{DynamicResource Media}"
-                    FontSize="20">
-                </TextBlock>
+                <Grid
+                    DockPanel.Dock="Top">
+                    <TextBlock
+                        VerticalAlignment="Center"
+                        Margin="5"
+                        Text="{DynamicResource Media}"
+                        FontSize="20">
+                    </TextBlock>
+                    <Button
+                        Name="Download"
+                        Click="Download_OnClick"
+                        CornerRadius="0,4,0,0"
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Right"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        DockPanel.Dock="Top">Download media</Button>
+                </Grid>
                 <Rectangle
                     DockPanel.Dock="Top"
                     Fill="DimGray"

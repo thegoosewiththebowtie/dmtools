@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Net;
 using System.Runtime.InteropServices.JavaScript;
 using Avalonia;
 using Avalonia.Controls;
@@ -411,5 +412,15 @@ public partial class SettingsView : UserControl
             Thread.Sleep(1000);
             desktop.Shutdown();
         }
+    }
+
+    private void Download_OnClick(object? sender, RoutedEventArgs e)
+    {
+        MediaDownloading md = new MediaDownloading();
+        if (Avalonia.Application.Current.ApplicationLifetime is ClassicDesktopStyleApplicationLifetime desktop)
+        {
+            md.ShowDialog(desktop.MainWindow);
+        }
+       
     }
 }

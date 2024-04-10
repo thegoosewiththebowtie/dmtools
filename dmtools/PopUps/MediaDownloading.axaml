@@ -1,0 +1,50 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Width="300" Height="100" CanResize="False"
+        mc:Ignorable="d" d:DesignWidth="250" d:DesignHeight="100"
+        x:Class="dmtools.PopUps.MediaDownloading"
+        Icon="/Assets/dmtools.ico"
+        Title="Download">
+        <Grid
+                ColumnDefinitions="*,3*,*,3*,*"
+                RowDefinitions="*, *">
+                <Button
+                        IsDefault="True"
+                        Name="Start"
+                        Click="Start_OnClick"
+                        Margin="5,10"
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch"
+                        VerticalContentAlignment="Center"
+                        HorizontalContentAlignment="Center"
+                        Grid.Row="1"
+                        Grid.Column="1">
+                        Start
+                </Button>
+                <Button
+                        Click="Cancel_OnClick"
+                        Name="Cancel"
+                        Margin="5,10"
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch"
+                        VerticalContentAlignment="Center"
+                        HorizontalContentAlignment="Center"
+                        Grid.Row="1"
+                        Grid.Column="3">
+                        Cancel
+                </Button>
+                <ProgressBar
+                        ShowProgressText="True"
+                        Name="Progress"
+                        Margin="20,10"
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="5"
+                        Value="0">
+                </ProgressBar>
+        </Grid>
+</Window>

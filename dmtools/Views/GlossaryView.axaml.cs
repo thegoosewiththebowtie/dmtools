@@ -190,19 +190,6 @@ public partial class GlossaryView : UserControl
         InitializeComponent();
         ini();
     }
-
-    private void SearchSpells_OnTextChanged(object? sender, TextChangedEventArgs e)
-    {
-        var filteredResults = from spell in spells
-            where spell.name.Contains((sender as AutoCompleteBox).Text, StringComparison.OrdinalIgnoreCase) ||
-                  spell.classes.Contains((sender as AutoCompleteBox).Text, StringComparison.OrdinalIgnoreCase)||
-                  spell.school.Contains((sender as AutoCompleteBox).Text, StringComparison.OrdinalIgnoreCase)
-            select spell;
-        SpellsGrid.ItemsSource = filteredResults;
-    }
-
-    
-    
     public void ini()
     {
         spells = new List<Spells>();
@@ -239,30 +226,59 @@ public partial class GlossaryView : UserControl
                 EQ.Add(best);
             }
         }
-        List<string> nammmes = new List<string>();
+        List<string> SpellACSearch = new List<string>();
         foreach (var f in spells)
         {
-            if (!nammmes.Contains(f.name))
+            if (!SpellACSearch.Contains(f.name))
             {
-                nammmes.Add(f.name); 
+                SpellACSearch.Add(f.name); 
             }
-            if (!nammmes.Contains(f.classes))
+
+            foreach (var cl in f.classes.Split(","))
             {
-                nammmes.Add(f.classes);
+                if (!SpellACSearch.Contains(cl))
+                {
+                    SpellACSearch.Add(cl);
+                }   
             }
-            if (!nammmes.Contains(f.school))
+            if (!SpellACSearch.Contains(f.school))
             {
-                nammmes.Add(f.school);
+                SpellACSearch.Add(f.school);
+            }
+        }
+        List<string> BestACSearch = new List<string>();
+        foreach (var f in bestiary)
+        {
+            if (!BestACSearch.Contains(f.name))
+            {
+                BestACSearch.Add(f.name); 
+            }
+        }
+        List<string> MISearch = new List<string>();
+        foreach (var f in magicitems)
+        {
+            if (!MISearch.Contains(f.name))
+            {
+                MISearch.Add(f.name); 
+            }
+        }
+        List<string> EQSearch = new List<string>();
+        foreach (var f in EQ)
+        {
+            if (!EQSearch.Contains(f.name))
+            {
+                EQSearch.Add(f.name); 
             }
         }
         SpellsGrid.ItemsSource = spells;
         BestGrid.ItemsSource = bestiary;
         MIGrid.ItemsSource = magicitems;
         EQGrid.ItemsSource = EQ;
-        SearchSpells.ItemsSource = nammmes;
+        SearchSpells.ItemsSource = SpellACSearch;
+        SearchBest.ItemsSource = BestACSearch;
+        SearchMI.ItemsSource = MISearch;
+        SearchEQ.ItemsSource = EQSearch;
     }
-    
-
     private void List_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
         if (SpellsGrid.SelectedItem == null)
@@ -303,7 +319,6 @@ public partial class GlossaryView : UserControl
             }
         }
         lvlss.RemoveAll(string.IsNullOrWhiteSpace);
-        ThisSpell.Levels = lvlss;
         ThisSpell.Desc = $"{thisspell.desc}\r\n\r\n{thisspell.higher_level}";
         ThisSpell.Level = thisspell.level.ToString();
         ThisSpell.SpellName = thisspell.name;
@@ -348,15 +363,19 @@ public partial class GlossaryView : UserControl
         ThisSpell.Duration = thisspell.duration;
         ThisSpell.CastingTime = thisspell.casting_time;
         ThisSpell.Range = thisspell.range;
-        ThisSpell.classes = $"Classes: {thisspell.classes}";
-        ThisSpell.subclasses = $"Subclasses: {thisspell.subclasses}";
+        string addesc = String.Empty;
+        addesc += $"Classes: {thisspell.classes}\r\n\r\n";
+        if (!string.IsNullOrEmpty(thisspell.subclasses))
+        {
+            addesc += $"Subclasses: {thisspell.subclasses}\r\n\r\n";
+        }
         if (thisspell.dctype != null || thisspell.dcsuccess != null || thisspell.dcdesc != null)
         {
-            ThisSpell.dctypensucess = $"Saving Throw: {thisspell.dctype} {thisspell.dcsuccess} {thisspell.dcdesc}";
+            addesc += $"Saving Throw: {thisspell.dctype}\r\nSuccess: {thisspell.dcsuccess.Replace("none", "No effect").Replace("half", "Half")} {thisspell.dcdesc}\r\n\r\n";
         }
         if (thisspell.DamageType != null || thisspell.attack_type != null)
         {
-            ThisSpell.damage = $"Damage: {thisspell.DamageType} {thisspell.attack_type}";
+            addesc += $"Damage: {thisspell.DamageType} {thisspell.attack_type}\r\n\r\n";
         }
         int? m = null;
         if (thisspell.AreaSize != -99)
@@ -365,12 +384,20 @@ public partial class GlossaryView : UserControl
         }
         if (thisspell.AreaType != null || m != null)
         {
-            ThisSpell.Area = $"Area damage: {thisspell.AreaType} - {m}ft";
+            addesc += $"Area damage: {thisspell.AreaType} - {m}ft\r\n\r\n";
         }
+        foreach (var lv in lvlss)
+        {
+            addesc += $"{lv}\r\n";
+        }
+        ThisSpell.classes = addesc;
     }
-
     private void BestGrid_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
+        if (BestGrid.SelectedItem == null)
+        {
+            return;
+        }
         var srs = ((sender as DataGrid).SelectedItem as Bestiary);
         ThisBest.BName = $"Name: {srs.name}";
         ThisBest.Aligment = $"Aligment: {srs.alignment}";
@@ -466,13 +493,48 @@ public partial class GlossaryView : UserControl
         }
         
     }
-
     private void EQGrid_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
+        if (EQGrid.SelectedItem == null)
+        {
+            return;
+        }
     }
-
     private void MIGrid_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
+        if (MIGrid.SelectedItem == null)
+        {
+            return;
+        }
     }
-
+    private void SearchSpells_OnTextChanged(object? sender, TextChangedEventArgs e)
+    {
+        var filteredResults = from spell in spells
+            where spell.name.Contains((sender as AutoCompleteBox).Text, StringComparison.OrdinalIgnoreCase) ||
+                  spell.classes.Contains((sender as AutoCompleteBox).Text, StringComparison.OrdinalIgnoreCase)||
+                  spell.school.Contains((sender as AutoCompleteBox).Text, StringComparison.OrdinalIgnoreCase)
+            select spell;
+        SpellsGrid.ItemsSource = filteredResults;
+    }
+    private void SearchBest_OnTextChanged(object? sender, TextChangedEventArgs e)
+    {
+        var filteredResults = from best in bestiary
+            where best.name.Contains((sender as AutoCompleteBox).Text, StringComparison.OrdinalIgnoreCase)
+            select best;
+        BestGrid.ItemsSource = filteredResults;    
+    }
+    private void SearchMI_OnTextChanged(object? sender, TextChangedEventArgs e)
+    {
+        var filteredResults = from mi in magicitems
+            where mi.name.Contains((sender as AutoCompleteBox).Text, StringComparison.OrdinalIgnoreCase)
+            select mi;
+        MIGrid.ItemsSource = filteredResults;        
+    }
+    private void SearchEQ_OnTextChanged(object? sender, TextChangedEventArgs e)
+    {
+        var filteredResults = from eq in EQ
+            where eq.name.Contains((sender as AutoCompleteBox).Text, StringComparison.OrdinalIgnoreCase)
+            select eq;
+        EQGrid.ItemsSource = filteredResults;    
+    }
 }
