@@ -5,6 +5,7 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Threading;
+using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
@@ -21,6 +22,7 @@ public partial class MediaDownloading : Window
         InitializeComponent();
         ini();
     }
+    public bool IsRe { get; set; }
     public void ini()
     {
         wc = new System.Net.Http.HttpClient();
@@ -36,8 +38,8 @@ public partial class MediaDownloading : Window
         File.Delete("Media.zip");
         cancelled = false;
         this.Closing += Window_OnClosing;
-        Start.Click -= Start_OnClick;
-        Start.Content = this.Title = "Downloading...";
+        Start.IsEnabled = false;
+        this.Title = "Downloading...";
         var httpClient = new HttpClient();
         var response = await httpClient.GetAsync(new System.Uri("https://www.triangleonthewall.org/Media.zip"), HttpCompletionOption.ResponseHeadersRead);
         if (!response.IsSuccessStatusCode)
@@ -72,28 +74,46 @@ public partial class MediaDownloading : Window
         OnDownloadFileCompleted();
     }
     
-    private void OnDownloadFileCompleted()
+    private async void OnDownloadFileCompleted()
     {
         if (cancelled)
         {
-            Start.Click += Start_OnClick;
+            Start.IsEnabled = true;
             this.Title = "Cancelled";
             Start.Content = "Start";
             Progress.Value = 0;
             File.Delete("Media.zip");
             return;
         }
-        string zipPath = "Media.zip";
-        string extractPath = System.IO.Directory.GetCurrentDirectory();
+        Progress.Value = 0;
+        Progress.ShowProgressText = false;
         Progress.IsIndeterminate = true;
         Start.Content = this.Title = "Unpacking...";
+        Cancel.IsEnabled = false;
         Directory.Delete("Music", true);
         Directory.Delete("Images", true);
-        System.IO.Compression.ZipFile.ExtractToDirectory(zipPath, extractPath);
-        Progress.IsIndeterminate = false;
-        Progress.Value = 100;
-        Start.Content = this.Title = "Finished";
-        Start.Click += Cancel_OnClick;
+        if (await unpack() == true)
+        {
+            Progress.Value = 100;
+            Progress.IsIndeterminate = false;
+            File.Delete("Media.zip");
+            this.Title = "Finished";
+            Start.Content = "Finish";
+            Start.IsEnabled = true;
+            Start.Click -= Start_OnClick;
+            Start.Click += Cancel_OnClick;
+        };
+    }
+
+    private Task<bool> unpack()
+    {
+        return Task.Run(() =>
+        {
+            string zipPath = "Media.zip";
+            string extractPath = System.IO.Directory.GetCurrentDirectory();
+            System.IO.Compression.ZipFile.ExtractToDirectory(zipPath, extractPath);
+            return true;
+        });
     }
     private void Cancel_OnClick(object? sender, RoutedEventArgs e)
     {

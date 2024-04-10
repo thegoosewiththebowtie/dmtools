@@ -36,6 +36,7 @@
                         Cancel
                 </Button>
                 <ProgressBar
+                        IsIndeterminate="{Binding !#Cancel.IsEnabled}"
                         ShowProgressText="True"
                         Name="Progress"
                         Margin="20,10"
