@@ -6,6 +6,7 @@ to have them all
 ## Updates
 Alpha is going to get updates weekly, public beta (not out yet) is going to be updated monthly. Or not , what do you want from me, im just a depressed girl locked in her room xdddd, follow me on tg to get the latest news. Release is going to be available as soon as i will think its ready. if you want to get the latest build (highly unstable tho) you can build the program from wip branch yourself.
 ## Contacts
+* my website: https://triangleonthewall.org/
 * updates and news:
 https://t.me/dmtoolsbyvtg
 * bug reports and chatting:
