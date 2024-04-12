@@ -27,7 +27,7 @@ public class NPC
         };
         public static List<string> Eyecolor = new List<string>()
         {
-            "Green", "Blue", "Brown", "Black", "Red", "White", "Silver", "Yellow"
+            "Green", "Blue", "Brown", "Black", "Red", "White", "Silver", "Transparent"
         };
         public static List<string> Hairlength = new List<string>()
         {
@@ -46,7 +46,7 @@ public class NPC
         {
             "Violence/Peace","Talking to strangers/Meet new people", "Stay alone", "Be outside", "Read", "Their eyecolor",
             "Their height", "Their weight", "To make desicions", "Sports", "People around them", "One-night stands",
-            "Nature/Technology", "Red/Orange/Yellow/Green/Blue/Purple", "Kids", "Their neighbours", "Smart people/Dumb people",
+            "Nature/Technology", "Red/Orange/Transparent/Green/Blue/Purple", "Kids", "Their neighbours", "Smart people/Dumb people",
             "One of your party members", "Darkness", "Spider", "Random person from their village", "Sleeping",
             "Ruler of the country/Their work/Their work/Their work",/*"","","",
             "","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",
