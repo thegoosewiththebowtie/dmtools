@@ -10,33 +10,61 @@
         Width="300"
         x:Class="dmtools.PopUps.AddCustNpc"
         Title="AddCustNpc">
-        <StackPanel>
+        <Grid
+                RowDefinitions="*,*,*,*,*,*">
                 <TextBox
+                        VerticalContentAlignment="Center"
+                        HorizontalContentAlignment="Left"
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch"
+                        Grid.Row="0"
                         KeyDown="TestInt"
                         Name="Initiative"
                         Watermark="{DynamicResource lnggg}"
                         Margin="5"></TextBox>
                 <TextBox
+                        VerticalContentAlignment="Center"
+                        HorizontalContentAlignment="Left"
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch"
+                        Grid.Row="1"
                         Name="Name"
                         Watermark="{DynamicResource NameS}"
                         Margin="5"></TextBox>
                 <TextBox
+                        VerticalContentAlignment="Center"
+                        HorizontalContentAlignment="Left"
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch"
+                        Grid.Row="2"
                         Name="NPC"
                         IsEnabled="False"
                         Margin="5">
                         NPC
                 </TextBox>
                 <TextBox
+                        VerticalContentAlignment="Center"
+                        HorizontalContentAlignment="Left"
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch"
+                        Grid.Row="3"
                         KeyDown="TestInt"
                         Name="AC"
                         Watermark="{DynamicResource ArmorClass}"
                         Margin="5"></TextBox>
                 <TextBox
+                        VerticalContentAlignment="Center"
+                        HorizontalContentAlignment="Left"
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch"
+                        Grid.Row="4"
                         KeyDown="TestInt"
                         Name="HP"
                         Watermark="{DynamicResource Health}"
                         Margin="5"></TextBox>
-                <Grid ColumnDefinitions="*, 2*, *, 2*, *">
+                <Grid
+                        Grid.Row="6"
+                        ColumnDefinitions="*, 2*, *, 2*, *">
                         <Button
                                 Click="OK"
                                 IsDefault="True"
@@ -57,5 +85,5 @@
                                 Grid.Column="3"
                                 Content="{DynamicResource ToDoDelete}"></Button>
                 </Grid>
-        </StackPanel>
+        </Grid>
 </Window>
