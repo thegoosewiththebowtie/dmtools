@@ -253,6 +253,19 @@ public partial class GlossaryView : UserControl
             {
                 BestACSearch.Add(f.name); 
             }
+
+            if (!BestACSearch.Contains(f.type))
+            {
+                BestACSearch.Add(f.type);
+            }
+            if (!BestACSearch.Contains(f.size))
+            {
+                BestACSearch.Add(f.size);
+            }
+            if (!BestACSearch.Contains(f.alignment))
+            {
+                BestACSearch.Add(f.alignment);
+            }
         }
         List<string> MISearch = new List<string>();
         foreach (var f in magicitems)
@@ -519,7 +532,11 @@ public partial class GlossaryView : UserControl
     private void SearchBest_OnTextChanged(object? sender, TextChangedEventArgs e)
     {
         var filteredResults = from best in bestiary
-            where best.name.Contains((sender as AutoCompleteBox).Text, StringComparison.OrdinalIgnoreCase)
+            where best.name.Contains((sender as AutoCompleteBox).Text, StringComparison.OrdinalIgnoreCase)||
+                  best.size.Contains((sender as AutoCompleteBox).Text, StringComparison.OrdinalIgnoreCase)||
+                  best.type.Contains((sender as AutoCompleteBox).Text, StringComparison.OrdinalIgnoreCase)||
+                  best.alignment.Contains((sender as AutoCompleteBox).Text, StringComparison.OrdinalIgnoreCase)
+
             select best;
         BestGrid.ItemsSource = filteredResults;    
     }

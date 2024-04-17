@@ -51,6 +51,8 @@
                         Grid.Row="1"
                         Grid.Column="1"
                         Name="ProfName"
+                        VerticalContentAlignment="Center"
+                        HorizontalContentAlignment="Left"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Stretch">
                     </TextBox>
@@ -60,6 +62,8 @@
                         Grid.Column="1"
                         Grid.Row="0"
                         Name="DmName"
+                        VerticalContentAlignment="Center"
+                        HorizontalContentAlignment="Left"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Stretch">
                     </TextBox>
@@ -115,33 +119,13 @@
                                 Text="Import"></TextBlock>
                         </Grid>
                     </Button>
-                    <ComboBox
-                        Name="LanguageChanger"
-                        SelectionChanged="LanguageChanger_OnSelectionChanged"
-                        Grid.Row="0"
-                        Grid.RowSpan="1"
-                        Grid.Column="3"
-                        VerticalContentAlignment="Center"
-                        HorizontalContentAlignment="Center"
-                        VerticalAlignment="Stretch"
-                        HorizontalAlignment="Stretch"
-                        Margin="5"
-                        PlaceholderText="Language">
-                        <ComboBoxItem>English</ComboBoxItem>
-                        <ComboBoxItem>French [Credits to Akanea]</ComboBoxItem>
-                        <ComboBoxItem>Spanish [Auto-translated]</ComboBoxItem>
-                        <ComboBoxItem>German [Auto-translated]</ComboBoxItem>
-                        <ComboBoxItem>Chinese [Auto-translated]</ComboBoxItem>
-                        <ComboBoxItem>Japanese  [Auto-translated]</ComboBoxItem>
-                        <ComboBoxItem>Ukrainian [Auto-translated]</ComboBoxItem>
-                        <ComboBoxItem>Russian [Auto-translated]</ComboBoxItem>
-                    </ComboBox>
+                   
                     <Button
                         Name="DelPro"
                         Click="DelPro_OnClick"
                         Grid.Column="3"
-                        Grid.Row="1"
-                        Grid.RowSpan="1"
+                        Grid.Row="0"
+                        Grid.RowSpan="2"
                         Margin="5"
                         Background="RosyBrown"
                         VerticalContentAlignment="Center"
@@ -317,7 +301,7 @@
                         HorizontalAlignment="Right"
                         HorizontalContentAlignment="Center"
                         VerticalContentAlignment="Center"
-                        DockPanel.Dock="Top">Download media</Button>
+                        DockPanel.Dock="Top">Download, repair or update media</Button>
                 </Grid>
                 <Rectangle
                     DockPanel.Dock="Top"
@@ -329,6 +313,7 @@
                 RowDefinitions="*, *, *, *"
                 ShowGridLines="False">
                 <TextBlock
+                    FontSize="16"
                     VerticalAlignment="Center"
                     Margin="5"
                     Classes="Text0"
@@ -366,6 +351,7 @@
                 <TextBlock
                     VerticalAlignment="Center"
                     Margin="5"
+                    FontSize="16"
                     Classes="Text0"
                     Grid.Row="1"
                     Text="{DynamicResource Ambientsoundssource}">
@@ -399,6 +385,7 @@
                     Content="{DynamicResource Browse}">
                 </Button>
                 <TextBlock
+                    FontSize="16"
                     VerticalAlignment="Center"
                     Margin="5"
                     Classes="Text0"
@@ -434,6 +421,7 @@
                         Content="{DynamicResource Browse}">
                 </Button>
                 <TextBlock
+                    FontSize="16"
                     VerticalAlignment="Center"
                     Margin="5"
                     Classes="Text0"
@@ -478,6 +466,93 @@
             BorderThickness="2"
             BorderBrush="DimGray"
             Margin="5">
+            <DockPanel>
+                <Grid
+                    DockPanel.Dock="Top">
+                    <TextBlock
+                        VerticalAlignment="Center"
+                        Margin="5"
+                        Text="Application"
+                        FontSize="20">
+                    </TextBlock>
+                </Grid>
+                <Rectangle
+                    DockPanel.Dock="Top"
+                    Fill="DimGray"
+                    Height="1">
+                </Rectangle>
+                <Grid
+                    ColumnDefinitions="*, *, *"
+                    RowDefinitions="Auto,Auto, 6*">
+                    <TextBlock
+                        Margin="5"
+                        FontSize="16"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left">
+                        Check for updates
+                    </TextBlock>
+                    <ToggleSwitch
+                        Click="ToggleUp_OnClick"
+                        Name="ToggleUp"
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                    </ToggleSwitch>
+                    <Expander
+                        Name="Updin"
+                        VerticalContentAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch"
+                        HorizontalContentAlignment="Center"
+                        Header="No updates"
+                        Grid.Row="0"
+                        Margin="5"
+                        Grid.Column="2">
+                        <StackPanel
+                            Orientation="Horizontal">
+                            <Button
+                                Click="AppUp_OnClick"
+                                Name="AppUp"
+                                IsEnabled="False">App</Button>
+                            <Button
+                                Click="Download_OnClick"
+                                Name="MediaUp"
+                                IsEnabled="False">Media</Button>
+                        </StackPanel>
+                    </Expander>
+                    <TextBlock
+                        Margin="5"
+                        FontSize="16"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left"
+                        Grid.Column="0"
+                        Grid.Row="1">
+                        Language
+                    </TextBlock>
+                    <ComboBox
+                        Name="LanguageChanger"
+                        SelectionChanged="LanguageChanger_OnSelectionChanged"
+                        Grid.Row="1"
+                        Grid.RowSpan="1"
+                        Grid.Column="2"
+                        VerticalContentAlignment="Center"
+                        HorizontalContentAlignment="Center"
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch"
+                        Margin="5"
+                        PlaceholderText="Language">
+                        <ComboBoxItem>English</ComboBoxItem>
+                        <ComboBoxItem>French [Credits to Akanea][upd needed]</ComboBoxItem>
+                        <ComboBoxItem>Spanish [goo*le]</ComboBoxItem>
+                        <ComboBoxItem>German [goo*le]</ComboBoxItem>
+                        <ComboBoxItem>Chinese [goo*le]</ComboBoxItem>
+                        <ComboBoxItem>Japanese  [goo*le]</ComboBoxItem>
+                        <ComboBoxItem>Ukrainian [goo*le]</ComboBoxItem>
+                        <ComboBoxItem>Russian [goo*le]</ComboBoxItem>
+                    </ComboBox>
+                </Grid>
+            </DockPanel>
         </Border>
     </Grid>
 </UserControl>

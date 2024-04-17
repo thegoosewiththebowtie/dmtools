@@ -2,7 +2,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="using:dmtools.Templates">
     <Design.PreviewWith>
-        <controls:GeneratedNPC />
+        <controls:GeneratedNPC 
+            Height="700"
+            Width="600"/>
     </Design.PreviewWith>
 
     <Style Selector="controls|GeneratedNPC">
@@ -20,7 +22,7 @@
                         <TextBlock
                             Padding="10"
                             Text="{TemplateBinding des}"
-                            Classes="Header3">
+                            FontSize="25">
                         </TextBlock>
                     </Border>
                     <Border
@@ -33,7 +35,7 @@
                                 <TextBlock
                                     DockPanel.Dock="Top"
                                     Margin="5"
-                                    FontSize="20"
+                                    FontSize="25"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Left"
                                     Text="{DynamicResource likes}">
@@ -45,7 +47,15 @@
                             </Rectangle>
                         <ListBox
                             ItemsSource="{TemplateBinding likes}"
-                            Background="Transparent"></ListBox>
+                            Background="Transparent">
+                            <ListBox.Styles>
+                                <Style Selector="ListBoxItem">
+                                    <Setter Property="FontSize"
+                                            Value="22">
+                                    </Setter>
+                                </Style>
+                            </ListBox.Styles>
+                        </ListBox>
                         </DockPanel>
                     </Border>
                     <Border
@@ -58,7 +68,7 @@
                             <TextBlock
                                 DockPanel.Dock="Top"
                                 Margin="5"
-                                FontSize="20"
+                                FontSize="25"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Right"
                                 Text="{DynamicResource dislikes}">
@@ -69,8 +79,17 @@
                                 Fill="DimGray">
                             </Rectangle>
                         <ListBox
+                            FontSize="22"
                             ItemsSource="{TemplateBinding dislikes}"
-                            Background="Transparent"></ListBox>
+                            Background="Transparent">
+                            <ListBox.Styles>
+                                <Style Selector="ListBoxItem">
+                                    <Setter Property="FontSize"
+                                            Value="22">
+                                    </Setter>
+                                </Style>
+                            </ListBox.Styles>
+                        </ListBox>
                         </DockPanel>
                     </Border>
                     <Border
@@ -84,7 +103,7 @@
                                 HorizontalAlignment="Center"
                                 Text="{DynamicResource Strength}"></TextBlock>
                             <TextBlock
-                                Classes="Header1"
+                                Classes="Text5"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Center"
                                 Grid.Row="1"
@@ -102,7 +121,7 @@
                                 HorizontalAlignment="Center"
                                 Text="{DynamicResource Dexterity}"></TextBlock>
                             <TextBlock
-                                Classes="Header1"
+                                Classes="Number"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Center"
                                 Grid.Row="1"
@@ -120,7 +139,7 @@
                                 HorizontalAlignment="Center"
                                 Text="{DynamicResource Constitution}"></TextBlock>
                             <TextBlock
-                                Classes="Header1"
+                                Classes="Number"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Center"
                                 Grid.Row="1"
@@ -138,7 +157,7 @@
                                 HorizontalAlignment="Center"
                                 Text="{DynamicResource Intelligence}"></TextBlock>
                             <TextBlock
-                                Classes="Header1"
+                                Classes="Number"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Center"
                                 Grid.Row="1"
@@ -156,7 +175,7 @@
                                 HorizontalAlignment="Center"
                                 Text="{DynamicResource Wisdom}"></TextBlock>
                             <TextBlock
-                                Classes="Header1"
+                                Classes="Number"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Center"
                                 Grid.Row="1"
@@ -174,7 +193,7 @@
                                 HorizontalAlignment="Center"
                                 Text="{DynamicResource Charisma}"></TextBlock>
                             <TextBlock
-                                Classes="Header1"
+                                Classes="Number"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Center"
                                 Grid.Row="1"

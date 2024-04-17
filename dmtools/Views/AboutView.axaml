@@ -9,7 +9,7 @@
         ShowGridLines="False">
         <Grid
             ShowGridLines="False"
-            RowDefinitions=" 11*,*"
+            RowDefinitions="*,Auto"
             Grid.Column="0">
             <StackPanel>
                 <TextBlock
@@ -17,7 +17,7 @@
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
                     FontSize="45">
-                    dmtools v.0.0.4-a
+                    dmtools v.0.1.0-b
                 </TextBlock>
                 <TextBlock
                     Name="totw"
@@ -29,29 +29,98 @@
                 <Image
                     Name="totwl"
                     Source="../Assets/totw.png"></Image>
+                <Grid
+                    ColumnDefinitions="*,*,*,*,*,*,*,*,*">
+                    <Image
+                        Source="../Assets/dmtools.ico"
+                        Grid.Column="0">
+                    </Image>
+                    <Image
+                        Source="../Assets/dmtools.ico"
+                        Grid.Column="1">
+                    </Image>
+                    <Image
+                        Source="../Assets/dmtools.ico"
+                        Grid.Column="2">
+                    </Image>
+                    <Image
+                        Source="../Assets/dmtools.ico"
+                        Grid.Column="3">
+                    </Image>
+                    <Image
+                        Source="../Assets/dmtools.ico"
+                        Grid.Column="4">
+                    </Image>
+                    <Image
+                        Source="../Assets/dmtools.ico"
+                        Grid.Column="5">
+                    </Image><Image
+                                Source="../Assets/dmtools.ico"
+                                Grid.Column="6">
+                    </Image><Image
+                                Source="../Assets/dmtools.ico"
+                                Grid.Column="7">
+                    </Image><Image
+                                Source="../Assets/dmtools.ico"
+                                Grid.Column="8">
+                    </Image>
+                </Grid>
             </StackPanel>
-            <ToggleButton
-                Grid.Row="1"
-                VerticalAlignment="Stretch"
-                Margin="10"
-                Padding="10"
-                FontSize="22"
-                Name="idn"
-                VerticalContentAlignment="Center"
-                HorizontalAlignment="Left">
-                I do Nothing!
-            </ToggleButton>
-            <ToggleButton
-                Grid.Row="1"
-                VerticalAlignment="Stretch"
-                Margin="10"
-                Padding="10"
-                FontSize="22"
-                Name="ndi"
-                VerticalContentAlignment="Center"
-                HorizontalAlignment="Right">
-                Neither do I!
-            </ToggleButton>
+            <Grid
+                ColumnDefinitions="*,*,*,*"
+                Grid.Row="1">
+                <Button
+                    Margin="5"
+                    VerticalAlignment="Stretch"
+                    HorizontalAlignment="Stretch"
+                    VerticalContentAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch"
+                    Click="Website_OnClick"
+                    Name="Website"
+                    Grid.Column="0">
+                    <Image
+                        Source="../Assets/dmtools.png"></Image>
+                </Button>
+                <Button
+                    Margin="5"
+
+                    VerticalAlignment="Stretch"
+                    HorizontalAlignment="Stretch"
+                    VerticalContentAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch"
+                    Click="Github_OnClick"
+                    Name="Github"
+                    Grid.Column="1">
+                    <Image
+                        Source="../Assets/github.png"></Image>
+                </Button>
+                <Button
+                    Margin="5"
+
+                    VerticalAlignment="Stretch"
+                    HorizontalAlignment="Stretch"
+                    VerticalContentAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch"
+                    Click="Telegram_OnClick"
+                    Name="Telegram"
+                    Grid.Column="2">
+                    <Image
+                        Source="../Assets/telegram.png"></Image>
+                </Button>
+                <Button
+                    Margin="5"
+
+                    VerticalAlignment="Stretch"
+                    HorizontalAlignment="Stretch"
+                    VerticalContentAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch"
+                    Click="Reddit_OnClick"
+                    Name="Reddit"
+                    Grid.Column="3">
+                    <Image
+                        Source="../Assets/Reddit.png"></Image>
+                </Button>
+            </Grid>
         </Grid>
         <DockPanel
             LastChildFill="True"
@@ -67,7 +136,7 @@
                 DockPanel.Dock="Top"
                 Margin="10"
                 FontSize="20"
-                Text="Version: v.0.0.4-a &#x0a;Maintained by: thegoosewiththebowtie a.k.a. VTG&#x0a;Distributed by: Triangle on The Wall Organization">
+                Text="Version: v.0.1.0-b &#x0a;Maintained by: thegoosewiththebowtie a.k.a. VTG&#x0a;Distributed by: Triangle on The Wall Organization">
             </TextBlock>
             <TextBlock
                 DockPanel.Dock="Bottom"
@@ -105,11 +174,11 @@
             </Border>
         </DockPanel>
         <Image
+            Name="ImageLogo"
             Grid.Column="1"
             VerticalAlignment="Bottom"
             HorizontalAlignment="Right"
             DockPanel.Dock="Right"
-            Margin="0,500,0,0"
             Source="../Assets/dmtools2.png">
         </Image>
     </Grid>

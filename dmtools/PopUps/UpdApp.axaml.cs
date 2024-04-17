@@ -1,26 +1,26 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
-using System.Net;
 using System.Net.Http;
-using System.Threading;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 
 namespace dmtools.PopUps;
 
-public partial class MediaDownloading : Window
+public partial class UpdApp : Window
 {
     public System.Net.Http.HttpClient wc { get; set; }
+    public string updatelink { get; set; }
     public bool cancelled { get; set; }
-    public MediaDownloading()
+    public UpdApp(string updlink)
     {
         InitializeComponent();
         ini();
+        updatelink = updlink;
     }
     public bool IsRe { get; set; }
     public void ini()
@@ -35,13 +35,13 @@ public partial class MediaDownloading : Window
     
     private async void Start_OnClick(object? sender, RoutedEventArgs e)
     {
-        File.Delete("Media.zip");
+        File.Delete("dmtoolssetup.exe");
         cancelled = false;
         this.Closing += Window_OnClosing;
         Start.IsEnabled = false;
         this.Title = "Downloading...";
         var httpClient = new HttpClient();
-        var response = await httpClient.GetAsync(new System.Uri("https://www.triangleonthewall.org/Media.zip"), HttpCompletionOption.ResponseHeadersRead);
+        var response = await httpClient.GetAsync(new System.Uri(updatelink), HttpCompletionOption.ResponseHeadersRead);
         if (!response.IsSuccessStatusCode)
         {
             Console.WriteLine("Error: " + response.StatusCode);
@@ -52,7 +52,7 @@ public partial class MediaDownloading : Window
         var totalBytesRead = 0L;
         var readChunkSize = 8192;
         using (var contentStream = await response.Content.ReadAsStreamAsync())
-        using (var fileStream = new FileStream("Media.zip", FileMode.Create, FileAccess.Write, FileShare.None, readChunkSize, true))
+        using (var fileStream = new FileStream("dmtoolssetup.exe", FileMode.Create, FileAccess.Write, FileShare.None, readChunkSize, true))
         {
             var buffer = new byte[readChunkSize];
             int bytesRead;
@@ -82,28 +82,14 @@ public partial class MediaDownloading : Window
             this.Title = "Cancelled";
             Start.Content = "Start";
             Progress.Value = 0;
-            File.Delete("Media.zip");
+            File.Delete("dmtoolssetup.exe");
             return;
         }
-        Progress.Value = 0;
-        Progress.ShowProgressText = false;
-        Progress.IsIndeterminate = true;
-        Start.Content = this.Title = "Unpacking...";
-        Cancel.IsEnabled = false;
-        Directory.Delete("Music", true);
-        Directory.Delete("Images", true);
-        if (await unpack() == true)
+        Process.Start("dmtoolssetup.exe");
+        if (Avalonia.Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            Progress.Value = 100;
-            Progress.IsIndeterminate = false;
-            File.Delete("Media.zip");
-            this.Title = "Finished";
-            Start.Content = "Finish";
-            Start.IsEnabled = true;
-            Start.Click -= Start_OnClick;
-            Start.Click += Cancel_OnClick;
-            def( new Button(), new RoutedEventArgs());
-        };
+            desktop.Shutdown();
+        }
     }
 
     private Task<bool> unpack()

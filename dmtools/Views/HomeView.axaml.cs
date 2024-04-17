@@ -131,6 +131,8 @@ public interface ISettings
     string Profile { get; set; }
     string Player { get; set; }
     string Weather { get; set; }
+    bool? CheckUpdates { get; set; }
+    string Version { get; set; }
     int MinutesInHour { get; set; }
     int HoursInDay { get; set; }
     int DaysInWeek { get; set; }
@@ -171,7 +173,7 @@ public class PictureWindow
 }
 public partial class HomeView : UserControl
 {
-    public static event EventHandler YTC ;
+    public static event EventHandler YTC ; //
     Profile profile = new ConfigurationBuilder<Profile>().UseIniFile("Profile.ini").Build();
     public ISettings settings { get; set; }
     public int profid { get; set; }
@@ -192,7 +194,7 @@ public partial class HomeView : UserControl
         ToDoInit();
         LanSet();
         GreetIni();
-        MainWindow.TabC += MainWindowOnTabC;
+        MediaView.TabC += MainWindowOnTabC;
         npcupdate(NPCs, new EventArgs());
         pcupdate(Players, new EventArgs());
     }
@@ -200,6 +202,20 @@ public partial class HomeView : UserControl
     private void MainWindowOnTabC(object? sender, int e)
     {
         TheTabControl.SelectedIndex = e;
+        if (e == 1)
+        {
+            if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            {
+                (desktop.MainWindow as MainWindow).media.IsVisible = true;
+            }
+        }
+        else
+        {
+            if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            {
+                (desktop.MainWindow as MainWindow).media.IsVisible = false;
+            }
+        }
     }
 
     public void SetSetup()
@@ -219,6 +235,12 @@ public partial class HomeView : UserControl
         if (settings.VolumeAmb == 0) { settings.VolumeAmb = 10; }
         if (settings.VolumeSnd == 0) { settings.VolumeSnd = 10; }
         if (settings.Language == null) { settings.Language = "en"; }
+
+        settings.Version = "0.1.0-b";
+        if (settings.CheckUpdates == null)
+        {
+            settings.CheckUpdates = true;
+        }
         using (var ldb = new LiteDatabase(settings.DataPath))
         {
             var Months = ldb.GetCollection<Months0>();
@@ -536,29 +558,12 @@ public partial class HomeView : UserControl
     {
         DashFightUp();
     }
+    
     private async void Startf(object? sender, RoutedEventArgs e)
     {
         if ((sender as ToggleButton).IsChecked == true && Avalonia.Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            var MoodChooser = (desktop.MainWindow as MainWindow).MoodChooser;
-            var MusDir = new DirectoryInfo(settings.MusPath).GetDirectories();
-            MoodChooser.Items.Clear();
-            if (MusDir.Count() == 0)
-            {
-                return;
-            }
-            foreach (var musdir in MusDir)
-            {
-                var name = musdir.Name;
-                MoodChooser.Items.Add(name);
-            }
-            foreach (var m in MoodChooser.Items)
-            {
-                if (m.ToString() == "Battle" || m.ToString() == "Fight" || m.ToString() == "fight" || m.ToString() == "battle")
-                {
-                    MoodChooser.SelectedItem = m;
-                }
-            }
+            
             int s = 1;
             using (var LdbPC = new LiteDatabase(settings.DataPath))
             {
@@ -601,32 +606,7 @@ public partial class HomeView : UserControl
         }
         else
         {
-            if (Avalonia.Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime dess)
-            {
-                var MoodChooser = (dess.MainWindow as MainWindow).MoodChooser;
-
-                var MusDir = new DirectoryInfo(settings.MusPath).GetDirectories();
-                MoodChooser.Items.Clear();
-                if (MusDir.Count() == 0)
-                {
-                    return;
-                }
-
-                foreach (var musdir in MusDir)
-                {
-                    var name = musdir.Name;
-                    MoodChooser.Items.Add(name);
-                }
-
-                foreach (var m in MoodChooser.Items)
-                {
-                    if (m.ToString() == "Normal" || m.ToString() == "Neutral" || m.ToString() == "normal" ||
-                        m.ToString() == "neutral")
-                    {
-                        MoodChooser.SelectedItem = m;
-                    }
-                }
-
+            
                 npcsf.Clear();
                 AddCus.IsEnabled = false;
                 AddNpc.IsEnabled = false;
@@ -634,7 +614,7 @@ public partial class HomeView : UserControl
                 FightGrid.Columns[1].Sort();
                 init.Clear();
                 selnpc.Clear();
-            }
+            
         }
         DashFightUp();
     }
@@ -1249,12 +1229,27 @@ public partial class HomeView : UserControl
     }
     private void TheTabControl_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
-        YTC(sender, e);
+        if (TheTabControl.SelectedIndex != 1)
+        {
+            return;
+        }
+        if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        {
+
+            (desktop.MainWindow as MainWindow).media.IsVisible = true;
+            YTC(sender, e);
+        }
     }
 
     private void TheTabControl_OnLoaded(object? sender, RoutedEventArgs e)
     {
-        YTC(sender, e);
+        if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        {
+            if ((desktop.MainWindow as MainWindow).media.IsVisible)
+            {
+                YTC(sender, e);
+            }
+        }
     }
     
 }

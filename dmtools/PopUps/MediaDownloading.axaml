@@ -3,6 +3,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         Width="300" Height="100" CanResize="False"
+        WindowStartupLocation="CenterOwner"
         mc:Ignorable="d" d:DesignWidth="250" d:DesignHeight="100"
         x:Class="dmtools.PopUps.MediaDownloading"
         Icon="/Assets/dmtools.ico"
