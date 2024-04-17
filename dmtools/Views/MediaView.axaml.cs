@@ -326,6 +326,7 @@ public partial class MediaView : UserControl
             {
                 sIDAmb[ID].Pause();
                 sIDTim[ID].Stop();
+                sIDDin[ID].CurrentTime = new TimeSpan(0);
             }
             void SndControl(object? o, EventArgs eventArgs)
             {
@@ -550,12 +551,10 @@ public partial class MediaView : UserControl
         //https://www.youtube.com/watch?v=
         if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop) 
         {
-        switch ((sender as Button).Name)
-        {
-            
-
+            switch ((sender as Button).Name)
+            {
                 case "BrowserButton0":
-                if (BrowserBox0.Text == null || !BrowserBox0.Text.Contains("https://youtu.be/") || !BrowserBox0.Text.Contains("https://www.youtube.com/watch?v="))
+                if (BrowserBox0.Text == null ||( !BrowserBox0.Text.Contains("https://youtu.be/") && !BrowserBox0.Text.Contains("https://www.youtube.com/watch?v=")))
                 {
                     var noo = new NO("Link has to start with 'https://youtu.be/' or https://www.youtube.com/watch?v= "); 
                     noo.Height = 250;
@@ -571,9 +570,9 @@ public partial class MediaView : UserControl
                 Browser0.Child = browsers[0];
                 break;
             case "BrowserButton1":
-                if (BrowserBox0.Text == null || !BrowserBox1.Text.Contains("https://youtu.be/") || !BrowserBox0.Text.Contains("https://www.youtube.com/watch?v="))
+                if (BrowserBox0.Text == null || (!BrowserBox1.Text.Contains("https://youtu.be/") && !BrowserBox0.Text.Contains("https://www.youtube.com/watch?v=")))
                 {
-                    var noo = new NO("Link has to start with 'https://youtu.be/' "); 
+                    var noo = new NO("Link has to start with 'https://youtu.be/' or 'https://www.youtube.com/watch?v='"); 
                     noo.Height = 250;
                     noo.ShowDialog(desktop.MainWindow);
                     break;
@@ -587,9 +586,9 @@ public partial class MediaView : UserControl
                 Browser1.Child = browsers[1];
                 break;
             case "BrowserButton2":
-                if (BrowserBox0.Text == null || !BrowserBox2.Text.Contains("https://youtu.be/") || !BrowserBox0.Text.Contains("https://www.youtube.com/watch?v="))
+                if (BrowserBox0.Text == null || (!BrowserBox2.Text.Contains("https://youtu.be/") && !BrowserBox0.Text.Contains("https://www.youtube.com/watch?v=")))
                 {
-                    var noo = new NO("Link has to start with 'https://youtu.be/' ");
+                    var noo = new NO("Link has to start with 'https://youtu.be/' or 'https://www.youtube.com/watch?v='");
                     noo.Height = 250;
                     noo.ShowDialog(desktop.MainWindow);
                    break;
@@ -603,9 +602,9 @@ public partial class MediaView : UserControl
                 Browser2.Child = browsers[2];
                 break;
             case "BrowserButton3":
-                if (BrowserBox0.Text == null || !BrowserBox3.Text.Contains("https://youtu.be/") || !BrowserBox0.Text.Contains("https://www.youtube.com/watch?v="))
+                if (BrowserBox0.Text == null || (!BrowserBox3.Text.Contains("https://youtu.be/") && !BrowserBox0.Text.Contains("https://www.youtube.com/watch?v=")))
                 {
-                    var noo = new NO("Link has to start with 'https://youtu.be/' "); 
+                    var noo = new NO("Link has to start with 'https://youtu.be/' or 'https://www.youtube.com/watch?v='"); 
                     noo.Height = 250;
                     noo.ShowDialog(desktop.MainWindow);
                     break;
