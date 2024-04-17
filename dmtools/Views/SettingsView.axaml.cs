@@ -4,6 +4,8 @@ using System.Drawing;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Runtime.InteropServices.JavaScript;
 using Avalonia;
 using Avalonia.Controls;
@@ -26,17 +28,90 @@ using Thread = System.Threading.Thread;
 
 namespace dmtools.Views;
 
+public interface updtinf
+{
+    public string latestver { get; set; }
+    public string latestmedver { get; set; }
+    public string updpa { get; set; }
+}
+
 public partial class SettingsView : UserControl
 {
     Profile profile = new ConfigurationBuilder<Profile>().UseIniFile("Profile.ini").Build();
     public ISettings settings { get; set; }
     public int profid { get; set; }
+    public string patttt { get; set; }
     public SettingsView()
     {
         InitializeComponent();
         profid = profile.ProfileID;
         ButIni();
+        MediaDownloading.def += Def;
+        CHKFRUPDT();
     }
+    private async void CHKFRUPDT()
+    {
+        ToggleUp.IsChecked = settings.CheckUpdates;
+        if (settings.CheckUpdates == false)
+        {
+            return;
+        }
+        var uc = new HttpClient();
+        var response = await uc.GetAsync(new System.Uri("https://www.triangleonthewall.org/updtinf.ini"),
+            HttpCompletionOption.ResponseHeadersRead);
+        if (!response.IsSuccessStatusCode)
+        {
+            Console.WriteLine("Error: " + response.StatusCode);
+            return;
+        }
+        var totalBytes = response.Content.Headers.ContentLength ?? -1L;
+        var totalBytesRead = 0L;
+        var readChunkSize = 8192;
+        using (var contentStream = await response.Content.ReadAsStreamAsync())
+        using (var fileStream = new FileStream("updtinf.ini", FileMode.Create, FileAccess.Write, FileShare.None,
+                   readChunkSize, true))
+        {
+            var buffer = new byte[readChunkSize];
+            int bytesRead;
+            while ((bytesRead = await contentStream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+            {
+                await fileStream.WriteAsync(buffer, 0, bytesRead);
+                totalBytesRead += bytesRead;
+            }
+        }
+        updtinf ui = new ConfigurationBuilder<updtinf>().UseIniFile("updtinf.ini").Build();
+        updtinf mevr = new ConfigurationBuilder<updtinf>().UseIniFile("Music/updtinf.ini").Build();
+        if (ui.latestmedver != mevr.latestmedver)
+        {
+            MediaUp.IsEnabled = true;
+        }
+        else
+        {
+            MediaUp.IsEnabled = false;
+        }
+        if (ui.latestver != settings.Version)
+        {
+            AppUp.IsEnabled = true;
+            patttt = ui.updpa;
+        }
+        else
+        {
+            AppUp.IsEnabled = false;
+        }
+        if (MediaUp.IsEnabled || AppUp.IsEnabled)
+        {
+            Updin.Header = "Update(s) available";
+        }
+    }
+    private void Def(object? sender, EventArgs e)
+    {
+        Mus.IsChecked = true;
+        Snd.IsChecked = true;
+        Img.IsChecked = true;
+        Amb.IsChecked = true;
+
+    }
+
     public void ButIni()
     {
         settings = new ConfigurationBuilder<ISettings>().UseIniFile("Settings/q0" + profid +".ini").Build();
@@ -182,7 +257,6 @@ public partial class SettingsView : UserControl
                 });
             }
         }
-
         Button savemonth = new Button()
         {
             Content = "Save",
@@ -410,6 +484,39 @@ public partial class SettingsView : UserControl
             Process.Start(p.ProcessName + ".exe");
             Thread.Sleep(1000);
             desktop.Shutdown();
+        }
+    }
+
+    private void Download_OnClick(object? sender, RoutedEventArgs e)
+    {
+        MediaDownloading md = new MediaDownloading();
+        if (Avalonia.Application.Current.ApplicationLifetime is ClassicDesktopStyleApplicationLifetime desktop)
+        {
+            md.ShowDialog(desktop.MainWindow);
+        }
+    }
+
+    private void ToggleUp_OnClick(object? sender, RoutedEventArgs e)
+    {
+        settings.CheckUpdates = (sender as ToggleSwitch).IsChecked;
+        if ((sender as ToggleSwitch).IsChecked == true)
+        {
+            CHKFRUPDT();
+        }
+        else
+        {
+            Updin.Header = "No updates";
+            MediaUp.IsEnabled = false;
+            AppUp.IsEnabled = false;
+        }
+    }
+
+    private void AppUp_OnClick(object? sender, RoutedEventArgs e)
+    {
+        if (Avalonia.Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        {
+            UpdApp ua = new UpdApp(patttt);
+            ua.ShowDialog(desktop.MainWindow);
         }
     }
 }

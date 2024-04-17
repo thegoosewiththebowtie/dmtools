@@ -4,7 +4,9 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text.RegularExpressions;
+using Atk;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
@@ -12,6 +14,7 @@ using dmtools.PopUps;
 using LiteDB;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Controls.Converters;
 using Avalonia.Controls.Primitives;
 using Avalonia.Layout;
 using Avalonia.LogicalTree;
@@ -22,7 +25,14 @@ using NAudio.Wave;
 using Config.Net;
 using dmtools.Generators;
 using dmtools.Templates;
+using Gtk;
 using Pango;
+using Application = Avalonia.Application;
+using Button = Avalonia.Controls.Button;
+using Grid = Avalonia.Controls.Grid;
+using Image = Avalonia.Controls.Image;
+using Init = dmtools.PopUps.Init;
+using ToggleButton = Avalonia.Controls.Primitives.ToggleButton;
 
 namespace dmtools.Views;
 public class FightData
@@ -121,6 +131,8 @@ public interface ISettings
     string Profile { get; set; }
     string Player { get; set; }
     string Weather { get; set; }
+    bool? CheckUpdates { get; set; }
+    string Version { get; set; }
     int MinutesInHour { get; set; }
     int HoursInDay { get; set; }
     int DaysInWeek { get; set; }
@@ -161,7 +173,7 @@ public class PictureWindow
 }
 public partial class HomeView : UserControl
 {
-    public static event EventHandler YTC ;
+    public static event EventHandler YTC ; //
     Profile profile = new ConfigurationBuilder<Profile>().UseIniFile("Profile.ini").Build();
     public ISettings settings { get; set; }
     public int profid { get; set; }
@@ -171,11 +183,6 @@ public partial class HomeView : UserControl
         TheTabControl.SelectionChanged += TheTabControl_OnSelectionChanged;
         profid = profile.ProfileID;
         SetSetup();
-        AmbIni();
-        SndIni();
-        VolumeS.Value = settings.Volume;
-        VolumeAmb.Value = settings.VolumeAmb;
-        VolumeSnd.Value = settings.VolumeSnd;
         MainWindow.SizzeChanged += SizeChange;
         Picture.Closeed += ClozedEv;
         Sure.Delete += pcupdate;
@@ -187,7 +194,30 @@ public partial class HomeView : UserControl
         ToDoInit();
         LanSet();
         GreetIni();
+        MediaView.TabC += MainWindowOnTabC;
+        npcupdate(NPCs, new EventArgs());
+        pcupdate(Players, new EventArgs());
     }
+
+    private void MainWindowOnTabC(object? sender, int e)
+    {
+        TheTabControl.SelectedIndex = e;
+        if (e == 1)
+        {
+            if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            {
+                (desktop.MainWindow as MainWindow).media.IsVisible = true;
+            }
+        }
+        else
+        {
+            if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            {
+                (desktop.MainWindow as MainWindow).media.IsVisible = false;
+            }
+        }
+    }
+
     public void SetSetup()
     {
         settings = new ConfigurationBuilder<ISettings>().UseIniFile("Settings/q0" + profid +".ini").Build();
@@ -205,6 +235,12 @@ public partial class HomeView : UserControl
         if (settings.VolumeAmb == 0) { settings.VolumeAmb = 10; }
         if (settings.VolumeSnd == 0) { settings.VolumeSnd = 10; }
         if (settings.Language == null) { settings.Language = "en"; }
+
+        settings.Version = "0.1.0-b";
+        if (settings.CheckUpdates == null)
+        {
+            settings.CheckUpdates = true;
+        }
         using (var ldb = new LiteDatabase(settings.DataPath))
         {
             var Months = ldb.GetCollection<Months0>();
@@ -416,7 +452,7 @@ public partial class HomeView : UserControl
     private void NoteInit()
     {
         var res = String.Empty;
-        if (settings.MainNotes == null)
+        if (string.IsNullOrWhiteSpace(settings.MainNotes))
         {
             return;
         }
@@ -432,8 +468,8 @@ public partial class HomeView : UserControl
     }
     private void DeleteNotes_OnClick(object? sender, RoutedEventArgs e)
     {
-        settings.MainNotes = "";
-        MainNotesT.Text = "";
+        settings.MainNotes = String.Empty;
+        MainNotesT.Text = String.Empty;
     }
     
     
@@ -522,28 +558,12 @@ public partial class HomeView : UserControl
     {
         DashFightUp();
     }
+    
     private async void Startf(object? sender, RoutedEventArgs e)
     {
         if ((sender as ToggleButton).IsChecked == true && Avalonia.Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            var MusDir = new DirectoryInfo(settings.MusPath).GetDirectories();
-            MoodChooser.Items.Clear();
-            if (MusDir.Count() == 0)
-            {
-                return;
-            }
-            foreach (var musdir in MusDir)
-            {
-                var name = musdir.Name;
-                MoodChooser.Items.Add(name);
-            }
-            foreach (var m in MoodChooser.Items)
-            {
-                if (m.ToString() == "Battle" || m.ToString() == "Fight" || m.ToString() == "fight" || m.ToString() == "battle")
-                {
-                    MoodChooser.SelectedItem = m;
-                }
-            }
+            
             int s = 1;
             using (var LdbPC = new LiteDatabase(settings.DataPath))
             {
@@ -586,31 +606,15 @@ public partial class HomeView : UserControl
         }
         else
         {
-            var MusDir = new DirectoryInfo(settings.MusPath).GetDirectories();
-            MoodChooser.Items.Clear();
-            if (MusDir.Count() == 0)
-            {
-                return;
-            }
-            foreach (var musdir in MusDir)
-            {
-                var name = musdir.Name;
-                MoodChooser.Items.Add(name);
-            }
-            foreach (var m in MoodChooser.Items)
-            {
-                if (m.ToString() == "Normal" || m.ToString() == "Neutral" || m.ToString() == "normal" || m.ToString() == "neutral")
-                {
-                    MoodChooser.SelectedItem = m;
-                }
-            }
-            npcsf.Clear();
-            AddCus.IsEnabled = false;
-            AddNpc.IsEnabled = false;
-            FightGrid.Columns[0].IsVisible = false;
-            FightGrid.Columns[1].Sort();
-            init.Clear();
-            selnpc.Clear();
+            
+                npcsf.Clear();
+                AddCus.IsEnabled = false;
+                AddNpc.IsEnabled = false;
+                FightGrid.Columns[0].IsVisible = false;
+                FightGrid.Columns[1].Sort();
+                init.Clear();
+                selnpc.Clear();
+            
         }
         DashFightUp();
     }
@@ -715,6 +719,7 @@ public partial class HomeView : UserControl
             tt.state = (bool)(sender as CheckBox).IsChecked;
             todos.Update(tt);
         }
+        tdl.SelectedItem = (sender as CheckBox);
     }
     private void Deltd_OnClick(object? sender, RoutedEventArgs e)
     {
@@ -944,309 +949,22 @@ public partial class HomeView : UserControl
     
     
     //media
-    
+
     private void Media_OnPointerReleased(object? sender, PointerReleasedEventArgs e)
     {
+        npcupdate(sender, e);
+        pcupdate(sender, e);
     }
     //music
-    public WaveOutEvent mainPlayer = new WaveOutEvent();
+    public WaveOutEvent mainPlayer;
     public Random rndm = new Random();
     public AudioFileReader auf;
     public DispatcherTimer mainTime { get; set; }
-    public string NowPlaying { get; set; } = "0";
-    public string CurrentSongPath { get; set; } = "0";
+    public string NowPlaying { get; set; }
+    public string CurrentSongPath { get; set; }
     public TimeSpan TotalLength { get; set; }
-    private void MoodChooser_OnDropDownOpened(object? sender, EventArgs e)
-    {
-        var MusDir = new DirectoryInfo(settings.MusPath).GetDirectories();
-        MoodChooser.Items.Clear();
-        if (MusDir.Count() == 0)
-        {
-            return;
-        }
-        foreach (var musdir in MusDir)
-        {
-            var name = musdir.Name;
-            MoodChooser.Items.Add(name);
-        }
-    }
-    private void MoodChooser_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
-    {
-        var sel = new DirectoryInfo(settings.MusPath + "/" + MoodChooser.SelectedItem);
-        SongChooser.Items.Clear();
-        foreach (var name in sel.GetFiles())
-        {
-            if (name.Name.EndsWith(".mp3"))
-            {
-                SongChooser.Items.Add(name.Name);
-            }
-        }
-        if (MoodChooser.SelectedItem != null)
-        {
-            SongChooser.SelectedIndex = rndm.Next(0, SongChooser.ItemCount + 1);
-        }
-    }
-    private void SongChooser_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
-    {
-        if (SongChooser.SelectedItem == null)
-        {
-            return;
-        }
-        CurrentSongPath = nowPlaying.Text = settings.MusPath + "/" + MoodChooser.SelectedItem + "/" + SongChooser.SelectedItem;
-        MusicControl();
-    }
-    private void Stop_OnClick(object? sender, RoutedEventArgs e)
-    {
-        mainPlayer.Stop();
-        mainTime.Stop();
-        SongChooser.SelectedItem = null;
-        MusState.Text = "00:00";
-        nowPlaying.Text = "";
-    }
-    private void Pause_OnClick(object? sender, RoutedEventArgs e)
-    {
-        MusicControl();
-    }
-    private void Next_OnClick(object? sender, RoutedEventArgs e)
-    {
-        int i;
-        do
-        {
-            i = rndm.Next(0, SongChooser.ItemCount+1);
-            if (i < 10)
-            {
-                break;
-            }
-        } while (SongChooser.SelectedIndex == i);
-        SongChooser.SelectedIndex = i;
-    }
-    public void MusicControl()
-    {
-        if (!File.Exists(CurrentSongPath))
-        {
-            return;
-        }
-        if (mainPlayer.PlaybackState == PlaybackState.Stopped)
-        {
-                auf = new AudioFileReader(CurrentSongPath);
-                NowPlaying = CurrentSongPath;
-                TotalLength = auf.TotalTime;
-                mainPlayer.Init(auf);
-                mainPlayer.Play();
-                mainTime = new DispatcherTimer();
-                mainTime.Tick += MainTimeOnTick;
-                mainTime.Start();
-                nowPlaying.Text = SongChooser.SelectedItem.ToString();
-                auf.Volume = (float)settings.Volume/10;
-                Pause.IsChecked = true;
-        }
-        else if (mainPlayer.PlaybackState == PlaybackState.Playing && NowPlaying == CurrentSongPath)
-        {
-                mainPlayer.Pause();
-                mainTime.Stop();
-                nowPlaying.Text = nowPlaying.Text = SongChooser.SelectedItem.ToString();
-                Pause.IsChecked = false;
-        }
-        else if (mainPlayer.PlaybackState == PlaybackState.Paused && NowPlaying == CurrentSongPath)
-        {
-                mainPlayer.Play();
-                mainTime.Start();
-                nowPlaying.Text = SongChooser.SelectedItem.ToString();
-                Pause.IsChecked = true;
-        }
-        else if (NowPlaying != CurrentSongPath)
-        {
-                mainTime.Stop();
-                mainPlayer.Stop();
-                mainPlayer.Dispose();
-                auf = new AudioFileReader(CurrentSongPath);
-                NowPlaying = CurrentSongPath;
-                mainPlayer.Init(auf);
-                mainPlayer.Play();
-                mainTime = new DispatcherTimer();
-                mainTime.Tick += MainTimeOnTick;
-                mainTime.Start();
-                nowPlaying.Text = SongChooser.SelectedItem.ToString();
-                Pause.IsChecked = true;
-        }
-    }
-    private void Volume_OnPropertyChanged(object? sender, AvaloniaPropertyChangedEventArgs e)
-    {
-        if (auf == null)
-        {
-            return;
-        }
-        settings.Volume = (sender as Slider).Value;
-        auf.Volume = (float)settings.Volume/10;
-    }
-    private void MainTimeOnTick(object? sender, EventArgs e)
-    {
-        if (mainPlayer.PlaybackState == PlaybackState.Playing)
-        {
-            MusState.Text = ($"{auf.CurrentTime.Minutes.ToString("00")}:{auf.CurrentTime.Seconds.ToString("00")}" +
-                             $"/{auf.TotalTime.Minutes.ToString("00")}:{auf.TotalTime.Seconds.ToString("00")}");
-            MusProg.Value = (auf.CurrentTime / auf.TotalTime) * 100;
-        }
-        else
-        {
-            MusState.Text = "00:00";
-            MusProg.Value = 0;
-            nowPlaying.Text = "";
-        }
-    }
     
     
-    
-    //amb
-    public List<WaveOutEvent> IDAmb = new List<WaveOutEvent>();
-    public List<DispatcherTimer> IDTim = new List<DispatcherTimer>();
-    public List<AudioFileReader> IDDin = new List<AudioFileReader>();
-    public void AmbIni()
-    {
-        var ambf = new DirectoryInfo(settings.AmbPath);
-        Ambience.Children.Clear();
-        int i = 0;
-        if (ambf.GetFiles().Count() == 0)
-        {
-            TextBlock n = new TextBlock()
-            {
-                Text = Application.Current.FindResource("nofiles").ToString(),
-                FontSize = 46
-            };
-            Ambience.Children.Add(n);
-            return;
-        }
-        foreach (var amb in ambf.GetFiles())
-        {
-            if (amb.Name.EndsWith(".mp3")) 
-            {
-                ToggleButton tg0 = new ToggleButton()
-                {
-                        Name = amb.Name + "_" + i,
-                        Content = amb.Name.Replace(".mp3", ""),
-                        Width = 150,
-                        Height = 50,
-                        HorizontalContentAlignment = HorizontalAlignment.Center,
-                        VerticalContentAlignment = VerticalAlignment.Center,
-                        FontSize = 24,
-                        Margin = new Thickness(5)
-                };
-                i++;
-                tg0.IsCheckedChanged += AmbChangeState;
-                Ambience.Children.Add(tg0);
-                AudioFileReader af = new AudioFileReader(settings.AmbPath + "/" + amb.Name);
-                IDDin.Add(af);
-                WaveOutEvent ap = new WaveOutEvent();
-                IDAmb.Add(ap);
-                DispatcherTimer dt = new DispatcherTimer();
-                IDTim.Add(dt);
-            }
-        }
-    }
-    private void AmbChangeState(object? sender, RoutedEventArgs e)
-    {
-        int tick = 0;
-        int ID = Convert.ToInt32((sender as ToggleButton).Name.Split("_")[1]);
-        IDDin[ID].Volume =(float)settings.VolumeAmb/10;
-        IDTim[ID].Tick += AmbControl;
-        if ((sender as ToggleButton).IsChecked == true)
-        {
-            if (IDAmb[ID].PlaybackState == PlaybackState.Stopped)
-            {
-                IDAmb[ID].Init(IDDin[ID]);
-            }
-            IDAmb[ID].Play();
-            IDTim[ID].Start();
-        }
-        else
-        {
-            IDAmb[ID].Pause();
-            IDTim[ID].Stop();
-        }
-        void AmbControl(object? o, EventArgs eventArgs)
-        {
-            if (tick < 99)
-            {
-                tick = Convert.ToInt32((IDDin[ID].CurrentTime / IDDin[ID].TotalTime) * 100);
-            }
-            else
-            {
-                tick = 0;
-                IDAmb[ID].Stop();
-                IDDin[ID].CurrentTime = new TimeSpan(0);
-                IDAmb[ID].Init(IDDin[ID]);
-                IDAmb[ID].Play();
-            }
-        }
-    }
-    private void RangeBase_OnValueChanged(object? sender, RangeBaseValueChangedEventArgs e)
-    {
-        foreach (var pl in IDDin)
-        {
-            settings.VolumeAmb = (sender as Slider).Value;
-            pl.Volume = (float)settings.VolumeAmb/10;
-        }
-    }
-    
-    
-    
-    //sounds
-    public List<AudioFileReader> af = new List<AudioFileReader>();
-    public void SndIni()
-    {
-        var sndf = new DirectoryInfo(settings.SndPath);
-        Sounds.Children.Clear();
-        if (sndf.GetFiles().Length != 0)
-        {
-            int c = 0;
-            foreach (var snd in sndf.GetFiles())
-            {
-                if (snd.Name.EndsWith(".mp3"))
-                {
-                    Button tg0 = new Button()
-                    {
-                        Name = c.ToString(),
-                        Content = snd.Name.Replace(".mp3", ""),
-                        Width = 150,
-                        Height = 50,
-                        HorizontalContentAlignment = HorizontalAlignment.Center,
-                        VerticalContentAlignment = VerticalAlignment.Center,
-                        FontSize = 24,
-                        Margin = new Thickness(5)
-                    };
-                    var x = new AudioFileReader(snd.FullName);
-                    x.Volume = (float)settings.VolumeSnd;
-                    af.Add(x);
-                    tg0.Click += boom;
-                    Sounds.Children.Add(tg0);
-                    c++;
-                }
-            }
-        }
-        else
-        {
-            TextBlock n = new TextBlock()
-            {
-              Text = Application.Current.FindResource("nofiles").ToString(),
-                FontSize = 46
-            };
-            Sounds.Children.Add(n);
-        }
-    }
-    private void boom(object? sender, RoutedEventArgs e)
-    {
-        WaveOutEvent ap = new WaveOutEvent();
-        ap.Init(af[Convert.ToInt32((sender as Button).Name)]);
-        ap.Play();
-    }
-    private void VolumeSnd_OnValueChanged(object? sender, RangeBaseValueChangedEventArgs e)
-    {
-        foreach (var pl in af)
-        {
-            settings.VolumeSnd = (sender as Slider).Value;
-            pl.Volume = (float)settings.VolumeSnd/10;
-        }
-    }
     
     
     
@@ -1311,9 +1029,26 @@ public partial class HomeView : UserControl
                 {
                     charForm.Dis = pc.Dislikes.Split("/").ToList();
                 }
-                wpnpc.Children.Add(charForm);
+                wpnpc.Children.Add(charForm); 
             }
         }
+        Button btn = new Button()
+        {
+            VerticalAlignment = VerticalAlignment.Center,
+            HorizontalAlignment = HorizontalAlignment.Center,
+            HorizontalContentAlignment = HorizontalAlignment.Center,
+            VerticalContentAlignment = VerticalAlignment.Center,
+            Content = new NpcForm()
+            {
+                IsHitTestVisible = false
+            }
+        };
+        btn.Click += BtnOnClick;
+        void BtnOnClick(object? o, RoutedEventArgs routedEventArgs)
+        {
+            AddNpcP(o, routedEventArgs);
+        }
+        wpnpc.Children.Add(btn);
     }
     private void NPCs_OnPointerReleased(object? sender, PointerReleasedEventArgs e)
     {
@@ -1373,8 +1108,26 @@ public partial class HomeView : UserControl
                     pc.IsCCharisma, pc.IsCStrength, pc.IsCDexterity, pc.IsCConstitution, pc.IsCIntelligence, pc.IsCWisdom,
                 };
                 wppc.Children.Add(charForm);
+
             }
         }
+        Button btn = new Button()
+        {
+            VerticalAlignment = VerticalAlignment.Center,
+            HorizontalAlignment = HorizontalAlignment.Center,
+            HorizontalContentAlignment = HorizontalAlignment.Center,
+            VerticalContentAlignment = VerticalAlignment.Center,
+            Content = new CharForm()
+            {
+                IsHitTestVisible = false
+            }
+        };
+        btn.Click += BtnOnClick;
+        void BtnOnClick(object o, RoutedEventArgs routedEventArgs)
+        {
+            Add(o, routedEventArgs);
+        }
+        wppc.Children.Add(btn);
     }
     private void Players_OnPointerReleased(object? sender, PointerReleasedEventArgs e)
     {
@@ -1419,7 +1172,43 @@ public partial class HomeView : UserControl
                 cf.Height = cf.Width / 1.33333;
             }
         }
+        foreach (Button cf in wppc.Children.OfType<Button>())
+        {
+            if (svpc.Bounds.Width > 1500)
+            {
+                cf.Width = svpc.Bounds.Width / 3 - 10;
+                cf.Height = cf.Width / 1.33333;
+            }
+            else if (svpc.Bounds.Width > 1000)
+            {
+                cf.Width = svpc.Bounds.Width / 2 - 10;
+                cf.Height = cf.Width / 1.33333;
+            }
+            else
+            {
+                cf.Width = svpc.Bounds.Width - 10;
+                cf.Height = cf.Width / 1.33333;
+            }
+        }
         foreach (NpcForm cf in wpnpc.Children.OfType<NpcForm>())
+        {
+            if (svnpc.Bounds.Width > 1500)
+            {
+                cf.Width = svnpc.Bounds.Width / 3 - 10;
+                cf.Height = cf.Width / 1.33333;
+            }
+            else if (svnpc.Bounds.Width > 1000)
+            {
+                cf.Width = svnpc.Bounds.Width / 2 - 10;
+                cf.Height = cf.Width / 1.33333;
+            }
+            else
+            {
+                cf.Width = svnpc.Bounds.Width - 10;
+                cf.Height = cf.Width / 1.33333;
+            }
+        }
+        foreach (Button cf in wpnpc.Children.OfType<Button>())
         {
             if (svnpc.Bounds.Width > 1500)
             {
@@ -1440,6 +1229,27 @@ public partial class HomeView : UserControl
     }
     private void TheTabControl_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
-        YTC(sender, e);
+        if (TheTabControl.SelectedIndex != 1)
+        {
+            return;
+        }
+        if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        {
+
+            (desktop.MainWindow as MainWindow).media.IsVisible = true;
+            YTC(sender, e);
+        }
     }
+
+    private void TheTabControl_OnLoaded(object? sender, RoutedEventArgs e)
+    {
+        if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        {
+            if ((desktop.MainWindow as MainWindow).media.IsVisible)
+            {
+                YTC(sender, e);
+            }
+        }
+    }
+    
 }

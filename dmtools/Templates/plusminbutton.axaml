@@ -58,7 +58,7 @@
 				      Margin="0, -1, 0, 0"></Rectangle>
               			  <TextBlock 
               				  Text="{TemplateBinding modmodd}"
-              				  Classes="Header1"
+              				  Classes="Text5"
               				  VerticalAlignment="Center"
               				  HorizontalAlignment="Center"
               				  Grid.ColumnSpan="4"

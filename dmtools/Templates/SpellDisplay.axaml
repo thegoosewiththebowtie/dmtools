@@ -14,9 +14,9 @@
             <ControlTemplate>
                 <DockPanel>
                     <Grid
+                        Height="100"
                         Name="Stats"
                         DockPanel.Dock="Top"
-                        RowDefinitions="Auto, *"
                         ColumnDefinitions="Auto, *">
                         <Border
                             Name = "Level"
@@ -28,12 +28,14 @@
                             <Grid
                                 RowDefinitions="*,3*">
                                 <TextBlock
+                                    Classes="Text3"
                                     Margin="10,5,10,0"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center">
                                     Level
                                 </TextBlock>
                                 <TextBlock
+                                    Classes = "Number"
                                     Text="{TemplateBinding Level}"
                                     Margin="0"
                                     VerticalAlignment="Center"
@@ -43,94 +45,101 @@
                             </Grid>
                         </Border>
                         <Grid
-                            ColumnDefinitions="*,*"
-                            Grid.Column="1"
-                            Grid.Row="0">
-                            <TextBlock
-                                Grid.Column="0"
-                                Name="SpName"
-                                Text="{TemplateBinding SpellName}"
-                                Margin="5"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center">
-                            </TextBlock>
-                            <Border
-                                Grid.Column="1"
-                                BorderBrush="DimGray"
-                                BorderThickness="1,0,0,0">
+                            RowDefinitions="*, *"
+                            Grid.Column="1">
+                            <Grid
+                                ColumnDefinitions="*,*"
+                                Grid.Row="0">
                                 <TextBlock
-                                    Text="{TemplateBinding School}"
+                                    Classes="Text3"
+                                    Grid.Column="0"
+                                    Name="SpName"
+                                    Text="{TemplateBinding SpellName}"
+                                    Margin="5"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center">
                                 </TextBlock>
-                            </Border>
-                        </Grid>
-                        <Grid
-                        Grid.Column="1"
-                        Grid.Row="1"
-                        RowDefinitions="Auto,Auto"
-                        ColumnDefinitions="*,*,*"
-                        DockPanel.Dock="Top">
-                        <Border
-                            Grid.Row="1"
-                            Grid.Column="0"
-                            BorderBrush="DimGray"
-                            BorderThickness="0,1,1,1">
-                            <Grid
-                                RowDefinitions="*,*">
-                                <TextBlock
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Center">
-                                    Duration
-                                </TextBlock>
-                                <TextBlock
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Center"
-                                    Grid.Row="1"
-                                    Text="{TemplateBinding Duration}">
-                                </TextBlock>
+                                <Border
+                                    Name="sch"
+                                    Grid.Column="1"
+                                    BorderBrush="DimGray"
+                                    BorderThickness="1,0,0,0">
+                                    <TextBlock
+                                        Classes="Text3"
+                                        Text="{TemplateBinding School}"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center">
+                                    </TextBlock>
+                                </Border>
                             </Grid>
-                        </Border>
-                        <Border
-                            Grid.Row="1"
-                            Grid.Column="1"
-                            BorderBrush="DimGray"
-                            BorderThickness="0,1,1,1">
                             <Grid
-                                RowDefinitions="*,*">
-                                <TextBlock
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Center">
-                                    Casting time
-                                </TextBlock>
-                                <TextBlock
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Center"
-                                    Grid.Row="1"
-                                    Text="{TemplateBinding CastingTime}">
-                                </TextBlock>
+                                Grid.Row="1"
+                                ColumnDefinitions="*,*,*">
+                                <Border
+                                    Grid.Column="0"
+                                    BorderBrush="DimGray"
+                                    BorderThickness="0,1,1,1">
+                                    <Grid
+                                        RowDefinitions="*,*">
+                                        <TextBlock
+                                            Classes="Text2"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Center">
+                                            Duration
+                                        </TextBlock>
+                                        <TextBlock
+                                            Classes="Text3"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Center"
+                                            Grid.Row="1"
+                                            Text="{TemplateBinding Duration}">
+                                        </TextBlock>
+                                    </Grid>
+                                </Border>
+                                <Border
+
+                                    Grid.Column="1"
+                                    BorderBrush="DimGray"
+                                    BorderThickness="0,1,1,1">
+                                    <Grid
+                                        RowDefinitions="*,*">
+                                        <TextBlock
+                                            Classes="Text2"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Center">
+                                            Casting time
+                                        </TextBlock>
+                                        <TextBlock
+                                            Classes="Text3"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Center"
+                                            Grid.Row="1"
+                                            Text="{TemplateBinding CastingTime}">
+                                        </TextBlock>
+                                    </Grid>
+                                </Border>
+                                <Border
+                                    Grid.Column="2"
+                                    BorderBrush="DimGray"
+                                    BorderThickness="0,1,0,1">
+                                    <Grid
+                                        RowDefinitions="*,*">
+                                        <TextBlock
+                                            Classes="Text2"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Center">
+                                            Range
+                                        </TextBlock>
+                                        <TextBlock
+                                            Classes="Text3"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Center"
+                                            Grid.Row="1"
+                                            Text="{TemplateBinding Range}">
+                                        </TextBlock>
+                                    </Grid>
+                                </Border>
                             </Grid>
-                        </Border>
-                        <Border
-                            Grid.Row="1"
-                            Grid.Column="3"
-                            BorderBrush="DimGray"
-                            BorderThickness="0,1,0,1">
-                            <Grid
-                                RowDefinitions="*,*">
-                                <TextBlock
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Center">
-                                    Range
-                                </TextBlock>
-                                <TextBlock
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Center"
-                                    Grid.Row="1"
-                                    Text="{TemplateBinding Range}">
-                                </TextBlock>
-                            </Grid>
-                        </Border>
                         </Grid>
                     </Grid>
                     <Expander
@@ -177,55 +186,34 @@
                                 </Grid>
                             </Expander.Header>
                             <TextBlock
+                                Classes="Text2"
                                 Text="{TemplateBinding Materials}">
                            </TextBlock>
                    </Expander>
                     <Grid
-                        ColumnDefinitions="1.3*,*">
-                    <ScrollViewer>
-                        <TextBlock
-                            TextWrapping="Wrap"
-                            Text="{TemplateBinding Desc}"
-                            Margin="10">
-                        </TextBlock>
-                    </ScrollViewer>
+                        ColumnDefinitions="*,Auto">
+                        <ScrollViewer>
+                            <TextBlock
+                                Classes="Text2"
+                                TextWrapping="Wrap"
+                                Text="{TemplateBinding Desc}"
+                                Margin="10">
+                            </TextBlock>
+                        </ScrollViewer>
                         <Border
+                            Width="{Binding #sch.Bounds.Width}"
                             BorderBrush="DimGray"
                             BorderThickness="1,0,0,0"
                             Grid.Column="1"
                             DockPanel.Dock="Bottom">
-                            <StackPanel
-                                Margin="0">
+                            <ScrollViewer>
                                 <TextBlock
-                                    Padding="10"
-                                    Margin="0"
+                                    Classes="Text2"
+                                    TextWrapping="Wrap"
+                                    Margin="10"
                                     Text="{TemplateBinding classes}">
                                 </TextBlock>
-                                <TextBlock
-                                    Padding="10"
-                                    Margin="0"
-                                    Text="{TemplateBinding subclasses}">
-                                </TextBlock>
-                                <TextBlock
-                                    Padding="10"
-                                    Margin="0"
-                                    Text="{TemplateBinding dctypensucess}">
-                                </TextBlock>
-                                <TextBlock
-                                    Padding="10"
-                                    Margin="0"
-                                    Text="{TemplateBinding damage}">
-                                </TextBlock>
-                                <TextBlock
-                                    Padding="0"
-                                    Margin="10"
-                                    Text="{TemplateBinding Area}">
-                                </TextBlock>
-                            <ListBox
-                                Background="Transparent"
-                                ItemsSource="{TemplateBinding Levels}">
-                            </ListBox>
-                            </StackPanel>
+                            </ScrollViewer>
                         </Border>
                     </Grid>
                 </DockPanel>

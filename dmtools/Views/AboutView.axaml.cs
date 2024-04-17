@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using Avalonia;
 using Avalonia.Controls;
@@ -22,8 +23,7 @@ public partial class AboutView : UserControl
     {
         dmt.FontSize = totwl.Bounds.Width * 0.1;
         totw.FontSize = totwl.Bounds.Width * 0.05;
-        idn.FontSize = totwl.Bounds.Width * 0.05;
-        ndi.FontSize = totwl.Bounds.Width * 0.05;
+        ImageLogo.Height = this.Bounds.Height * 0.7;
     }
 
     public void TextIni()
@@ -32,5 +32,25 @@ public partial class AboutView : UserControl
         rm.Text = Readme;
         License = File.ReadAllText("Docs/LICENSE.txt");
         lic.Text = License;
+    }
+
+    private void Website_OnClick(object? sender, RoutedEventArgs e)
+    {
+        Process.Start(new ProcessStartInfo() { FileName = "https://www.triangleonthewall.org/dmtools", UseShellExecute = true });
+    }
+
+    private void Github_OnClick(object? sender, RoutedEventArgs e)
+    {
+        Process.Start(new ProcessStartInfo() { FileName = "https://github.com/thegoosewiththebowtie/dmtools", UseShellExecute = true });
+    }
+
+    private void Telegram_OnClick(object? sender, RoutedEventArgs e)
+    {
+        Process.Start(new ProcessStartInfo() { FileName = "https://t.me/dmtoolsbyvtg", UseShellExecute = true });
+    }
+
+    private void Reddit_OnClick(object? sender, RoutedEventArgs e)
+    {
+        Process.Start(new ProcessStartInfo() { FileName = "https://www.reddit.com/r/dmtools/", UseShellExecute = true });
     }
 }

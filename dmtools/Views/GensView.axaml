@@ -17,6 +17,7 @@
                     <Grid
                         ColumnDefinitions="*, 2*">
                     <DataGrid
+                        IsReadOnly="True"
                         Name="History"
                         SelectionChanged="History_OnSelectionChanged"
                         Margin="5">
@@ -117,18 +118,22 @@
             </Grid>
         </TabItem>
         <TabItem
+            IsEnabled="False"
             Header="{DynamicResource Loot}">
             
         </TabItem>
         <TabItem
+            IsEnabled="False"
             Header="{DynamicResource Encounters}">
             
         </TabItem>
         <TabItem
+            IsEnabled="False"
             Header="{DynamicResource Cities}">
             
         </TabItem>
         <TabItem
+            IsEnabled="False"
             Header="{DynamicResource Dungeons}">
             
         </TabItem>

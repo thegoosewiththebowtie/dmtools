@@ -16,7 +16,7 @@
 		</ResourceDictionary>
 	</Application.Resources>
 	<Application.Styles>
-        <FluentTheme />
+        <FluentTheme DensityStyle="Normal" />
         <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
         <StyleInclude Source="Templates/BestDisplay.axaml"></StyleInclude>
         <StyleInclude Source="Templates/GeneratedNPC.axaml"></StyleInclude>

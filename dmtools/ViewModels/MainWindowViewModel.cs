@@ -8,8 +8,8 @@ namespace dmtools.ViewModels;
 public class MainWindowViewModel : ViewModelBase
 {
     ViewModelBase _content;
+    ViewModelBase _media0;
     ViewModelBase _home0;
-
     public MainWindowViewModel()
     {
         Profile profile = new ConfigurationBuilder<Profile>().UseIniFile("Profile.ini").Build();
@@ -20,6 +20,7 @@ public class MainWindowViewModel : ViewModelBase
         }
         else
         {
+            Media0 = new MediaViewModel();
             Home0 = new HomeViewModel();
         }
     }
@@ -35,6 +36,11 @@ public class MainWindowViewModel : ViewModelBase
         get => _home0;
         private set => this.RaiseAndSetIfChanged(ref _home0, value);
     }
+    public ViewModelBase Media0
+    {
+        get => _media0;
+        private set => this.RaiseAndSetIfChanged(ref _media0, value);
+    }
 
     //HomeViewModel List { get; }
 
@@ -42,6 +48,10 @@ public class MainWindowViewModel : ViewModelBase
     public void Home()
     {
         Content = null;
+        if (Media0 == null)
+        {
+            Media0 = new MediaViewModel();
+        }
         if (Home0 == null)
         {
             Home0 = new HomeViewModel();
@@ -58,6 +68,7 @@ public class MainWindowViewModel : ViewModelBase
         var vm = new GlossaryViewModel();
         Content = vm;
     }
+    
     public void Bot()
     {
         var vm = new BotTestViewModel();
@@ -68,6 +79,7 @@ public class MainWindowViewModel : ViewModelBase
         var vm = new SettingsViewModel();
         Content = vm;
         Home0 = null;
+        Media0 = null;
     }
     public void About()
     {
