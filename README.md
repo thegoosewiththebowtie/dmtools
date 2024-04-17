@@ -61,6 +61,7 @@ them in powerpoint, but i dunno, thats plans for a veeeerrryy distant future)
 ## Free and open-sourse forever
 i have no plans to monetize this app in any way. Maybe i will make it possible to donate after 1.0
 ## Screenshots:
+[outdated]
 ![image](https://github.com/thegoosewiththebowtie/dmtools/assets/153792474/5ec3c7dd-8a95-4bee-87a8-160d31342357)
 ![image](https://github.com/thegoosewiththebowtie/dmtools/assets/153792474/eb675e9d-a728-4935-bc40-443eaf03cd93)
 ![image](https://github.com/thegoosewiththebowtie/dmtools/assets/153792474/565f059b-4278-42b6-9c4d-e46891c694b0)
