@@ -39,7 +39,7 @@ public partial class MediaDownloading : Window
         cancelled = false;
         this.Closing += Window_OnClosing;
         Start.IsEnabled = false;
-        this.Title = "Downloading...";
+        this.Title = Application.Current.FindResource("Downloading").ToString();
         var httpClient = new HttpClient();
         var response = await httpClient.GetAsync(new System.Uri("https://www.triangleonthewall.org/Media.zip"), HttpCompletionOption.ResponseHeadersRead);
         if (!response.IsSuccessStatusCode)
@@ -79,8 +79,8 @@ public partial class MediaDownloading : Window
         if (cancelled)
         {
             Start.IsEnabled = true;
-            this.Title = "Cancelled";
-            Start.Content = "Start";
+            this.Title = Application.Current.FindResource("Cancelled").ToString();
+            Start.Content = Application.Current.FindResource("Start").ToString();
             Progress.Value = 0;
             File.Delete("Media.zip");
             return;
@@ -88,7 +88,7 @@ public partial class MediaDownloading : Window
         Progress.Value = 0;
         Progress.ShowProgressText = false;
         Progress.IsIndeterminate = true;
-        Start.Content = this.Title = "Unpacking...";
+        Start.Content = this.Title = Application.Current.FindResource("Unpacking").ToString();
         Cancel.IsEnabled = false;
         Directory.Delete("Music", true);
         Directory.Delete("Images", true);
@@ -97,8 +97,8 @@ public partial class MediaDownloading : Window
             Progress.Value = 100;
             Progress.IsIndeterminate = false;
             File.Delete("Media.zip");
-            this.Title = "Finished";
-            Start.Content = "Finish";
+            this.Title = Application.Current.FindResource("Finished").ToString();
+            Start.Content = Application.Current.FindResource("Finish").ToString();
             Start.IsEnabled = true;
             Start.Click -= Start_OnClick;
             Start.Click += Cancel_OnClick;

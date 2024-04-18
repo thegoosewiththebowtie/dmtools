@@ -996,7 +996,7 @@
 		<!-- NPCS -->
 		<TabItem 
 			Classes="MainTabs"
-			Name="NPCs" PointerReleased="NPCs_OnPointerReleased" Header="NPCs">
+			Name="NPCs" PointerReleased="NPCs_OnPointerReleased" Header="{DynamicResource npcss}">
 			<ScrollViewer
 				        Name="svnpc"
 				        VerticalAlignment="Stretch"
@@ -1017,7 +1017,7 @@
 		<!-- PLAYERS -->
 		<TabItem
 			Classes="MainTabs"
-			Name="Players" PointerReleased="Players_OnPointerReleased" Header="Players">
+			Name="Players" PointerReleased="Players_OnPointerReleased" Header="{DynamicResource Playerss}">
 				<ScrollViewer
 					Name="svpc"
 				              VerticalAlignment="Stretch"

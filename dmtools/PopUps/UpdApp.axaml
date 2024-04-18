@@ -20,8 +20,8 @@
             VerticalContentAlignment="Center"
             HorizontalContentAlignment="Center"
             Grid.Row="1"
-            Grid.Column="1">
-            Start
+            Grid.Column="1"
+            Content="{DynamicResource Start}">
         </Button>
         <Button
             Click="Cancel_OnClick"
@@ -32,8 +32,8 @@
             VerticalContentAlignment="Center"
             HorizontalContentAlignment="Center"
             Grid.Row="1"
-            Grid.Column="3">
-            Cancel
+            Grid.Column="3"
+            Content="{DynamicResource Cancel}">
         </Button>
         <ProgressBar
             IsIndeterminate="{Binding !#Cancel.IsEnabled}"

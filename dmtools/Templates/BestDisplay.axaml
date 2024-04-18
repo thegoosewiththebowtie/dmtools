@@ -138,35 +138,35 @@
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"
                             Classes="Text2"
-                            Text="Speed"
+                            Text="{DynamicResource Speed}"
                             Grid.Row="6"
                             Grid.Column="0"></TextBlock>
                         <TextBlock
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"
                             Classes="Text2"
-                            Text="Swim"
+                            Text="{DynamicResource Swim}"
                             Grid.Row="6"
                             Grid.Column="1"></TextBlock>
                         <TextBlock
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"
                             Classes="Text2"
-                            Text="Fly"
+                            Text="{DynamicResource Fly}"
                             Grid.Row="6"
                             Grid.Column="2"></TextBlock>
                         <TextBlock
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"
                             Classes="Text2"
-                            Text="Burrow"
+                            Text="{DynamicResource Burrow}"
                             Grid.Row="6"
                             Grid.Column="3"></TextBlock>
                         <TextBlock
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"
                             Classes="Text2"
-                            Text="Climb"
+                            Text="{DynamicResource Climb}"
                             Grid.Row="6"
                             Grid.Column="4"></TextBlock>
                         <TextBlock
@@ -220,7 +220,7 @@
                                 IsExpanded="True"
                                 FontSize="22"
                                 HorizontalAlignment="Stretch"
-                                Header="Immunities">
+                                Header="{DynamicResource Immunities}">
                                 <TextBlock
                                     TextWrapping="Wrap"
                                     Text="{TemplateBinding Immunities}"
@@ -234,7 +234,7 @@
                                 IsExpanded="True"
                                 FontSize="22"
                                 HorizontalAlignment="Stretch"
-                                Header="Vulnerabilities">
+                                Header="{DynamicResource Vulnerabilities}">
                                 <TextBlock
                                     TextWrapping="Wrap"
                                     Text="{TemplateBinding Vul}"
@@ -248,7 +248,7 @@
                                 IsExpanded="True"
                                 FontSize="22"
                                 HorizontalAlignment="Stretch"
-                                Header="Senses">
+                                Header="{DynamicResource Senses}">
                                 <TextBlock
                                     TextWrapping="Wrap"
                                     Text="{TemplateBinding Senses}"
@@ -275,8 +275,13 @@
                         Grid.RowSpan="3"
                         Grid.Row="0"
                         Grid.Column="1">
-                        <TabItem
-                            Header="Attacks">
+                        <TabItem>
+                            <TabItem.Header>
+                                <TextBlock
+                                    Text="{DynamicResource Attacks}">
+								  
+                                </TextBlock>
+                            </TabItem.Header>
                             <ScrollViewer>
                             <TextBlock
                                 Margin="5"
@@ -286,8 +291,13 @@
                             </TextBlock>
                             </ScrollViewer>
                         </TabItem>
-                        <TabItem
-                            Header="Abilities">
+                        <TabItem>
+                            <TabItem.Header>
+                                <TextBlock
+                                    Text="{DynamicResource Abilities}">
+								  
+                                </TextBlock>
+                            </TabItem.Header>
                             <ScrollViewer>
                             <TextBlock
                                 Margin="5"
@@ -297,8 +307,13 @@
                             </TextBlock>
                             </ScrollViewer>
                         </TabItem>
-                        <TabItem
-                            Header="Description">
+                        <TabItem>
+                            <TabItem.Header>
+                                <TextBlock
+                                    Text="{DynamicResource Description}">
+								  
+                                </TextBlock>
+                            </TabItem.Header>
                             <ScrollViewer>
                                 <TextBlock
                                     Margin="5"

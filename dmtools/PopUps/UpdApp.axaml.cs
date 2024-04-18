@@ -39,7 +39,7 @@ public partial class UpdApp : Window
         cancelled = false;
         this.Closing += Window_OnClosing;
         Start.IsEnabled = false;
-        this.Title = "Downloading...";
+        this.Title = Application.Current.FindResource("Downloading").ToString();
         var httpClient = new HttpClient();
         var response = await httpClient.GetAsync(new System.Uri(updatelink), HttpCompletionOption.ResponseHeadersRead);
         if (!response.IsSuccessStatusCode)
@@ -79,8 +79,8 @@ public partial class UpdApp : Window
         if (cancelled)
         {
             Start.IsEnabled = true;
-            this.Title = "Cancelled";
-            Start.Content = "Start";
+            this.Title = Application.Current.FindResource("Cancelled").ToString();
+            Start.Content = Application.Current.FindResource("Start").ToString();
             Progress.Value = 0;
             File.Delete("dmtoolssetup.exe");
             return;

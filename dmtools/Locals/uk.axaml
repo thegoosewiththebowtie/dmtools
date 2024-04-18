@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=System.Runtime">
     <!-- Add Resources Here -->
-    <system:String x:Key="Test">ру</system:String>
+    <system:String x:Key="Test">uk</system:String>
     <!-- HOME -->
     <!-- DASHBOARD -->
     <system:String x:Key="DashboardTab">Основна панель</system:String>
@@ -55,7 +55,7 @@
     <system:String x:Key="Glossary">Енциклопедія</system:String>
     <system:String x:Key="Settings">Налаштування</system:String>
     <system:String x:Key="About">Про програму</system:String>
-    <system:String x:Key="alpha">[альфа-тест]</system:String>
+    <system:String x:Key="beta">[альфа-тест]</system:String>
     <!--Glossary-->
     <system:String x:Key="Spells">Заклинання</system:String>
     <system:String x:Key="Search">Пошук</system:String>
@@ -125,4 +125,86 @@
     <!--INIT-->
     <system:String x:Key="imhoRTDisthebestdwshowrunner">Кидаємо куби!</system:String>
     <system:String x:Key="lnggg">Ініціатива, залиште порожнім на випадковий випадок</system:String>
+    <!--ALPHANEW-->
+    <system:String x:Key="likes">Лайки</system:String>
+    <system:String x:Key="dislikes">Не подобається</system:String>
+    <system:String x:Key="npcss">NPC</system:String>
+    <system:String x:Key="Playerss">Гравці</system:String>
+    <system:String x:Key="level">Рівень</system:String>
+    <system:String x:Key="Duration">Тривалість</system:String>
+    <system:String x:Key="Castingtime">Час кастингу</system:String>
+    <system:String x:Key="Range">Діапазон</system:String>
+    <system:String x:Key="Concentration">конц.</system:String>
+    <system:String x:Key="Ritual">Ритуал</system:String>
+    <system:String x:Key="Verbal">Вербальний</system:String>
+    <system:String x:Key="Somatic">Соматичний</system:String>
+    <system:String x:Key="Material">матеріал</system:String>
+    <system:String x:Key="SpellSlotLevel">Рівень слота заклинань</system:String>
+    <system:String x:Key="CharacterLevel">Рівень персонажа</system:String>
+    <system:String x:Key="Classes">Заняття</system:String>
+    <system:String x:Key="Subclasses">Підкласи</system:String>
+    <system:String x:Key="SavingThrow">Рятувальний кидок</system:String>
+    <system:String x:Key="Damage">Пошкодження</system:String>
+    <system:String x:Key="Areadamage">Пошкодження площі</system:String>
+
+
+    
+    <system:String x:Key="Name">Ім'я</system:String>
+    <system:String x:Key="Size">Розмір</system:String>
+    <system:String x:Key="Type">Тип</system:String>
+    <system:String x:Key="Subtype">Підтип</system:String>
+    <system:String x:Key="Aligment">Вирівнювання</system:String>
+    <system:String x:Key="Languages">Мови</system:String>
+    
+    <system:String x:Key="Damageimmunities">Пошкодження</system:String>
+    <system:String x:Key="DamageVulnerabilities">Вразливості до пошкоджень</system:String>
+    <system:String x:Key="Damageresistances">Стійкість до пошкоджень</system:String>
+    <system:String x:Key="Conditions">Умови</system:String>
+    
+    <system:String x:Key="None">Жодного</system:String>
+    <system:String x:Key="Darkvision">Темнобачення</system:String>
+    <system:String x:Key="Passiveperception">Пасивне сприйняття</system:String>
+    <system:String x:Key="Blindsight">Сліпозір</system:String>
+    <system:String x:Key="Truesight">Truesight</system:String>
+    <system:String x:Key="Legendaryattacks">Легендарні атаки</system:String>
+    <system:String x:Key="Tremorsense">тремор</system:String>
+
+
+
+    
+    
+    <system:String x:Key="Speed">швидкість</system:String>
+    <system:String x:Key="Swim">Плавати</system:String>
+    <system:String x:Key="Fly">Літати</system:String>
+    <system:String x:Key="Burrow">Burrow</system:String>
+    <system:String x:Key="Climb">Climb</system:String>
+    <system:String x:Key="Immunities">Імунітети</system:String>
+    <system:String x:Key="Vulnerabilities">Вразливі місця</system:String>
+    <system:String x:Key="Senses">Почуття</system:String>
+    <system:String x:Key="Attacks">Напади</system:String>
+    <system:String x:Key="Abilities">Здібності</system:String>
+    <system:String x:Key="Description">опис</system:String>
+
+    <system:String x:Key="Export">Експорт</system:String>
+    <system:String x:Key="Import">Import</system:String>
+    
+    <system:String x:Key="UpdAv">Доступні оновлення</system:String>
+    <system:String x:Key="Updno">Немає оновлень</system:String>
+    <system:String x:Key="reme">Завантажуйте, виправляйте або оновлюйте медіафайли</system:String>
+    
+    <system:String x:Key="Application">застосування</system:String>
+    <system:String x:Key="Chk">Перевірити наявність оновлень</system:String>
+    <system:String x:Key="App">додаток</system:String>
+    <system:String x:Key="Mediaa">ЗМІ</system:String>
+    <system:String x:Key="ImpP">Імпорт&#x0a;Профіль</system:String>
+    <system:String x:Key="Language">Мова</system:String>
+    
+    <system:String x:Key="Start">старт</system:String>
+    <system:String x:Key="Cancel">Скасувати</system:String>
+    <system:String x:Key="Cancelled">Скасовано</system:String>
+    <system:String x:Key="Finished">Готово</system:String>
+    <system:String x:Key="Finish">Закінчити</system:String>
+    <system:String x:Key="Unpacking">Розпакування...</system:String>
+    <system:String x:Key="Downloading">Завантаження...</system:String>
+
 </ResourceDictionary>

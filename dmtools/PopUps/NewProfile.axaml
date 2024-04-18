@@ -89,7 +89,7 @@
                                         Classes="Text1"
                                         VerticalAlignment="Bottom"
                                         HorizontalAlignment="Center"
-                                        Text="Import&#x0a;Profile">
+                                        Text="{DynamicResource ImpP}">
                                 </TextBlock>
                         </Grid>
                 </Button>

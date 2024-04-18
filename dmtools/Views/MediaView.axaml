@@ -395,13 +395,13 @@
 				    Background="Transparent"
 				    Opacity="100"
 				    Name="N"
-				    Header="NPCs"/>
+				    Header="{DynamicResource npcss}"/>
 			    <TabItem
 				    Foreground="Transparent"
 				    Background="Transparent"
 				    Opacity="100"
 				    Name="P"
-				    Header="Players"/>
+				    Header="{DynamicResource Playerss}"/>
 			    </TabControl>
 
 </UserControl>

@@ -161,8 +161,13 @@
 					  Grid.Row="2"
 					  Grid.ColumnSpan="6"
 					  Grid.RowSpan="5">
-					  <TabItem
-						  Header="Notes">
+					  <TabItem>
+					  <TabItem.Header>
+						  <TextBlock
+							  Text="{DynamicResource Notes}">
+								  
+						  </TextBlock>
+					  </TabItem.Header>
 						  <TextBox 
 							  FontSize="20"
 							  CornerRadius="5"
@@ -174,8 +179,13 @@
 							  Watermark="{DynamicResource Notes}">
 						  </TextBox>
 					  </TabItem>
-					  <TabItem
-						  Header="Likes">
+					  <TabItem>
+						  <TabItem.Header>
+							  <TextBlock
+								  Text="{DynamicResource likes}">
+								  
+							  </TextBlock>
+						  </TabItem.Header>
 						  <Border
 							  Margin="-6,7,-5,5"
 							  BorderBrush="DimGray"
@@ -237,8 +247,13 @@
 							  </DockPanel>
 						  </Border>
 					  </TabItem>
-					  <TabItem
-						  Header="Dislikes">
+					  <TabItem>
+					  <TabItem.Header>
+						  <TextBlock
+							  Text="{DynamicResource dislikes}">
+								  
+						  </TextBlock>
+					  </TabItem.Header>
 						  <Border
 							  Margin="-6,7,-5,5"
 							  BorderBrush="DimGray"

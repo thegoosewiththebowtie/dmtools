@@ -55,7 +55,7 @@
     <system:String x:Key="Glossary">用語集</system:String>
     <system:String x:Key="Settings">設定</system:String>
     <system:String x:Key="About">について</system:String>
-    <system:String x:Key="alpha">[アルファ]</system:String>
+    <system:String x:Key="beta">[アルファ]</system:String>
     <!--Glossary-->
     <system:String x:Key="Spells">呪文</system:String>
     <system:String x:Key="Search">検索</system:String>
@@ -125,4 +125,86 @@
     <!--INIT-->
     <system:String x:Key="imhoRTDisthebestdwshowrunner">サイコロを転がす！</system:String>
     <system:String x:Key="lnggg">イニシアチブ、ランダムの場合は空のままにしておきます</system:String>
+    <!--ALPHANEW-->
+    <system:String x:Key="likes">いいね！</system:String>
+    <system:String x:Key="dislikes">嫌いなもの</system:String>
+    <system:String x:Key="npcss">NPC</system:String>
+    <system:String x:Key="Playerss">選手</system:String>
+    <system:String x:Key="level">レベル</system:String>
+    <system:String x:Key="Duration">間隔</system:String>
+    <system:String x:Key="Castingtime">詠唱時間</system:String>
+    <system:String x:Key="Range">範囲</system:String>
+    <system:String x:Key="Concentration">濃度.</system:String>
+    <system:String x:Key="Ritual">儀式</system:String>
+    <system:String x:Key="Verbal">口頭で</system:String>
+    <system:String x:Key="Somatic">ソマティック</system:String>
+    <system:String x:Key="Material">材料</system:String>
+    <system:String x:Key="SpellSlotLevel">スペルスロットレベル</system:String>
+    <system:String x:Key="CharacterLevel">キャラクターレベル</system:String>
+    <system:String x:Key="Classes">クラス</system:String>
+    <system:String x:Key="Subclasses">サブクラス</system:String>
+    <system:String x:Key="SavingThrow">セービングスロー</system:String>
+    <system:String x:Key="Damage">ダメージ</system:String>
+    <system:String x:Key="Areadamage">範囲ダメージ</system:String>
+
+
+    
+    <system:String x:Key="Name">名前</system:String>
+    <system:String x:Key="Size">サイズ</system:String>
+    <system:String x:Key="Type">タイプ</system:String>
+    <system:String x:Key="Subtype">サブタイプ</system:String>
+    <system:String x:Key="Aligment">アライメント</system:String>
+    <system:String x:Key="Languages">言語</system:String>
+    
+    <system:String x:Key="Damageimmunities">ダメージ</system:String>
+    <system:String x:Key="DamageVulnerabilities">被害の脆弱性</system:String>
+    <system:String x:Key="Damageresistances">ダメージ耐性</system:String>
+    <system:String x:Key="Conditions">条件</system:String>
+    
+    <system:String x:Key="None">なし</system:String>
+    <system:String x:Key="Darkvision">ダークビジョン</system:String>
+    <system:String x:Key="Passiveperception">受動的な知覚</system:String>
+    <system:String x:Key="Blindsight">ブラインドサイト</system:String>
+    <system:String x:Key="Truesight">トゥルーサイト</system:String>
+    <system:String x:Key="Legendaryattacks">伝説の攻撃</system:String>
+    <system:String x:Key="Tremorsense">震え</system:String>
+
+
+
+    
+    
+    <system:String x:Key="Speed">スピード</system:String>
+    <system:String x:Key="Swim">泳ぐ</system:String>
+    <system:String x:Key="Fly">飛ぶ</system:String>
+    <system:String x:Key="Burrow">潜る</system:String>
+    <system:String x:Key="Climb">登る</system:String>
+    <system:String x:Key="Immunities">免疫</system:String>
+    <system:String x:Key="Vulnerabilities">脆弱性</system:String>
+    <system:String x:Key="Senses">感覚</system:String>
+    <system:String x:Key="Attacks">攻撃</system:String>
+    <system:String x:Key="Abilities">能力</system:String>
+    <system:String x:Key="Description">説明</system:String>
+
+    <system:String x:Key="Export">輸出</system:String>
+    <system:String x:Key="Import">輸入</system:String>
+    
+    <system:String x:Key="UpdAv">利用可能なアップデート</system:String>
+    <system:String x:Key="Updno">更新はありません</system:String>
+    <system:String x:Key="reme">メディアのダウンロード、修復、または更新</system:String>
+    
+    <system:String x:Key="Application">応用</system:String>
+    <system:String x:Key="Chk">アップデートを確認</system:String>
+    <system:String x:Key="App">アプリ</system:String>
+    <system:String x:Key="Mediaa">メディア</system:String>
+    <system:String x:Key="ImpP">輸入&#x0a;プロフィール</system:String>
+    <system:String x:Key="Language">言語</system:String>
+    
+    <system:String x:Key="Start">始める</system:String>
+    <system:String x:Key="Cancel">キャンセル</system:String>
+    <system:String x:Key="Cancelled">キャンセル</system:String>
+    <system:String x:Key="Finished">終了した</system:String>
+    <system:String x:Key="Finish">仕上げる</system:String>
+    <system:String x:Key="Unpacking">開梱...</system:String>
+    <system:String x:Key="Downloading">ダウンロード中...</system:String>
+
 </ResourceDictionary>

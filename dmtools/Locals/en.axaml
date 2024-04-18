@@ -54,7 +54,7 @@
     <system:String x:Key="Glossary">Glossary</system:String>
     <system:String x:Key="Settings">Settings</system:String>
     <system:String x:Key="About">About</system:String>
-    <system:String x:Key="alpha">[alpha]</system:String>
+    <system:String x:Key="beta">[beta]</system:String>
     <!--Glossary-->
     <system:String x:Key="Spells">Spells</system:String>
     <system:String x:Key="Search">Search</system:String>
@@ -127,5 +127,95 @@
     <!--ALPHANEW-->
     <system:String x:Key="likes">Likes</system:String>
     <system:String x:Key="dislikes">Dislikes</system:String>
+    <system:String x:Key="npcss">NPCs</system:String>
+    <system:String x:Key="Playerss">Players</system:String>
+    <system:String x:Key="level">Level</system:String>
+    <system:String x:Key="Duration">Duration</system:String>
+    <system:String x:Key="Castingtime">Casting time</system:String>
+    <system:String x:Key="Range">Range</system:String>
+    <system:String x:Key="Concentration">Conc.</system:String>
+    <system:String x:Key="Ritual">Ritual</system:String>
+    <system:String x:Key="Verbal">Verbal</system:String>
+    <system:String x:Key="Somatic">Somatic</system:String>
+    <system:String x:Key="Material">Material</system:String>
+    <system:String x:Key="SpellSlotLevel">Spell Slot Level</system:String>
+    <system:String x:Key="CharacterLevel">Character Level</system:String>
+    <system:String x:Key="Classes">Classes</system:String>
+    <system:String x:Key="Subclasses">Subclasses</system:String>
+    <system:String x:Key="SavingThrow">Saving Throw</system:String>
+    <system:String x:Key="Damage">Damage</system:String>
+    <system:String x:Key="Areadamage">Area damage</system:String>
+
+
+    
+    <system:String x:Key="Name">Name</system:String>
+    <system:String x:Key="Size">Size</system:String>
+    <system:String x:Key="Type">Type</system:String>
+    <system:String x:Key="Subtype">Subtype</system:String>
+    <system:String x:Key="Aligment">Aligment</system:String>
+    <system:String x:Key="Languages">Languages</system:String>
+    
+    <system:String x:Key="Damageimmunities">Damage</system:String>
+    <system:String x:Key="DamageVulnerabilities">Damage Vulnerabilities</system:String>
+    <system:String x:Key="Damageresistances">Damage resistances</system:String>
+    <system:String x:Key="Conditions">Conditions</system:String>
+    
+    <system:String x:Key="None">None</system:String>
+    <system:String x:Key="Darkvision">Darkvision</system:String>
+    <system:String x:Key="Passiveperception">Passive perception</system:String>
+    <system:String x:Key="Blindsight">Blindsight</system:String>
+    <system:String x:Key="Truesight">Truesight</system:String>
+    <system:String x:Key="Legendaryattacks">Legendary attacks</system:String>
+    <system:String x:Key="Tremorsense">Tremorsense</system:String>
+
+
+
+    
+    
+    <system:String x:Key="Speed">Speed</system:String>
+    <system:String x:Key="Swim">Swim</system:String>
+    <system:String x:Key="Fly">Fly</system:String>
+    <system:String x:Key="Burrow">Burrow</system:String>
+    <system:String x:Key="Climb">Climb</system:String>
+    <system:String x:Key="Immunities">Immunities</system:String>
+    <system:String x:Key="Vulnerabilities">Vulnerabilities</system:String>
+    <system:String x:Key="Senses">Senses</system:String>
+    <system:String x:Key="Attacks">Attacks</system:String>
+    <system:String x:Key="Abilities">Abilities</system:String>
+    <system:String x:Key="Description">Description</system:String>
+
+    <system:String x:Key="Export">Export</system:String>
+    <system:String x:Key="Import">Import</system:String>
+    
+    <system:String x:Key="UpdAv">Update(s) available</system:String>
+    <system:String x:Key="Updno">No updates</system:String>
+    <system:String x:Key="reme">Download, repair or update media</system:String>
+    
+    <system:String x:Key="Application">Application</system:String>
+    <system:String x:Key="Chk">Check for updates</system:String>
+    <system:String x:Key="App">App</system:String>
+    <system:String x:Key="Mediaa">Media</system:String>
+    <system:String x:Key="ImpP">Import&#x0a;Profile</system:String>
+    <system:String x:Key="Language">Language</system:String>
+    
+    <system:String x:Key="Start">Start</system:String>
+    <system:String x:Key="Cancel">Cancel</system:String>
+    <system:String x:Key="Cancelled">Cancelled</system:String>
+    <system:String x:Key="Finished">Finished</system:String>
+    <system:String x:Key="Finish">Finish</system:String>
+    <system:String x:Key="Unpacking">Unpacking...</system:String>
+    <system:String x:Key="Downloading">Downloading...</system:String>
+
+
+
+
+
+
+
+
+
+
+
+
 
 </ResourceDictionary>

@@ -13,6 +13,7 @@ using DynamicData;
 using LiteDB;
 using Avalonia.Data;
 using System.Windows;
+using Avalonia;
 
 namespace dmtools.Views;
 public class Spells
@@ -332,6 +333,12 @@ public partial class GlossaryView : UserControl
             }
         }
         lvlss.RemoveAll(string.IsNullOrWhiteSpace);
+        var ssl = Application.Current.FindResource("SpellSlotLevel").ToString();
+        var ccl = Application.Current.FindResource("CharacterLevel").ToString();
+        for (int i = 0; i < lvlss.Count; i++)
+        {
+            lvlss[i].Replace("Spell Slot Level", ssl).Replace("Character Level", ccl);
+        }
         ThisSpell.Desc = $"{thisspell.desc}\r\n\r\n{thisspell.higher_level}";
         ThisSpell.Level = thisspell.level.ToString();
         ThisSpell.SpellName = thisspell.name;
@@ -377,18 +384,18 @@ public partial class GlossaryView : UserControl
         ThisSpell.CastingTime = thisspell.casting_time;
         ThisSpell.Range = thisspell.range;
         string addesc = String.Empty;
-        addesc += $"Classes: {thisspell.classes}\r\n\r\n";
+        addesc += $"{Application.Current.FindResource("Classes")}: {thisspell.classes}\r\n\r\n";
         if (!string.IsNullOrEmpty(thisspell.subclasses))
         {
-            addesc += $"Subclasses: {thisspell.subclasses}\r\n\r\n";
+            addesc += $"{Application.Current.FindResource("Subclasses")}: {thisspell.subclasses}\r\n\r\n";
         }
         if (thisspell.dctype != null || thisspell.dcsuccess != null || thisspell.dcdesc != null)
         {
-            addesc += $"Saving Throw: {thisspell.dctype}\r\nSuccess: {thisspell.dcsuccess.Replace("none", "No effect").Replace("half", "Half")} {thisspell.dcdesc}\r\n\r\n";
+            addesc += $"{Application.Current.FindResource("SavingThrow")}: {thisspell.dctype}\r\nSuccess: {thisspell.dcsuccess.Replace("none", "No effect").Replace("half", "Half")} {thisspell.dcdesc}\r\n\r\n";
         }
         if (thisspell.DamageType != null || thisspell.attack_type != null)
         {
-            addesc += $"Damage: {thisspell.DamageType} {thisspell.attack_type}\r\n\r\n";
+            addesc += $"{Application.Current.FindResource("Damage")}: {thisspell.DamageType} {thisspell.attack_type}\r\n\r\n";
         }
         int? m = null;
         if (thisspell.AreaSize != -99)
@@ -397,7 +404,7 @@ public partial class GlossaryView : UserControl
         }
         if (thisspell.AreaType != null || m != null)
         {
-            addesc += $"Area damage: {thisspell.AreaType} - {m}ft\r\n\r\n";
+            addesc += $"{Application.Current.FindResource("Areadamage")}: {thisspell.AreaType} - {m}ft\r\n\r\n";
         }
         foreach (var lv in lvlss)
         {
@@ -412,33 +419,33 @@ public partial class GlossaryView : UserControl
             return;
         }
         var srs = ((sender as DataGrid).SelectedItem as Bestiary);
-        ThisBest.BName = $"Name: {srs.name}";
-        ThisBest.Aligment = $"Aligment: {srs.alignment}";
-        ThisBest.Languages = $"Languages: {srs.languages}";
-        ThisBest.Type = $"Type: {srs.type}";
-        ThisBest.Subtype = $"Subtype: {srs.subtype}";
-        ThisBest.Size = $"Size: {srs.size}";
+        ThisBest.BName = $"{Application.Current.FindResource("Name")}: {srs.name}";
+        ThisBest.Aligment = $"{Application.Current.FindResource("Aligment")}: {srs.alignment}";
+        ThisBest.Languages = $"{Application.Current.FindResource("Languages")}: {srs.languages}";
+        ThisBest.Type = $"{Application.Current.FindResource("Type")}: {srs.type}";
+        ThisBest.Subtype = $"{Application.Current.FindResource("Subtype")}: {srs.subtype}";
+        ThisBest.Size = $"{Application.Current.FindResource("Size")}: {srs.size}";
         ThisBest.Speed = srs.speed_walk;
         ThisBest.Swim = srs.speed_swim;
         ThisBest.Fly = srs.speed_fly;
         ThisBest.Burrow = srs.speed_burrow;
         ThisBest.Climb = srs.speed_climb;
-        ThisBest.Immunities = $"Damage immunities: {srs.damage_immunities}\r\n\r\n" +
-                              $"Damage resistances: {srs.damage_resistances}\r\n\r\n" +
-                              $"Conditions: {srs.condition_immunities}";
+        ThisBest.Immunities = $"{Application.Current.FindResource("Damageimmunities")}: {srs.damage_immunities}\r\n\r\n" +
+                              $"{Application.Current.FindResource("Damageresistances")}: {srs.damage_resistances}\r\n\r\n" +
+                              $"{Application.Current.FindResource("Conditions")}: {srs.condition_immunities}";
         if (srs.damage_vulnerabilities != null)
         {
             ThisBest.Vul = $"{srs.damage_vulnerabilities}";
         }
         else
         {
-            ThisBest.Vul = "None";
+            ThisBest.Vul = $"{Application.Current.FindResource("None")}";
         }
-        ThisBest.Senses = $"Darkvision: {srs.darkvision}\r\n\r\n" +
-                          $"Passive perception: {srs.passive_perception}\r\n\r\n" +
-                          $"Blindsight: {srs.blindsight}\r\n\r\n" +
-                          $"Truesight: {srs.truesight}\r\n\r\n" +
-                          $"Tremorsense: {srs.tremorsense}";
+        ThisBest.Senses = $"{Application.Current.FindResource("Darkvision")}: {srs.darkvision}\r\n\r\n" +
+                          $"{Application.Current.FindResource("Passiveperception")}: {srs.passive_perception}\r\n\r\n" +
+                          $"{Application.Current.FindResource("Blindsight")}: {srs.blindsight}\r\n\r\n" +
+                          $"{Application.Current.FindResource("Truesight")}: {srs.truesight}\r\n\r\n" +
+                          $"{Application.Current.FindResource("Tremorsense")}: {srs.tremorsense}";
         ThisBest.Armor = $"{srs.ac_armor}\r\n" +
                          $"{srs.ac_condition}\r\n" +
                          $"{srs.ac_desc}\r\n" +
@@ -468,13 +475,13 @@ public partial class GlossaryView : UserControl
         }
         else
         {
-            attacks = "None";
+            attacks = $"{Application.Current.FindResource("None")}";
         }
         if (srs.la_name != null)
         {
             var lanames = srs.la_name.Split("$");
             var ladescs = srs.la_desc.Split("$");
-            attacks += $"Legendary attacks: \r\n";
+            attacks += $"{Application.Current.FindResource("Legendaryattacks")}: \r\n";
             for (int i = 0; i < lanames.Length; i++)
             {
                 attacks += $"{lanames[i]}\r\n{ladescs[i]}\r\n\r\n";
@@ -494,7 +501,7 @@ public partial class GlossaryView : UserControl
         }
         else
         {
-            ThisBest.Abilities = "None";
+            ThisBest.Abilities = $"{Application.Current.FindResource("None")}";;
         }
         if (srs.desc != null)
         {
@@ -502,7 +509,7 @@ public partial class GlossaryView : UserControl
         }
         else
         {
-            ThisBest.Desc = "None";
+            ThisBest.Desc = $"{Application.Current.FindResource("None")}";;
         }
         
     }

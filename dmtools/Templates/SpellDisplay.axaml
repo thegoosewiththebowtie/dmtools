@@ -31,8 +31,8 @@
                                     Classes="Text3"
                                     Margin="10,5,10,0"
                                     VerticalAlignment="Center"
-                                    HorizontalAlignment="Center">
-                                    Level
+                                    HorizontalAlignment="Center"
+                                    Text="{DynamicResource Level}">
                                 </TextBlock>
                                 <TextBlock
                                     Classes = "Number"
@@ -84,8 +84,8 @@
                                         <TextBlock
                                             Classes="Text2"
                                             VerticalAlignment="Center"
-                                            HorizontalAlignment="Center">
-                                            Duration
+                                            HorizontalAlignment="Center"
+                                            Text="{DynamicResource Duration}">
                                         </TextBlock>
                                         <TextBlock
                                             Classes="Text3"
@@ -106,8 +106,8 @@
                                         <TextBlock
                                             Classes="Text2"
                                             VerticalAlignment="Center"
-                                            HorizontalAlignment="Center">
-                                            Casting time
+                                            HorizontalAlignment="Center"
+                                            Text="{DynamicResource Castingtime}">
                                         </TextBlock>
                                         <TextBlock
                                             Classes="Text3"
@@ -127,8 +127,8 @@
                                         <TextBlock
                                             Classes="Text2"
                                             VerticalAlignment="Center"
-                                            HorizontalAlignment="Center">
-                                            Range
+                                            HorizontalAlignment="Center"
+                                            Text="{DynamicResource Range}">
                                         </TextBlock>
                                         <TextBlock
                                             Classes="Text3"
@@ -158,31 +158,36 @@
                                         Grid.Column="1"
                                         IsChecked="{TemplateBinding Conc}"
                                         HorizontalAlignment="Center"
-                                        Margin="5">Conc.</CheckBox>
+                                        Margin="5"
+                                        Content="{DynamicResource Concentration}"></CheckBox>
                                     <CheckBox
                                         IsEnabled="False"
                                         Grid.Column="2"
                                         IsChecked="{TemplateBinding Ritual}"
                                         HorizontalAlignment="Center"
-                                        Margin="5">Ritual</CheckBox>
+                                        Margin="5"
+                                        Content="{DynamicResource Ritual}"></CheckBox>
                                     <CheckBox
                                         IsEnabled="False"
                                         Grid.Column="3"
                                         IsChecked="{TemplateBinding Verbal}"
                                         HorizontalAlignment="Center"
-                                        Margin="5">Verbal</CheckBox>
+                                        Margin="5"
+                                        Content="{DynamicResource Verbal}"></CheckBox>
                                     <CheckBox
                                         IsEnabled="False"
                                         IsChecked="{TemplateBinding Somatic}"
                                         HorizontalAlignment="Center"
                                         Margin="5"
-                                        Grid.Column="4">Somatic</CheckBox>
+                                        Grid.Column="4"
+                                        Content="{DynamicResource Somatic}"></CheckBox>
                                     <CheckBox
                                         IsEnabled="False"
                                         IsChecked="{TemplateBinding Material}"
                                         HorizontalAlignment="Center"
                                         Margin="5"
-                                        Grid.Column="5">Material</CheckBox>
+                                        Grid.Column="5"
+                                        Content="{DynamicResource Material}"></CheckBox>
                                 </Grid>
                             </Expander.Header>
                             <TextBlock

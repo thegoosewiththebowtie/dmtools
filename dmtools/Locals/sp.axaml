@@ -55,7 +55,7 @@
     <system:String x:Key="Glossary">Glosario</system:String>
     <system:String x:Key="Settings">Ajustes</system:String>
     <system:String x:Key="About">Acerca de</system:String>
-    <system:String x:Key="alpha">[alfa]</system:String>
+    <system:String x:Key="beta">[alfa]</system:String>
     <!--Glossary-->
     <system:String x:Key="Spells">Hechizos</system:String>
     <system:String x:Key="Search">Buscar</system:String>
@@ -125,4 +125,86 @@
     <!--INIT-->
     <system:String x:Key="imhoRTDisthebestdwshowrunner">¡Tirar los dados!</system:String>
     <system:String x:Key="lnggg">Iniciativa, déjela vacía para que sea aleatoria.</system:String>
+    <!--ALPHANEW-->
+    <system:String x:Key="likes">Gustos</system:String>
+    <system:String x:Key="dislikes">No me gusta</system:String>
+    <system:String x:Key="npcss">PNJ</system:String>
+    <system:String x:Key="Playerss">Jugadores</system:String>
+    <system:String x:Key="level">Nivel</system:String>
+    <system:String x:Key="Duration">Duración</system:String>
+    <system:String x:Key="Castingtime">Tiempo de audiciones</system:String>
+    <system:String x:Key="Range">Rango</system:String>
+    <system:String x:Key="Concentration">concentrado.</system:String>
+    <system:String x:Key="Ritual">Ritual</system:String>
+    <system:String x:Key="Verbal">Verbal</system:String>
+    <system:String x:Key="Somatic">Somático</system:String>
+    <system:String x:Key="Material">Material</system:String>
+    <system:String x:Key="SpellSlotLevel">Nivel de espacio para hechizos</system:String>
+    <system:String x:Key="CharacterLevel">Nivel de personaje</system:String>
+    <system:String x:Key="Classes">Clases</system:String>
+    <system:String x:Key="Subclasses">Subclases</system:String>
+    <system:String x:Key="SavingThrow">Tiro de salvación</system:String>
+    <system:String x:Key="Damage">Damage</system:String>
+    <system:String x:Key="Areadamage">Daños en el área</system:String>
+
+
+    
+    <system:String x:Key="Name">Nombre</system:String>
+    <system:String x:Key="Size">Tamaño</system:String>
+    <system:String x:Key="Type">Tipo</system:String>
+    <system:String x:Key="Subtype">Subtipo</system:String>
+    <system:String x:Key="Aligment">Alineación</system:String>
+    <system:String x:Key="Languages">Idiomas</system:String>
+    
+    <system:String x:Key="Damageimmunities">Daño</system:String>
+    <system:String x:Key="DamageVulnerabilities">Vulnerabilidades de daño</system:String>
+    <system:String x:Key="Damageresistances">Resistencias al daño</system:String>
+    <system:String x:Key="Conditions">Condiciones</system:String>
+    
+    <system:String x:Key="None">Ninguno</system:String>
+    <system:String x:Key="Darkvision">Visión oscura</system:String>
+    <system:String x:Key="Passiveperception">Percepción pasiva</system:String>
+    <system:String x:Key="Blindsight">Vista ciega</system:String>
+    <system:String x:Key="Truesight">Vista verdadera</system:String>
+    <system:String x:Key="Legendaryattacks">Ataques legendarios</system:String>
+    <system:String x:Key="Tremorsense">temblor</system:String>
+
+
+
+    
+    
+    <system:String x:Key="Speed">Velocidad</system:String>
+    <system:String x:Key="Swim">Nadar</system:String>
+    <system:String x:Key="Fly">Volar</system:String>
+    <system:String x:Key="Burrow">Madriguera</system:String>
+    <system:String x:Key="Climb">Trepar</system:String>
+    <system:String x:Key="Immunities">Inmunidades</system:String>
+    <system:String x:Key="Vulnerabilities">Vulnerabilidades</system:String>
+    <system:String x:Key="Senses">Senses</system:String>
+    <system:String x:Key="Attacks">Ataques</system:String>
+    <system:String x:Key="Abilities">Habilidades</system:String>
+    <system:String x:Key="Description">Descripción</system:String>
+
+    <system:String x:Key="Export">Exportar</system:String>
+    <system:String x:Key="Import">Importar</system:String>
+    
+    <system:String x:Key="UpdAv">Actualizaciones disponibles</system:String>
+    <system:String x:Key="Updno">Sin actualizaciones</system:String>
+    <system:String x:Key="reme">Descargar, reparar o actualizar medios</system:String>
+    
+    <system:String x:Key="Application">Solicitud</system:String>
+    <system:String x:Key="Chk">Buscar actualizaciones</system:String>
+    <system:String x:Key="App">Aplicación</system:String>
+    <system:String x:Key="Mediaa">Medios de comunicación</system:String>
+    <system:String x:Key="ImpP">Importar&#x0a;Perfil</system:String>
+    <system:String x:Key="Language">Idioma</system:String>
+    
+    <system:String x:Key="Start">Comenzar</system:String>
+    <system:String x:Key="Cancel">Cancelar</system:String>
+    <system:String x:Key="Cancelled">Cancelado</system:String>
+    <system:String x:Key="Finished">Finalizado</system:String>
+    <system:String x:Key="Finish">Finalizar</system:String>
+    <system:String x:Key="Unpacking">Desembalaje...</system:String>
+    <system:String x:Key="Downloading">Descargando...</system:String>
+
 </ResourceDictionary>

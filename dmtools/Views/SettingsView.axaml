@@ -90,7 +90,7 @@
                                 HorizontalAlignment="Center"
                                 Grid.Column="0"
                                 Grid.ColumnSpan="2"
-                                Text="Export"></TextBlock>
+                                Text="{DynamicResource Export}"></TextBlock>
                         </Grid>
                     </Button>
                     <Button
@@ -116,7 +116,7 @@
                                 HorizontalAlignment="Center"
                                 Grid.Column="0"
                                 Grid.ColumnSpan="2"
-                                Text="Import"></TextBlock>
+                                Text="{DynamicResource Import}"></TextBlock>
                         </Grid>
                     </Button>
                    
@@ -301,7 +301,8 @@
                         HorizontalAlignment="Right"
                         HorizontalContentAlignment="Center"
                         VerticalContentAlignment="Center"
-                        DockPanel.Dock="Top">Download, repair or update media</Button>
+                        DockPanel.Dock="Top"
+                        Content="{DynamicResource reme}"></Button>
                 </Grid>
                 <Rectangle
                     DockPanel.Dock="Top"
@@ -472,7 +473,7 @@
                     <TextBlock
                         VerticalAlignment="Center"
                         Margin="5"
-                        Text="Application"
+                        Text="{DynamicResource Application}"
                         FontSize="20">
                     </TextBlock>
                 </Grid>
@@ -488,8 +489,8 @@
                         Margin="5"
                         FontSize="16"
                         VerticalAlignment="Center"
-                        HorizontalAlignment="Left">
-                        Check for updates
+                        HorizontalAlignment="Left"
+                        Text="{DynamicResource Chk}">
                     </TextBlock>
                     <ToggleSwitch
                         Click="ToggleUp_OnClick"
@@ -514,11 +515,13 @@
                             <Button
                                 Click="AppUp_OnClick"
                                 Name="AppUp"
-                                IsEnabled="False">App</Button>
+                                IsEnabled="False"
+                                Content="{DynamicResource App}"></Button>
                             <Button
                                 Click="Download_OnClick"
                                 Name="MediaUp"
-                                IsEnabled="False">Media</Button>
+                                IsEnabled="False"
+                                Content="{DynamicResource Mediaa}"></Button>
                         </StackPanel>
                     </Expander>
                     <TextBlock
@@ -527,8 +530,8 @@
                         VerticalAlignment="Center"
                         HorizontalAlignment="Left"
                         Grid.Column="0"
-                        Grid.Row="1">
-                        Language
+                        Grid.Row="1"
+                        Text="{DynamicResource Language}">
                     </TextBlock>
                     <ComboBox
                         Name="LanguageChanger"
@@ -541,7 +544,7 @@
                         VerticalAlignment="Stretch"
                         HorizontalAlignment="Stretch"
                         Margin="5"
-                        PlaceholderText="Language">
+                        PlaceholderText="{DynamicResource Language}">
                         <ComboBoxItem>English</ComboBoxItem>
                         <ComboBoxItem>French [Credits to Akanea][upd needed]</ComboBoxItem>
                         <ComboBoxItem>Spanish [goo*le]</ComboBoxItem>

@@ -6,8 +6,13 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="dmtools.Views.GensView">
     <TabControl>
-        <TabItem
-            Header="NPC">
+        <TabItem>
+            <TabItem.Header>
+                <TextBlock
+                    Text="{DynamicResource npcss}">
+								  
+                </TextBlock>
+            </TabItem.Header>
             <Grid
                 ColumnDefinitions="*, 2*, *">
                 <Border
@@ -119,22 +124,40 @@
         </TabItem>
         <TabItem
             IsEnabled="False"
-            Header="{DynamicResource Loot}">
+           ><TabItem.Header>
+                <TextBlock
+                    Text="{DynamicResource Loot}">
+								  
+                </TextBlock>
+            </TabItem.Header>
             
         </TabItem>
         <TabItem
-            IsEnabled="False"
-            Header="{DynamicResource Encounters}">
+            IsEnabled="False"><TabItem.Header>
+                <TextBlock
+                    Text="{DynamicResource Encounters}">
+								  
+                </TextBlock>
+            </TabItem.Header>
+        </TabItem>
+        <TabItem
+            IsEnabled="False">
+        <TabItem.Header>
+            <TextBlock
+                Text="{DynamicResource Cities}">
+								  
+            </TextBlock>
+        </TabItem.Header>
             
         </TabItem>
         <TabItem
-            IsEnabled="False"
-            Header="{DynamicResource Cities}">
-            
-        </TabItem>
-        <TabItem
-            IsEnabled="False"
-            Header="{DynamicResource Dungeons}">
+            IsEnabled="False">
+        <TabItem.Header>
+            <TextBlock
+                Text="{DynamicResource Dungeons}">
+								  
+            </TextBlock>
+        </TabItem.Header>
             
         </TabItem>
     </TabControl>

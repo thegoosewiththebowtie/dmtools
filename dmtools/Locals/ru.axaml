@@ -54,7 +54,7 @@
     <system:String x:Key="Glossary">Энциклопедия</system:String>
     <system:String x:Key="Settings">Настройки</system:String>
     <system:String x:Key="About">О программе</system:String>
-    <system:String x:Key="alpha">[альфа-тест]</system:String>
+    <system:String x:Key="beta">[альфа-тест]</system:String>
     <!--Glossary-->
     <system:String x:Key="Spells">Заклинания</system:String>
     <system:String x:Key="Search">Поиск</system:String>
@@ -124,4 +124,86 @@
     <!--INIT-->
     <system:String x:Key="imhoRTDisthebestdwshowrunner">Бросаем кубы!</system:String>
     <system:String x:Key="lnggg">Инициатива, оставьте пустым на случайный случай</system:String>
+    <!--ALPHANEW-->
+    <system:String x:Key="likes">Нравится</system:String>
+    <system:String x:Key="dislikes">Не любит</system:String>
+    <system:String x:Key="npcss">НПС</system:String>
+    <system:String x:Key="Playerss">Игроки</system:String>
+    <system:String x:Key="level">Уровень</system:String>
+    <system:String x:Key="Duration">Продолжительность</system:String>
+    <system:String x:Key="Castingtime">Время каста</system:String>
+    <system:String x:Key="Range">Диапазон</system:String>
+    <system:String x:Key="Concentration">Конц..</system:String>
+    <system:String x:Key="Ritual">Ритуал</system:String>
+    <system:String x:Key="Verbal">Вербальный</system:String>
+    <system:String x:Key="Somatic">соматический</system:String>
+    <system:String x:Key="Material">Материал</system:String>
+    <system:String x:Key="SpellSlotLevel">Уровень слота заклинаний</system:String>
+    <system:String x:Key="CharacterLevel">Уровень персонажа</system:String>
+    <system:String x:Key="Classes">Классы</system:String>
+    <system:String x:Key="Subclasses">Подклассы</system:String>
+    <system:String x:Key="SavingThrow">Спасительный бросок</system:String>
+    <system:String x:Key="Damage">Повреждать</system:String>
+    <system:String x:Key="Areadamage">Урон по площади</system:String>
+
+
+    
+    <system:String x:Key="Name">Имя</system:String>
+    <system:String x:Key="Size">Размер</system:String>
+    <system:String x:Key="Type">Тип</system:String>
+    <system:String x:Key="Subtype">Подтип</system:String>
+    <system:String x:Key="Aligment">Выравнивание</system:String>
+    <system:String x:Key="Languages">Языки</system:String>
+    
+    <system:String x:Key="Damageimmunities">Повреждать</system:String>
+    <system:String x:Key="DamageVulnerabilities">Уязвимости повреждения</system:String>
+    <system:String x:Key="Damageresistances">Сопротивление урону</system:String>
+    <system:String x:Key="Conditions">Условия</system:String>
+    
+    <system:String x:Key="None">Никто</system:String>
+    <system:String x:Key="Darkvision">темновидение</system:String>
+    <system:String x:Key="Passiveperception">Пассивное восприятие</system:String>
+    <system:String x:Key="Blindsight">Слепое зрение</system:String>
+    <system:String x:Key="Truesight">Истинное зрение</system:String>
+    <system:String x:Key="Legendaryattacks">Легендарные атаки</system:String>
+    <system:String x:Key="Tremorsense">чувство тремора</system:String>
+
+
+
+    
+    
+    <system:String x:Key="Speed">Скорость</system:String>
+    <system:String x:Key="Swim">Плавать</system:String>
+    <system:String x:Key="Fly">Летать</system:String>
+    <system:String x:Key="Burrow">Нора</system:String>
+    <system:String x:Key="Climb">Взбираться</system:String>
+    <system:String x:Key="Immunities">Иммунитет</system:String>
+    <system:String x:Key="Vulnerabilities">Уязвимости</system:String>
+    <system:String x:Key="Senses">Чувства</system:String>
+    <system:String x:Key="Attacks">Атаки</system:String>
+    <system:String x:Key="Abilities">Способности</system:String>
+    <system:String x:Key="Description">Описание</system:String>
+
+    <system:String x:Key="Export">Экспорт</system:String>
+    <system:String x:Key="Import">Импортировать</system:String>
+    
+    <system:String x:Key="UpdAv">Доступны обновления</system:String>
+    <system:String x:Key="Updno">Нет обновлений</system:String>
+    <system:String x:Key="reme">Загрузка, восстановление или обновление носителя</system:String>
+    
+    <system:String x:Key="Application">Приложение</system:String>
+    <system:String x:Key="Chk">Проверьте наличие обновлений</system:String>
+    <system:String x:Key="App">Приложение</system:String>
+    <system:String x:Key="Mediaa">СМИ</system:String>
+    <system:String x:Key="ImpP">Импортировать&#x0a;Профиль</system:String>
+    <system:String x:Key="Language">Язык</system:String>
+    
+    <system:String x:Key="Start">Начинать</system:String>
+    <system:String x:Key="Cancel">Отмена</system:String>
+    <system:String x:Key="Cancelled">Отменено</system:String>
+    <system:String x:Key="Finished">Законченный</system:String>
+    <system:String x:Key="Finish">Кончить</system:String>
+    <system:String x:Key="Unpacking">Распаковка...</system:String>
+    <system:String x:Key="Downloading">Загрузка...</system:String>
+
 </ResourceDictionary>

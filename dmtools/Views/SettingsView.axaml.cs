@@ -100,7 +100,7 @@ public partial class SettingsView : UserControl
         }
         if (MediaUp.IsEnabled || AppUp.IsEnabled)
         {
-            Updin.Header = "Update(s) available";
+            Updin.Header = Application.Current.FindResource("UpdAv");
         }
     }
     private void Def(object? sender, EventArgs e)
@@ -505,7 +505,7 @@ public partial class SettingsView : UserControl
         }
         else
         {
-            Updin.Header = "No updates";
+            Updin.Header = Application.Current.FindResource("Updno");
             MediaUp.IsEnabled = false;
             AppUp.IsEnabled = false;
         }
