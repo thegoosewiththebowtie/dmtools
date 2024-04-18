@@ -54,7 +54,7 @@
     <system:String x:Key="Glossary">Энциклопедия</system:String>
     <system:String x:Key="Settings">Настройки</system:String>
     <system:String x:Key="About">О программе</system:String>
-    <system:String x:Key="beta">[альфа-тест]</system:String>
+    <system:String x:Key="beta">[бета1-фикс1]</system:String>
     <!--Glossary-->
     <system:String x:Key="Spells">Заклинания</system:String>
     <system:String x:Key="Search">Поиск</system:String>

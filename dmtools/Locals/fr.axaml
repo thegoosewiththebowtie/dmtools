@@ -55,7 +55,7 @@
     <system:String x:Key="Glossary">Glossaire</system:String>
     <system:String x:Key="Settings">Paramètres</system:String>
     <system:String x:Key="About">À propos du programme</system:String>
-    <system:String x:Key="beta">[beta]</system:String>
+    <system:String x:Key="beta">[beta1-fix1]</system:String>
     <!--Glossary-->
     <system:String x:Key="Spells">Sorts</system:String>
     <system:String x:Key="Search">Recherche</system:String>

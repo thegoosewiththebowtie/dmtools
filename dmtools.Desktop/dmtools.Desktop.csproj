@@ -12,7 +12,7 @@
     <FileVersion>0.1.1.0</FileVersion>
     <NeutralLanguage>en</NeutralLanguage>
     <Product>dmtools</Product>
-    <Version>0.1.1-b</Version>
+    <Version>0.1.1-bf</Version>
     <Authors>thegoosewiththebowtie</Authors>
     <Copyright>Triangle on The Wall organization</Copyright>
   </PropertyGroup>
