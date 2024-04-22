@@ -132,7 +132,7 @@
             </Grid>
         </TabItem>
         <TabItem
-            IsEnabled="False"
+            
             Header="Magic Items">
                         <Grid
                 ColumnDefinitions="2*, 2*, *">
@@ -185,7 +185,7 @@
             </Grid>
         </TabItem>
         <TabItem
-            IsEnabled="False"
+            
             Header="Equipment">
                         <Grid
                 ColumnDefinitions="2*, 2*, *">

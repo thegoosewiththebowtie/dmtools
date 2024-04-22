@@ -53,6 +53,7 @@
 
   <ItemGroup>
     <Folder Include="config\" />
+    <Folder Include="Styles\" />
   </ItemGroup>
 
   <ItemGroup>
