@@ -2,14 +2,469 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="using:dmtools.Templates">
     <Design.PreviewWith>
-        <controls:EQForm />
+        <controls:EQForm 
+            Width="500"
+            Height="700"/>
     </Design.PreviewWith>
 
     <Style Selector="controls|EQForm">
         <!-- Set Defaults -->
         <Setter Property="Template">
             <ControlTemplate>
-                <TextBlock Text="Templated Control" />
+                <DockPanel
+                    LastChildFill="True">
+                    <Grid
+                        DockPanel.Dock="Top"
+                        RowDefinitions="50,50"
+                        ColumnDefinitions="*,*">
+                        <Border
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            BorderBrush="DimGray"
+                            BorderThickness="0,0,0,1">
+                            <TextBlock
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Margin="5,0"
+                            Text="{TemplateBinding Name0}"
+                            Classes="Text3"></TextBlock>
+                        </Border>
+                        <Border
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        BorderBrush="DimGray"
+                        BorderThickness="0,0,1,1">
+                            <TextBlock
+                                Text="{TemplateBinding Category}"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Margin="5,0"
+                                Classes="Text3">
+                            </TextBlock>
+                        </Border>
+                        <Border
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            BorderBrush="DimGray"
+                            BorderThickness="0,0,0,1">
+                            <TextBlock
+                                Text="{TemplateBinding SubCategory}"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Margin="5,0"
+                                Classes="Text3">
+                            </TextBlock>
+                        </Border>
+                    </Grid>
+                    <Grid
+                        DockPanel.Dock="Top"
+                        ColumnDefinitions="*, *, *, *"
+                        RowDefinitions="*,*,*,*,*"
+                        Name="Weapons"
+                        IsVisible="{TemplateBinding Weapon}">
+                        <Border
+                            Height="50"
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            BorderBrush="DimGray"
+                            BorderThickness="0,0,1,1">
+                            <Grid
+                                RowDefinitions="*,*">
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Classes="Text2">
+                                    Damage
+                                </TextBlock>
+                                <TextBlock
+                                    Grid.Row="1"
+                                Text="{TemplateBinding DamDpT}"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Margin="5,0"
+                                Classes="Text3"></TextBlock>
+                            </Grid>
+                        </Border>
+                        <Border
+                            Height="50"
+                            Grid.Row="0"
+                            Grid.Column="2"
+                            Grid.ColumnSpan="2"
+                            BorderBrush="DimGray"
+                            BorderThickness="0,0,0,1">
+                            <Grid
+                                RowDefinitions="*,*">
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Classes="Text2">
+                                    Two handed damage
+                                </TextBlock>
+                                <TextBlock
+                                    Grid.Row="1"
+                                Text="{TemplateBinding THdam}"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Margin="5,0"
+                                Classes="Text3"></TextBlock>
+                                </Grid>
+                        </Border>
+                        <Border
+                            Height="50"
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            BorderBrush="DimGray"
+                            BorderThickness="0,0,1,1">
+                            <Grid
+                                RowDefinitions="*,*">
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Classes="Text2">
+                                    Normal range
+                                </TextBlock>
+                                <TextBlock
+                                    Grid.Row="1"
+                                Text="{TemplateBinding NormalRange}"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Margin="5,0"
+                                Classes="Text3">
+                            </TextBlock>
+                                </Grid>
+                        </Border>
+                        <Border
+                            Height="50"
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            BorderBrush="DimGray"
+                            BorderThickness="0,0,1,1">
+                            <Grid
+                                RowDefinitions="*,*">
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Classes="Text2">
+                                    Long Rage
+                                </TextBlock>
+                                <TextBlock
+                                    Grid.Row="1"
+                                Text="{TemplateBinding LongRange}"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Margin="5,0"
+                                Classes="Text3">
+                            </TextBlock>
+                                </Grid>
+                        </Border>
+                        <Border
+                            Height="50"
+                            Grid.Row="1"
+                            Grid.Column="2"
+                            BorderBrush="DimGray"
+                            BorderThickness="0,0,1,1">
+                            <Grid
+                                RowDefinitions="*,*">
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Classes="Text2">
+                                    Thr. Range
+                                </TextBlock>
+                                <TextBlock
+                                    Grid.Row="1"
+                                    Text="{TemplateBinding ThrowingRange}"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Margin="5,0"
+                                    Classes="Text3">
+                                </TextBlock>
+                            </Grid>
+                        </Border>
+                        <Border
+                            Height="50"
+                            Grid.Row="1"
+                            Grid.Column="3"
+                            BorderBrush="DimGray"
+                            BorderThickness="0,0,0,1">
+                            <Grid
+                                RowDefinitions="*,*">
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Classes="Text2">
+                                    Long Thr. Rage
+                                </TextBlock>
+                                <TextBlock
+                                    Grid.Row="1"
+                                    Text="{TemplateBinding LongThrowingRange}"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Margin="5,0"
+                                    Classes="Text3">
+                                </TextBlock>
+                            </Grid>
+                        </Border>
+                        <Border
+                            IsVisible="{TemplateBinding huh}"
+                            Height="50"
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="4"
+                            BorderBrush="DimGray"
+                            BorderThickness="0,0,1,1">
+                            <Grid>
+                                <TextBlock
+                                    Text="{TemplateBinding Tags}"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Margin="5,0"
+                                    Classes="Text3"></TextBlock>
+                            </Grid>
+                        </Border>
+
+                    </Grid>
+                    <Grid
+                        ColumnDefinitions="Auto,*"
+                        RowDefinitions="*,*"
+                        DockPanel.Dock="Top"
+                        Name="Armor"
+                        IsVisible="{TemplateBinding Armor}">
+                        <Border
+                            BorderThickness="0,0,1,1"
+                            BorderBrush="DimGray"
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Grid.RowSpan="2"
+                            Height="100"
+                            Width="100">
+                            <Grid
+                                RowDefinitions="*,2*,*">
+                                <TextBlock
+                                    Classes="Text2"
+                                    Grid.Row="0"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Text="{DynamicResource ArmorClass}">
+                                </TextBlock>
+                                <TextBlock
+                                    Classes="Number"
+                                    Grid.Row="1"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Text="{TemplateBinding BaseAC}">
+                                </TextBlock>
+                                <TextBlock
+                                    Classes="Text2"
+                                    Grid.Row="2"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Text="{TemplateBinding DexBon}">
+                                </TextBlock>
+                            </Grid>
+                        </Border>
+                        <Border
+                            BorderBrush="DimGray"
+                            BorderThickness="0,0,0,1"
+                            Grid.Column="1"
+                            Grid.Row="0">
+                            <TextBlock
+                                Text="{TemplateBinding MinStr}"
+                                Classes="Text2"
+                                Margin="5,0"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Left">
+                            </TextBlock>
+                        </Border>
+                        <Border
+                            BorderBrush="DimGray"
+                            BorderThickness="0,0,0,1"
+                            Grid.Column="1"
+                            Grid.Row="1">
+                            <TextBlock
+                                Text="{TemplateBinding StDis}"
+                                Classes="Text2"
+                                Margin="5,0"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Left">
+                            </TextBlock>
+                        </Border>
+                    </Grid>
+                    <Grid
+                        ColumnDefinitions="*,*"
+                        DockPanel.Dock="Top"
+                        Name="Gear"
+                        IsVisible="{TemplateBinding Gear}">
+                        <Border
+                            Height="{Binding #Cont.Height}"
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            BorderBrush="DimGray"
+                            BorderThickness="0,0,1,1">
+                            <Grid
+                                RowDefinitions="*,*">
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Classes="Text2">
+                                    Amount
+                                </TextBlock>
+                                <TextBlock
+                                    Grid.Row="1"
+                                Text="{TemplateBinding quantity}"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Margin="5,0"
+                                Classes="Text3"></TextBlock>
+                            </Grid>
+                        </Border>
+                        <Expander
+                            Name="Cont"
+                            Grid.Column="1"
+                            VerticalAlignment="Stretch"
+                            HorizontalAlignment="Stretch"
+                            BorderBrush="DimGray"
+                            Background="Transparent"
+                            CornerRadius="0"
+                            BorderThickness="0,0,0,0"
+                            Margin="0"
+                            Padding="0">
+                            <Expander.Styles>
+                                <Style Selector="Expander /template/ ToggleButton#ExpanderHeader">
+                                    <Setter Property="BorderBrush" Value="DimGray" />
+                                    <Setter Property="CornerRadius" Value="0" />
+                                    <Setter Property="Padding" Value="0" />
+                                    <Setter Property="Margin" Value="0" />
+                                    <Setter Property="BorderThickness" Value="0,0,0,1" />
+                                </Style>
+                            </Expander.Styles>
+                            <Expander.Header>
+                                <TextBlock
+                                    Classes="Text2"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center">
+                                    Content
+                                </TextBlock>
+                            </Expander.Header>
+                            <TextBlock
+                                Margin="5"
+                                Classes="Text2"
+                                Text="{TemplateBinding Contents}">
+                            </TextBlock>
+                        </Expander>
+                    </Grid>
+                    <Grid
+                        ColumnDefinitions="*,*"
+                        DockPanel.Dock="Top"
+                        Name="Vehicle"
+                        IsVisible="{TemplateBinding Vehicle}">
+                        <Border
+                            Height="50"
+                            Grid.Column="0"
+                            BorderBrush="DimGray"
+                            BorderThickness="0,0,1,1">
+                            <Grid
+                                RowDefinitions="*,*">
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Classes="Text2">
+                                    Speed
+                                </TextBlock>
+                                <TextBlock
+                                    Grid.Row="1"
+                                Text="{TemplateBinding Speed}"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Margin="5,0"
+                                Classes="Text3">
+                            </TextBlock>
+                                </Grid>
+                        </Border>
+                        <Border
+                            Height="50"
+                            Grid.Column="1"
+                            BorderBrush="DimGray"
+                            BorderThickness="0,0,1,1">
+                            <Grid
+                                RowDefinitions="*,*">
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Classes="Text2">
+                                    Capacity
+                                </TextBlock>
+                                <TextBlock
+                                    Grid.Row="1"
+                                Text="{TemplateBinding Capacity}"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Margin="5,0"
+                                Classes="Text3">
+                            </TextBlock>
+                                </Grid>
+                        </Border>
+                    </Grid>
+                    <Grid
+                        ColumnDefinitions="*,*"
+                        Height="50"
+                        DockPanel.Dock="Bottom">
+                        <Border
+                            Grid.Column="0"
+                            BorderBrush="DimGray"
+                            BorderThickness="0,1,1,0">
+                            <Grid
+                                RowDefinitions="*,*">
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Classes="Text2">
+                                    Weight
+                                </TextBlock>
+                                <TextBlock
+                                    Grid.Row="1"
+                                    Text="{TemplateBinding Weight}"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Margin="5,0"
+                                    Classes="Text3"></TextBlock>
+                            </Grid>
+                        </Border>
+                        <Border
+                            Grid.Column="1"
+                            BorderBrush="DimGray"
+                            BorderThickness="0,1,0,0">
+                            <Grid
+                                RowDefinitions="*,*">
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Classes="Text2">
+                                    Price
+                                </TextBlock>
+                                <TextBlock
+                                    Grid.Row="1"
+                                    Text="{TemplateBinding Price}"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Margin="5,0"
+                                    Classes="Text3"></TextBlock>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                    <Border>
+                        <TextBlock
+                            TextWrapping="Wrap"
+                            Text="{TemplateBinding Desc}"
+                            VerticalAlignment="Top"
+                            HorizontalAlignment="Left"
+                            Margin="5,5"
+                            Classes="Text3">
+                            
+                        </TextBlock>
+                    </Border>
+                </DockPanel>
             </ControlTemplate>
         </Setter>
     </Style>

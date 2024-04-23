@@ -5,6 +5,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using dmtools.Generators;
 
 namespace dmtools.Views;
 
@@ -41,7 +42,8 @@ public partial class AboutView : UserControl
 
     private void Github_OnClick(object? sender, RoutedEventArgs e)
     {
-        Process.Start(new ProcessStartInfo() { FileName = "https://github.com/thegoosewiththebowtie/dmtools", UseShellExecute = true });
+        //Process.Start(new ProcessStartInfo() { FileName = "https://github.com/thegoosewiththebowtie/dmtools", UseShellExecute = true });
+        LootCr.StartCon();
     }
 
     private void Telegram_OnClick(object? sender, RoutedEventArgs e)

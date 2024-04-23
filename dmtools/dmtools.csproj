@@ -32,6 +32,7 @@
 
   <ItemGroup>
         <AvaloniaResource Include="Assets\**" />
+        <AvaloniaResource Remove="trash\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -53,7 +54,6 @@
 
   <ItemGroup>
     <Folder Include="config\" />
-    <Folder Include="Styles\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -73,6 +73,7 @@
       <DependentUpon>Picture.axaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Remove="trash\**" />
   </ItemGroup>
 
 <ItemGroup>
@@ -80,6 +81,7 @@
         <Generator>PublicResXFileCodeGenerator</Generator>
         <LastGenOutput>Resources1.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Remove="trash\**" />
     </ItemGroup>
 
 <ItemGroup>
@@ -89,4 +91,16 @@
       <DependentUpon>Resources1.resx</DependentUpon>
     </Compile>
     </ItemGroup>
+
+<ItemGroup>
+  <AvaloniaXaml Remove="trash\**" />
+</ItemGroup>
+
+<ItemGroup>
+  <AdditionalFiles Remove="trash\**" />
+</ItemGroup>
+
+<ItemGroup>
+  <None Remove="trash\**" />
+</ItemGroup>
 </Project>

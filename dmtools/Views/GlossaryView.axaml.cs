@@ -8,7 +8,6 @@ using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml.Styling;
 using AVFoundation;
 using dmtools.PopUps;
-using dmtools.GlossData;
 using DynamicData;
 using LiteDB;
 using Avalonia.Data;
@@ -127,7 +126,6 @@ public class Bestiary
     public string r_descs { get; set; }
     public string forms { get; set; }
 }
-
 public class MagicItems
 {
     public int ID { get; set; }
@@ -138,47 +136,76 @@ public class MagicItems
     public bool variant { get; set; }
     public string desc { get; set; }
 }
-
-
 public class Equipment
 {
     public int ID { get; set; }
-    public string name { get; set; }
-    public string equipment_category { get; set; }
-    public string weapon_category { get; set; }
-    public string weapon_range { get; set; }
-    public string category_range { get; set; }
+    //ALL
+    public string name { get; set; }//+
+    public string equipment_category { get; set; }//+
     public string cost_amount { get; set; }
     public string cost_coin { get; set; }
-    public string damage_dice { get; set; }
-    public string damage_type { get; set; }
-    public int range_normal{ get; set; }
-    public int? range_long{ get; set; }
     public double weight { get; set; }
-    public string properties { get; set; }
-    public int ThrRannormal { get; set; }
-    public int ThrRanlong { get; set; }
-    public string TwoHandedDamagedamage_dice { get; set; }
-    public string TwoHandedDamagedamage_type { get; set; }
-    public string special { get; set; }
-    public string armor_category { get; set; }
-    public int ArmorClassbase { get; set; }
-    public bool ArmorClassdex_bonus { get; set; }
-    public int? ArmorClassmax_bonus { get; set; }
+
+    //OnlyWeapons
+    public string weapon_category { get; set; }//+
+    public string weapon_range { get; set; }//+
+    public string category_range { get; set; }//+
+    public string damage_dice { get; set; }//+
+    public string damage_type { get; set; }//+
+    public int range_normal{ get; set; }//+
+    public int? range_long{ get; set; }//+
+    public int ThrRannormal { get; set; }//+
+    public int ThrRanlong { get; set; }//+
+    public string TwoHandedDamagedamage_dice { get; set; }//+
+    public string TwoHandedDamagedamage_type { get; set; }//+
+    public string special { get; set; } //+
+
+    //OnlyArmor
+    public string armor_category { get; set; }//+
+    public int ArmorClassbase { get; set; } //+
+    public bool ArmorClassdex_bonus { get; set; }//+
+    public int? ArmorClassmax_bonus { get; set; }//+
     public int? str_minimum { get; set; }
     public bool? stealth_disadvantage { get; set; }
-    public string gear_category { get; set; }
-    public string desc { get; set; }
-    public int? quantity { get; set; }
-    public string contents_items { get; set; }
+
+    //OnlyTools
+    public string tool_category { get; set; }//+
+
+    //OnlyMounts
+    public string vehicle_category { get; set; }//+
+    public string speedquantity { get; set; }//+
+    public string speedunit { get; set; }//+
+    public string capacity { get; set; }//+
+
+
+    //OnlyGear
+    public string gear_category { get; set; }//+
     public string contents_amountss { get; set; }
-    public string tool_category { get; set; }
-    public string vehicle_category { get; set; }
-    public string speedquantity { get; set; }
-    public string speedunit { get; set; }
-    public string capacity { get; set; }
+    public int? quantity { get; set; }//+
+
+    //Rand
+    public string properties { get; set; }//+
+    public string desc { get; set; }//+
+
+    //unsorted
+    public string contents_items { get; set; } //+
+
 }
 
+public class LootList
+{
+    public int ID { get; set; }
+    public string Item { get; set; }
+    public string Description { get; set; }
+    public string EstValue { get; set; }
+    public string Rarity { get; set; }
+    public string Weight { get; set; }
+    public string Category { get; set; }
+    public string Properties { get; set; }
+    public string Requirements { get; set; }
+    public string Author { get; set; }
+    public object RarityNumber { get; set; }
+}
 public partial class GlossaryView : UserControl
 {
     public List<Spells> spells { get; set; } = new List<Spells>();
@@ -216,7 +243,10 @@ public partial class GlossaryView : UserControl
             var mi = ldb.GetCollection<MagicItems>();
             foreach (var best in mi.FindAll())
             {
-                magicitems.Add(best);
+                if (best.variants == null)
+                {
+                    magicitems.Add(best);
+                }
             }
         }
         using (var ldb = new LiteDatabase("GlossData/Equipment.db"))
@@ -513,18 +543,179 @@ public partial class GlossaryView : UserControl
         }
         
     }
+    private void MIGrid_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        if (MIGrid.SelectedItem == null)
+        {
+            return;
+        }
+        var thisMI = (MIGrid.SelectedItem as MagicItems);
+        ThisMI.Name0 = thisMI.name;
+        ThisMI.rarity = thisMI.rarity;
+        ThisMI.desc = thisMI.desc;
+        ThisMI.eqc = thisMI.equipmentcategory;
+    }
     private void EQGrid_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
         if (EQGrid.SelectedItem == null)
         {
             return;
         }
-    }
-    private void MIGrid_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
-    {
-        if (MIGrid.SelectedItem == null)
+        var opnd = (EQGrid.SelectedItem as Equipment);
+        switch (opnd.equipment_category)
         {
-            return;
+            case "Weapon":
+                ThisEQ.Weapon = true;
+                ThisEQ.Armor = false;
+                ThisEQ.Vehicle = false;
+                ThisEQ.Gear = false;
+                ThisEQ.Tool = false;
+                ThisEQ.SubCategory = opnd.category_range;
+                break;
+            case "Armor":
+                ThisEQ.Weapon = false;
+                ThisEQ.Armor = true;
+                ThisEQ.Vehicle = false;
+                ThisEQ.Gear = false;
+                ThisEQ.Tool = false;
+                ThisEQ.SubCategory = opnd.armor_category;
+                break;
+            case "Adventuring Gear":
+                ThisEQ.Weapon = false;
+                ThisEQ.Armor = false;
+                ThisEQ.Vehicle = false;
+                ThisEQ.Gear = true;
+                ThisEQ.Tool = false;
+                ThisEQ.SubCategory = opnd.gear_category;
+                break;
+            case "Tools":
+                ThisEQ.Weapon = false;
+                ThisEQ.Armor = false;
+                ThisEQ.Vehicle = false;
+                ThisEQ.Gear = false;
+                ThisEQ.Tool = true;
+                ThisEQ.SubCategory = opnd.tool_category;
+                break;
+            case "Mounts and Vehicles":
+                ThisEQ.Weapon = false;
+                ThisEQ.Armor = false;
+                ThisEQ.Vehicle = true;
+                ThisEQ.Gear = false;
+                ThisEQ.Tool = false;
+                ThisEQ.SubCategory = opnd.vehicle_category;
+                break;
+        }
+        ThisEQ.Name0 = opnd.name;
+        ThisEQ.Category = opnd.equipment_category;
+        ThisEQ.Desc = $"{opnd.special}\r\n";
+        ThisEQ.Desc += opnd.desc;
+        ThisEQ.Price = $"{opnd.cost_amount} {opnd.cost_coin}";
+        ThisEQ.Weight = $"{opnd.weight}";
+        //Weapons
+        ThisEQ.NormalRange = $"{opnd.range_normal} ft.";
+        if (opnd.range_long == null || opnd.range_long == 0)
+        {
+            ThisEQ.LongRange = "None";
+        }
+        else
+        {
+            ThisEQ.LongRange = $"{opnd.range_long} ft.";
+        }
+        if (opnd.ThrRannormal == 0)
+        {
+            ThisEQ.ThrowingRange = $"None";
+        }
+        else
+        {
+            ThisEQ.ThrowingRange = $"{opnd.ThrRannormal} ft.";
+        }
+        if (opnd.ThrRanlong == 0)
+        {
+            ThisEQ.LongThrowingRange = $"None";
+        }
+        else
+        {
+            ThisEQ.LongThrowingRange = $"{opnd.ThrRanlong} ft.";
+        }
+        if (opnd.damage_dice == null && opnd.damage_type == null)
+        {
+            ThisEQ.DamDpT = $"None";
+        }
+        else
+        {
+            ThisEQ.DamDpT = $"{opnd.damage_type} {opnd.damage_dice}";
+        }
+
+        if (opnd.TwoHandedDamagedamage_type == null && opnd.TwoHandedDamagedamage_dice == null)
+        {
+            ThisEQ.THdam = "None";
+        }
+        else
+        {
+            ThisEQ.THdam = $"{opnd.TwoHandedDamagedamage_type} {opnd.TwoHandedDamagedamage_dice}";
+        }
+        if (opnd.properties == null)
+        {
+            ThisEQ.huh = false;
+        }
+        else
+        {
+            ThisEQ.huh = true;
+            ThisEQ.Tags = opnd.properties.Replace("$", ", ");
+        }
+        //Armor
+        ThisEQ.BaseAC = $"{opnd.ArmorClassbase}";
+        if (opnd.ArmorClassdex_bonus)
+        {
+            ThisEQ.DexBon = $"+DEX, max +{opnd.ArmorClassmax_bonus}";
+        }
+        ThisEQ.MinStr = $"Minimal strength: {opnd.str_minimum}";
+        ThisEQ.StDis = $"Stealth disadvantage: No";
+        if (opnd.stealth_disadvantage == true)
+        {
+            ThisEQ.StDis.Replace("No", "Yes");
+        }
+        //Mounts
+        if (opnd.speedquantity == "0" && opnd.speedunit == null)
+        {
+            ThisEQ.Speed = $"None";
+        }
+        else
+        {
+            ThisEQ.Speed = $"{opnd.speedquantity} {opnd.speedunit}";
+        }
+        if (opnd.capacity == null)
+        {
+            ThisEQ.Capacity = "None";
+        }
+        else
+        {
+            ThisEQ.Capacity = $"{opnd.capacity}";
+        }
+        //Gear
+        string f = String.Empty;
+        if (opnd.contents_amountss != "0" && opnd.properties != null)
+        {
+            var kjdd = opnd.properties.Split("$").ToList();
+            kjdd.Remove(kjdd[0]);
+            var ghtnhk = opnd.contents_amountss.Split("$").ToList();
+            for (int i = 0; i < ghtnhk.Count; i++)
+            {
+                f += $"{kjdd[i]} {ghtnhk[i]}\r\n";
+            }
+        }
+        else
+        {
+            f = "None";
+        }
+        ThisEQ.Contents = f;
+        if (opnd.quantity == null)
+        {
+            ThisEQ.quantity = "1";
+        }
+        else
+        {
+            ThisEQ.quantity = opnd.quantity.ToString();
         }
     }
     private void SearchSpells_OnTextChanged(object? sender, TextChangedEventArgs e)

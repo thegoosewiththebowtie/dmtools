@@ -1,6 +1,5 @@
-﻿<Application xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Application.Styles>
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <StyleInclude Source="BestDisplay.axaml"></StyleInclude>
     <StyleInclude Source="GeneratedNPC.axaml"></StyleInclude>
     <StyleInclude Source="SpellDisplay.axaml"></StyleInclude>
@@ -13,5 +12,6 @@
     <StyleInclude Source="plusminbuttonless.axaml"></StyleInclude>
     <StyleInclude Source="Styles.axaml"></StyleInclude>
     <StyleInclude Source="HealthGrid.axaml"></StyleInclude>
-    </Application.Styles>
-</Application>
+    <StyleInclude Source="MIForm.axaml"></StyleInclude>
+    <StyleInclude Source="EQForm.axaml"></StyleInclude>
+</Styles>

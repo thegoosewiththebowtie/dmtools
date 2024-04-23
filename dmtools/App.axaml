@@ -11,11 +11,13 @@
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceInclude Source="/Locals/en.axaml" />
+				
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
 	</Application.Resources>
 	<Application.Styles>
         <FluentTheme DensityStyle="Normal" />
+        <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
         <StyleInclude Source="Templates/Templates.axaml"></StyleInclude>
     </Application.Styles>
 </Application>
