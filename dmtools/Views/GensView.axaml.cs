@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
@@ -8,6 +9,7 @@ using Avalonia.Markup.Xaml;
 using Config.Net;
 using LiteDB;
 using Microsoft.VisualBasic;
+using OpenGL;
 
 namespace dmtools.Views;
 
@@ -29,6 +31,11 @@ public class GenNpc
     public string cha { get; set; }
     public List<string> DisList { get; set; }
     public List<string>LikesList { get; set; }
+}
+
+public class LootParameters
+{
+    public bool test { get; set; }
 }
 public partial class GensView : UserControl
 {
@@ -111,5 +118,19 @@ public partial class GensView : UserControl
                 Race = (History.SelectedItem as GenNpc).Race,
             });
         }
+    }
+
+    private void LootHis_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        Debug.WriteLine("Nah, it doesnt work yet");
+    }
+
+    private void GenL_OnClick(object? sender, RoutedEventArgs e)
+    {
+        var lp = new LootParameters ()
+        {
+            test = true
+        };
+        dmtools.Generators.Loot.GenerateLoot(lp);
     }
 }

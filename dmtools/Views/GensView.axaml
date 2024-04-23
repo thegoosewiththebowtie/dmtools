@@ -123,14 +123,67 @@
             </Grid>
         </TabItem>
         <TabItem
-            IsEnabled="False"
-           ><TabItem.Header>
+            IsEnabled="True">
+            <TabItem.Header>
                 <TextBlock
                     Text="{DynamicResource Loot}">
-								  
+                    
                 </TextBlock>
             </TabItem.Header>
-            
+             <Grid
+                ColumnDefinitions="*, 2*, *">
+                <Border
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Classes="DefBorder">
+                    <Grid
+                        ColumnDefinitions="*, 2*">
+                    <DataGrid
+                        IsReadOnly="True"
+                        Name="LootHis"
+                        SelectionChanged="LootHis_OnSelectionChanged"
+                        Margin="5">
+                        <DataGrid.Columns>
+                        <DataGridTextColumn
+                            Header="{DynamicResource FirstNameG}"
+                            Binding="{Binding Path=Rarity}">
+                            
+                        </DataGridTextColumn>
+                        <DataGridTextColumn
+                            Header="{DynamicResource SecondNameG}"
+                            Binding="{Binding Path=Name2}">
+                            
+                        </DataGridTextColumn>
+                        <DataGridTextColumn
+                            Header="{DynamicResource RaceG}"
+                            Binding="{Binding Path=Race}">
+                            
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                    </Grid>
+                    </Border>
+                <Border
+                    Grid.Column="1"
+                    Classes="DefBorder">
+                </Border>
+                <Border
+                    Classes="DefBorder"
+                    Grid.Column="2">
+                    <StackPanel>
+                        <Button
+                                Name="GenL"
+                                Click="GenL_OnClick"
+                                Margin="5"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Stretch"
+                                VerticalContentAlignment="Center"
+                                HorizontalContentAlignment="Center"
+                                Content="{DynamicResource Generate}">
+                        </Button>
+                    </StackPanel>
+                </Border>
+            </Grid>
         </TabItem>
         <TabItem
             IsEnabled="False"><TabItem.Header>
