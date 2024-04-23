@@ -42,8 +42,7 @@ public partial class AboutView : UserControl
 
     private void Github_OnClick(object? sender, RoutedEventArgs e)
     {
-        //Process.Start(new ProcessStartInfo() { FileName = "https://github.com/thegoosewiththebowtie/dmtools", UseShellExecute = true });
-        LootCr.StartCon();
+        Process.Start(new ProcessStartInfo() { FileName = "https://github.com/thegoosewiththebowtie/dmtools", UseShellExecute = true });
     }
 
     private void Telegram_OnClick(object? sender, RoutedEventArgs e)
