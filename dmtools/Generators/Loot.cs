@@ -6,7 +6,6 @@ using dmtools.Views;
 using DynamicData;
 using GLib;
 using LiteDB;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace dmtools.Generators;
 

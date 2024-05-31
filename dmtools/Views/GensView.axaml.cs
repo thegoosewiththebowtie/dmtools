@@ -172,15 +172,15 @@ public partial class GensView : UserControl
 
     private void EnvGen_OnClick(object? sender, RoutedEventArgs e)
     {
-        if (BossType.SelectedItem == null)
+        if (EnvType.SelectedItem == null)
         {
             return;
         }
         var lp = new LootParameters ()
         {
-            type0 = 4, type = (BossType.SelectedItem as ComboBoxItem).Name
+            type0 = 4, type = (EnvType.SelectedItem as ComboBoxItem).Name
         };
         var res = dmtools.Generators.Loot.GenerateLoot(lp);
-        Gendbossloot.ItemsSource = null;
-        Gendbossloot.ItemsSource = res;    }
+        EnvRes.ItemsSource = null;
+        EnvRes.ItemsSource = res;    }
 }
