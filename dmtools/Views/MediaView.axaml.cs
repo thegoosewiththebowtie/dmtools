@@ -63,7 +63,7 @@ public partial class MediaView : UserControl
         if (settings.VolumeSnd == 0) { settings.VolumeSnd = 10; }
         if (settings.Language == null) { settings.Language = "en"; }
 
-        settings.Version = "0.1.1-bf";
+        settings.Version = "0.1.0-a";
         if (settings.CheckUpdates == null)
         {
             settings.CheckUpdates = true;
