@@ -1,0 +1,68 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:dmtools.Templates">
+    <Design.PreviewWith>
+        <controls:MIForm
+            Height="700"
+            Width="500"/>
+    </Design.PreviewWith>
+
+    <Style Selector="controls|MIForm">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Grid
+                    RowDefinitions="*,*,10*"
+                    ColumnDefinitions="*,*">
+                    <Border
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        BorderBrush="DimGray"
+                        BorderThickness="0,0,0,1">
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Margin="5,0"
+                            Text="{TemplateBinding Name0}"
+                            Classes="Text4"></TextBlock>
+                    </Border>
+                    <Border
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        BorderBrush="DimGray"
+                        BorderThickness="0,0,1,1">
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Margin="5,0"
+                            Text="{TemplateBinding eqc}"
+                            Classes="Text4"></TextBlock>
+                    </Border>
+                    <Border
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        BorderBrush="DimGray"
+                        BorderThickness="0,0,0,1">
+                        <TextBlock
+                            Text="{TemplateBinding rarity}"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Margin="5,0"
+                            Classes="Text4"></TextBlock>
+                    </Border>
+                    <Border Grid.Row="2"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2">
+                        <TextBlock
+                            TextWrapping="Wrap"
+                            Text="{TemplateBinding desc}"
+                            VerticalAlignment="Top"
+                            HorizontalAlignment="Left"
+                            Margin="5,5"
+                            Classes="Text3"></TextBlock>
+                    </Border>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

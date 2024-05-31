@@ -3,7 +3,6 @@
              xmlns:reactiveUi="clr-namespace:ReactiveUI;assembly=ReactiveUI"
              x:Class="dmtools.App"
              xmlns:local="clr-namespace:dmtools"
-             xmlns:neumorphism="https://github.com/flarive/Neumorphism.Avalonia"
              RequestedThemeVariant="Light">
 	<Application.DataTemplates>
 		<local:ViewLocator/>
@@ -12,23 +11,13 @@
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceInclude Source="/Locals/en.axaml" />
+				
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
 	</Application.Resources>
 	<Application.Styles>
         <FluentTheme DensityStyle="Normal" />
         <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
-        <StyleInclude Source="Templates/BestDisplay.axaml"></StyleInclude>
-        <StyleInclude Source="Templates/GeneratedNPC.axaml"></StyleInclude>
-        <StyleInclude Source="Templates/SpellDisplay.axaml"></StyleInclude>
-        <StyleInclude Source="Templates/WeekMonthEdit.axaml"></StyleInclude>
-		<StyleInclude Source="/Templates/CharForm.axaml"/>
-        <StyleInclude Source="Templates/NpcForm.axaml"></StyleInclude>
-		<StyleInclude Source="/Templates/plusminbutton.axaml"/>
-        <StyleInclude Source="PopUps/Icons.axaml"></StyleInclude>
-        <StyleInclude Source="Templates/Longplusminmore.axaml"></StyleInclude>
-        <StyleInclude Source="Templates/plusminbuttonless.axaml"></StyleInclude>
-		<StyleInclude Source="Styles/Styles.axaml"></StyleInclude>
-        <StyleInclude Source="Templates/HealthGrid.axaml"></StyleInclude>
+        <StyleInclude Source="Templates/Templates.axaml"></StyleInclude>
     </Application.Styles>
 </Application>

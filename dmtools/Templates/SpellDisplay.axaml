@@ -1,7 +1,6 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:controls="using:dmtools.Templates"
-        xmlns:glossData="clr-namespace:dmtools.GlossData">
+        xmlns:controls="using:dmtools.Templates">
     <Design.PreviewWith>
         <controls:SpellDisplay
             Width="500"

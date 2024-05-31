@@ -132,7 +132,6 @@
             </Grid>
         </TabItem>
         <TabItem
-            IsEnabled="False"
             Header="Magic Items">
                         <Grid
                 ColumnDefinitions="2*, 2*, *">
@@ -162,7 +161,14 @@
                                     Header="{DynamicResource NameS}"
                                     Binding="{Binding Path=name}">
                                 </DataGridTextColumn>
-                                
+                                <DataGridTextColumn
+                                    Header="Category"
+                                    Binding="{Binding Path=equipmentcategory}">
+                                </DataGridTextColumn>
+                                <DataGridTextColumn
+                                    Header="Rarity"
+                                    Binding="{Binding Path=rarity}">
+                                </DataGridTextColumn>
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>
@@ -171,9 +177,9 @@
                     Margin="-5,5,5,5"
                     Grid.Column="1"
                     Classes="DefBorder">
-                    <controls:SpellDisplay
+                    <controls:MIForm
                         Name="ThisMI">
-                    </controls:SpellDisplay>
+                    </controls:MIForm>
                 </Border>
                 <Border
                     Classes="DefBorder"
@@ -185,9 +191,8 @@
             </Grid>
         </TabItem>
         <TabItem
-            IsEnabled="False"
             Header="Equipment">
-                        <Grid
+            <Grid
                 ColumnDefinitions="2*, 2*, *">
                 <Border
                     Grid.Column="0"
@@ -216,12 +221,8 @@
                                     Binding="{Binding Path=name}">
                                 </DataGridTextColumn>
                                 <DataGridTextColumn
-                                    Header="{DynamicResource LevelS}"
-                                    Binding="{Binding Path=level}">
-                                </DataGridTextColumn>
-                                <DataGridTextColumn
-                                    Header="{DynamicResource Class}"
-                                    Binding="{Binding Path=classes}">
+                                    Header="Category"
+                                    Binding="{Binding Path=equipment_category}">
                                 </DataGridTextColumn>
                             </DataGrid.Columns>
                         </DataGrid>
@@ -231,9 +232,9 @@
                     Margin="-5,5,5,5"
                     Grid.Column="1"
                     Classes="DefBorder">
-                    <controls:SpellDisplay
+                    <controls:EQForm
                         Name="ThisEQ">
-                    </controls:SpellDisplay>
+                    </controls:EQForm>
                 </Border>
                 <Border
                     Classes="DefBorder"

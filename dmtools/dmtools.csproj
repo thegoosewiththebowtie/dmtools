@@ -32,6 +32,7 @@
 
   <ItemGroup>
         <AvaloniaResource Include="Assets\**" />
+        <AvaloniaResource Remove="trash\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,9 +42,8 @@
     <PackageReference Include="Avalonia.ReactiveUI" Version="11.0.10" />
     <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.10" />
-    <PackageReference Include="Config.Net" Version="5.1.5" />
+    <PackageReference Include="Config.Net" Version="5.2.0" />
     <PackageReference Include="LiteDB" Version="5.0.19" />
-    <PackageReference Include="LLamaSharp" Version="0.11.1" />
     <PackageReference Include="NAudio" Version="2.2.1" />
     <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.0.10" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
@@ -72,6 +72,7 @@
       <DependentUpon>Picture.axaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Remove="trash\**" />
   </ItemGroup>
 
 <ItemGroup>
@@ -79,6 +80,7 @@
         <Generator>PublicResXFileCodeGenerator</Generator>
         <LastGenOutput>Resources1.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Remove="trash\**" />
     </ItemGroup>
 
 <ItemGroup>
@@ -88,4 +90,16 @@
       <DependentUpon>Resources1.resx</DependentUpon>
     </Compile>
     </ItemGroup>
+
+<ItemGroup>
+  <AvaloniaXaml Remove="trash\**" />
+</ItemGroup>
+
+<ItemGroup>
+  <AdditionalFiles Remove="trash\**" />
+</ItemGroup>
+
+<ItemGroup>
+  <None Remove="trash\**" />
+</ItemGroup>
 </Project>
