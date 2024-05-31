@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Reflection;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using dmtools.Generators;
 using Avalonia.Markup.Xaml;
 using Config.Net;
+using dmtools.PopUps;
 using LiteDB;
 using Microsoft.VisualBasic;
 using OpenGL;
@@ -35,7 +38,8 @@ public class GenNpc
 
 public class LootParameters
 {
-    public bool test { get; set; }
+    public int type0 { get; set; }
+    public string type { get; set; }
 }
 public partial class GensView : UserControl
 {
@@ -127,10 +131,56 @@ public partial class GensView : UserControl
 
     private void GenL_OnClick(object? sender, RoutedEventArgs e)
     {
+    }
+
+    private void Button_OnClick(object? sender, RoutedEventArgs e)
+    {
+        if (NpcType.SelectedItem == null)
+        {
+            return;
+        }
         var lp = new LootParameters ()
         {
-            test = true
+            type0 = 1, type = (NpcType.SelectedItem as ComboBoxItem).Name
         };
-        dmtools.Generators.Loot.GenerateLoot(lp);
+        var res = dmtools.Generators.Loot.GenerateLoot(lp);
+        Gendloot.ItemsSource = null;
+        Gendloot.ItemsSource = res;
     }
+
+    private void ShopGen_OnClick(object? sender, RoutedEventArgs e)
+    {
+        NO no = new NO("It's not implemented yet cause im gonna transfer everything from this pdf (it should've been opened)");
+        no.Show();
+        Process.Start("explorer.exe", $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}/GlossData/dndsh.pdf");
+    }
+
+    private void BossGen_OnClick(object? sender, RoutedEventArgs e)
+    {
+        if (BossType.SelectedItem == null)
+        {
+            return;
+        }
+        var lp = new LootParameters ()
+        {
+            type0 = 2, type = (BossType.SelectedItem as ComboBoxItem).Name
+        };
+        var res = dmtools.Generators.Loot.GenerateLoot(lp);
+        Gendbossloot.ItemsSource = null;
+        Gendbossloot.ItemsSource = res;
+    }
+
+    private void EnvGen_OnClick(object? sender, RoutedEventArgs e)
+    {
+        if (BossType.SelectedItem == null)
+        {
+            return;
+        }
+        var lp = new LootParameters ()
+        {
+            type0 = 4, type = (BossType.SelectedItem as ComboBoxItem).Name
+        };
+        var res = dmtools.Generators.Loot.GenerateLoot(lp);
+        Gendbossloot.ItemsSource = null;
+        Gendbossloot.ItemsSource = res;    }
 }

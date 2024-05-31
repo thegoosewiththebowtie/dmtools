@@ -19,8 +19,7 @@
 
   <ItemGroup>
     <PackageReference Include="Avalonia.Desktop" Version="11.0.10" />
-    <PackageReference Include="Config.Net" Version="5.1.5" />
-    <PackageReference Include="LLamaSharp" Version="0.11.1" />
+    <PackageReference Include="Config.Net" Version="5.2.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="WebView.Avalonia" Version="11.0.0.1" />
     <PackageReference Include="WebView.Avalonia.Desktop" Version="11.0.0.1" />
