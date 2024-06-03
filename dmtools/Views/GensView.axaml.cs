@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using Avalonia;
 using Avalonia.Controls;
@@ -18,6 +19,7 @@ namespace dmtools.Views;
 
 public class GenNpc
 {
+    public int ID { get; set; }
     public string Name { get; set; }
     public string Name2 { get; set; }
     public string Race { get; set; }
@@ -52,6 +54,15 @@ public partial class GensView : UserControl
         InitializeComponent();
         profid = profile.ProfileID;
         settings = new ConfigurationBuilder<ISettings>().UseIniFile("Settings/q0" + profid +".ini").Build();
+
+        using (LiteDatabase ldb = new LiteDatabase(settings.DataPath))
+        {
+            var ldbhistnp = ldb.GetCollection<GenNpc>();
+            HistNpcs = ldbhistnp.FindAll().ToList();
+            HistNpcs.Reverse();
+        }
+
+        History.ItemsSource = HistNpcs;
     }
 
     private void GenerateNPC_OnClick(object? sender, RoutedEventArgs e)
@@ -64,13 +75,41 @@ public partial class GensView : UserControl
         {
             MinMaxAge = (Age.SelectedItem as TextBlock).Name;
         }
-        var res = Generators.NPC.CreateNPC(MinMaxAge);
-        HistNpcs.Insert(0,new GenNpc()
+        NpcParams npcParams = new NpcParams();
+        npcParams.MinMaxAge = MinMaxAge;
+        npcParams.Race = 0;
+        if (Racech.SelectedItem != null)
         {
-            Name = res[0][0], Name2 = res[0][1], Race = res[1][0], Age = res[1][1], Hair = res[1][2], Height = res[1][3],
-            BodyType = res[1][4], EyeColor= res[1][5], str = res[1][6], dex = res[1][7], con = res[1][8], inte = res[1][9], wis = res[1][10], cha = res[1][11], 
+            npcParams.Race = Racech.SelectedIndex;
+        }
+        var res = Generators.NPC.CreateNPC(npcParams);
+        var genned = new GenNpc()
+        {
+            Name = res[0][0], Name2 = res[0][1], Race = res[1][0], Age = res[1][1], Hair = res[1][2],
+            Height = res[1][3],
+            BodyType = res[1][4], EyeColor = res[1][5], str = res[1][6], dex = res[1][7], con = res[1][8],
+            inte = res[1][9], wis = res[1][10], cha = res[1][11],
             DisList = res[2], LikesList = res[3]
-        });
+        };
+        HistNpcs.Insert(0,genned);
+        if (HistNpcs.Count() > 50)
+        {
+            var c = HistNpcs.Count();
+           HistNpcs.RemoveRange(50, c-50);
+        }
+        using (LiteDatabase ldb = new LiteDatabase(settings.DataPath))
+        {
+            var ldbhistnp = ldb.GetCollection<GenNpc>();
+            ldbhistnp.Insert(genned);
+            if (ldbhistnp.Count() > 50)
+            {
+                var c2 = ldbhistnp.Count();
+                for (int i = 51; i <= c2; i++)
+                {
+                    ldbhistnp.Delete(51);
+                }
+            }
+        }
         History.ItemsSource = HistNpcs;
     }
 

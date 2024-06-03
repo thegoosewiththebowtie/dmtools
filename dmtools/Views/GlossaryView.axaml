@@ -57,8 +57,37 @@
                     </controls:SpellDisplay>
                 </Border>
                 <Border
+                    Name="starredstuff"
                     Classes="DefBorder"
                     Grid.Column="2">
+                    <DockPanel>
+                        <ToggleButton
+                            Name="StarBtnSP"
+                            Click="StarBtnSP_OnIsCheckedChanged"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Margin="0,-1,0,0"
+                            CornerRadius="5,5,0,0"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Width="{Binding #starredstuff.Bounds.Width}"
+                            DockPanel.Dock="Top">
+                            <ToggleButton.Styles>
+                                <Style
+                                    Selector="ToggleButton:checked">
+                                    <Setter Property="Content">Starred</Setter>
+                                </Style>
+                                <Style
+                                    Selector="ToggleButton:unchecked">
+                                    <Setter Property="Content">Star</Setter>
+                                </Style>
+                            </ToggleButton.Styles>
+                        </ToggleButton>
+                        <ListBox
+                            SelectionChanged="StarSP_OnSelectionChanged"
+                            Background="Transparent"
+                            Name="StarSP"></ListBox>
+                    </DockPanel>
                 </Border>
             </Grid>
         </TabItem>
@@ -123,11 +152,37 @@
                     </controls:BestDisplay>
                 </Border>
                 <Border
+                    Name="eqss"
                     Classes="DefBorder"
                     Grid.Column="2">
-                    <StackPanel>
-                        
-                    </StackPanel>
+                    <DockPanel>
+                        <ToggleButton
+                            Click="StarBtnBest_OnIsCheckedChanged"
+                            Name="StarBtnBest"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Margin="0,-1,0,0"
+                            CornerRadius="5,5,0,0"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Width="{Binding #eqss.Bounds.Width}"
+                            DockPanel.Dock="Top">
+                            <ToggleButton.Styles>
+                                <Style
+                                    Selector="ToggleButton:checked">
+                                    <Setter Property="Content">Starred</Setter>
+                                </Style>
+                                <Style
+                                    Selector="ToggleButton:unchecked">
+                                    <Setter Property="Content">Star</Setter>
+                                </Style>
+                            </ToggleButton.Styles>
+                        </ToggleButton>
+                        <ListBox
+                            SelectionChanged="StarBest_OnSelectionChanged"
+                            Background="Transparent"
+                            Name="StarBest"></ListBox>
+                    </DockPanel>
                 </Border>
             </Grid>
         </TabItem>
@@ -182,11 +237,44 @@
                     </controls:MIForm>
                 </Border>
                 <Border
+                    Name="miss"
                     Classes="DefBorder"
                     Grid.Column="2">
-                    <StackPanel>
-                        
-                    </StackPanel>
+                    <DockPanel>
+                        <ToggleButton
+                            Click="StarBtnMI_OnIsCheckedChanged"
+                            Name="StarBtnMI"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Margin="0,-1,0,0"
+                            CornerRadius="5,5,0,0"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Width="{Binding #miss.Bounds.Width}"
+                            DockPanel.Dock="Top">
+                            <ToggleButton.Styles>
+                                <Style
+                                    Selector="ToggleButton:checked">
+                                    <Setter Property="Content">Starred</Setter>
+                                </Style>
+                                <Style
+                                    Selector="ToggleButton:unchecked">
+                                    <Setter Property="Content">Star</Setter>
+                                </Style>
+                            </ToggleButton.Styles>
+                        </ToggleButton>
+                        <ListBox
+                            SelectionChanged="StarMI_OnSelectionChanged"
+                            Background="Transparent"
+                            Name="StarMI">
+                            <ListBox.Styles>
+                                <Style Selector="ListBoxItem:pointerover">
+                                    <Setter Property="Foreground" Value="Transparent">
+                                    </Setter>
+                                </Style>
+                            </ListBox.Styles>
+                        </ListBox>
+                    </DockPanel>
                 </Border>
             </Grid>
         </TabItem>
@@ -237,11 +325,37 @@
                     </controls:EQForm>
                 </Border>
                 <Border
+                    Name="bess"
                     Classes="DefBorder"
                     Grid.Column="2">
-                    <StackPanel>
-                       
-                    </StackPanel>
+                    <DockPanel>
+                        <ToggleButton
+                            Click="StarBtnEQ_OnIsCheckedChanged"
+                            Name="StarBtnEQ"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Margin="0,-1,0,0"
+                            CornerRadius="5,5,0,0"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Width="{Binding #bess.Bounds.Width}"
+                            DockPanel.Dock="Top">
+                            <ToggleButton.Styles>
+                                <Style
+                                    Selector="ToggleButton:checked">
+                                    <Setter Property="Content">Starred</Setter>
+                                </Style>
+                                <Style
+                                    Selector="ToggleButton:unchecked">
+                                    <Setter Property="Content">Star</Setter>
+                                </Style>
+                            </ToggleButton.Styles>
+                        </ToggleButton>
+                        <ListBox
+                            SelectionChanged="StarEQ_OnSelectionChanged"
+                            Background="Transparent"
+                            Name="StarEQ"></ListBox>
+                    </DockPanel>
                 </Border>
             </Grid>
         </TabItem>

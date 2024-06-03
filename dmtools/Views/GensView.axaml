@@ -10,7 +10,6 @@
             <TabItem.Header>
                 <TextBlock
                     Text="{DynamicResource npcss}">
-								  
                 </TextBlock>
             </TabItem.Header>
             <Grid
@@ -117,7 +116,53 @@
                                 Text="{DynamicResource Old}">
                             </TextBlock>
                         </ComboBox>
-                        
+                        <ComboBox
+                            Name="Racech"
+                            PlaceholderText="Race"
+                            Margin="5"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Stretch"
+                            VerticalContentAlignment="Center"
+                            HorizontalContentAlignment="Center">
+                            <TextBlock
+                                Name="rnd">
+                                Random
+                            </TextBlock>
+                            <TextBlock
+                                Name="Gnome"
+                                Text="Gnome">
+                                
+                            </TextBlock>
+                            <TextBlock
+                                Name="Dwarf"
+                                Text="Dwarf">
+                            </TextBlock>
+                            <TextBlock
+                                Name="Halforc"
+                                Text="Half-orc" >
+                            </TextBlock>
+                            <TextBlock
+                                Name="Halfling"
+                                Text="Halfling" >
+                            </TextBlock>
+                            <TextBlock
+                                Name="Halfelf"
+                                Text="Half-elf">
+                            </TextBlock>
+                            <TextBlock
+                                Name="Tiefling"
+                                Text="Tiefling">
+                            </TextBlock>
+                            <TextBlock
+                                Name="Human"
+                                Text="Human">
+                            </TextBlock>
+                            <TextBlock
+                                Name="Elf"
+                                Text="Elf">
+                            </TextBlock>
+                        </ComboBox>
+
                     </StackPanel>
                 </Border>
             </Grid>
@@ -585,12 +630,15 @@
              </Grid>
         </TabItem>
         <TabItem
-            IsEnabled="False"><TabItem.Header>
+            IsEnabled="True">
+            <TabItem.Header>
                 <TextBlock
                     Text="{DynamicResource Encounters}">
-								  
                 </TextBlock>
             </TabItem.Header>
+            <Grid>
+                
+            </Grid>
         </TabItem>
         <TabItem
             IsEnabled="False">

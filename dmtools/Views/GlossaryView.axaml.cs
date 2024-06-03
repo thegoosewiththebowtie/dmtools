@@ -10,9 +10,12 @@ using AVFoundation;
 using dmtools.PopUps;
 using DynamicData;
 using LiteDB;
+using ReactiveUI;
 using Avalonia.Data;
 using System.Windows;
 using Avalonia;
+using Avalonia.Controls.Primitives;
+using Config.Net;
 
 namespace dmtools.Views;
 public class Spells
@@ -212,10 +215,19 @@ public partial class GlossaryView : UserControl
     public List<Bestiary> bestiary { get; set; } = new List<Bestiary>();
     public List<MagicItems> magicitems { get; set; } = new List<MagicItems>();
     public List<Equipment> EQ { get; set; } = new List<Equipment>();
+    public ISettings settings { get; set; }
+    Profile profile = new ConfigurationBuilder<Profile>().UseIniFile("Profile.ini").Build();
+    public int profid { get; set; }
+    public List<string> StSp { get; set; }
+    public List<string> StBe { get; set; }
+    public List<string> StMi { get; set; }
+    public List<string> StEq { get; set; }
     public GlossaryView()
     
     {
         InitializeComponent();
+        profid = profile.ProfileID;
+        settings = new ConfigurationBuilder<ISettings>().UseIniFile("Settings/q0" + profid +".ini").Build();
         ini();
     }
     public void ini()
@@ -322,6 +334,14 @@ public partial class GlossaryView : UserControl
         SearchBest.ItemsSource = BestACSearch;
         SearchMI.ItemsSource = MISearch;
         SearchEQ.ItemsSource = EQSearch;
+        StSp = settings.StarredSpells.Split("$").ToList();
+        StarSP.ItemsSource = StSp;
+        StBe = settings.StarredBest.Split("$").ToList();
+        StarBest.ItemsSource = StBe;
+        StMi = settings.StarredMI.Split("$").ToList();
+        StarMI.ItemsSource = StMi;
+        StEq = settings.StarredEQ.Split("$").ToList();
+        StarEQ.ItemsSource = StEq;
     }
     private void List_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
@@ -441,6 +461,25 @@ public partial class GlossaryView : UserControl
             addesc += $"{lv}\r\n";
         }
         ThisSpell.classes = addesc;
+        if (StSp.Contains(thisspell.name))
+        {
+            StarBtnSP.IsChecked = true;
+            var c = 0;
+            foreach (var v in StarSP.Items)
+            {
+                var sln = ((sender as DataGrid).SelectedItem as Spells).name;
+                if (v.ToString() == sln)
+                {
+                    StarSP.SelectedIndex = c;
+                }
+                c++;
+            }
+        }
+        else
+        {
+            StarBtnSP.IsChecked = false;
+            StarSP.SelectedItem = null;
+        }
     }
     private void BestGrid_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
@@ -541,6 +580,25 @@ public partial class GlossaryView : UserControl
         {
             ThisBest.Desc = $"{Application.Current.FindResource("None")}";;
         }
+        if (StBe.Contains(((sender as DataGrid).SelectedItem as Bestiary).name))
+        {
+            StarBtnBest.IsChecked = true;
+            var c = 0;
+            foreach (var v in StarBest.Items)
+            {
+                var sln = ((sender as DataGrid).SelectedItem as Bestiary).name;
+                if (v.ToString() == sln)
+                {
+                    StarBest.SelectedIndex = c;
+                }
+                c++;
+            }
+        }
+        else
+        {
+            StarBtnBest.IsChecked = false;
+            StarBest.SelectedItem = null;
+        }
         
     }
     private void MIGrid_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
@@ -554,6 +612,25 @@ public partial class GlossaryView : UserControl
         ThisMI.rarity = thisMI.rarity;
         ThisMI.desc = thisMI.desc;
         ThisMI.eqc = thisMI.equipmentcategory;
+        if (StMi.Contains(thisMI.name))
+        {
+            StarBtnMI.IsChecked = true;
+            var c = 0;
+            foreach (var v in StarMI.Items)
+            {
+                var sln = ((sender as DataGrid).SelectedItem as MagicItems).name;
+                if (v.ToString() == sln)
+                {
+                    StarMI.SelectedIndex = c;
+                }
+                c++;
+            }
+        }
+        else
+        {
+            StarBtnMI.IsChecked = false;
+            StarMI.SelectedItem = null;
+        }
     }
     private void EQGrid_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
@@ -717,6 +794,25 @@ public partial class GlossaryView : UserControl
         {
             ThisEQ.quantity = opnd.quantity.ToString();
         }
+        if (StEq.Contains(ThisEQ.Name0))
+        {
+            StarBtnEQ.IsChecked = true;
+            var c = 0;
+            foreach (var v in StarEQ.Items)
+            {
+                var sln = ((sender as DataGrid).SelectedItem as Equipment).name;
+                if (v.ToString() == sln)
+                {
+                    StarEQ.SelectedIndex = c;
+                }
+                c++;
+            }
+        }
+        else
+        {
+            StarBtnEQ.IsChecked = false;
+            StarEQ.SelectedItem = null;
+        }
     }
     private void SearchSpells_OnTextChanged(object? sender, TextChangedEventArgs e)
     {
@@ -751,5 +847,185 @@ public partial class GlossaryView : UserControl
             where eq.name.Contains((sender as AutoCompleteBox).Text, StringComparison.OrdinalIgnoreCase)
             select eq;
         EQGrid.ItemsSource = filteredResults;    
+    }
+
+    private void StarBtnSP_OnIsCheckedChanged(object? sender, RoutedEventArgs e)
+    {
+        if (SpellsGrid.SelectedItem == null)
+        {
+            (sender as ToggleButton).IsChecked = false;
+            return;
+        }
+        switch ((sender as ToggleButton).IsChecked)
+        {
+            case true:
+                StSp.Insert(0, (SpellsGrid.SelectedItem as Spells).name);
+                break;
+            case false:
+                StSp.Remove((SpellsGrid.SelectedItem as Spells).name);
+                break;
+        }
+        StarSP.ItemsSource = null;
+        StarSP.ItemsSource = StSp;
+        settings.StarredSpells = string.Join('$', StSp);
+    }
+
+    private void StarSP_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        if ((sender as ListBox).SelectedItem == null)
+        {
+            return;
+        }
+        if ((sender as ListBox).SelectedItem == (sender as ListBox).Items.Last())
+        {
+            (sender as ListBox).SelectedItem = null;
+            return;
+        }
+        var sln = (sender as ListBox).SelectedItem.ToString();
+        var c = 0;
+        foreach (var v in SpellsGrid.ItemsSource)
+        {
+            if ((v as Spells).name == sln)
+            {
+                SpellsGrid.SelectedIndex = c;
+                return;
+            }
+            c++;
+        }
+    }
+
+    private void StarBtnBest_OnIsCheckedChanged(object? sender, RoutedEventArgs e)
+    {
+        if (BestGrid.SelectedItem == null)
+        {
+            (sender as ToggleButton).IsChecked = false;
+            return;
+        }
+        switch ((sender as ToggleButton).IsChecked)
+        {
+            case true:
+                StBe.Insert(0, (BestGrid.SelectedItem as Bestiary).name);
+                break;
+            case false:
+                StBe.Remove((BestGrid.SelectedItem as Bestiary).name);
+                break;
+        }
+        StarBest.ItemsSource = null;
+        StarBest.ItemsSource = StBe;
+        settings.StarredBest = string.Join('$', StBe);
+    }
+
+    private void StarBest_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        if ((sender as ListBox).SelectedItem == null)
+        {
+            return;
+        }
+        if ((sender as ListBox).SelectedItem == (sender as ListBox).Items.Last())
+        {
+            (sender as ListBox).SelectedItem = null;
+            return;
+        }
+        var sln = (sender as ListBox).SelectedItem.ToString();
+        var c = 0;
+        foreach (var v in BestGrid.ItemsSource)
+        {
+            if ((v as Bestiary).name == sln)
+            {
+                BestGrid.SelectedIndex = c;
+                return;
+            }
+            c++;
+        }
+    }
+
+    private void StarBtnMI_OnIsCheckedChanged(object? sender, RoutedEventArgs e)
+    {
+        if (MIGrid.SelectedItem == null)
+        {
+            (sender as ToggleButton).IsChecked = false;
+            return;
+        }
+        switch ((sender as ToggleButton).IsChecked)
+        {
+            case true:
+                StMi.Insert(0, (MIGrid.SelectedItem as MagicItems).name);
+                break;
+            case false:
+                StMi.Remove((MIGrid.SelectedItem as MagicItems).name);
+                break;
+        }
+        StarMI.ItemsSource = null;
+        StarMI.ItemsSource = StMi;
+        settings.StarredMI = string.Join('$', StMi);
+    }
+
+    private void StarMI_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        if ((sender as ListBox).SelectedItem == null)
+        {
+            return;
+        }
+        if ((sender as ListBox).SelectedItem == (sender as ListBox).Items.Last())
+        {
+            (sender as ListBox).SelectedItem = null;
+            return;
+        }
+        var sln = (sender as ListBox).SelectedItem.ToString();
+        var c = 0;
+        foreach (var v in MIGrid.ItemsSource)
+        {
+            if ((v as MagicItems).name == sln)
+            {
+                MIGrid.SelectedIndex = c;
+                return;
+            }
+            c++;
+        }
+    }
+
+    private void StarBtnEQ_OnIsCheckedChanged(object? sender, RoutedEventArgs e)
+    {
+        if (EQGrid.SelectedItem == null)
+        {
+            (sender as ToggleButton).IsChecked = false;
+            return;
+        }
+        switch ((sender as ToggleButton).IsChecked)
+        {
+            case true:
+                StEq.Insert(0, (EQGrid.SelectedItem as Equipment).name);
+                break;
+            case false:
+                StEq.Remove((EQGrid.SelectedItem as Equipment).name);
+                break;
+        }
+        StarEQ.ItemsSource = null;
+        StarEQ.ItemsSource = StEq;
+        settings.StarredEQ = string.Join('$', StEq);
+    }
+
+    private void StarEQ_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        if ((sender as ListBox).SelectedItem == null)
+        {
+            return;
+        }
+        if ((sender as ListBox).SelectedItem == (sender as ListBox).Items.Last())
+        {
+            (sender as ListBox).SelectedItem = null;
+            return;
+        }
+        var sln = (sender as ListBox).SelectedItem.ToString();
+        var c = 0;
+        foreach (var v in EQGrid.ItemsSource)
+        {
+            if ((v as Equipment).name == sln)
+            {
+                EQGrid.SelectedIndex = c;
+                return;
+            }
+            c++;
+        }
     }
 }

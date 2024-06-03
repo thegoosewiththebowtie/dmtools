@@ -7,6 +7,11 @@ using GLib;
 
 namespace dmtools.Generators;
 
+public class NpcParams
+{
+    public string MinMaxAge { get; set; }
+    public int Race { get; set; }
+}
 public class NPC
 {
         public static List<string> vowels = new List<string>()
@@ -23,7 +28,7 @@ public class NPC
         };
         public static List<string> Races = new List<string>()
         {
-            "Gnome", "Dwarf", "Half - orc", "Halfling", "Half-elf", "Tiefling", "Human", "Elf"
+            "Gnome", "Dwarf", "Half-orc", "Halfling", "Half-elf", "Tiefling", "Human", "Elf"
         };
         public static List<string> Eyecolor = new List<string>()
         {
@@ -47,15 +52,15 @@ public class NPC
             "Violence/Peace","Talking to strangers/Meet new people", "Stay alone", "Be outside", "Read", "Their eyecolor",
             "Their height", "Their weight", "To make desicions", "Sports", "People around them", "One-night stands",
             "Nature/Technology", "Red/Orange/Yellow/Green/Blue/Purple", "Kids", "Their neighbours", "Smart people/Dumb people",
-            "One of your party members", "Darkness", "Spider", "Random person from their village", "Sleeping",
-            "Ruler of the country/Their work/Their work/Their work",/*"","","",
+            "One of your party members", "Darkness", "Spiders", "Random person from their village", "Sleeping",
+            "Ruler of the country/Their work/Their work/Their work", "Insects",/*"","",
             "","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",
             "","","","","","","","",*/
             
             
         };
         public static Random rnd = new Random();
-        public static List<List<string>> CreateNPC(string MinMaxAge)
+        public static List<List<string>> CreateNPC(NpcParams npcParams )
         {
             string n = Name();
             string sn = Name();
@@ -64,12 +69,13 @@ public class NPC
             {
                 stats.Add( Convert.ToString(Stats()));
             }
-            string MinMaxAge0 = MinMaxAge;
+            string MinMaxAge0 = npcParams.MinMaxAge;
+            
             var DLL = DisLikesR();
             List<List<string>> NPC = new List<List<string>>()
             {
                 new List<string>(){n, sn},
-                Appearance(MinMaxAge0),
+                Appearance(MinMaxAge0, npcParams.Race),
                 DLL[0], DLL[1]
             };
             return NPC;
@@ -99,7 +105,6 @@ public class NPC
                     if (n == 0)
                     {
                         firstname.Add(constants[rnd.Next(0, constants.Count)]);
-
                     }
                     else
                     {
@@ -116,23 +121,20 @@ public class NPC
             return stat;
         }
 
-        public static List<string> Appearance(string MinMaxAge)
+        public static List<string> Appearance(string MinMaxAge, int race0)
         {
             string Race = Races[rnd.Next(0, Races.Count)];
-            
+            if (race0 != 0)
+            {
+                Race = Races[race0 - 1];
+            }
             int MinAge = Convert.ToInt32(MinMaxAge.Split("a")[1]);
             int MaxAge = Convert.ToInt32(MinMaxAge.Split("a")[2]);
             int age = rnd.Next(MinAge,MaxAge);
-            
             string hair = HairColor[rnd.Next(0, HairColor.Count)] + ", " + Hairlength[rnd.Next(0, Hairlength.Count)];
-            
             int height = 0;
-            
             string bodytype = BodyTypes[rnd.Next(0, BodyTypes.Count)];
-            
             string eyecolor = "0";
-            
-            
             if (Race == Races[0]) //gnome
             {
                 height = rnd.Next(85, 122);

@@ -145,6 +145,10 @@ public interface ISettings
     string BrLink3 { get; set; }
     int PrevDay { get; set; }
     string Language { get; set; }
+    string StarredSpells { get; set; }
+    string StarredBest { get; set; }
+    string StarredMI { get; set; }
+    string StarredEQ { get; set; }
     int ID { get; set; }
 }
 
@@ -235,6 +239,10 @@ public partial class HomeView : UserControl
         if (settings.VolumeAmb == 0) { settings.VolumeAmb = 10; }
         if (settings.VolumeSnd == 0) { settings.VolumeSnd = 10; }
         if (settings.Language == null) { settings.Language = "en"; }
+        if (settings.StarredSpells == null) { settings.StarredSpells = ""; } 
+        if (settings.StarredBest == null) { settings.StarredBest = ""; }
+        if (settings.StarredEQ == null) { settings.StarredEQ = ""; }
+        if (settings.StarredMI == null) { settings.StarredMI = ""; }
 
         settings.Version = "0.1.0-a";
         if (settings.CheckUpdates == null)
