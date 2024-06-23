@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:controls="using:dmtools.Templates"
+             xmlns:rs="using:RangeSlider.Avalonia.Controls"
              mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="700"
              x:Class="dmtools.Views.GensView">
     <TabControl>
@@ -220,7 +221,7 @@
                          </Rectangle>
                              <Grid
                                  ColumnDefinitions="*,*"
-                                 RowDefinitions="*,5*">
+                                 RowDefinitions="50,*">
                                  <TextBlock
                                      Margin="15"
                                      VerticalAlignment="Center"
@@ -361,10 +362,9 @@
                              Height="1"
                              Fill="DimGray"
                              DockPanel.Dock="Top"></Rectangle>
-                         <Grid>
-							 <Grid
+                         <Grid
                                  ColumnDefinitions="*,*"
-                                 RowDefinitions="*,5*">
+                                 RowDefinitions="50,*">
 								 <TextBlock
                                      Margin="15"
                                      VerticalAlignment="Center"
@@ -470,9 +470,7 @@
                                          </DataGrid.Columns>
                                      </DataGrid>
                                  </Grid>
-								 </Grid>
                          </Grid>
-                         
                      </DockPanel>
                  </Border>
                  <Border
@@ -544,12 +542,10 @@
                              Height="1"
                              Fill="DimGray"
                              DockPanel.Dock="Top"></Rectangle>
-                         <Grid>
-                             <Grid>
-							 <Grid
-                                 ColumnDefinitions="*,*"
-                                 RowDefinitions="*,5*">
-								 <TextBlock
+                         <Grid
+                                    ColumnDefinitions="*,*"
+                                    RowDefinitions="50,*">
+								    <TextBlock
                                      Margin="15"
                                      VerticalAlignment="Center"
                                      HorizontalAlignment="Left"
@@ -557,7 +553,7 @@
                                      Grid.Column="0">
 									 Environment's type 
 								 </TextBlock>
-								 <ComboBox
+								    <ComboBox
                                      Name="EnvType"
                                      VerticalAlignment="Stretch"
                                      HorizontalAlignment="Stretch"
@@ -577,7 +573,7 @@
 										 Dungeon (gonna have easy, hard and medium vars)
 									 </ComboBoxItem>
                                  </ComboBox>
-								 <Grid
+								    <Grid
                                      Grid.Row="1"
                                      Grid.ColumnSpan="2">
 									 <DataGrid
@@ -622,8 +618,6 @@
 										 </DataGrid.Columns>
 									 </DataGrid>
 								 </Grid>
-								 </Grid>
-                         </Grid>
                          </Grid>
                      </DockPanel>
                  </Border>
@@ -636,19 +630,223 @@
                     Text="{DynamicResource Encounters}">
                 </TextBlock>
             </TabItem.Header>
-            <Grid>
-                
+            <Grid
+                ShowGridLines="False"
+                RowDefinitions="100, *"
+                ColumnDefinitions="*, *">
+                <Grid
+                    Grid.ColumnSpan="2"
+                    RowDefinitions="*, *"
+                    ColumnDefinitions="50, *,50, *, *, 50">
+                    <Button
+                        Margin="5"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Grid.Column="2"
+                        Grid.ColumnSpan="2">
+                        Fight!
+                    </Button>
+                    <Button
+                        Name="GenEnc"
+                        Click="GenEnc_OnClick"
+                        Grid.ColumnSpan="2"
+                        Margin="5"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Grid.Column="4">
+                        Generate
+                    </Button>
+                    <NumericUpDown
+                        Increment="1"
+                        Value="1"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Name="ams"
+                        AllowSpin="True"
+                        Grid.ColumnSpan="2"
+                        Margin="5"
+                        Grid.Column="0">
+                    </NumericUpDown>
+                    <ComboBox
+                        Name="enctype"
+                        Margin="5"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Grid.Row="1"
+                        Grid.ColumnSpan="2"
+                        Grid.Column="0"
+                        PlaceholderText="Encounter type">
+                        <ComboBoxItem
+                            IsEnabled="False">
+                            Friendly 
+                        </ComboBoxItem>
+                        <ComboBoxItem
+                            Name="Hostile"
+                            IsEnabled="True">
+                            Hostile
+                        </ComboBoxItem>
+                    </ComboBox>
+                    <TextBox
+                        IsReadOnly="True"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        TextAlignment="Center"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Margin="5"
+                        Grid.Row="1"
+                        Grid.Column="2"
+                        Text="{Binding #com.LowerSelectedValue}"></TextBox>
+                    <rs:RangeSlider
+                        LowerSelectedValue="0.125"
+                        UpperSelectedValue="30"
+                        IsSnapToTickEnabled="True"
+                        Ticks="0, 0.125, 0.25, 0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20, 21, 22, 23, 24, 30"
+                        TickPlacement="TopLeft"
+                        Name="com"
+                        Minimum="0"
+                        Maximum="30"
+                        Margin="5"
+                        IsEnabled="{Binding #Hostile.IsSelected}"
+                        Grid.Row="1"
+                        Grid.ColumnSpan="2"
+                        Grid.Column="3">
+                    </rs:RangeSlider>
+                    <TextBox
+                        IsReadOnly="True"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        TextAlignment="Center"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Margin="5"
+                        Grid.Row="1"
+                        Grid.Column="5"
+                        Text="{Binding #com.UpperSelectedValue}"></TextBox>
+                </Grid>
+                <Border
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Classes="DefBorder">
+                    <Grid
+                        ShowGridLines="False"
+                        ColumnDefinitions="50, *, 50"
+                        RowDefinitions="50, *">
+                        <Button
+                                Margin="-1,-1,0,0"
+                                CornerRadius="5,0,0,0"
+                                Name="PrevPC"
+                                Click="PrevPC_OnClick"
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                VerticalAlignment="Stretch"
+                                HorizontalAlignment="Stretch"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                Content="&lt;">
+                            </Button>
+                            <Button
+                                Margin="0,-1,-1,0"
+                                CornerRadius="0,5,0,0"
+                                Name="NxtPC"
+                                Click="NxtPC_OnClick"
+                                Grid.Row="0"
+                                Grid.Column="2"
+                                VerticalAlignment="Stretch"
+                                HorizontalAlignment="Stretch"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                Content="&gt;">
+                            </Button>
+                            <Carousel
+                                ZIndex="-2"
+                                Name="PCCarousel"
+                                Grid.Column="0"
+                                Grid.Row="0"
+                                Grid.ColumnSpan="3"
+                                Grid.RowSpan="2"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch">
+                                <Carousel.PageTransition >
+                                    <CompositePageTransition>
+                                        <PageSlide Duration="0:00:00.500" Orientation="Horizontal" />
+                                    </CompositePageTransition>
+                                </Carousel.PageTransition>
+                            </Carousel>
+                    </Grid>
+                </Border>
+                <Border
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Classes="DefBorder">
+                    <Grid
+                        ShowGridLines="False"
+                        ColumnDefinitions="50, *, 50"
+                        RowDefinitions="50, *">
+                        <Button
+                            Margin="-1,-1,0,0"
+                            CornerRadius="5,0,0,0"
+                            Name="PrevEn"
+                            Click="PrevEn_OnClick"
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            VerticalAlignment="Stretch"
+                            HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Content="&lt;">
+                        </Button>
+                        <Button
+                            Margin="0,-1,-1,0"
+                            CornerRadius="0,5,0,0"
+                            Name="NxtEn"
+                            Click="NxtEn_OnClick"
+                            Grid.Row="0"
+                            Grid.Column="2"
+                            VerticalAlignment="Stretch"
+                            HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Content="&gt;">
+                        </Button>
+                        <Carousel
+                            ZIndex="-2"
+                            Name="EnemyCarousel"
+                            Grid.Column="0"
+                            Grid.Row="0"
+                            Grid.ColumnSpan="3"
+                            Grid.RowSpan="2"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch">
+                            <Carousel.PageTransition >
+                                <CompositePageTransition>
+                                    <PageSlide Duration="0:00:00.500" Orientation="Horizontal" />
+                                </CompositePageTransition>
+                            </Carousel.PageTransition>
+
+                        </Carousel>
+                    </Grid>
+                </Border>
             </Grid>
         </TabItem>
         <TabItem
-            IsEnabled="False">
+            IsEnabled="True">
         <TabItem.Header>
             <TextBlock
                 Text="{DynamicResource Cities}">
-								  
             </TextBlock>
         </TabItem.Header>
-            
+            <Grid>
+                
+            </Grid>
         </TabItem>
         <TabItem
             IsEnabled="False">

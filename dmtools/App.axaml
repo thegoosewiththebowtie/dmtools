@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:reactiveUi="clr-namespace:ReactiveUI;assembly=ReactiveUI"
              x:Class="dmtools.App"
+             xmlns:themes="using:RangeSlider.Avalonia.Themes.Fluent"
              xmlns:local="clr-namespace:dmtools"
              RequestedThemeVariant="Light">
 	<Application.DataTemplates>
@@ -17,6 +18,8 @@
 	</Application.Resources>
 	<Application.Styles>
         <FluentTheme DensityStyle="Normal" />
+        <themes:RangeSliderTheme />
+        <StyleInclude Source="avares://Avalonia.Controls.ColorPicker/Themes/Fluent/Fluent.xaml" />
         <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
         <StyleInclude Source="Templates/Templates.axaml"></StyleInclude>
     </Application.Styles>

@@ -11,6 +11,7 @@ using dmtools.Generators;
 using Avalonia.Markup.Xaml;
 using Config.Net;
 using dmtools.PopUps;
+using dmtools.Templates;
 using LiteDB;
 using Microsoft.VisualBasic;
 using OpenGL;
@@ -52,16 +53,48 @@ public partial class GensView : UserControl
     public GensView()
     {
         InitializeComponent();
+        ini();
+    }
+
+    public void ini()
+    {
         profid = profile.ProfileID;
         settings = new ConfigurationBuilder<ISettings>().UseIniFile("Settings/q0" + profid +".ini").Build();
-
         using (LiteDatabase ldb = new LiteDatabase(settings.DataPath))
         {
             var ldbhistnp = ldb.GetCollection<GenNpc>();
             HistNpcs = ldbhistnp.FindAll().ToList();
             HistNpcs.Reverse();
+            var ldbchars = ldb.GetCollection<PlayerCharacter>();
+            foreach (var pc in ldbchars.FindAll())
+            {
+                EncChForm charForm = new EncChForm();
+                charForm.ID = pc.ID;
+                charForm.FirstName = pc.FirstName;
+                charForm.OtherNames = pc.OtherName;
+                charForm.Player = pc.Player;
+                charForm.Class = pc.Class;
+                charForm.Race = pc.Race;
+                charForm.Alligment = pc.Alligment;
+                charForm.Notes = pc.Notes;
+                charForm.Backgroundd = pc.Backgroundd;
+                charForm.StrVal = pc.Strength;
+                charForm.DexVal = pc.Dexterity;
+                charForm.ConVal = pc.Constitution;
+                charForm.IntVal = pc.Intelligence;
+                charForm.WisVal = pc.Wisdom;
+                charForm.ChaVal = pc.Charisma;
+                charForm.Level = pc.Level;
+                charForm.Exp = pc.Experience;
+                charForm.Health = pc.Health;
+                charForm.Ac = pc.ArmorClass;
+                charForm.IsCheck = new List<bool>()
+                {
+                    pc.IsCCharisma, pc.IsCStrength, pc.IsCDexterity, pc.IsCConstitution, pc.IsCIntelligence, pc.IsCWisdom,
+                };
+                PCCarousel.Items.Add(charForm);
+            }
         }
-
         History.ItemsSource = HistNpcs;
     }
 
@@ -222,4 +255,138 @@ public partial class GensView : UserControl
         var res = dmtools.Generators.Loot.GenerateLoot(lp);
         EnvRes.ItemsSource = null;
         EnvRes.ItemsSource = res;    }
+
+    private void PrevPC_OnClick(object? sender, RoutedEventArgs e)
+    {
+        PCCarousel.Previous();
+    }
+
+    private void NxtPC_OnClick(object? sender, RoutedEventArgs e)
+    {
+        PCCarousel.Next();
+    }
+
+    private void PrevEn_OnClick(object? sender, RoutedEventArgs e)
+    {
+        EnemyCarousel.Previous();
+    }
+
+    private void NxtEn_OnClick(object? sender, RoutedEventArgs e)
+    {
+        EnemyCarousel.Next();
+    }
+
+    private void GenEnc_OnClick(object? sender, RoutedEventArgs e)
+    {
+        List<Bestiary> bc;
+        switch (enctype.SelectedIndex)
+        {
+            case 0:
+                return;
+            case 1:
+                bc = Generators.Encounter.GenerateEncounter(com.LowerSelectedValue, com.UpperSelectedValue, (int)ams.Value);
+                break;
+            default:
+                return;
+        }
+        EnemyCarousel.Items.Clear();
+        foreach (var srs in bc)
+        {
+            EncForm ThisBest = new EncForm();
+            ThisBest.BName = srs.name;
+            ThisBest.Aligment = $"{Application.Current.FindResource("Aligment")}: {srs.alignment}";
+            ThisBest.Languages = $"{Application.Current.FindResource("Languages")}: {srs.languages}";
+            ThisBest.Type = $"{Application.Current.FindResource("Type")}: {srs.type}";
+            ThisBest.Subtype = $"{Application.Current.FindResource("Subtype")}: {srs.subtype}";
+            ThisBest.Size = $"{Application.Current.FindResource("Size")}: {srs.size}";
+            ThisBest.Speed = srs.speed_walk;
+        ThisBest.Swim = srs.speed_swim;
+        ThisBest.Fly = srs.speed_fly;
+        ThisBest.Burrow = srs.speed_burrow;
+        ThisBest.Climb = srs.speed_climb;
+        ThisBest.Immunities = $"{Application.Current.FindResource("Damageimmunities")}: {srs.damage_immunities}\r\n\r\n" +
+                              $"{Application.Current.FindResource("Damageresistances")}: {srs.damage_resistances}\r\n\r\n" +
+                              $"{Application.Current.FindResource("Conditions")}: {srs.condition_immunities}";
+        if (srs.damage_vulnerabilities != null)
+        {
+            ThisBest.Vul = $"{srs.damage_vulnerabilities}";
+        }
+        else
+        {
+            ThisBest.Vul = $"{Application.Current.FindResource("None")}";
+        }
+        ThisBest.Senses = $"{Application.Current.FindResource("Darkvision")}: {srs.darkvision}\r\n\r\n" +
+                          $"{Application.Current.FindResource("Passiveperception")}: {srs.passive_perception}\r\n\r\n" +
+                          $"{Application.Current.FindResource("Blindsight")}: {srs.blindsight}\r\n\r\n" +
+                          $"{Application.Current.FindResource("Truesight")}: {srs.truesight}\r\n\r\n" +
+                          $"{Application.Current.FindResource("Tremorsense")}: {srs.tremorsense}";
+        ThisBest.Armor = $"{srs.ac_armor}\r\n" +
+                         $"{srs.ac_condition}\r\n" +
+                         $"{srs.ac_desc}\r\n" +
+                         $"{srs.ac_spell}\r\n" +
+                         $"{srs.ac_type}\r\n" +
+                         $"{srs.ac_type}";
+        ThisBest.MainACval = srs.ac_value;
+        ThisBest.ACType = srs.ac_type;
+        ThisBest.Health = srs.hit_points.ToString();
+        ThisBest.HitPointsRoll = srs.hit_points_roll;
+        ThisBest.Exp = srs.xp.ToString();
+        ThisBest.StrVal = srs.strength.ToString();
+        ThisBest.DexVal = srs.dexterity.ToString();
+        ThisBest.ConVal = srs.constitution.ToString();
+        ThisBest.IntVal = srs.intelligence.ToString();
+        ThisBest.WisVal = srs.wisdom.ToString();
+        ThisBest.ChaVal = srs.charisma.ToString();
+        string attacks = String.Empty;
+        if (srs.a_names != null)
+        {
+            var anames = srs.a_names.Split("$");
+            var adescs = srs.a_desc.Split("$");
+            for (int i = 0; i < anames.Length; i++)
+            {
+                attacks += $"{anames[i]}\r\n{adescs[i]}\r\n\r\n";
+            }
+        }
+        else
+        {
+            attacks = $"{Application.Current.FindResource("None")}";
+        }
+        if (srs.la_name != null)
+        {
+            var lanames = srs.la_name.Split("$");
+            var ladescs = srs.la_desc.Split("$");
+            attacks += $"{Application.Current.FindResource("Legendaryattacks")}: \r\n";
+            for (int i = 0; i < lanames.Length; i++)
+            {
+                attacks += $"{lanames[i]}\r\n{ladescs[i]}\r\n\r\n";
+            }
+        }
+        ThisBest.Attacks = attacks;
+        string abilities = String.Empty;
+        if (srs.sa_name != null)
+        {
+            var sanames = srs.sa_name.Split("$");
+            var sadesc = srs.sa_desc.Split("$");
+            for (int i = 0; i < sanames.Length; i++)
+            {
+                abilities += $"{sanames[i]}\r\n{sadesc[i]}\r\n\r\n";
+            }
+            ThisBest.Abilities = abilities;
+        }
+        else
+        {
+            ThisBest.Abilities = $"{Application.Current.FindResource("None")}";;
+        }
+        if (srs.desc != null)
+        {
+            ThisBest.Desc = srs.desc;
+        }
+        else
+        {
+            ThisBest.Desc = $"{Application.Current.FindResource("None")}";;
+        }
+
+        EnemyCarousel.Items.Add(ThisBest);
+        }
+    }
 }

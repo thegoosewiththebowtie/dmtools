@@ -1029,5 +1029,24 @@
 					</WrapPanel>
 				</ScrollViewer>
 		</TabItem>
+		
+		
+		<!-- LOCATIONS -->
+		<TabItem
+			Header="Locations">
+			<TabControl
+				Name="MapControl"
+				TabStripPlacement="Left">
+				<TabItem>
+					<TabItem.Header>
+						<Button
+							Click="AddMap_OnClick"
+							Name="AddMap">
+							Add
+						</Button>
+					</TabItem.Header>
+				</TabItem>
+			</TabControl>
+		</TabItem>
 	</TabControl>
 </UserControl>

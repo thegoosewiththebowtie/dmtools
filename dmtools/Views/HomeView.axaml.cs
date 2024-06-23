@@ -152,6 +152,25 @@ public interface ISettings
     int ID { get; set; }
 }
 
+public class Maps
+{
+    public int ID { get; set; }
+    public string LocName { get; set; }
+}
+public interface IMap
+{
+    public int width { get; set; }
+    public int height { get; set; }
+    public string name { get; set; }
+    public string Notes { get; set; }
+    public int dataid { get; set; }
+    public string icons { get; set; } //path|coordinates$
+    public string images { get; set; } //path|column|row|columnspan|rowspan$
+    public string colors { get; set; } //#color|column|row|columnspan|rowspan$
+    public string text { get; set; } //text|column|row|columnspan|rowspan$
+    public string roads { get; set; } //coord1|coord2$
+    public string urhere { get; set; } //player|coordinates$
+}
 public class SelNpcs
 {
     public int id { get; set; }
@@ -201,6 +220,13 @@ public partial class HomeView : UserControl
         MediaView.TabC += MainWindowOnTabC;
         npcupdate(NPCs, new EventArgs());
         pcupdate(Players, new EventArgs());
+        MapsIni();
+        MapEditor.IveBeenDeletedAAAA += WeNeedToCleanUpThisMessGuys;
+    }
+
+    public void WeNeedToCleanUpThisMessGuys(object? sender, EventArgs e)
+    {
+        MapsIni();
     }
 
     private void MainWindowOnTabC(object? sender, int e)
@@ -1144,9 +1170,67 @@ public partial class HomeView : UserControl
     }
     
     
-    
-    
-    
+    //locations
+    public void MapsIni()
+    {
+        MapControl.Items.Clear();
+        var maps = new DirectoryInfo("Maps/");
+            foreach (var map in maps.GetFiles()) 
+            {
+                var mapdata = new ConfigurationBuilder<IMap>().UseIniFile($"Maps/{map.Name}");
+                TabItem nm = new TabItem();
+                nm.Header = map.Name;
+                nm.Content = new MapEditor(mapdata);
+                MapControl.Items.Insert(0, nm);
+            }
+
+            Button button = new Button()
+        {
+            Name = "AddMap",
+            Content = "Add"
+        };
+        button.Click += AddMap_OnClick;
+        MapControl.Items.Add(new TabItem()
+        {
+            Header = button
+        });
+    }
+    private async void AddMap_OnClick(object? sender, RoutedEventArgs e)
+    {
+        
+        MapName inn = new MapName();
+        MapSize dff = new MapSize();
+        string name;
+        if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        {
+            await inn.ShowDialog(desktop.MainWindow);
+            if (string.IsNullOrWhiteSpace(inn.result))
+            {
+                return;
+            }
+            await dff.ShowDialog(desktop.MainWindow);
+            if (string.IsNullOrWhiteSpace(dff.res))
+            {
+                return;
+            }
+        }
+        name = inn.result;
+        
+        var sesz = new ConfigurationBuilder<IMap>().UseIniFile($"Maps/{name}").Build();
+        sesz.width = Convert.ToInt32(dff.res.Split("$")[0]);
+        sesz.height = Convert.ToInt32(dff.res.Split("$")[1]);
+        sesz.name = name;
+        sesz.icons = "";
+        sesz.colors = "";
+        sesz.images = "";
+        sesz.roads = "";
+        sesz.text = "";
+        sesz.urhere = "";
+        TabItem nm = new TabItem();
+        nm.Header = name;
+        nm.Content = new MapEditor(new ConfigurationBuilder<IMap>().UseIniFile($"Maps/{name}"));
+        MapControl.Items.Insert(0, nm);
+    }
     //common
     public void SizeChange(object? sender, EventArgs e)
     {
@@ -1259,5 +1343,4 @@ public partial class HomeView : UserControl
             }
         }
     }
-    
 }

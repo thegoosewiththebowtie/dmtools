@@ -54,7 +54,7 @@
     <system:String x:Key="Glossary">Glossary</system:String>
     <system:String x:Key="Settings">Settings</system:String>
     <system:String x:Key="About">About</system:String>
-    <system:String x:Key="beta">[beta1-fix1]</system:String>
+    <system:String x:Key="beta">[alpha]</system:String>
     <!--Glossary-->
     <system:String x:Key="Spells">Spells</system:String>
     <system:String x:Key="Search">Search</system:String>

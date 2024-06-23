@@ -1,0 +1,147 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="800"
+             x:Class="dmtools.Templates.MapEditor">
+    <Grid
+        Name="Huhhhh"
+        ColumnDefinitions="4.4*, *">
+        <Viewbox
+            HorizontalAlignment="Stretch"
+            Stretch="Uniform"
+            Grid.Column="0"
+            Grid.Row="0">
+            <Grid
+                ShowGridLines="False"
+                Name="Map">
+            </Grid>
+        </Viewbox>
+        <Grid
+            RowDefinitions="*,*,*,*,*,*,*,*,*,5*"
+            Grid.Column="1">
+            <Grid
+                Grid.Row="0"
+                ColumnDefinitions="*,*">
+            <TextBlock
+                Name="crd"
+                FontSize="32"
+                Margin="10, 10, 10, 5"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Grid.Row="0">
+            </TextBlock>
+                <TextBlock
+                    Name="crdns"
+                    FontSize="32"
+                    Margin="10, 10, 10, 5"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Grid.Column="1">
+                </TextBlock>
+            </Grid>
+            <Button
+                Name="img"
+                Click="Img_OnClick"
+                VerticalContentAlignment="Center"
+                HorizontalContentAlignment="Center"
+                Margin="10, 5"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                Grid.Row="1"
+                Content="Add an image">
+            </Button>
+            <Button
+                Click="Ico_OnClick"
+                Name="ico"
+                Margin="10, 5"
+                VerticalContentAlignment="Center"
+                HorizontalContentAlignment="Center"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                Grid.Row="2"
+                Content="Add an icon">
+            </Button>
+            <Button
+                Click="Col_OnClick"
+                Name="col"
+                VerticalContentAlignment="Center"
+                HorizontalContentAlignment="Center"
+                Margin="10, 5"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                Grid.Row="3"
+                Content="Add a color">
+            </Button>
+            <Button
+                Click="Txt_OnClick"
+                Name="txt"
+                Margin="10, 5"
+                VerticalContentAlignment="Center"
+                HorizontalContentAlignment="Center"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                Grid.Row="4"
+                Content="Add text">
+            </Button>
+            <Button
+                Click="Pth_OnClick"
+                Name="pth"
+                Margin="10, 5"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                Grid.Row="5"
+                VerticalContentAlignment="Center"
+                HorizontalContentAlignment="Center"
+                Content="Add a path">
+            </Button>
+            <DropDownButton
+                Click="Loc_OnClick"
+                Name="loc"
+                Margin="10, 5"
+                VerticalContentAlignment="Center"
+                HorizontalContentAlignment="Center"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                Grid.Row="6"
+                Content="Set players' locations">
+            </DropDownButton>
+            <SplitButton
+                Click="Clr_OnClick"
+                Name="del"
+                Margin="10, 5"
+                VerticalContentAlignment="Center"
+                HorizontalContentAlignment="Center"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                Grid.Row="7"
+                Content="Clear cell">
+                <SplitButton.Flyout>
+                    <Flyout Placement="Bottom">
+                    <StackPanel>
+                    <Button Click="clrsel_OnClick" Name="id1">Remove an image</Button>
+                    <Button Click="clrsel_OnClick" Name="id2">Remove an icon</Button>
+                    <Button Click="clrsel_OnClick" Name="id3">Remove a color</Button>
+                    <Button Click="clrsel_OnClick" Name="id4">Remove text</Button>
+                    <Button Click="clrsel_OnClick" Name="id5">Remove path</Button>
+                    </StackPanel>
+                    </Flyout>
+                </SplitButton.Flyout>
+            </SplitButton>
+            <Button
+                Click="Del_OnClick"
+                Name="clr"
+                Margin="10, 5"
+                VerticalContentAlignment="Center"
+                HorizontalContentAlignment="Center"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                Grid.Row="8"
+                Foreground="DarkRed"
+                Background="RosyBrown"
+                Content="Delete the map">
+            </Button>
+        </Grid>
+    </Grid>
+   
+</UserControl>

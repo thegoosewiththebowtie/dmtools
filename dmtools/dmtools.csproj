@@ -47,6 +47,7 @@
     <PackageReference Include="NAudio" Version="2.2.1" />
     <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.0.10" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="RangeSlider.Avalonia" Version="2.1.0" />
     <PackageReference Include="WebView.Avalonia" Version="11.0.0.1" />
     <PackageReference Include="WebView.Avalonia.Desktop" Version="11.0.0.1" />
   </ItemGroup>
@@ -73,6 +74,22 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Remove="trash\**" />
+    <Compile Update="PopUps\MapPU\MapSize.axaml.cs">
+      <DependentUpon>MapSize.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="PopUps\MapPU\MapName.axaml.cs">
+      <DependentUpon>MapName.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="PopUps\MapPU\IconSelector.axaml.cs">
+      <DependentUpon>IconSelector.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="PopUps\MapPU\ColorSelector.axaml.cs">
+      <DependentUpon>ColorSelector.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
 <ItemGroup>

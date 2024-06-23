@@ -1,0 +1,70 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Width="300"
+        Height="150"
+        CanResize="False"
+        WindowStartupLocation="CenterOwner"
+        mc:Ignorable="d" 
+        x:Class="dmtools.PopUps.MapSize"
+        Title="MapSize">
+    <Grid
+        RowDefinitions="*, *, *"
+        ColumnDefinitions="*, 2*, *, 2*, *">
+        <Slider
+            Name="w"
+            Margin="5"
+            Maximum="128"
+            TickFrequency="1"
+            IsSnapToTickEnabled="True"
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="5">
+            <Slider.Styles>
+                <Style Selector="Slider /template/ Thumb">
+                    <Setter Property="ToolTip.Tip" Value="{Binding $parent[Slider].Value, Mode=OneWay, StringFormat='Width 0'}" />
+                    <Setter Property="ToolTip.Placement" Value="Top" />
+                    <Setter Property="ToolTip.VerticalOffset" Value="-10" />
+                    <Setter Property="ToolTip.HorizontalOffset" Value="-30" />
+                </Style>
+            </Slider.Styles>
+        </Slider>
+        <Slider
+            TickFrequency="1"
+            IsSnapToTickEnabled="True"
+            Name="h"
+            Maximum="128"
+            Margin="5"
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="5">
+            <Slider.Styles>
+                <Style Selector="Slider /template/ Thumb">
+                    <Setter Property="ToolTip.Tip" Value="{Binding $parent[Slider].Value, Mode=OneWay, StringFormat='Height 0'}" />
+                    <Setter Property="ToolTip.Placement" Value="Top" />
+                    <Setter Property="ToolTip.VerticalOffset" Value="-10" />
+                    <Setter Property="ToolTip.HorizontalOffset" Value="-30" />
+                </Style>
+            </Slider.Styles>
+        </Slider>
+        <Button
+            Grid.Row="2"
+            Name="Add"
+            Click="Add_OnClick"
+            HorizontalAlignment="Stretch"
+            HorizontalContentAlignment="Center"
+            Grid.Column="1"
+            Content="{DynamicResource ADD}">
+        </Button>
+        <Button
+            Grid.Row="2"
+            Name="Cancel"
+            Click="Cancel_OnClick"
+            HorizontalAlignment="Stretch"
+            HorizontalContentAlignment="Center"
+            Grid.Column="3"
+            Content="{DynamicResource ToDoDelete}">
+        </Button>
+    </Grid>
+</Window>

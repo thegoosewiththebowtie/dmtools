@@ -1,0 +1,555 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:dmtools.Templates">
+    <Design.PreviewWith>
+        <controls:EncForm />
+    </Design.PreviewWith>
+
+    <Style Selector="controls|EncForm">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Grid
+                    RowDefinitions="50, *">
+                    <Border
+                        Margin="50,0,50,0"
+                        Grid.ColumnSpan="5"
+                        BorderBrush="DimGray"
+                        BorderThickness="1,0,1,1"
+                        Grid.Row="0">
+                        <TextBlock
+                            TextWrapping="Wrap"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Margin="5"
+                            Classes="Text3"
+                            Text="{TemplateBinding BName}">
+                        </TextBlock>
+                    </Border>
+                    <Grid
+                    Grid.Row="1"
+                    ShowGridLines="False"
+                    RowDefinitions="Auto,*,*, Auto"
+                    ColumnDefinitions="*,*">
+                    <Grid
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        RowDefinitions="0, *, *, *, *, *, 0.4*, *"
+                        ColumnDefinitions="*,*,*,*,*"
+                        ShowGridLines="False">
+                        <Border
+                            Grid.ColumnSpan="5"
+                            BorderBrush="DimGray"
+                            BorderThickness="0,0,1,1"
+                            Grid.Row="1">
+                            <TextBlock
+                                TextWrapping="Wrap"
+                                VerticalAlignment="Center"
+                                Margin="5"
+                                Classes="Text3"
+                                Text="{TemplateBinding Size}">
+                            </TextBlock>
+                        </Border>
+                        <Border
+                            Grid.ColumnSpan="5"
+                            BorderThickness="0,0,1,1"
+                            BorderBrush="DimGray"
+                            Grid.Row="2">
+                            <TextBlock
+                                TextWrapping="Wrap"
+                                VerticalAlignment="Center"
+                                Margin="5"
+                                Classes="Text3"
+                                Text="{TemplateBinding Type}">
+                            </TextBlock>
+                        </Border>
+                        <Border
+                            Grid.ColumnSpan="5"
+                            BorderThickness="0,0,1,1"
+                            BorderBrush="DimGray"
+                            Grid.Row="3">
+                            <TextBlock
+                                TextWrapping="Wrap"
+                                VerticalAlignment="Center"
+                                Margin="5"
+                                Classes="Text3"
+                                Text="{TemplateBinding Subtype}">
+                            </TextBlock>
+                        </Border>
+                        <Border
+                            Grid.ColumnSpan="5"
+                            BorderThickness="0,0,1,1"
+                            BorderBrush="DimGray"
+                            Grid.Row="4">
+                            <TextBlock
+                                TextWrapping="Wrap"
+                                VerticalAlignment="Center"
+                                Margin="5"
+                                Classes="Text3"
+                                Text="{TemplateBinding Aligment}">
+                            </TextBlock>
+                        </Border>
+                        <Border
+                            Grid.ColumnSpan="5"
+                            BorderThickness="0,0,1,1"
+                            BorderBrush="DimGray"
+                            Grid.Row="5">
+                            <TextBlock
+                                TextWrapping="Wrap"
+                                VerticalAlignment="Center"
+                                Margin="5"
+                                Classes="Text3"
+                                Text="{TemplateBinding Languages}">
+                            </TextBlock>
+                        </Border>
+                        <Border
+                            BorderBrush="DimGray"
+                            BorderThickness="0,0,1,1"
+                            Grid.Row="6"
+                            Grid.RowSpan="2"
+                            Grid.Column="0">
+                        </Border>
+                        <Border
+                            BorderBrush="DimGray"
+                            BorderThickness="0,0,1,1"
+                            Grid.Row="6"
+                            Grid.RowSpan="2"
+                            Grid.Column="1">
+                        </Border>
+                        <Border
+                            BorderBrush="DimGray"
+                            BorderThickness="0,0,1,1"
+                            Grid.Row="6"
+                            Grid.RowSpan="2"
+                            Grid.Column="2">
+                        </Border>
+                        <Border
+                            BorderBrush="DimGray"
+                            BorderThickness="0,0,1,1"
+                            Grid.Row="6"
+                            Grid.RowSpan="2"
+                            Grid.Column="3">
+                        </Border>
+                        <Border
+                            BorderBrush="DimGray"
+                            BorderThickness="0,0,1,1"
+                            Grid.Row="6"
+                            Grid.RowSpan="2"
+                            Grid.Column="4">
+                        </Border>
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Classes="Text2"
+                            Text="{DynamicResource Speed}"
+                            Grid.Row="6"
+                            Grid.Column="0"></TextBlock>
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Classes="Text2"
+                            Text="{DynamicResource Swim}"
+                            Grid.Row="6"
+                            Grid.Column="1"></TextBlock>
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Classes="Text2"
+                            Text="{DynamicResource Fly}"
+                            Grid.Row="6"
+                            Grid.Column="2"></TextBlock>
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Classes="Text2"
+                            Text="{DynamicResource Burrow}"
+                            Grid.Row="6"
+                            Grid.Column="3"></TextBlock>
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Classes="Text2"
+                            Text="{DynamicResource Climb}"
+                            Grid.Row="6"
+                            Grid.Column="4"></TextBlock>
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Classes="Text4"
+                            Text="{TemplateBinding Speed}"
+                            Grid.Row="7"
+                            Grid.Column="0"></TextBlock>
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Classes="Text4"
+                            Text="{TemplateBinding Swim}"
+                            Grid.Row="7"
+                            Grid.Column="1"></TextBlock>
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Classes="Text4"
+                            Text="{TemplateBinding Fly}"
+                            Grid.Row="7"
+                            Grid.Column="2"></TextBlock>
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Classes="Text4"
+                            Text="{TemplateBinding Burrow}"
+                            Grid.Row="7"
+                            Grid.Column="3"></TextBlock>
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Classes="Text4"
+                            Text="{TemplateBinding Climb}"
+                            Grid.Row="7"
+                            Grid.Column="4"></TextBlock>
+                    </Grid>
+                    <Border
+                        Grid.Row="2"
+                        BorderThickness="0,0,1,0"
+                        BorderBrush="DimGray">
+                    </Border>
+                    <ScrollViewer
+                        Grid.Row="2">
+                        <StackPanel>
+                            <Expander
+                                BorderThickness="0"
+                                BorderBrush="Transparent"
+                                CornerRadius="0"
+                                IsExpanded="True"
+                                FontSize="22"
+                                HorizontalAlignment="Stretch"
+                                Header="{DynamicResource Immunities}">
+                                <TextBlock
+                                    TextWrapping="Wrap"
+                                    Text="{TemplateBinding Immunities}"
+                                    Classes="Text3">
+                                </TextBlock>
+                            </Expander>
+                            <Expander
+                                BorderThickness="0"
+                                BorderBrush="Transparent"
+                                CornerRadius="0"
+                                IsExpanded="True"
+                                FontSize="22"
+                                HorizontalAlignment="Stretch"
+                                Header="{DynamicResource Vulnerabilities}">
+                                <TextBlock
+                                    TextWrapping="Wrap"
+                                    Text="{TemplateBinding Vul}"
+                                    Classes="Text3">
+                                </TextBlock>
+                            </Expander>
+                            <Expander
+                                BorderThickness="0"
+                                BorderBrush="Transparent"
+                                CornerRadius="0"
+                                IsExpanded="True"
+                                FontSize="22"
+                                HorizontalAlignment="Stretch"
+                                Header="{DynamicResource Senses}">
+                                <TextBlock
+                                    TextWrapping="Wrap"
+                                    Text="{TemplateBinding Senses}"
+                                    Classes="Text3">
+                                </TextBlock>
+                            </Expander>
+                            <Expander
+                                BorderThickness="0"
+                                BorderBrush="Transparent"
+                                CornerRadius="0"
+                                IsExpanded="True"
+                                FontSize="22"
+                                HorizontalAlignment="Stretch"
+                                Header="AC">
+                                <TextBlock
+                                    TextWrapping="Wrap"
+                                    Text="{TemplateBinding Armor}"
+                                    Classes="Text3">
+                                </TextBlock>
+                            </Expander>
+                        </StackPanel>
+                    </ScrollViewer>
+                    <TabControl
+                        Grid.RowSpan="3"
+                        Grid.Row="0"
+                        Grid.Column="1">
+                        <TabItem>
+                            <TabItem.Header>
+                                <TextBlock
+                                    Text="{DynamicResource Attacks}">
+								  
+                                </TextBlock>
+                            </TabItem.Header>
+                            <ScrollViewer>
+                            <TextBlock
+                                Margin="5"
+                                TextWrapping="Wrap"
+                                Classes="Text3"
+                                Text="{TemplateBinding Attacks}">
+                            </TextBlock>
+                            </ScrollViewer>
+                        </TabItem>
+                        <TabItem>
+                            <TabItem.Header>
+                                <TextBlock
+                                    Text="{DynamicResource Abilities}">
+								  
+                                </TextBlock>
+                            </TabItem.Header>
+                            <ScrollViewer>
+                            <TextBlock
+                                Margin="5"
+                                TextWrapping="Wrap"
+                                Classes="Text3"
+                                Text="{TemplateBinding Abilities}">
+                            </TextBlock>
+                            </ScrollViewer>
+                        </TabItem>
+                        <TabItem>
+                            <TabItem.Header>
+                                <TextBlock
+                                    Text="{DynamicResource Description}">
+								  
+                                </TextBlock>
+                            </TabItem.Header>
+                            <ScrollViewer>
+                                <TextBlock
+                                    Margin="5"
+                                    TextWrapping="Wrap"
+                                    Classes="Text3"
+                                    Text="{TemplateBinding Desc}">
+                                </TextBlock>
+                            </ScrollViewer>
+                        </TabItem>
+                    </TabControl>
+                    <Grid
+                        Height="{Binding #GetHeight.Bounds.Width}"
+                        ShowGridLines="False"
+                        Grid.Column="0"
+                        Grid.Row="3"
+                        RowDefinitions="0.5*, *, 0.5*"
+                        ColumnDefinitions="*,*,*,*,*,*,*,*,*"
+                        Grid.ColumnSpan="2">
+                        <Border
+                            Name="HeightGet"
+                            BorderBrush="DimGray"
+                            BorderThickness="0,1,1,0"
+                            Grid.Row="0"
+                            Grid.RowSpan="3"
+                            Grid.Column="0">
+                        </Border>
+                        <Border
+                            BorderBrush="DimGray"
+                            BorderThickness="0,1,1,0"
+                            Grid.Row="0"
+                            Grid.RowSpan="3"
+                            Grid.Column="1">
+                        </Border>
+                        <Border
+                            BorderBrush="DimGray"
+                            BorderThickness="0,1,1,0"
+                            Grid.Row="0"
+                            Grid.RowSpan="3"
+                            Grid.Column="2">
+                        </Border>
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Classes="Text2"
+                            Text="{DynamicResource Health}"
+                            Grid.Row="0"
+                            Grid.Column="0"></TextBlock>
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Classes="Text4"
+                            Text="{TemplateBinding Health}"
+                            Grid.Row="1"
+                            Grid.Column="0"></TextBlock>
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Classes="Text3"
+                            Text="{TemplateBinding HitPointsRoll}"
+                            Grid.Row="2"
+                            Grid.Column="0"></TextBlock>
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Classes="Text2"
+                            Text="{DynamicResource Experience}"
+                            Grid.Row="0"
+                            Grid.Column="1"></TextBlock>
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Classes="Text4"
+                            Text="{TemplateBinding Exp}"
+                            Grid.Row="1"
+                            Grid.Column="1"></TextBlock>
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Classes="Text2"
+                            Text="{DynamicResource ArmorClass}"
+                            Grid.Row="0"
+                            Grid.Column="2"></TextBlock>
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Classes="Text4"
+                            Text="{TemplateBinding MainACval}"
+                            Grid.Row="1"
+                            Grid.Column="2"></TextBlock>
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Classes="Text3"
+                            Text="{TemplateBinding ACType}"
+                            Grid.Row="2"
+                            Grid.Column="2"></TextBlock>
+                        <Border
+                            Name = "GetHeight"
+                            BorderBrush="DimGray"
+                            BorderThickness="0,1,1,0"
+                            Grid.RowSpan="3"
+                            Grid.Column="3">
+                        </Border>
+                        <Border
+                            BorderBrush="DimGray"
+                            BorderThickness="0,1,1,0"
+                            Grid.RowSpan="3"
+                            Grid.Column="4">
+                        </Border>
+                        <Border
+                            BorderBrush="DimGray"
+                            BorderThickness="0,1,1,0"
+                            Grid.RowSpan="3"
+                            Grid.Column="5">
+                        </Border>
+                        <Border
+                            BorderBrush="DimGray"
+                            BorderThickness="0,1,1,0"
+                            Grid.RowSpan="3"
+                            Grid.Column="6">
+                        </Border>
+                        <Border
+                            BorderBrush="DimGray"
+                            BorderThickness="0,1,1,0"
+                            Grid.RowSpan="3"
+                            Grid.Column="7">
+                        </Border>
+                        <Border
+                            BorderBrush="DimGray"
+                            BorderThickness="0,1,0,0"
+                            Grid.RowSpan="3"
+                            Grid.Column="8">
+                        </Border>
+                        <TextBlock
+                            Grid.Column="3"
+                            Grid.Row="0"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Classes="Text2"
+                            Text="{DynamicResource Strength}">
+                        </TextBlock>
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Classes="Text4"
+                            Text="{TemplateBinding StrVal}"
+                            Grid.Column="3"
+                            Grid.Row="1">
+                        </TextBlock>
+                        <TextBlock
+                            Grid.Column="4"
+                            Grid.Row="0"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Classes="Text2"
+                            Text="{DynamicResource Dexterity}">
+                        </TextBlock>
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Classes="Text4"
+                            Text="{TemplateBinding DexVal}"
+                            Grid.Column="4"
+                            Grid.Row="1">
+                        </TextBlock>
+                        <TextBlock
+                            Grid.Column="5"
+                            Grid.Row="0"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Classes="Text2"
+                            Text="{DynamicResource Constitution}">
+                        </TextBlock>
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Classes="Text4"
+                            Text="{TemplateBinding ConVal}"
+                            Grid.Column="5"
+                            Grid.Row="1">
+                        </TextBlock>
+                        <TextBlock
+                            Grid.Column="6"
+                            Grid.Row="0"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Classes="Text2"
+                            Text="{DynamicResource Intelligence}">
+                        </TextBlock>
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Classes="Text4"
+                            Text="{TemplateBinding IntVal}"
+                            Grid.Column="6"
+                            Grid.Row="1">
+                        </TextBlock>
+                        <TextBlock
+                            Grid.Column="7"
+                            Grid.Row="0"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Classes="Text2"
+                            Text="{DynamicResource Wisdom}">
+                        </TextBlock>
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Classes="Text4"
+                            Text="{TemplateBinding WisVal}"
+                            Grid.Column="7"
+                            Grid.Row="1">
+                        </TextBlock>
+                        <TextBlock
+                            Grid.Column="8"
+                            Grid.Row="0"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Classes="Text2"
+                            Text="{DynamicResource Charisma}">
+                        </TextBlock>
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Classes="Text4"
+                            Text="{TemplateBinding ChaVal}"
+                            Grid.Column="8"
+                            Grid.Row="1">
+                        </TextBlock>
+                    </Grid>
+                </Grid>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

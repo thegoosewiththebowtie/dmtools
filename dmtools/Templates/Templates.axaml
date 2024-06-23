@@ -14,4 +14,6 @@
     <StyleInclude Source="HealthGrid.axaml"></StyleInclude>
     <StyleInclude Source="MIForm.axaml"></StyleInclude>
     <StyleInclude Source="EQForm.axaml"></StyleInclude>
+    <StyleInclude Source="EncForm.axaml"></StyleInclude>
+    <StyleInclude Source="EncChForm.axaml"></StyleInclude>
 </Styles>
