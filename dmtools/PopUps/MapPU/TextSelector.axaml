@@ -2,8 +2,61 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" Width="500"
+        Height="150"
+        WindowStartupLocation="CenterOwner"
+        CanResize="False"
         x:Class="dmtools.PopUps.MapPU.TextSelector"
         Title="TextSelector">
-    Welcome to Avalonia!
+    <Grid
+        RowDefinitions="*,0.5*,0.5*"
+        ColumnDefinitions="*,*,0.5*,0.5*,*,*">
+        <TextBox
+            VerticalContentAlignment="Center"
+            HorizontalContentAlignment="Center"
+            Name="TextBoxx"
+            Margin="10"
+            Grid.Column="0"
+            Grid.Row="0"
+            Grid.ColumnSpan="6"></TextBox>
+        <Slider
+            Minimum="1"
+            IsSnapToTickEnabled="True"
+            TickFrequency="1"
+            TickPlacement="TopLeft"
+            Name="width"
+            Margin="10,0"
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="6">
+            <Slider.Styles>
+                <Style Selector="Slider /template/ Thumb">
+                    <Setter Property="ToolTip.Tip" Value="{Binding $parent[Slider].Value, Mode=OneWay, StringFormat='Width 0'}" />
+                    <Setter Property="ToolTip.Placement" Value="Top" />
+                    <Setter Property="ToolTip.VerticalOffset" Value="-10" />
+                    <Setter Property="ToolTip.HorizontalOffset" Value="-30" />
+                </Style>
+            </Slider.Styles>
+        </Slider>
+        <Button
+            Name="ok"
+            Click="Ok_OnClick"
+            VerticalContentAlignment="Center"
+            HorizontalContentAlignment="Center"
+            VerticalAlignment="Stretch"
+            HorizontalAlignment="Stretch"
+            Grid.Row="2"
+            Margin="5"
+            Grid.Column="1">OK</Button>
+        <Button
+            Name="cancel"
+            Click="Cancel_OnClick"
+            VerticalContentAlignment="Center"
+            HorizontalContentAlignment="Center"
+            VerticalAlignment="Stretch"
+            HorizontalAlignment="Stretch"
+            Grid.Row="2"
+            Margin="5"
+            Grid.Column="4">Cancel</Button>
+    </Grid>
 </Window>

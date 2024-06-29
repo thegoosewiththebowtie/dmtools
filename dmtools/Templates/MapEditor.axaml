@@ -18,7 +18,7 @@
             </Grid>
         </Viewbox>
         <Grid
-            RowDefinitions="*,*,*,*,*,*,*,*,*,5*"
+            RowDefinitions="*,0*,*,*,*,*,*,*,*,5*"
             Grid.Column="1">
             <Grid
                 Grid.Row="0"
@@ -41,17 +41,6 @@
                 </TextBlock>
             </Grid>
             <Button
-                Name="img"
-                Click="Img_OnClick"
-                VerticalContentAlignment="Center"
-                HorizontalContentAlignment="Center"
-                Margin="10, 5"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                Grid.Row="1"
-                Content="Add an image">
-            </Button>
-            <Button
                 Click="Ico_OnClick"
                 Name="ico"
                 Margin="10, 5"
@@ -71,7 +60,7 @@
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
                 Grid.Row="3"
-                Content="Add a color">
+                Content="Add color">
             </Button>
             <Button
                 Click="Txt_OnClick"
@@ -95,7 +84,7 @@
                 HorizontalContentAlignment="Center"
                 Content="Add a path">
             </Button>
-            <DropDownButton
+            <SplitButton
                 Click="Loc_OnClick"
                 Name="loc"
                 Margin="10, 5"
@@ -105,7 +94,17 @@
                 HorizontalAlignment="Stretch"
                 Grid.Row="6"
                 Content="Set players' locations">
-            </DropDownButton>
+                <SplitButton.Flyout>
+                    <Flyout
+                        Opened="FlyoutBase_OnOpened"
+                        Placement="Bottom">
+                        <StackPanel
+                            Name="btnpnl"
+                            Width="{Binding #del.Bounds.Width}">
+                        </StackPanel>
+                    </Flyout>
+                </SplitButton.Flyout>
+            </SplitButton>
             <SplitButton
                 Click="Clr_OnClick"
                 Name="del"
@@ -118,12 +117,12 @@
                 Content="Clear cell">
                 <SplitButton.Flyout>
                     <Flyout Placement="Bottom">
-                    <StackPanel>
-                    <Button Click="clrsel_OnClick" Name="id1">Remove an image</Button>
-                    <Button Click="clrsel_OnClick" Name="id2">Remove an icon</Button>
-                    <Button Click="clrsel_OnClick" Name="id3">Remove a color</Button>
-                    <Button Click="clrsel_OnClick" Name="id4">Remove text</Button>
-                    <Button Click="clrsel_OnClick" Name="id5">Remove path</Button>
+                    <StackPanel
+                        Width="{Binding #del.Bounds.Width}">
+                    <Button VerticalAlignment="Stretch" HorizontalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="clrsel_OnClick" Name="id2">Remove an icon</Button>
+                    <Button VerticalAlignment="Stretch" HorizontalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="clrsel_OnClick" Name="id3">Remove color</Button>
+                    <Button VerticalAlignment="Stretch" HorizontalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="clrsel_OnClick" Name="id4">Remove text</Button>
+                    <Button VerticalAlignment="Stretch" HorizontalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="clrsel_OnClick" Name="id5">Remove path</Button>
                     </StackPanel>
                     </Flyout>
                 </SplitButton.Flyout>

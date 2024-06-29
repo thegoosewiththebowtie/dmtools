@@ -4,6 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" Width="500" Height="500"
         WindowStartupLocation="CenterOwner"
+        CanResize="False"
         x:Class="dmtools.PopUps.ColorSelector"
         Title="ColorSelector">
     <Grid

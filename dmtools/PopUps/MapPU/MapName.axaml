@@ -7,6 +7,7 @@
         Width="250"
         CanResize="False"
         x:Class="dmtools.PopUps.MapName"
+        
         WindowStartupLocation="CenterOwner"
         Title="Map Name">
     <Grid

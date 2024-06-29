@@ -7,6 +7,7 @@ using System.Net;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Layout;
@@ -14,6 +15,7 @@ using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Config.Net;
 using dmtools.PopUps;
+using dmtools.PopUps.MapPU;
 using dmtools.Views;
 using DynamicData;
 using Gdk;
@@ -41,9 +43,9 @@ public partial class MapEditor : UserControl
     {
         InitializeComponent();
         profid = profile.ProfileID;
+        settings = new ConfigurationBuilder<ISettings>().UseIniFile("Settings/q0" + profid +".ini").Build();
         ini(thismap.Build());
         MapInfo = thismap.Build();
-        settings = new ConfigurationBuilder<ISettings>().UseIniFile("Settings/q0" + profid +".ini").Build();
     }
 
     public void ini(IMap tm)
@@ -149,7 +151,7 @@ public partial class MapEditor : UserControl
             Map.Children.Add(notbutton);
         }
 
-        if (tm.icons != null)
+        if (!string.IsNullOrEmpty(tm.icons))
         {
             foreach (var ics in tm.icons.Split("$"))
             {
@@ -168,7 +170,7 @@ public partial class MapEditor : UserControl
                 Map.Children.Add(pi);
             }
         }
-        if (tm.text != null)
+        if (!string.IsNullOrEmpty(tm.text))
         {
             foreach (var ics in tm.text.Split("$"))
             {
@@ -179,17 +181,20 @@ public partial class MapEditor : UserControl
                 var d = ics.Split("|")[0];
                 var pi = new TextBlock()
                 {
+                    FontSize = 25,
+                    TextWrapping = TextWrapping.Wrap,
                     Text = d,
+                    VerticalAlignment = VerticalAlignment.Center,
+                    HorizontalAlignment = HorizontalAlignment.Center,
                     ZIndex = -2,
                     [Grid.ColumnProperty] = Convert.ToInt32(ics.Split("|")[1]),
                     [Grid.RowProperty] = Convert.ToInt32(ics.Split("|")[2]),
                     [Grid.ColumnSpanProperty] = Convert.ToInt32(ics.Split("|")[3]),
-                    [Grid.RowSpanProperty] = Convert.ToInt32(ics.Split("|")[4]),
                 };
                 Map.Children.Add(pi);
             }
         }
-        if (tm.colors != null)
+        if (!string.IsNullOrEmpty(tm.colors))
         {
             foreach (var ics in tm.colors.Split("$"))
             {
@@ -215,7 +220,7 @@ public partial class MapEditor : UserControl
                 Map.Children.Add(pi);
             }
         }
-        if (tm.images != null)
+        if (!string.IsNullOrEmpty(tm.images))
         {
             foreach (var ics in tm.images.Split("$"))
             {
@@ -236,27 +241,113 @@ public partial class MapEditor : UserControl
                 Map.Children.Add(pi);
             }
         }
+        if (!string.IsNullOrEmpty(tm.urhere))
+        {
+            string ress = "";
+            string last = "";
+            foreach (var ics in tm.urhere.Split("$"))
+            {
+                if (string.IsNullOrEmpty(ics))
+                {
+                    break;
+                }
+                if (!ress.Contains($"{ics.Split("|")[1]}|{ics.Split("|")[2]}"))
+                {
+                    ress += $"{ics.Split("|")[0]}>|{ics.Split("|")[1]}|{ics.Split("|")[2]}$";
+                }
+                else
+                {
+                    ress = ress.Replace(last, $"{last}/{ics.Split("|")[0]}>");
+                }
+                last = $"{ics.Split("|")[0]}>";
+            }
+            foreach (var ics in ress.Split("$"))
+            {
+                if (string.IsNullOrEmpty(ics))
+                {
+                    break;
+                }
+                var pi = new Border()
+                {
+                    VerticalAlignment = VerticalAlignment.Center,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    ZIndex = 1,
+                    Width = 40,
+                    Height = 40,
+                    [Grid.ColumnProperty] = Convert.ToInt32(ics.Split("|")[1]),
+                    [Grid.RowProperty] = Convert.ToInt32(ics.Split("|")[2]),
+                    Background = Brushes.LightGreen,
+                    CornerRadius = new CornerRadius(5),
+                    BorderThickness = new Thickness(1),
+                    BorderBrush = Brushes.Black,
+                };
+                if (ics.Split("|")[0].Split("/").Length == 1)
+                {
+                    TextBlock tb = new TextBlock()
+                    {
+                        VerticalAlignment = VerticalAlignment.Center,
+                        HorizontalAlignment = HorizontalAlignment.Center,
+                        Text = $"{ics.Split("|")[0].Replace(">","")}",
+                        FontSize = 25,
+                        Margin = new Thickness(1),
+                        Padding = new Thickness(0),
+                        TextWrapping = TextWrapping.Wrap,
+                    };
+                    pi.Child = tb;
+                }
+                else if (ress.Split("$").Length - 1 == 1)
+                {
+                    TextBlock tb = new TextBlock()
+                    {
+                        VerticalAlignment = VerticalAlignment.Center,
+                        HorizontalAlignment = HorizontalAlignment.Center,
+                        FontSize = 20,
+                        Text = $"All",
+                        Margin = new Thickness(1),
+                        Padding = new Thickness(0),
+                        TextWrapping = TextWrapping.Wrap,
+                    };
+                    pi.Child = tb;
+                }
+                else
+                {
+                    WrapPanel wrapPanel = new WrapPanel()
+                    {
+                        VerticalAlignment = VerticalAlignment.Center,
+                        HorizontalAlignment = HorizontalAlignment.Center,
+                    };
+                    pi.Child = wrapPanel;
+                    foreach (var ltrs in ics.Split("|")[0].Split("/"))
+                    {
+                        if (string.IsNullOrEmpty(ltrs))
+                        {
+                            break;
+                        }
+                        TextBlock tb = new TextBlock()
+                        {
+                            VerticalAlignment = VerticalAlignment.Center,
+                            HorizontalAlignment = HorizontalAlignment.Center,
+                            Text = $"{ltrs.Replace(">","")}",
+                            Margin = new Thickness(0),
+                            Padding = new Thickness(1),
+                            TextWrapping = TextWrapping.Wrap,
+                        };
+                        wrapPanel.Children.Add(tb);
+                    }
+                }
+                
+                Map.Children.Add(pi);
+            }
+        }
     }
-
     private void coordinates(object? sender, PointerEventArgs e)
     {
         crdns.Text = (sender as Button).Name;
     }
-
     private void SelectPlace(object? sender, RoutedEventArgs e)
     {
         crd.Text = (sender as Button).Name;
     }
-
-    private void Img_OnClick(object? sender, RoutedEventArgs e)
-    {
-        if (string.IsNullOrWhiteSpace(crd.Text))
-        {
-            return;
-        }
-        var selcor = GetCoordinates();
-    }
-
     private async void Ico_OnClick(object? sender, RoutedEventArgs e)
     {
         if (string.IsNullOrWhiteSpace(crd.Text))
@@ -273,14 +364,12 @@ public partial class MapEditor : UserControl
         }
         ini(MapInfo);
     }
-
     private async void Col_OnClick(object? sender, RoutedEventArgs e)
     {
         if (string.IsNullOrWhiteSpace(crd.Text))
         {
             return;
         }
-        ClrType(3);
         var selcor = GetCoordinates();
         ItemCoordinates max = new ItemCoordinates()
         {
@@ -300,16 +389,31 @@ public partial class MapEditor : UserControl
         }
         ini(MapInfo);
     }
-
-    private void Txt_OnClick(object? sender, RoutedEventArgs e)
+    private async void Txt_OnClick(object? sender, RoutedEventArgs e)
     {
         if (string.IsNullOrWhiteSpace(crd.Text))
         {
             return;
         }
         var selcor = GetCoordinates();
+        ItemCoordinates max = new ItemCoordinates()
+        {
+            horizontal = MapInfo.width,
+            vertical = MapInfo.height
+        };
+        if (Avalonia.Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        {
+            TextSelector colorSelector = new TextSelector(max, selcor);
+            await colorSelector.ShowDialog(desktop.MainWindow);
+            if (string.IsNullOrWhiteSpace(colorSelector.coloret))
+            {
+                return;
+            }
+            MapInfo.text +=
+                $"{colorSelector.coloret}|{selcor.vertical}|{selcor.horizontal}|{colorSelector.width0}$";
+        }
+        ini(MapInfo);
     }
-
     private void Pth_OnClick(object? sender, RoutedEventArgs e)
     {
         if (string.IsNullOrWhiteSpace(crd.Text))
@@ -318,7 +422,6 @@ public partial class MapEditor : UserControl
         }
         var selcor = GetCoordinates();
     }
-
     private void Loc_OnClick(object? sender, RoutedEventArgs e)
     {
         if (string.IsNullOrWhiteSpace(crd.Text))
@@ -326,8 +429,18 @@ public partial class MapEditor : UserControl
             return;
         }
         var selcor = GetCoordinates();
+        var MI = MapInfo.urhere.Split("$").ToList();
+        MapInfo.urhere = "";
+        foreach (var player in MI)
+        {
+            if (string.IsNullOrEmpty(player))
+            {
+                break;
+            }
+            MapInfo.urhere += $"{player.Split("|")[0]}|{selcor.vertical}|{selcor.horizontal}|{player.Split("|")[3]}$";
+        }
+        ini(MapInfo);
     }
-
     private void Del_OnClick(object? sender, RoutedEventArgs e)
     {
         try
@@ -341,7 +454,6 @@ public partial class MapEditor : UserControl
         }
         IveBeenDeletedAAAA(sender, e);
     }
-
     public void ClrType(int id)
     {
         if (string.IsNullOrWhiteSpace(crd.Text))
@@ -381,15 +493,16 @@ public partial class MapEditor : UserControl
                 break;
             case 3:
                 var colors = MapInfo.colors.Split("$");
+                Array.Reverse(colors);
                 foreach (var a in colors)
                 {
-                    if (string.IsNullOrEmpty(a))
+                    if (!string.IsNullOrEmpty(a))
                     {
-                        break;
-                    }
-                    if (a.Contains($"{selcor.vertical}|{selcor.horizontal}"))
-                    {
-                        MapInfo.colors = MapInfo.colors.Replace($"{a}$", "");
+                        if (a.Contains($"{selcor.vertical}|{selcor.horizontal}"))
+                        {
+                            MapInfo.colors = MapInfo.colors.Replace($"{a}$", "");
+                            break;
+                        }
                     }
                 }
                 break;
@@ -499,7 +612,6 @@ public partial class MapEditor : UserControl
         }
         ini(MapInfo);
     }
-
     public ItemCoordinates GetCoordinates()
     {
         var prev = crd.Text.Split("-")[0].ToCharArray();
@@ -519,9 +631,75 @@ public partial class MapEditor : UserControl
         };
         return ret;
     }
-
     private void clrsel_OnClick(object? sender, RoutedEventArgs e)
     {
         ClrType(Convert.ToInt32((sender as Button).Name.Replace("id", "")));
+    }
+    private void FlyoutBase_OnOpened(object? sender, EventArgs e)
+    {
+        btnpnl.Children.Clear();
+        using (LiteDatabase ldb = new LiteDatabase(settings.DataPath))
+        {
+            var pls = ldb.GetCollection<PlayerCharacter>();
+            foreach (var pc in pls.FindAll())
+            {
+                Button btn = new Button()
+                {
+                    Content = pc.FirstName,
+                    Name = pc.FirstName,
+                    VerticalAlignment = VerticalAlignment.Stretch,
+                    HorizontalAlignment = HorizontalAlignment.Stretch,
+                    HorizontalContentAlignment = HorizontalAlignment.Center,
+                    VerticalContentAlignment = VerticalAlignment.Center
+                };
+                btn.Click += BtnOnClick;
+                btnpnl.Children.Add(btn);
+            }
+        }
+    }
+    private void BtnOnClick(object? sender, RoutedEventArgs e)
+    {
+        if (string.IsNullOrWhiteSpace(crd.Text))
+        {
+            return;
+        }
+        var selcor = GetCoordinates();
+        List<string> bas = MapInfo.urhere.Split("$").ToList();
+        if (MapInfo.urhere.Contains(((sender as Button).Name)))
+        {
+            foreach (var pc in bas)
+            {
+                if (string.IsNullOrEmpty(pc))
+                {
+                    break;
+                }
+                if (pc.Contains((sender as Button).Name.Remove(1).ToUpper()))
+                {
+                    if (pc.Contains((sender as Button).Name) && pc.Split("|")[0].Length > 1)
+                    {
+                        MapInfo.urhere = MapInfo.urhere.Replace( $"{pc}$", "");
+                        MapInfo.urhere += $"{(sender as Button).Name.Remove(1).ToUpper()}{(sender as Button).Name.Remove(2).Remove(0,1).ToLower()}|{selcor.vertical}|{selcor.horizontal}|{(sender as Button).Name}$";
+                    }
+                    else if (pc.Contains((sender as Button).Name) && pc.Split("|")[0].Length == 1)
+                    {
+                        MapInfo.urhere = MapInfo.urhere.Replace( $"{pc}$", "");
+                        MapInfo.urhere += $"{(sender as Button).Name.Remove(1).ToUpper()}|{selcor.vertical}|{selcor.horizontal}|{(sender as Button).Name}$";
+                    }
+                }
+            }
+        }
+        else
+        {
+            if (MapInfo.urhere.Contains($"{(sender as Button).Name.Remove(1).ToUpper()}|"))
+            {
+                MapInfo.urhere += $"{(sender as Button).Name.Remove(1).ToUpper()}{(sender as Button).Name.Remove(2).Remove(0,1).ToLower()}|{selcor.vertical}|{selcor.horizontal}|{(sender as Button).Name}$";
+            }
+            else
+            {
+                MapInfo.urhere += $"{(sender as Button).Name.Remove(1).ToUpper()}|{selcor.vertical}|{selcor.horizontal}|{(sender as Button).Name}$";
+            }
+        }
+        
+        ini(MapInfo);
     }
 }

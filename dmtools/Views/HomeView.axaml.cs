@@ -1142,7 +1142,6 @@ public partial class HomeView : UserControl
                     pc.IsCCharisma, pc.IsCStrength, pc.IsCDexterity, pc.IsCConstitution, pc.IsCIntelligence, pc.IsCWisdom,
                 };
                 wppc.Children.Add(charForm);
-
             }
         }
         Button btn = new Button()

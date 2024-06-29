@@ -4,100 +4,165 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         WindowStartupLocation="CenterOwner"
+        CanResize="False"
         x:Class="dmtools.PopUps.IconSelector"
-        Width="190"
-        Height="100"
+        Width="200"
+        Height="200"
         Title="IconSelector">
     <WrapPanel>
         <Button
+            Width="50"
+            Height="50"
             Name="bed"
             Click="Button_OnClick">
-            <PathIcon
+                        <PathIcon
+                Width="30"
+                Height="30"
                 Data="{StaticResource bed}">
             </PathIcon>
         </Button>
-        <Button Name="book"
+        <Button
+            Width="50"
+            Height="50"
+            Name="book"
                 Click="Button_OnClick">
-            <PathIcon
+                        <PathIcon
+                Width="30"
+                Height="30"
                 Data="{StaticResource book}">
             </PathIcon>
         </Button>
-        <Button Name="bank"
+        <Button
+            Width="50"
+            Height="50"
+            Name="bank"
                 Click="Button_OnClick">
-            <PathIcon
+                        <PathIcon
+                Width="30"
+                Height="30"
                 Data="{StaticResource bank}">
             </PathIcon>
         </Button>
         <Button Name="shop"
+                Width="50"
+                Height="50"
                 Click="Button_OnClick">
-            <PathIcon
+                        <PathIcon
+                Width="30"
+                Height="30"
                 Data="{StaticResource shop}">
             </PathIcon>
         </Button>
         <Button Name="gov"
+                Width="50"
+                Height="50"
                 Click="Button_OnClick">
-            <PathIcon
+                        <PathIcon
+                Width="30"
+                Height="30"
                 Data="{StaticResource gov}">
             </PathIcon>
         </Button>
         <Button Name="tooth"
+                Width="50"
+                Height="50"
                 Click="Button_OnClick">
-            <PathIcon
+                        <PathIcon
+                Width="30"
+                Height="30"
                 Data="{StaticResource tooth}">
             </PathIcon>
         </Button>
         <Button Name="beer"
+                Width="50"
+                Height="50"
                 Click="Button_OnClick">
-            <PathIcon
+                        <PathIcon
+                Width="30"
+                Height="30"
                 Data="{StaticResource beer}">
             </PathIcon>
         </Button>
         <Button Name="food"
+                Width="50"
+                Height="50"
                 Click="Button_OnClick">
-            <PathIcon
+                        <PathIcon
+                Width="30"
+                Height="30"
                 Data="{StaticResource food}">
             </PathIcon>
         </Button>
-        <Button Name="home"
+        <Button Name="home" Width="50"
+                Height="50"
                 Click="Button_OnClick">
-            <PathIcon
+                        <PathIcon
+                Width="30"
+                Height="30"
                 Data="{StaticResource home}">
             </PathIcon>
         </Button>
-        <Button Name="att"
+        <Button Name="att" Width="50"
+                Height="50"
                 Click="Button_OnClick">
-            <PathIcon
+                        <PathIcon
+                Width="30"
+                Height="30"
                 Data="{StaticResource att}">
             </PathIcon>
         </Button>
-        <Button Name="mail"
+        <Button Name="mail" Width="50"
+                Height="50"
                 Click="Button_OnClick">
-            <PathIcon
+                        <PathIcon
+                Width="30"
+                Height="30"
                 Data="{StaticResource mail}">
             </PathIcon>
         </Button>
-        <Button Name="luggage"
+        <Button Name="luggage" Width="50"
+                Height="50"
                 Click="Button_OnClick">
-            <PathIcon
+                        <PathIcon
+                Width="30"
+                Height="30"
                 Data="{StaticResource luggage}">
             </PathIcon>
         </Button>
-        <Button Name="music"
+        <Button Name="music" Width="50"
+                Height="50"
                 Click="Button_OnClick">
-            <PathIcon
+                        <PathIcon
+                Width="30"
+                Height="30"
                 Data="{StaticResource music}">
             </PathIcon>
         </Button>
-        <Button Name="pill"
+        <Button Name="pill" Width="50"
+                Height="50"
                 Click="Button_OnClick">
-            <PathIcon
+                        <PathIcon
+                Width="30"
+                Height="30"
                 Data="{StaticResource pill}">
             </PathIcon>
         </Button>
-        <Button Name="tent"
+        <Button Name="tent" Width="50"
+                Height="50"
                 Click="Button_OnClick">
-            <PathIcon
+                        <PathIcon
+                Width="30"
+                Height="30"
                 Data="{StaticResource tent}">
+            </PathIcon>
+        </Button>
+        <Button Name="here" Width="50"
+                Height="50"
+                Click="Button_OnClick">
+                        <PathIcon
+                Width="30"
+                Height="30"
+                Data="{StaticResource here}">
             </PathIcon>
         </Button>
     </WrapPanel>
