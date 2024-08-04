@@ -3,15 +3,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" Width="500"
-        Height="150"
+        Height="600"
         WindowStartupLocation="CenterOwner"
         CanResize="False"
         x:Class="dmtools.PopUps.MapPU.TextSelector"
         Title="TextSelector">
     <Grid
-        RowDefinitions="*,0.5*,0.5*"
-        ColumnDefinitions="*,*,0.5*,0.5*,*,*">
+        RowDefinitions="*,5*,0.5*,0.5*,0.5*"
+        ColumnDefinitions="*,*,*,*,*,*">
         <TextBox
+            FontSize="{Binding #fontsize.Value}"
             VerticalContentAlignment="Center"
             HorizontalContentAlignment="Center"
             Name="TextBoxx"
@@ -19,6 +20,42 @@
             Grid.Column="0"
             Grid.Row="0"
             Grid.ColumnSpan="6"></TextBox>
+        <ToggleSwitch
+            Name="Switch"
+            IsCheckedChanged="ToggleButton_OnIsCheckedChanged"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Grid.Column="2"
+            Grid.ColumnSpan="2"
+            Grid.Row="5"
+            OnContent="Light text"
+            OffContent="Dark Text"></ToggleSwitch>
+        <ColorView
+            ColorChanged="Txtbkg_OnColorChanged"
+            Name="txtbkg"
+            Grid.ColumnSpan="6"
+            Grid.Row="1"></ColorView>
+        <Slider
+            Minimum="1"
+            IsSnapToTickEnabled="True"
+            TickFrequency="1"
+            TickPlacement="TopLeft"
+            Name="fontsize"
+            Margin="10,0"
+            Value="12"
+            Maximum="32"
+            Grid.Row="2"
+            Grid.Column="0"
+            Grid.ColumnSpan="6">
+            <Slider.Styles>
+                <Style Selector="Slider /template/ Thumb">
+                    <Setter Property="ToolTip.Tip" Value="{Binding $parent[Slider].Value, Mode=OneWay, StringFormat='FontSize 0'}" />
+                    <Setter Property="ToolTip.Placement" Value="Top" />
+                    <Setter Property="ToolTip.VerticalOffset" Value="-10" />
+                    <Setter Property="ToolTip.HorizontalOffset" Value="-30" />
+                </Style>
+            </Slider.Styles>
+        </Slider>
         <Slider
             Minimum="1"
             IsSnapToTickEnabled="True"
@@ -26,7 +63,7 @@
             TickPlacement="TopLeft"
             Name="width"
             Margin="10,0"
-            Grid.Row="1"
+            Grid.Row="3"
             Grid.Column="0"
             Grid.ColumnSpan="6">
             <Slider.Styles>
@@ -45,7 +82,7 @@
             HorizontalContentAlignment="Center"
             VerticalAlignment="Stretch"
             HorizontalAlignment="Stretch"
-            Grid.Row="2"
+            Grid.Row="4"
             Margin="5"
             Grid.Column="1">OK</Button>
         <Button
@@ -55,7 +92,7 @@
             HorizontalContentAlignment="Center"
             VerticalAlignment="Stretch"
             HorizontalAlignment="Stretch"
-            Grid.Row="2"
+            Grid.Row="4"
             Margin="5"
             Grid.Column="4">Cancel</Button>
     </Grid>

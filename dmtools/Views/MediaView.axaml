@@ -402,6 +402,11 @@
 				    Opacity="100"
 				    Name="P"
 				    Header="{DynamicResource Playerss}"/>
-			    </TabControl>
-
+			    <TabItem
+				    Foreground="Transparent"
+				    Background="Transparent"
+				    Opacity="100"
+				    Name="M"
+				    Header="Locations"/>
+                </TabControl>
 </UserControl>

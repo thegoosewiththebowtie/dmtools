@@ -82,7 +82,7 @@
                 Grid.Row="5"
                 VerticalContentAlignment="Center"
                 HorizontalContentAlignment="Center"
-                Content="Add a path">
+                Content="Open player view">
             </Button>
             <SplitButton
                 Click="Loc_OnClick"
@@ -139,6 +139,17 @@
                 Foreground="DarkRed"
                 Background="RosyBrown"
                 Content="Delete the map">
+            </Button>
+            <Button
+                Click="Upd_OnClick"
+                Name="update"
+                Margin="10, 5"
+                VerticalContentAlignment="Center"
+                HorizontalContentAlignment="Center"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                Grid.Row="9"
+                Content="Update ->">
             </Button>
         </Grid>
     </Grid>

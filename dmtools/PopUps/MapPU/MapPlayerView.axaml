@@ -2,23 +2,49 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="50" d:DesignHeight="50"
+        mc:Ignorable="d" Width="700" Height="500"
         x:Class="dmtools.PopUps.MapPU.MapPlayerView"
         Title="MapPlayerView">
-    <Viewbox>
-        <Border
-            Height="40"
-            Width="40"
-            VerticalAlignment="Stretch"
-            HorizontalAlignment="Stretch"
-            CornerRadius="5"
-            BorderBrush="Black"
-            BorderThickness="1">
-            <TextBlock
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                TextWrapping="Wrap">
-            </TextBlock>
-        </Border>
+    <Grid ColumnDefinitions="4.4*, *">
+    <Viewbox
+        HorizontalAlignment="Stretch"
+        Stretch="Uniform"
+        Grid.Column="0"
+        Grid.Row="0">
+        <Grid
+            ShowGridLines="False"
+            Name="Map">
+        </Grid>
     </Viewbox>
+        <Grid
+            RowDefinitions="Auto, *"
+            Name="players"
+            Grid.Column="1">
+            <Grid
+                Grid.Row="0"
+                ColumnDefinitions="*,*">
+                <TextBlock
+                    Name="crd"
+                    FontSize="32"
+                    Margin="10, 10, 10, 5"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Grid.Row="0">
+                </TextBlock>
+                <TextBlock
+                    Name="crdns"
+                    FontSize="32"
+                    Margin="10, 10, 10, 5"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Grid.Column="1">
+                </TextBlock>
+            </Grid>
+            <StackPanel
+                Grid.Row="1"
+                Name="btnpnl">
+                
+            </StackPanel>
+        </Grid>
+    </Grid>
 </Window>

@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.InteropServices.JavaScript;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -33,6 +34,7 @@ public class ItemCoordinates
 public partial class MapEditor : UserControl
 {
     public static event EventHandler IveBeenDeletedAAAA;
+    public static event EventHandler upd;
     public IMap MapInfo { get; set; } 
     char[] alpha = " ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
     Profile profile = new ConfigurationBuilder<Profile>().UseIniFile("Profile.ini").Build();
@@ -46,6 +48,12 @@ public partial class MapEditor : UserControl
         settings = new ConfigurationBuilder<ISettings>().UseIniFile("Settings/q0" + profid +".ini").Build();
         ini(thismap.Build());
         MapInfo = thismap.Build();
+        MapPlayerView.upd0 += MapPlayerViewOnupd0;
+    }
+
+    private void MapPlayerViewOnupd0(object? sender, EventArgs e)
+    {
+        ini(MapInfo);
     }
 
     public void ini(IMap tm)
@@ -55,33 +63,33 @@ public partial class MapEditor : UserControl
         var he = tm.height;
         GridLength acvi;
         GridLength achi;
-        if (tm.height > tm.width)
-        {
-            achi = new GridLength(1, GridUnitType.Star);
-            var f = (double)(tm.height/tm.width);
-            acvi = new GridLength(f, GridUnitType.Star);
-            Map.VerticalAlignment = VerticalAlignment.Top;
-            Map.HorizontalAlignment = HorizontalAlignment.Left;
-        }
-        else if (tm.height < tm.width)
-        {
-            var f = (double)(tm.width / tm.height);
-            achi = new GridLength(f, GridUnitType.Star);
-            acvi = new GridLength(1, GridUnitType.Star);
-            Map.VerticalAlignment = VerticalAlignment.Top;
-            Map.HorizontalAlignment = HorizontalAlignment.Left;
-        }
-        else
-        {
-            acvi = new GridLength(1, GridUnitType.Star);
-            achi = new GridLength(1, GridUnitType.Star);
-        }
+        // if (tm.height > tm.width)
+        // {
+        //     achi = new GridLength(1, GridUnitType.Star);
+        //     var f = (double)(tm.height/tm.width);
+        //     acvi = new GridLength(f, GridUnitType.Star);
+        //     Map.VerticalAlignment = VerticalAlignment.Top;
+        //     Map.HorizontalAlignment = HorizontalAlignment.Left;
+        // }
+        // else if (tm.height < tm.width)
+        // {
+        //     var f = (double)(tm.width / tm.height);
+        //     achi = new GridLength(f, GridUnitType.Star);
+        //     acvi = new GridLength(1, GridUnitType.Star);
+        //     Map.VerticalAlignment = VerticalAlignment.Top;
+        //     Map.HorizontalAlignment = HorizontalAlignment.Left;
+        // }
+        // else
+        // {
+        //     acvi = new GridLength(1, GridUnitType.Star);
+        //     achi = new GridLength(1, GridUnitType.Star);
+        // }
         ColumnDefinitions cds = new ColumnDefinitions();
         for (int w = 0; w < wi; w++)
         {
             ColumnDefinition cd = new ColumnDefinition()
             {
-                Width = acvi
+                Width = new GridLength(50)
             };
             cds.Add(cd);
         }
@@ -90,7 +98,7 @@ public partial class MapEditor : UserControl
         {
             RowDefinition rd = new RowDefinition()
             {
-                Height = achi
+                Height = new GridLength(50)
             }; 
             rds.Add(rd);
         }
@@ -179,19 +187,30 @@ public partial class MapEditor : UserControl
                     break;
                 }
                 var d = ics.Split("|")[0];
+
+                var bd = new Border()
+                {
+                    Margin = new Thickness(5),
+                    CornerRadius = new CornerRadius(5),
+                    BorderThickness = new Thickness(1),
+                    [Grid.ColumnProperty] = Convert.ToInt32(ics.Split("|")[1]),
+                    [Grid.RowProperty] = Convert.ToInt32(ics.Split("|")[2]),
+                    [Grid.ColumnSpanProperty] = Convert.ToInt32(ics.Split("|")[3]),
+                    Background = new SolidColorBrush(Color.Parse(ics.Split("|")[4])),
+                    BorderBrush = new SolidColorBrush(Color.Parse(ics.Split("|")[5])),
+                };
                 var pi = new TextBlock()
                 {
-                    FontSize = 25,
+                    FontSize = Convert.ToInt32(ics.Split("|")[6]),
+                    Foreground = new SolidColorBrush(Color.Parse(ics.Split("|")[5])),
                     TextWrapping = TextWrapping.Wrap,
                     Text = d,
                     VerticalAlignment = VerticalAlignment.Center,
                     HorizontalAlignment = HorizontalAlignment.Center,
                     ZIndex = -2,
-                    [Grid.ColumnProperty] = Convert.ToInt32(ics.Split("|")[1]),
-                    [Grid.RowProperty] = Convert.ToInt32(ics.Split("|")[2]),
-                    [Grid.ColumnSpanProperty] = Convert.ToInt32(ics.Split("|")[3]),
                 };
-                Map.Children.Add(pi);
+                bd.Child = pi;
+                Map.Children.Add(bd);
             }
         }
         if (!string.IsNullOrEmpty(tm.colors))
@@ -403,24 +422,33 @@ public partial class MapEditor : UserControl
         };
         if (Avalonia.Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            TextSelector colorSelector = new TextSelector(max, selcor);
+            TextSelector colorSelector = new TextSelector(max, selcor); //
             await colorSelector.ShowDialog(desktop.MainWindow);
             if (string.IsNullOrWhiteSpace(colorSelector.coloret))
             {
                 return;
             }
+            string fg;
+            if (colorSelector.fg)
+            {
+                fg = "#FFFFFF";
+            }
+            else
+            {
+                fg = "#000000";
+            }
             MapInfo.text +=
-                $"{colorSelector.coloret}|{selcor.vertical}|{selcor.horizontal}|{colorSelector.width0}$";
+                $"{colorSelector.coloret}|{selcor.vertical}|{selcor.horizontal}|{colorSelector.width0}|{colorSelector.bg}|{fg}|{colorSelector.sz}$";
         }
         ini(MapInfo);
     }
     private void Pth_OnClick(object? sender, RoutedEventArgs e)
     {
-        if (string.IsNullOrWhiteSpace(crd.Text))
+        if (Avalonia.Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            return;
+            MapPlayerView mapPlayerView = new MapPlayerView(MapInfo);
+            mapPlayerView.Show();
         }
-        var selcor = GetCoordinates();
     }
     private void Loc_OnClick(object? sender, RoutedEventArgs e)
     {
@@ -701,5 +729,11 @@ public partial class MapEditor : UserControl
         }
         
         ini(MapInfo);
+    }
+
+    private void Upd_OnClick(object? sender, RoutedEventArgs e)
+    {
+        ini(MapInfo);
+        upd(sender, e);
     }
 }
